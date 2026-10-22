@@ -17,6 +17,17 @@ function parseKey_(a) {
   return { type: s.slice(0, i), rest: s.slice(i + 1) };
 }
 
+/** The visible columns of a list, from its column list: a photo adds “… description”, a button adds “… link”. */
+function expandColumns_(columns) {
+  var cols = [];
+  columns.forEach(function (c) {
+    cols.push({ name: c.what, kind: c.kind });
+    if (c.kind === "photo") cols.push({ name: c.what + " description", kind: "text" });
+    if (c.link) cols.push({ name: c.what + " link", kind: "text" });
+  });
+  return cols;
+}
+
 function readPageRows_(v, page) {
   var data = { page: page, blocks: [] };
   var block = null, list = null, gallery = null, listName = "", pendingFolder = "";
@@ -40,7 +51,7 @@ function readPageRows_(v, page) {
     if (k.type === "list") {
       var lp = k.rest.split("|");
       var columns = JSON.parse(lp.slice(1).join("|"));
-      list = { key: lp[0], what: listName || "Items", columns: columns, rows: [], header: row };
+      list = { key: lp[0], what: listName || "Items", columns: columns, rows: [], names: expandColumns_(columns).map(function (c) { return c.name; }) };
       if (pendingFolder) list.folder = pendingFolder;
       pendingFolder = ""; listName = "";
       block.lists.push(list); gallery = null; continue;
@@ -49,7 +60,7 @@ function readPageRows_(v, page) {
     if (k.type === "galleryfolder" && gallery) { if (String(row[2]).trim()) gallery.folder = String(row[2]).trim(); continue; }
     if ((k.type === "row" || k.type === "") && list) {
       var cells = {};
-      for (var c = 2; c < list.header.length; c++) if (list.header[c] && list.header[c] !== "Preview") cells[String(list.header[c])] = row[c] === "" ? "" : String(row[c]);
+      for (var c = 0; c < list.names.length; c++) cells[list.names[c]] = row[c + 2] === "" || row[c + 2] === undefined ? "" : String(row[c + 2]);
       var filled = Object.keys(cells).some(function (x) { return String(cells[x]).trim(); });
       if (!filled) continue;
       list.rows.push({ key: k.rest || ("new-" + r), show: row[1] !== false, cells: cells, sheetRow: r + 1 });
@@ -60,7 +71,7 @@ function readPageRows_(v, page) {
       gallery.rows.push({ show: row[1] !== false, type: /video/i.test(row[2]) ? "video" : "image", src: String(row[3]).trim(), shape: /tall/i.test(row[4]) ? "tall" : "wide", caption: String(row[5] || ""), sheetRow: r + 1 });
     }
   }
-  data.blocks.forEach(function (b) { b.lists.forEach(function (l) { delete l.header; }); });
+  data.blocks.forEach(function (b) { b.lists.forEach(function (l) { delete l.names; }); });
   return data;
 }
 
@@ -78,12 +89,7 @@ function layoutPage_(pg, data) {
       push(["slot|" + sl.key + "|" + sl.kind + (sl.href !== undefined ? "|link" : ""), sl.kind === "photos" ? "Photos — one per line (Drive links), or one Drive folder link" : sl.what + (sl.href !== undefined ? " (words, then link)" : ""), sl.value, extra, ""], { type: "slot", kind: sl.kind, link: sl.href !== undefined });
     });
     b.lists.forEach(function (l) {
-      var cols = [];
-      l.columns.forEach(function (c) {
-        cols.push({ name: c.what, kind: c.kind });
-        if (c.kind === "photo") cols.push({ name: c.what + " description", kind: "text" });
-        if (c.link) cols.push({ name: c.what + " link", kind: "text" });
-      });
+      var cols = expandColumns_(l.columns);
       var photoIdx = -1;
       cols.forEach(function (c, i) { if (photoIdx < 0 && (c.kind === "photo" || c.kind === "photos")) photoIdx = i; });
       var note = l.note || (l.what === "Paragraphs" ? "One row per paragraph." : "One row each. Untick Show to hide. Drag a row by its number to move it. Type in an empty row at the bottom to add one.");

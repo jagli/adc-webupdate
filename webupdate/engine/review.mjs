@@ -6,11 +6,14 @@
  * outlined; and a short list of what changed (added, edited, hidden, moved rows).
  */
 import { parse, select, outer, inner, walk } from "./html.mjs";
-import { extract } from "./model.mjs";
+import { extract, galleryRow } from "./model.mjs";
 import { escapeHtml, escapeAttr, normalise, decode } from "./light.mjs";
 import { PAGE_NAMES, PAGES, GLOBAL_FIELDS } from "./site.mjs";
 
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+/** Cells compared without empty ones and in a fixed order (the Sheet adds empty columns). */
+const cellsKey = (c) => JSON.stringify(Object.entries(c || {}).filter(([, v]) => String(v ?? "").trim() !== "").sort());
+const galleryKey = (g) => JSON.stringify((g?.rows || []).filter((x) => x.show !== false).map(galleryRow));
 const short = (s, n = 70) => { const t = normalise(String(s ?? "").replace(/\*\*|\*|\[|\]\([^)]*\)/g, "")); return t.length > n ? t.slice(0, n - 1) + "…" : t; };
 
 /** What changed in one section, as plain sentences. */
@@ -40,14 +43,14 @@ function blockChanges(b0, b1) {
       if (!b) { if (r.show !== false) out.push(`${l.what}: added “${first(r)}”`); continue; }
       if (r.show === false && b.show !== false) out.push(`${l.what}: hidden “${first(b)}”`);
       else if (r.show !== false && b.show === false) out.push(`${l.what}: shown again “${first(r)}”`);
-      else if (r.show !== false && !same(r.cells, b.cells)) out.push(`${l.what}: edited “${first(r)}”`);
+      else if (r.show !== false && cellsKey(r.cells) !== cellsKey(b.cells)) out.push(`${l.what}: edited “${first(r)}”`);
     }
     const kept = shownNow.filter((k) => shownBefore.includes(k));
     const keptBefore = shownBefore.filter((k) => kept.includes(k));
     if (!same(kept, keptBefore) && !l.rule?.sort) out.push(`${l.what}: order changed`);
     for (const k of shownBefore) if (!l.rows.find((r) => r.key === k)) out.push(`${l.what}: removed “${first(before.get(k))}”`);
   }
-  if (b1.gallery && !same(b1.gallery, b0?.gallery)) {
+  if (b1.gallery && galleryKey(b1.gallery) !== galleryKey(b0?.gallery)) {
     const n0 = (b0?.gallery?.rows || []).filter((g) => g.show !== false).length;
     const n1 = b1.gallery.rows.filter((g) => g.show !== false).length;
     out.push(`Gallery: ${n1 - n0 > 0 ? `${n1 - n0} added` : n1 - n0 < 0 ? `${n0 - n1} fewer` : "edited"} (${n1} shown)`);
@@ -59,7 +62,7 @@ function blockChanges(b0, b1) {
 function headLinks(html) {
   const root = parse(html);
   return select(root, "link[rel=stylesheet]").map((l) => outer(html, l)).join("\n") +
-    `\n<style>body{margin:0;background:var(--ivory,#fbfaf9)} main{display:block} .wu-faded{opacity:.35;pointer-events:none;max-height:420px;overflow:hidden;-webkit-mask-image:linear-gradient(#000 40%,transparent)} .wu-faded--above{-webkit-mask-image:linear-gradient(transparent,#000 60%)} .wu-mark{outline:3px solid #e9b44c;outline-offset:3px;background:rgba(233,180,76,.12)} img.wu-mark{outline-offset:-3px}</style>`;
+    `\n<style>body{margin:0;background:var(--ivory,#fbfaf9)} main{display:block} .wu-faded{opacity:.35;pointer-events:none;position:relative;height:170px;overflow:hidden;-webkit-mask-image:linear-gradient(#000 30%,transparent)} .wu-faded--above{-webkit-mask-image:linear-gradient(transparent,#000 70%)} .wu-faded--above>*{position:absolute;left:0;right:0;bottom:0} .wu-mark{outline:3px solid #e9b44c;outline-offset:3px;background:rgba(233,180,76,.12)} img.wu-mark{outline-offset:-3px}</style>`;
 }
 
 function sectionSnippet(html, index) {

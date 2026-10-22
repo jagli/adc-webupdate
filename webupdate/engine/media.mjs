@@ -63,6 +63,7 @@ export async function resolveMedia(content, stage, { cache, log = () => {} } = {
         ({ buf, type } = await download(id));
         if (cached) { fs.writeFileSync(cached, buf); fs.writeFileSync(cached + ".type", type); }
       }
+      if (kind !== "file" && /^video\//.test(type)) throw new Error("is a video — put videos on YouTube and paste the YouTube link");
       if (type.includes("pdf") || kind === "file") {
         const ext = type.includes("pdf") ? "pdf" : type.includes("zip") ? "zip" : (drive[id]?.name || "").split(".").pop() || "bin";
         rel = `assets/web/content/files/${label}-${hash}.${ext}`;
@@ -75,7 +76,11 @@ export async function resolveMedia(content, stage, { cache, log = () => {} } = {
       }
       log(`  media: ${where} → ${rel}`);
     } catch (e) {
-      problems.push(`${where}: the Drive link ${e.message.includes("share") ? e.message : `could not be used (${e.message})`}`);
+      const m = String(e.message);
+      const why = m.includes("share") || m.includes("YouTube") ? m
+        : /unsupported image format|heif|heic/i.test(m) ? "is a photo type the website cannot use (iPhone HEIC?) — save it as JPG and share that"
+        : `could not be used (${m})`;
+      problems.push(`${where}: the Drive link ${why}`);
       rel = null;
     }
     done.set(key, rel);

@@ -1098,11 +1098,11 @@
      ]
     },
     {
-     "key": "index/part-4",
-     "label": "Part 4",
+     "key": "index/at-a-glance",
+     "label": "At a Glance",
      "slots": [
       {
-       "key": "index/part-4/t1",
+       "key": "index/at-a-glance/t1",
        "kind": "text",
        "what": "Small heading",
        "value": "At a Glance"
@@ -1110,7 +1110,7 @@
      ],
      "lists": [
       {
-       "key": "index/part-4/1",
+       "key": "index/at-a-glance/1",
        "what": "Numbers",
        "columns": [
         {
@@ -1126,7 +1126,7 @@
        ],
        "rows": [
         {
-         "key": "index/part-4/1/1",
+         "key": "index/at-a-glance/1/1",
          "show": true,
          "cells": {
           "Number": "32+",
@@ -1134,7 +1134,7 @@
          }
         },
         {
-         "key": "index/part-4/1/2",
+         "key": "index/at-a-glance/1/2",
          "show": true,
          "cells": {
           "Number": "7.5M+",
@@ -1142,7 +1142,7 @@
          }
         },
         {
-         "key": "index/part-4/1/3",
+         "key": "index/at-a-glance/1/3",
          "show": true,
          "cells": {
           "Number": "180+",
@@ -1150,7 +1150,7 @@
          }
         },
         {
-         "key": "index/part-4/1/4",
+         "key": "index/at-a-glance/1/4",
          "show": true,
          "cells": {
           "Number": "700+",
@@ -7534,12 +7534,12 @@
      "lists": []
     },
     {
-     "key": "gallery/part-2",
-     "label": "Part 2",
+     "key": "gallery/gallery-2",
+     "label": "Gallery",
      "slots": [],
      "lists": [],
      "gallery": {
-      "key": "gallery/part-2/gallery",
+      "key": "gallery/gallery-2/gallery",
       "rows": [
        {
         "show": true,

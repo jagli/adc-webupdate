@@ -61,6 +61,11 @@ export function validate(content) {
         for (const [i, r] of (l.rows || []).entries()) {
           if (r.show === false) continue;
           const at = `${tab} › ${b.label} › ${l.what}, row ${i + 1}`;
+          if (l.key === "performances/upcoming-list/1") {
+            const first = String(Object.values(r.cells || {})[0] || "");
+            const date = (/\*\*([^*]+)\*\*/.exec(first) || [])[1];
+            if (first.trim() && (!date || !/\b(19|20)\d\d\b/.test(date))) out.push(`${at}: start with the date and year in bold, e.g. **8 Jan 2027** — what, where`);
+          }
           const filled = Object.values(r.cells || {}).some((v) => normalise(v));
           if (!filled) continue; // an empty row is simply ignored
           for (const c of l.columns || []) {

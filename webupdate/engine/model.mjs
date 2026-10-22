@@ -141,8 +141,13 @@ export function extract(page, src) {
     n++;
     if (isSkipped(top, skipSet)) continue;
     const heading = select(top, "h1, h2")[0];
-    const label = heading ? textOf(src, heading) : top.attrs.id ? top.attrs.id.replace(/-/g, " ") : `Part ${n}`;
-    const key = `${page}/${top.attrs.id || slug(label) || `part-${n}`}`;
+    const eyebrow = select(top, ".s-section__eyebrow, .v-label, .alt-section-head__eyebrow")[0];
+    const label = heading ? textOf(src, heading)
+      : select(top, "[data-gallery]").length ? "Gallery"
+      : eyebrow ? textOf(src, eyebrow)
+      : top.attrs.id ? top.attrs.id.replace(/-/g, " ") : `Part ${n}`;
+    let key = `${page}/${top.attrs.id || slug(label) || `part-${n}`}`;
+    if (blocks.some((b) => b.key === key)) key = `${key}-${n}`; // two sections may share a name; keys must not
     const block = { key, label, el: top, slots: [], lists: [], gallery: null };
     let si = 0, li = 0;
     const visit = (el) => {
@@ -317,6 +322,12 @@ function fieldEdits(src, f, cell, base = 0) {
   return edits;
 }
 
+/** One gallery entry in its standard form (videos have no shape). */
+export function galleryRow(g) {
+  const caption = g.caption ?? "";
+  return g.type === "video" ? { type: "video", src: g.src, caption } : { type: "image", src: g.src, shape: g.shape === "tall" ? "tall" : "wide", caption };
+}
+
 /** Turn a Sheet row (cells by column name) into per-field values for one item's fields. */
 function cellsFor(fields, cells) {
   return fields.map((f) => ({
@@ -328,6 +339,7 @@ function cellsFor(fields, cells) {
 
 function eventDate(light) {
   const m = /\*\*([^*]+)\*\*/.exec(light) || [null, light];
+  if (!/\b(19|20)\d\d\b/.test(m[1])) return null; // a date without a year would be read as long past
   const d = Date.parse(m[1].replace(/(\d+)(st|nd|rd|th)/, "$1"));
   return Number.isNaN(d) ? null : d;
 }
@@ -357,7 +369,7 @@ export function apply(page, src, data, { today = Date.now() } = {}) {
       let rows = v.rows.filter((r) => r.show !== false && Object.values(r.cells || {}).some((x) => normalise(x)));
       if (l.rule?.sort === "date") {
         rows = rows.map((r) => ({ r, d: eventDate(String(Object.values(r.cells)[0] || "")) }));
-        for (const x of rows) if (x.d === null) problems.push(`${d.label} › ${v.what}: "${String(Object.values(x.r.cells)[0]).slice(0, 40)}" does not start with a date in bold, e.g. **8 Jan 2027**`);
+        for (const x of rows) if (x.d === null) problems.push(`${d.label} › ${v.what}: "${String(Object.values(x.r.cells)[0]).slice(0, 40)}" does not start with a date and year in bold, e.g. **8 Jan 2027**`);
         rows = rows.filter((x) => x.d !== null && (!l.rule.pastHidden || x.d >= today - 86400000)).sort((a, b) => a.d - b.d).map((x) => x.r);
       }
       const original = l.rows;
@@ -367,8 +379,15 @@ export function apply(page, src, data, { today = Date.now() } = {}) {
       const template = original[0];
       const first = original[0].el, last = original[original.length - 1].el;
       const sep = original.length > 1 ? src.slice(original[0].el.end, original[1].el.start) : "\n" + " ".repeat(Math.max(0, first.start - src.lastIndexOf("\n", first.start) - 1));
-      const parts = rows.map((r) => {
-        const orig = original.find((o) => o.key === r.key) || template;
+      const parts = rows.map((r, ri) => {
+        const known = original.find((o) => o.key === r.key);
+        const orig = known || template;
+        if (!known) {
+          for (const f of orig.fields) {
+            const need = { photo: "photo (a Drive link)", photos: "photos (Drive links, one per line)", video: "YouTube link", href: "link or file" }[f.kind];
+            if (need && !normalise(r.cells?.[f.what])) problems.push(`${d.label} › ${v.what}, new row ${ri + 1}: add the ${need} in “${f.what}”`);
+          }
+        }
         const piece = src.slice(orig.el.start, orig.el.end);
         const vals = cellsFor(orig.fields, r.cells);
         const e = orig.fields.flatMap((f, j) => fieldEdits(src, f, vals[j], orig.el.start));
@@ -377,8 +396,8 @@ export function apply(page, src, data, { today = Date.now() } = {}) {
       edits.push([first.start, last.end, parts.join(sep)]);
     }
     if (block.gallery && d.gallery) {
-      const rows = d.gallery.rows.filter((g) => g.show !== false).map(({ show, ...g }) => g);
-      const same = JSON.stringify(rows) === JSON.stringify(block.gallery.rows);
+      const rows = d.gallery.rows.filter((g) => g.show !== false).map(galleryRow);
+      const same = JSON.stringify(rows) === JSON.stringify(block.gallery.rows.map(galleryRow));
       if (!same) {
         const el = block.gallery.el;
         const json = "[\n" + rows.map((g) => "        " + JSON.stringify(g)).join(",\n") + "\n      ]";
@@ -387,7 +406,6 @@ export function apply(page, src, data, { today = Date.now() } = {}) {
     }
   }
   // list rebuilds replace whole ranges; drop single-field edits that fall inside them
-  const ranges = edits.filter((e) => e[2].length > 0 && e[1] - e[0] > 0);
   const clean = [];
   for (const e of edits.sort((a, b) => a[0] - b[0])) {
     if (clean.length && e[0] < clean[clean.length - 1][1]) {
@@ -397,6 +415,5 @@ export function apply(page, src, data, { today = Date.now() } = {}) {
     }
     clean.push(e);
   }
-  void ranges;
   return { src: splice(src, clean), problems };
 }

@@ -146,41 +146,50 @@ function pageTab_(ss, pg, data) {
     if (f.type === "band") s.setRowHeight(i + 1, 30);
     if (f.type === "listnote") s.getRange(i + 1, 2).setFontStyle("italic");
   });
-  // checkboxes (Show) and previews
-  values.forEach(function (r, i) {
+  // checkboxes (Show), previews and photo row heights — done in runs of neighbouring rows (fast)
+  function runs(test) {
+    var out = [], start = -1;
+    for (var i = 0; i <= values.length; i++) {
+      var hit = i < values.length && test(fmt[i], i);
+      if (hit && start < 0) start = i;
+      if (!hit && start >= 0) { out.push([start, i - 1]); start = -1; }
+    }
+    return out;
+  }
+  runs(function (f) { return f.type === "row" || f.type === "grow"; }).forEach(function (r) {
+    var n = r[1] - r[0] + 1, range = s.getRange(r[0] + 1, 2, n, 1);
+    range.setNumberFormat("General").insertCheckboxes().setHorizontalAlignment("center");
+    range.setValues(values.slice(r[0], r[1] + 1).map(function (row) { return [row[1] === true]; }));
+  });
+  // list rows with a photo column: one preview formula per row, same column within a list
+  runs(function (f) { return f.type === "row" && f.photoCol; }).forEach(function (r) {
+    var f0 = fmt[r[0]], n = r[1] - r[0] + 1, formulas = [];
+    for (var i = r[0]; i <= r[1]; i++) formulas.push([previewFormula_(colLetter_(fmt[i].photoCol) + (i + 1))]);
+    s.getRange(r[0] + 1, f0.previewCol, n, 1).setFormulas(formulas);
+    s.setRowHeights(r[0] + 1, n, 70);
+  });
+  runs(function (f) { return f.type === "grow"; }).forEach(function (r) {
+    var n = r[1] - r[0] + 1, formulas = [];
+    for (var i = r[0]; i <= r[1]; i++) formulas.push(['=IF(OR(D' + (i + 1) + '="",C' + (i + 1) + '="Video"),"",' + previewFormula_("D" + (i + 1)).slice(1) + ')']);
+    s.getRange(r[0] + 1, 3, n, 1).setDataValidation(SpreadsheetApp.newDataValidation().requireValueInList(["Photo", "Video"], true).build());
+    s.getRange(r[0] + 1, 5, n, 1).setDataValidation(SpreadsheetApp.newDataValidation().requireValueInList(["Wide", "Tall"], true).build());
+    s.getRange(r[0] + 1, 7, n, 1).setFormulas(formulas);
+    s.setRowHeights(r[0] + 1, n, 70);
+  });
+  values.forEach(function (row, i) {
     var f = fmt[i];
-    if (f.type === "row" || f.type === "grow") {
-      s.getRange(i + 1, 2).setNumberFormat("General").insertCheckboxes().setValue(values[i][1] === true);
-      s.getRange(i + 1, 2).setHorizontalAlignment("center");
-    }
-    if (f.type === "row" && f.photoCol) {
-      s.getRange(i + 1, f.previewCol).setFormula(previewFormula_(colLetter_(f.photoCol) + (i + 1)));
-      s.setRowHeight(i + 1, 70);
-    }
-    if (f.type === "grow") {
-      s.getRange(i + 1, 3).setDataValidation(SpreadsheetApp.newDataValidation().requireValueInList(["Photo", "Video"], true).build());
-      s.getRange(i + 1, 5).setDataValidation(SpreadsheetApp.newDataValidation().requireValueInList(["Wide", "Tall"], true).build());
-      s.getRange(i + 1, 7).setFormula('=IF(OR(D' + (i + 1) + '="",C' + (i + 1) + '="Video"),"",' + previewFormula_("D" + (i + 1)).slice(1) + ')');
-      s.setRowHeight(i + 1, 70);
-    }
     if (f.type === "slot" && (f.kind === "photo" || f.kind === "photos" || f.kind === "video")) {
       s.getRange(i + 1, 5).setFormula(previewFormula_("C" + (i + 1)));
       s.setRowHeight(i + 1, 70);
-    }
-    if (f.type === "slot" && f.kind === "video") {
-      s.getRange(i + 1, 3).setDataValidation(SpreadsheetApp.newDataValidation().requireFormulaSatisfied('=OR(C' + (i + 1) + '="",REGEXMATCH(C' + (i + 1) + ',"youtu"))').setAllowInvalid(true).setHelpText("Paste a YouTube link").build());
     }
   });
   s.setColumnWidth(1, 20); s.setColumnWidth(2, 150); s.setColumnWidth(3, 460); s.setColumnWidth(4, 260); s.setColumnWidth(5, 170);
   for (var c = 6; c <= width; c++) s.setColumnWidth(c, 220);
   s.setFrozenRows(2);
   s.hideColumns(1);
-  // the structure (keys, bands, headers) warns before it is changed
+  // the hidden keys warn before they are changed; the visible headers are only labels (the Sheet
+  // reads the column names from the hidden keys), so typing over one breaks nothing
   s.getRange(1, 1, s.getMaxRows(), 1).protect().setDescription("Keys — do not change").setWarningOnly(true);
-  values.forEach(function (r, i) {
-    var t = fmt[i].type;
-    if (t === "band" || t === "listhead" || t === "slothead" || t === "listnote") s.getRange(i + 1, 2, 1, width - 1).protect().setDescription("Layout — do not change").setWarningOnly(true);
-  });
 }
 
 /* ── Productions ── */

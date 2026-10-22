@@ -55,11 +55,13 @@ const spare = find((r, i) => i > evHead && r[0] === "row|" && !r[2]);
 values[spare][2] = "**2 Apr 2027** — Typed in a spare row";
 const ins = ["", true, "**3 Apr 2027** — Inserted row"]; while (ins.length < values[0].length) ins.push("");
 values.splice(evHead + 2, 0, ins);
+values[evHead][2] = "Somebody typed over the header"; // visible header text is only a label
 const back = ctx.readPageRows_(values, p);
 const ev = back.blocks.find((b) => b.key === "performances/upcoming-list").lists[0];
 ok(ev.rows.some((r) => r.cells.Item.includes("Typed in a spare row") && r.key === "new-" + (spare + 1)) || ev.rows.some((r) => r.cells.Item.includes("Typed in a spare row")), "spare row read as a new row");
 ok(ev.rows.some((r) => r.cells.Item.includes("Inserted row") && r.key.startsWith("new-")), "inserted row read as a new row");
 ok(ev.rows.filter((r) => r.show === false).length === 1, "one hidden row");
+ok(ev.rows.every((r) => "Item" in r.cells), "typing over a header row changes nothing");
 ok(ev.rows.findIndex((r) => r.key === site.pages[p].blocks.find((b) => b.key === "performances/upcoming-list").lists[0].rows[0].key) > 1, "moved row is lower");
 console.log(fails ? `\n${fails} problem(s)` : "✓ every page lays out and reads back the same; editor actions read correctly");
 process.exit(fails ? 1 : 0);

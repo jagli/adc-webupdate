@@ -132,17 +132,26 @@ function gh_(method, path, body) {
 
 function putFile_(path, text, message, branch) {
   var repo = setting_("GITHUB_REPO");
-  var cur = gh_("GET", "/repos/" + repo + "/contents/" + path + "?ref=" + branch);
   var body = { message: message, content: Utilities.base64Encode(Utilities.newBlob(text).getBytes()), branch: branch };
-  if (cur.code === 200 && cur.json && cur.json.sha) body.sha = cur.json.sha;
-  var r = gh_("PUT", "/repos/" + repo + "/contents/" + path, body);
+  var r;
+  for (var attempt = 0; attempt < 2; attempt++) {
+    // someone else may have saved a moment ago: read the current version, then save on top of it
+    var cur = gh_("GET", "/repos/" + repo + "/contents/" + path + "?ref=" + branch);
+    if (cur.code === 200 && cur.json && cur.json.sha) body.sha = cur.json.sha;
+    r = gh_("PUT", "/repos/" + repo + "/contents/" + path, body);
+    if (r.code !== 409 && r.code !== 422) break;
+    Utilities.sleep(1500);
+  }
   if (r.code !== 200 && r.code !== 201) throw new Error("GitHub said " + r.code + ": " + (r.json && r.json.message || r.text).slice(0, 200));
   return r.json.commit.sha;
 }
 
 function rawFile_(path, branch) {
-  var url = "https://raw.githubusercontent.com/" + setting_("GITHUB_REPO") + "/" + branch + "/" + path + "?t=" + Date.now();
-  var res = UrlFetchApp.fetch(url, { muteHttpExceptions: true, headers: { "Cache-Control": "no-cache" } });
+  // through the API (not raw.githubusercontent.com, which is cached for minutes)
+  var res = UrlFetchApp.fetch("https://api.github.com/repos/" + setting_("GITHUB_REPO") + "/contents/" + path + "?ref=" + branch, {
+    muteHttpExceptions: true,
+    headers: { Authorization: "Bearer " + setting_("GITHUB_TOKEN"), Accept: "application/vnd.github.raw" }
+  });
   return res.getResponseCode() === 200 ? res.getContentText() : "";
 }
 
@@ -205,6 +214,11 @@ function driveId_(s) {
   return m && /drive\.google|docs\.google/.test(s) ? m[1] : null;
 }
 
+/** Call fn for each line of a cell that is a Drive link (a photos cell holds one per line). */
+function eachLine_(value, fn) {
+  String(value || "").split(/\r?\n/).forEach(function (line) { line = line.trim(); if (driveId_(line)) fn(line); });
+}
+
 /** Look up every Drive link: check it is shared, and list folders. Returns problems. */
 function resolveDrive_(content) {
   var drive = {};
@@ -236,11 +250,14 @@ function resolveDrive_(content) {
   Object.keys(content.pages).forEach(function (pg) {
     var tab = PAGES.filter(function (x) { return x[0] === pg; })[0][1];
     content.pages[pg].blocks.forEach(function (b) {
-      b.slots.forEach(function (s) { if (driveId_(s.value)) check(s.value, tab + " › " + b.label + " › " + s.what, false); if (driveId_(s.href)) check(s.href, tab + " › " + b.label + " › " + s.what + " link", false); });
+      b.slots.forEach(function (s) {
+        eachLine_(s.value, function (line) { check(line, tab + " › " + b.label + " › " + s.what, /folders\//.test(line)); });
+        if (driveId_(s.href)) check(s.href, tab + " › " + b.label + " › " + s.what + " link", false);
+      });
       b.lists.forEach(function (l) {
         if (l.folder) check(l.folder, tab + " › " + b.label + " › " + l.what + " (folder link)", true);
         l.rows.forEach(function (r) {
-          Object.keys(r.cells).forEach(function (c) { if (driveId_(r.cells[c])) check(r.cells[c], tab + " › row " + r.sheetRow + " › " + c, /folder/.test(r.cells[c])); });
+          Object.keys(r.cells).forEach(function (c) { eachLine_(r.cells[c], function (line) { check(line, tab + " › row " + r.sheetRow + " › " + c, /folders\//.test(line)); }); });
         });
       });
       if (b.gallery) {
@@ -295,7 +312,16 @@ function getStatus() {
     var pub = rawFile_("status/publish.json", "status");
     if (pub) {
       out.publish = JSON.parse(pub);
-      if (st.status === "publishing" && out.publish.sha === st.sha && out.publish.ok) { st.status = "published"; setState_(st); }
+      if (st.status === "publishing" && out.publish.sha === st.sha) {
+        if (out.publish.ok) { st.status = "published"; st.publishError = ""; setState_(st); }
+        else {
+          // nothing went live: back to waiting, so it can be approved again once fixed
+          st.status = "waiting";
+          st.publishError = out.publish.netlify === "2" ? "Approved, but abhinava.dance is not connected yet — the owner has to add the Netlify key (see the owner guide). Nothing changed on the live site." : "Publishing did not finish, so the live site did not change. The owner can see why on GitHub (Actions ▸ Publish). You can approve again.";
+          setState_(st);
+          log_("Publish did not finish", st.publishError);
+        }
+      }
     }
   }
   out.state = st;
