@@ -4,7 +4,7 @@
   "name": "Abhinava Dance Company",
   "tagline": "Classical and all-time-new",
   "email": "info@abhinavadancecompany.com",
-  "phone": "+91 93432 00000",
+  "phone": "+91 93432 16765",
   "schoolEmail": "Smruthi@abhinavadancecompany.com",
   "schoolPhone": "+91 99023 55722",
   "instagram": "https://www.instagram.com/nirupama_rajendra/",
@@ -62,7 +62,7 @@
    "Poster": "assets/web/client/018.jpg",
    "Media folder": "",
    "Videos": "",
-   "Show": "No"
+   "Show": "Yes"
   },
   {
    "Production": "Rasalila",
@@ -1019,7 +1019,8 @@
           "Photo": "assets/web/client/001.jpg",
           "Photo description": "Sangeet Natak Akademi Award — Nirupama and Rajendra",
           "Small heading": "Recognition",
-          "Title": "[SNA Award conferred by Hon'ble President Smt. Droupadi Murmu, 6 March 2024](credentials.html)"
+          "Title": "[SNA Award conferred by Hon'ble President Smt. Droupadi Murmu, 6 March 2024](credentials.html)",
+          "Text": ""
          }
         },
         {
@@ -1029,7 +1030,8 @@
           "Photo": "assets/web/client/005.jpg",
           "Photo description": "Madanothsava spring festival",
           "Small heading": "Community",
-          "Title": "[Madanothsava — reviving a 1600-year-old spring festival](activities.html#community-programs)"
+          "Title": "[Madanothsava — reviving a 1600-year-old spring festival](activities.html#community-programs)",
+          "Text": ""
          }
         }
        ]
@@ -1098,11 +1100,11 @@
      ]
     },
     {
-     "key": "index/part-4",
-     "label": "Part 4",
+     "key": "index/at-a-glance",
+     "label": "At a Glance",
      "slots": [
       {
-       "key": "index/part-4/t1",
+       "key": "index/at-a-glance/t1",
        "kind": "text",
        "what": "Small heading",
        "value": "At a Glance"
@@ -1110,7 +1112,7 @@
      ],
      "lists": [
       {
-       "key": "index/part-4/1",
+       "key": "index/at-a-glance/1",
        "what": "Numbers",
        "columns": [
         {
@@ -1126,7 +1128,7 @@
        ],
        "rows": [
         {
-         "key": "index/part-4/1/1",
+         "key": "index/at-a-glance/1/1",
          "show": true,
          "cells": {
           "Number": "32+",
@@ -1134,7 +1136,7 @@
          }
         },
         {
-         "key": "index/part-4/1/2",
+         "key": "index/at-a-glance/1/2",
          "show": true,
          "cells": {
           "Number": "7.5M+",
@@ -1142,7 +1144,7 @@
          }
         },
         {
-         "key": "index/part-4/1/3",
+         "key": "index/at-a-glance/1/3",
          "show": true,
          "cells": {
           "Number": "180+",
@@ -1150,7 +1152,7 @@
          }
         },
         {
-         "key": "index/part-4/1/4",
+         "key": "index/at-a-glance/1/4",
          "show": true,
          "cells": {
           "Number": "700+",
@@ -1640,7 +1642,8 @@
           "Photos (one per line)": "assets/web/client/yuva-abhinava-5.jpg\nassets/web/client/yuva-abhinava-1.jpg\nassets/web/client/yuva-abhinava-2.jpg\nassets/web/client/yuva-abhinava-3.jpg\nassets/web/client/yuva-abhinava-4.jpg",
           "Title": "Yuva Abhinava",
           "Text": "Yuva Abhinava is a unique initiative that empowers young people to develop skills in the allied arts — music, painting, literature and more. Talented and able youth are given opportunities to share their creativity with peers through intimate in-house studio concerts.",
-          "Text 2": "In these performances, the young artists introduce classical art to at least sixty to eighty new youngsters who have never before attended a classical programme. Through this simple yet meaningful exchange, Yuva Abhinava helps classical arts reach a new generation while nurturing the confidence and voice of emerging artists."
+          "Text 2": "In these performances, the young artists introduce classical art to at least sixty to eighty new youngsters who have never before attended a classical programme. Through this simple yet meaningful exchange, Yuva Abhinava helps classical arts reach a new generation while nurturing the confidence and voice of emerging artists.",
+          "Text 3": ""
          }
         }
        ]
@@ -1704,7 +1707,7 @@
       {
        "key": "about/our-mission/t1",
        "kind": "photos",
-       "what": "Photos (one per line)",
+       "what": "Photos — one per line (Drive links), or one Drive folder link",
        "value": "assets/web/client/four-pillars-4.jpg\nassets/web/client/four-pillars-3.jpg\nassets/web/client/four-pillars-5.jpg\nassets/web/client/four-pillars-1.jpg"
       },
       {
@@ -2707,14 +2710,16 @@
          "key": "about/faq/1/2",
          "show": true,
          "cells": {
-          "Title": "Do you offer online classes?"
+          "Title": "Do you offer online classes?",
+          "Text": ""
          }
         },
         {
          "key": "about/faq/1/3",
          "show": true,
          "cells": {
-          "Title": "Do you perform for corporate events?"
+          "Title": "Do you perform for corporate events?",
+          "Text": ""
          }
         },
         {
@@ -3109,7 +3114,8 @@
          "show": true,
          "cells": {
           "Small heading": "Overview",
-          "Text": "Abhinava Dance Company is India's premier classical dance institution with 32 years of excellence in performance, education, research, and community engagement. Winner of Sangeet Natak Akademi Award 2023 (Creativity & Experimental Dance). ICCR recognized training wing with 700+ students. Based in Basavanagudi, Bangalore."
+          "Text": "Abhinava Dance Company is India's premier classical dance institution with 32 years of excellence in performance, education, research, and community engagement. Winner of Sangeet Natak Akademi Award 2023 (Creativity & Experimental Dance). ICCR recognized training wing with 700+ students. Based in Basavanagudi, Bangalore.",
+          "Text 2": ""
          }
         },
         {
@@ -3117,7 +3123,7 @@
          "show": true,
          "cells": {
           "Small heading": "Media enquiries",
-          "Text": "For interviews, photos or video, write to [info@abhinavadancecompany.com](mailto:info@abhinavadancecompany.com).",
+          "Text": "For interviews, more photographs or video, write to [info@abhinavadancecompany.com](mailto:info@abhinavadancecompany.com?subject=Press%20enquiry%20from%20the%20website).",
           "Text 2": "[View gallery](gallery.html)[Credentials & recognition](credentials.html)"
          }
         }
@@ -3399,7 +3405,6 @@
       {
        "key": "performances/upcoming-list/1",
        "what": "List",
-       "note": "One event per row. Start with the date in bold, e.g. **8 Jan 2027** — what, where. The site puts them in date order and hides past dates by itself.",
        "columns": [
         {
          "what": "Item",
@@ -3486,7 +3491,7 @@
          }
         },
         {
-         "key": "new-90",
+         "key": "new-900",
          "show": true,
          "cells": {
           "Item": "**1 Mar 2027** — *Test Premiere*: Chowdiah Hall, Bengaluru"
@@ -3591,7 +3596,7 @@
          "show": true,
          "cells": {
           "Small heading": "In-House",
-          "Text": "Everything is made **in-house**, start to finish."
+          "Text": "Complete production house — original concepts, lyrics, music scores, and bespoke costumes & props created under one roof."
          }
         },
         {
@@ -3621,7 +3626,7 @@
       {
        "key": "performances/past-performances/t1",
        "kind": "photos",
-       "what": "Photos (one per line)",
+       "what": "Photos — one per line (Drive links), or one Drive folder link",
        "value": "assets/web/client/noteworthy-1.jpg\nassets/web/client/noteworthy-2.jpg\nassets/web/client/noteworthy-3.jpg\nassets/web/client/noteworthy-4.jpg\nassets/web/client/noteworthy-5.jpg\nassets/web/client/noteworthy-6.jpg\nassets/web/client/noteworthy-7.jpg"
       },
       {
@@ -4252,8 +4257,8 @@
       {
        "key": "school/apply/t1",
        "kind": "photos",
-       "what": "Photos (one per line)",
-       "value": "assets/web/client/037b-edit.jpg\nassets/web/client/school-apply-now.jpg\nhttps://youtu.be/la7C2BQlbHY"
+       "what": "Photos — one per line (Drive links), or one Drive folder link",
+       "value": "assets/web/client/school-apply-now.jpg\nassets/web/client/037b-edit.jpg"
       },
       {
        "key": "school/apply/t2",
@@ -4462,7 +4467,7 @@
       {
        "key": "school/beyond-the-classroom/t1",
        "kind": "photos",
-       "what": "Photos (one per line)",
+       "what": "Photos — one per line (Drive links), or one Drive folder link",
        "value": "assets/web/client/rangapravesha-01.jpg\nassets/web/client/rangapravesha-02.jpg\nassets/web/client/rangapravesha-medha-1.jpg\nassets/web/client/rangapravesha-08.jpg\nassets/web/client/rangapravesha-sanchita.jpg\nassets/web/client/rangapravesha-04.jpg\nassets/web/client/rangapravesha-07-edit.jpg\nassets/web/client/rangapravesha-09.jpg\nassets/web/client/rangapravesh-shreya.jpg\nassets/web/client/rangapravesha-10-edit.jpg"
       },
       {
@@ -4515,7 +4520,7 @@
       {
        "key": "school/vijayadashami/t1",
        "kind": "photos",
-       "what": "Photos (one per line)",
+       "what": "Photos — one per line (Drive links), or one Drive folder link",
        "value": "assets/web/client/vijayadashami-thumbnail.jpg\nassets/web/client/vijayadashami-01.jpg\nassets/web/client/vijayadashami-02.jpg\nassets/web/client/vijayadashami-03.jpg\nassets/web/client/vijayadashami-04.jpg\nassets/web/client/vijayadashami-05.jpg\nassets/web/client/vijayadashami-07.jpg\nassets/web/client/vijayadashami-08.jpg\nassets/web/client/vijayadashami-09.jpg\nassets/web/client/vijayadashami-10.jpg\nassets/web/client/vijayadashami-11.jpg\nassets/web/client/vijayadashami-12.jpg\nassets/web/client/vijayadashami.jpg"
       },
       {
@@ -4546,7 +4551,7 @@
       {
        "key": "school/milan/t1",
        "kind": "photos",
-       "what": "Photos (one per line)",
+       "what": "Photos — one per line (Drive links), or one Drive folder link",
        "value": "assets/web/client/milan-01.jpg\nassets/web/client/milan-02.jpg\nassets/web/client/milan-02a.jpg\nassets/web/client/milan-03.jpg\nassets/web/client/milan-04.jpg\nassets/web/client/milan-05.jpg"
       },
       {
@@ -4933,7 +4938,9 @@
           "Video link": "https://www.youtube.com/watch?v=mdXNlfs0IDc",
           "Video picture": "assets/web/client/workshop-maharajji.jpg",
           "Video picture description": "Play video: Pandit Birju Maharaj — Kathak workshop at ADC",
-          "Caption": "Kathak workshop"
+          "Caption": "Kathak workshop",
+          "Photos (one per line)": "",
+          "Text": ""
          }
         },
         {
@@ -4944,7 +4951,9 @@
           "Video link": "https://www.youtube.com/watch?v=vDaAQPQLHx0",
           "Video picture": "assets/web/client/workshop-maya-rao.jpg",
           "Video picture description": "Play video: Dr Maya Rao — Abhinaya workshop at ADC",
-          "Caption": "Abhinaya workshop"
+          "Caption": "Abhinaya workshop",
+          "Photos (one per line)": "",
+          "Text": ""
          }
         },
         {
@@ -4955,7 +4964,9 @@
           "Video link": "https://www.youtube.com/watch?v=wXCxUq4XVQk",
           "Video picture": "assets/web/images/workshop-kumudini-lakhia.jpg",
           "Video picture description": "Play video: Smt. Kumudini Lakhia — meet and greet at ADC",
-          "Caption": "Meet and Greet"
+          "Caption": "Meet and Greet",
+          "Photos (one per line)": "",
+          "Text": ""
          }
         },
         {
@@ -4963,8 +4974,12 @@
          "show": true,
          "cells": {
           "Title": "Gurus Maulik Shah & Ishira Parekh",
+          "Video link": "",
+          "Video picture": "",
+          "Video picture description": "",
+          "Caption": "Kathak Workshop",
           "Photos (one per line)": "assets/web/client/maulik-workshop-thumbnail.jpg\nassets/web/client/maulik-workshop-02.jpg\nassets/web/client/maulik-workshop-03.jpg\nassets/web/client/maulik-workshop-04.jpg\nhttps://www.youtube.com/watch?v=BkPvAf5N6Qo",
-          "Caption": "Kathak Workshop"
+          "Text": ""
          }
         },
         {
@@ -4972,8 +4987,12 @@
          "show": true,
          "cells": {
           "Title": "Padma Vibhushan Dr. Padma Subrahmanyam",
+          "Video link": "",
+          "Video picture": "",
+          "Video picture description": "",
+          "Caption": "Bharatanrityam Workshop",
           "Photos (one per line)": "assets/web/client/workshop-padma-subrahmanyam.jpg\nassets/web/client/workshop-padma-subrahmanyam-1.jpg\nassets/web/client/workshop-padma-subrahmanyam-2.jpg\nassets/web/client/workshop-padma-subrahmanyam-3.jpg\nassets/web/client/workshop-padma-subrahmanyam-4.jpg\nassets/web/client/workshop-padma-subrahmanyam-5.jpg\nassets/web/client/workshop-padma-subrahmanyam-6.jpg\nassets/web/client/workshop-padma-subrahmanyam-7.jpg\nassets/web/client/workshop-padma-subrahmanyam-8.jpg",
-          "Caption": "Bharatanrityam Workshop"
+          "Text": ""
          }
         },
         {
@@ -4984,7 +5003,9 @@
           "Video link": "https://www.youtube.com/watch?v=V1lN-qMpZCc",
           "Video picture": "assets/web/client/workshop-nirupama-dma.jpg",
           "Video picture description": "Play video: DMA students — Bharatanrityam workshop",
-          "Caption": "DMA Workshop"
+          "Caption": "DMA Workshop",
+          "Photos (one per line)": "",
+          "Text": ""
          }
         },
         {
@@ -4992,11 +5013,12 @@
          "show": true,
          "cells": {
           "Title": "Temple University, Philadelphia, USA",
-          "Text": "A cultural experience was given to management students from Philadelphia.",
           "Video link": "https://www.youtube.com/watch?v=6owsQZNTpnA",
           "Video picture": "https://img.youtube.com/vi/6owsQZNTpnA/hqdefault.jpg",
           "Video picture description": "Play video: Temple University, Philadelphia — Indian cultural experience",
-          "Caption": "Indian Cultural Experience"
+          "Caption": "Indian Cultural Experience",
+          "Photos (one per line)": "",
+          "Text": "A cultural experience was given to management students from Philadelphia."
          }
         }
        ]
@@ -5494,7 +5516,7 @@
       {
        "key": "store/dance-apparel/t1",
        "kind": "photos",
-       "what": "Photos (one per line)",
+       "what": "Photos — one per line (Drive links), or one Drive folder link",
        "value": "assets/web/client/store-costume-01-3x4.jpg\nassets/web/client/store-costume-02-3x4.jpg\nassets/web/client/store-costume-03-3x4.jpg\nassets/web/client/store-costume-04-3x4.jpg\nassets/web/client/store-costume-05-3x4.jpg\nassets/web/client/store-costume-06-3x4.jpg\nassets/web/client/store-costume-07-3x4.jpg\nassets/web/client/store-costume-08-3x4.jpg\nassets/web/client/store-costume-09-3x4.jpg\nassets/web/client/store-costume-10-3x4.jpg\nassets/web/client/store-costume-11-3x4.jpg"
       },
       {
@@ -5894,7 +5916,7 @@
       {
        "key": "support/scholarships/t1",
        "kind": "photos",
-       "what": "Photos (one per line)",
+       "what": "Photos — one per line (Drive links), or one Drive folder link",
        "value": "assets/web/client/scholar-pradyota-3x4.jpg\nassets/web/client/scholar-dharithri-hamsini-3x4.jpg\nassets/web/client/scholar-sharvari-3x4.jpg\nassets/web/client/scholar-naisha-3x4.jpg\nassets/web/client/scholar-akshitha-chandrappa-3x4.jpg\nassets/web/client/scholar-deepika-chandrappa-3x4.jpg\nassets/web/client/scholar-ardra-3x4.jpg"
       },
       {
@@ -6357,7 +6379,9 @@
          "key": "contact/contact-details/1/3",
          "show": true,
          "cells": {
-          "Small heading": "Research (DMA)"
+          "Small heading": "Research (DMA)",
+          "Button": "",
+          "Button link": ""
          }
         }
        ]
@@ -6934,6 +6958,7 @@
           "Name": "Dr. Sudha Murty",
           "Small heading": "5 July 2019 · special presentation of *Krishnaa — Fire to Frost*, Dayanand Sagar Auditorium",
           "Quote": "“In general, women face a lot of challenges in their life but when we see the great difficulties faced by epic characters like Draupadi, it inspires us to deal with our troubles better. The saga of Draupadi was brought to life by Abhinava Dance Company in a grand manner even better than what I had imagined. The music, dance, costume, lighting, and the performance of the artistes touched my heart.”",
+          "Quote 2": "",
           "About": "*Educator, author, philanthropist and former chairperson of the Infosys Foundation; nominated Member of Parliament in 2024.*"
          }
         },
@@ -6943,6 +6968,9 @@
          "cells": {
           "Photo": "assets/web/client/testimonial-veena-bannanje-2.jpg",
           "Photo description": "Dr. Veena Bannanje",
+          "Video link": "",
+          "Video picture": "",
+          "Video picture description": "",
           "Name": "Dr. Veena Bannanje",
           "Small heading": "11 December 2021 · *Krishnaa — Fire to Frost*, organized by Bannanje Pratishthaana, Dayanand Sagar Auditorium, Bangalore",
           "Quote": "“I, Veena Bannanje, the founder of the Bannanje Prathishtana, have organized Abhinava Dance Company's production twice, once in Bangalore and once in my village, Kalhalli. Witnessing this big scale production presented by the wonderful team was truly remarkable. Each artist brought profound and impactful artistry to the forefront, taking on multiple roles and characters from the epic.”",
@@ -6956,6 +6984,9 @@
          "cells": {
           "Photo": "assets/web/client/arjun-bharadwaj-pic-3x4.jpg",
           "Photo description": "Shri Arjun Bharadwaj",
+          "Video link": "",
+          "Video picture": "",
+          "Video picture description": "",
           "Name": "Shri Arjun Bharadwaj",
           "Small heading": "11 December 2021 · Dayanand Sagar Auditorium",
           "Quote": "“It has been a great pleasure and privilege to have been associated with the Abhinava Dance Company for the last decade. I have been fortunate to have witnessed four times the staging of one of their most fabulous productions named Krishnaa — From Fire to Frost. The theme derives its inspiration from the grandest epic of India, the Mahabharata, and sketches the emotional landscape of Draupadi, the heroine of the epic. The choreographers, Smt. Nirupama Rajendra and Sri. T D Rajendra, have spatiotemporally recreated the episodes of the epic with such nuances that every movement is filled with suggestions and metaphors. The internationally renowned dancer duo are known for their exquisite choreographies which are rooted in traditional Indian theatre, but have a global appeal — their choreographies are a rare blend of the ancient and the modern, classical and the contemporary, material and the spiritual. The production Krishnaa aesthetically blends the grammar of many dance and drama forms of India. Watching the production not only entertains but also educates the audience on universal human values.”",
@@ -6969,6 +7000,9 @@
          "cells": {
           "Photo": "assets/web/client/testimonial-srinivasa-varakhedi-3.jpg",
           "Photo description": "Prof. Srinivasa Varakhedi",
+          "Video link": "",
+          "Video picture": "",
+          "Video picture description": "",
           "Name": "Prof. Srinivasa Varakhedi",
           "Small heading": "27 July 2023 · organizer of the Yajnaseni conference, Kamani Auditorium, New Delhi",
           "Quote": "“The uniqueness of Abhinava production creates an objective experience and leaves a long lasting impression in all viewers. It’s an enthralling and appealing play with multilayered effects to each and everyone. It touches one’s heart and reveals the inner Bhavan into many characters. Indian value system and cultures are reflected in these plays such a way the whole world will be transformed into a joyful theatre.”",
@@ -7227,7 +7261,8 @@
          "cells": {
           "Small heading": "State",
           "Title": "Karnataka Kalashree",
-          "Text": "State recognition for excellence in performing arts — honouring Nirupama & Rajendra's contribution to Karnataka's classical dance heritage."
+          "Text": "State recognition for excellence in performing arts — honouring Nirupama & Rajendra's contribution to Karnataka's classical dance heritage.",
+          "Text 2": ""
          }
         },
         {
@@ -7236,7 +7271,8 @@
          "cells": {
           "Small heading": "International Tour",
           "Title": "Oklahoma Governor Commendation",
-          "Text": "Recognition during US touring performances — acknowledging Abhinava Dance Company's role in sharing Indian classical art with American audiences."
+          "Text": "Recognition during US touring performances — acknowledging Abhinava Dance Company's role in sharing Indian classical art with American audiences.",
+          "Text 2": ""
          }
         }
        ]
@@ -7541,12 +7577,12 @@
      "lists": []
     },
     {
-     "key": "gallery/part-2",
-     "label": "Part 2",
+     "key": "gallery/gallery-2",
+     "label": "Gallery",
      "slots": [],
      "lists": [],
      "gallery": {
-      "key": "gallery/part-2/gallery",
+      "key": "gallery/gallery-2/gallery",
       "rows": [
        {
         "show": true,
@@ -7608,18 +7644,21 @@
         "show": true,
         "type": "video",
         "src": "https://www.youtube.com/embed/N3tJrzU3XLk",
+        "shape": "wide",
         "caption": "DMA Promo I"
        },
        {
         "show": true,
         "type": "video",
         "src": "https://www.youtube.com/embed/FvRC3Q4h1Kw",
+        "shape": "wide",
         "caption": "DMA Promo II"
        },
        {
         "show": true,
         "type": "video",
         "src": "https://www.youtube.com/embed/tbbnvYsB2Jw",
+        "shape": "wide",
         "caption": "Guru Padma Subrahmanyam blessing DMA"
        }
       ]
@@ -7628,7 +7667,8 @@
    ]
   }
  },
+ "drive": {},
  "by": "test@robot",
- "at": "2026-10-22T19:40:12.665Z",
- "hash": "testhash0002"
+ "at": "2026-10-22T19:48:04.017Z",
+ "hash": "testhash0003"
 }
