@@ -1,12 +1,12 @@
-# Update preview: runs when the Google Sheet sends new content (content/preview.json on the
-# "preview" branch). Builds the preview and the change page, puts them on GitHub Pages, and writes
-# the result to status/preview.json (branch "status") for the Sheet's Website panel.
+# Update preview: started by the Google Sheet after it saves new content (content/preview.json on
+# the "preview" branch). Builds the preview and the change page, puts them on GitHub Pages, and
+# writes the result to status/preview.json (branch "status") for the Sheet's Website panel.
 name: Preview
 
 on:
-  push:
-    branches: [preview]
   workflow_dispatch:
+    inputs:
+      sha: { description: "The content to preview (commit on the preview branch)", required: true }
 
 permissions:
   contents: write
@@ -29,7 +29,7 @@ jobs:
           path: site
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.sha }}
+          ref: ${{ inputs.sha }}
           path: pv
           sparse-checkout: content
       - uses: actions/setup-node@v4
@@ -54,7 +54,7 @@ jobs:
       - name: Write the status for the Sheet
         env:
           OK: ${{ steps.build.outputs.ok }}
-          SHA: ${{ github.sha }}
+          SHA: ${{ inputs.sha }}
         run: |
           node -e '
             const fs = require("fs");

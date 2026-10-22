@@ -272,6 +272,8 @@ function updatePreview() {
   content.at = new Date().toISOString();
   content.hash = hash;
   var sha = putFile_("content/preview.json", JSON.stringify(content, null, 1), "Preview requested by " + me_(), "preview");
+  var run = gh_("POST", "/repos/" + setting_("GITHUB_REPO") + "/actions/workflows/preview.yml/dispatches", { ref: "main", inputs: { sha: sha } });
+  if (run.code !== 204) return { ok: false, message: "Saved, but the preview could not be started (GitHub said " + run.code + "). Try again in a minute." };
   setState_({ status: "building", by: me_(), when: content.at, sha: sha, hash: hash, problems: [] });
   log_("Update preview", "Preview requested (" + sha.slice(0, 7) + ")");
   return { ok: true, message: "Building the preview… it takes about 2 minutes. The Website panel shows when it is ready." };
