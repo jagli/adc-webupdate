@@ -1,0 +1,45 @@
+# Undo last publish: started by the owner from the Google Sheet. Puts the previous published version
+# back on abhinava.dance (from the publish-… tags), without rebuilding anything the editors changed.
+name: Undo last publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      by: { description: "Who asked", required: true }
+
+permissions:
+  contents: write
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-save --no-audit --no-fund sharp@0.33.5
+      - name: The previous published content
+        run: |
+          prev=$(git tag -l 'publish-*' --sort=-creatordate | sed -n 2p)
+          if [ -z "$prev" ]; then echo "There is no earlier publish to go back to."; exit 1; fi
+          echo "Going back to $prev"
+          git show "$prev:content/live.json" > /tmp/live.json
+          echo "PREV=$prev" >> "$GITHUB_ENV"
+      - run: node webupdate/build.mjs --content /tmp/live.json --out ../out
+      - name: Upload to Netlify
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: node webupdate/netlify-deploy.mjs ../out/site "Undo by ${{ inputs.by }} (back to $PREV)"
+      - name: Record it
+        run: |
+          cp /tmp/live.json content/live.json
+          echo "$(date -u +%Y-%m-%dT%H:%M:%SZ),${{ inputs.by }},undo to $PREV,live" >> log/publishes.csv
+          git add -A
+          git -c user.name="Website robot" -c user.email="actions@users.noreply.github.com" commit -q -m "Undo by ${{ inputs.by }}: back to $PREV"
+          git tag "publish-$(date -u +%Y%m%d-%H%M%S)-undo"
+          git push -q origin main --tags

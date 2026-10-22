@@ -1,0 +1,122 @@
+@layer sections {
+  /* ==========================================================================
+     15. Pillars — Core Elements (alt-pillar)
+     APPROVED by the client (July 2026). Mist band, opaque ivory cards. Do not restyle.
+     ========================================================================== */
+
+  .alt-pillars {
+    display: grid;
+    gap: var(--space-lg);
+    margin-top: var(--space-2xl);
+  }
+
+  @media (min-width: 768px) {
+    .alt-pillars--3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .alt-pillar {
+    background: var(--surface-card-gradient);
+    border: var(--band-rule);
+    border-top: 3px solid var(--gold);
+    padding: var(--space-xl) 1.75rem;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+  }
+
+  .alt-pillar__label {
+    font-size: var(--text-label);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin: 0 0 var(--space-sm);
+    font-weight: 700;
+  }
+
+  .alt-pillar__body {
+    margin: 0;
+    font-size: var(--text-small);
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  .alt-pillar__body strong {
+    color: var(--navy);
+  }
+
+  /* ==========================================================================
+     16. Partners (alt-partner-card)
+     APPROVED by the client (July 2026). Burgundy band, tone-on-tone cards. Do not restyle.
+     ========================================================================== */
+
+  .alt-partners__intro {
+    max-width: 62ch;
+    margin: 0;
+    color: var(--text-on-dark-muted);
+  }
+
+  .alt-partners__grid {
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: 1fr;
+    margin-top: 1.75rem;
+  }
+
+  @media (min-width: 768px) {
+    .alt-partners__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .alt-partners__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Tone-on-tone cards on burgundy band — translucent lift, gold hairline, no ivory boxes */
+
+  .alt-partner-card {
+    background: var(--partner-card-bg);
+    border: 1px solid var(--partner-card-border);
+    border-radius: 0;
+    box-shadow: inset 0 1px 0 rgba(251, 250, 249, 0.06);
+    padding: var(--space-xl) 1.75rem;
+    transition: background 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  }
+
+  .alt-partner-card:hover {
+    background: var(--partner-card-bg-hover);
+    border-color: var(--partner-card-border-hover);
+    box-shadow: inset 0 1px 0 rgba(251, 250, 249, 0.1), 0 6px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .alt-partner-card__label {
+    font-size: var(--text-label);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    margin: 0 0 var(--space-sm);
+  }
+
+  .alt-partner-card__body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    line-height: 1.65;
+    color: var(--partner-card-text-muted);
+  }
+
+  .alt-partner-card__body strong {
+    color: var(--partner-card-text);
+    font-weight: 700;
+  }
+
+  /* Partner cards sit on burgundy — keep inner text light (not dark-band prose navy) */
+
+  .alt-band--burgundy .alt-partner-card__body,
+  .alt-band--burgundy .alt-partner-card__body strong {
+    color: var(--text-on-dark);
+  }
+}

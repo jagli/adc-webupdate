@@ -1,0 +1,47 @@
+# Daily Instagram refresh (06:00 IST): rebuilds the live site with the latest posts and uploads it
+# only when the posts changed. Nobody has to press anything.
+name: Instagram refresh
+
+on:
+  schedule:
+    - cron: "30 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-save --no-audit --no-fund sharp@0.33.5
+      - name: Build with the latest posts
+        env:
+          INSTAGRAM_FEED_MAIN: ${{ secrets.INSTAGRAM_FEED_MAIN }}
+          INSTAGRAM_FEED_SCHOOL: ${{ secrets.INSTAGRAM_FEED_SCHOOL }}
+        run: node webupdate/build.mjs --content content/live.json --out ../out
+      - name: Changed?
+        id: diff
+        run: |
+          strip() { sed -E 's/\?t=[0-9]+//'; }
+          if diff -q <(strip < js/instagram-data.js) <(strip < ../out/site/js/instagram-data.js) >/dev/null; then echo "changed=no" >> "$GITHUB_OUTPUT"; else echo "changed=yes" >> "$GITHUB_OUTPUT"; fi
+      - if: steps.diff.outputs.changed == 'yes'
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          set +e; node webupdate/netlify-deploy.mjs ../out/site "Instagram: latest posts"; code=$?; set -e
+          [ $code = 1 ] && exit 1
+          cp ../out/site/js/instagram-data.js js/instagram-data.js
+          mkdir -p assets/web/instagram assets/web/thumbs/instagram
+          cp -R ../out/site/assets/web/instagram/. assets/web/instagram/
+          cp -R ../out/site/assets/web/thumbs/instagram/. assets/web/thumbs/instagram/ 2>/dev/null || true
+          git add -A
+          git -c user.name="Instagram refresh" -c user.email="actions@users.noreply.github.com" commit -q -m "Instagram: latest posts ($(date -u +%Y-%m-%d))"
+          git push -q origin main

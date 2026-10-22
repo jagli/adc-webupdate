@@ -1,0 +1,85 @@
+# Update preview: runs when the Google Sheet sends new content (content/preview.json on the
+# "preview" branch). Builds the preview and the change page, puts them on GitHub Pages, and writes
+# the result to status/preview.json (branch "status") for the Sheet's Website panel.
+name: Preview
+
+on:
+  push:
+    branches: [preview]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: preview
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      ok: ${{ steps.build.outputs.ok }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          path: pv
+          sparse-checkout: content
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-save --no-audit --no-fund sharp@0.33.5
+        working-directory: site
+      - uses: actions/cache@v4
+        with:
+          path: site/webupdate/.cache
+          key: media-${{ github.run_id }}
+          restore-keys: media-
+      - name: Build the preview and the change page
+        id: build
+        working-directory: site
+        run: |
+          set +e
+          node webupdate/build.mjs --content ../pv/content/preview.json --base content/live.json --test --out ../out
+          code=$?
+          echo "ok=$([ $code = 0 ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Write the status for the Sheet
+        env:
+          OK: ${{ steps.build.outputs.ok }}
+          SHA: ${{ github.sha }}
+        run: |
+          node -e '
+            const fs = require("fs");
+            const c = JSON.parse(fs.readFileSync("pv/content/preview.json", "utf8"));
+            const ok = process.env.OK === "true";
+            const s = { ok, sha: process.env.SHA, hash: c.hash || "", by: c.by || "", at: new Date().toISOString() };
+            if (ok) s.changes = JSON.parse(fs.readFileSync("out/changes.json", "utf8"));
+            else s.problems = fs.existsSync("out/problems.txt") ? fs.readFileSync("out/problems.txt", "utf8").trim().split("\n") : ["The build stopped unexpectedly — the owner can see why on GitHub (Actions ▸ Preview)."];
+            fs.writeFileSync("status.json", JSON.stringify(s, null, 1));'
+          git -C site fetch origin status:status 2>/dev/null || true
+          mkdir st && cd st && git init -q && git checkout -q -b status
+          git -C ../site show status:status/publish.json > /dev/null 2>&1 && mkdir -p status && git -C ../site show status:status/publish.json > status/publish.json || true
+          mkdir -p status && cp ../status.json status/preview.json
+          git add -A && git -c user.name="Website robot" -c user.email="actions@users.noreply.github.com" commit -q -m "Preview status"
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" status
+      - if: steps.build.outputs.ok == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: out/site
+
+  deploy:
+    needs: build
+    if: needs.build.outputs.ok == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+    steps:
+      - uses: actions/deploy-pages@v4

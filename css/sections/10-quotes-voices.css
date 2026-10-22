@@ -1,0 +1,171 @@
+@layer sections {
+  /* ==========================================================================
+     21. Pull quotes (quote-pull)
+     ========================================================================== */
+
+  .quote-pull {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    color: var(--text);
+    border-left: 2px solid var(--gold);
+    padding-left: var(--space-md);
+    max-width: 62ch;
+  }
+
+  .quote-pull--compact {
+    font-size: var(--text-body-lg);
+  }
+
+  /* Quotation cards (s-quotes) — several short testimonials in two balanced columns.
+     Body type, not the display face, so long quotes stay calm; a single gold mark and a hairline
+     carry the decoration. The columns let short and long quotes sit together without gaps. */
+
+  .s-quotes {
+    margin-top: var(--space-xl);
+    columns: 1;
+    column-gap: var(--space-xl);
+  }
+
+  @media (min-width: 768px) {
+    .s-quotes {
+      columns: 2;
+    }
+  }
+
+  .s-quote {
+    break-inside: avoid;
+    margin: 0 0 var(--space-lg);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--gold-bright);
+  }
+
+  .s-quote__text {
+    margin: 0;
+    font-size: var(--text-small);
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  .s-quote__text::before {
+    content: "\201C";
+    display: block;
+    font-family: var(--font-display);
+    font-size: 2.25rem;
+    line-height: 1;
+    color: var(--gold);
+    margin-bottom: var(--space-2xs);
+  }
+
+  .s-quote__by {
+    margin-top: var(--space-sm);
+    font-size: var(--text-label);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+
+  .s-quotes + .s-video-grid {
+    margin-top: var(--space-xl);
+  }
+
+  /* Testimonial rows (s-voice) — one person per row: portrait beside one block of limited height that
+     holds the words and then the video, scrolled with a slim gold bar only when it is longer than the box; on a phone the parts stack. Tone-on-tone on the dark band. */
+
+  .s-voices {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .s-voice {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    padding: var(--space-lg);
+    background: var(--partner-card-bg);
+    border: 1px solid var(--partner-card-border);
+    box-shadow: var(--shadow-tone);
+  }
+
+  .s-voice__photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .s-voice__name {
+    margin: 0 0 var(--space-2xs);
+    font-family: var(--font-display);
+    font-size: var(--text-subtitle);
+    font-weight: 400;
+    color: var(--partner-card-text);
+  }
+
+  .s-voice .s-card__label {
+    margin-bottom: var(--space-sm);
+    color: var(--gold-bright);
+  }
+
+  .s-voice__quote,
+  .s-voice__bio {
+    margin: 0;
+    font-size: var(--text-small);
+    line-height: 1.7;
+    color: var(--partner-card-text-muted);
+  }
+
+  .s-voice__bio {
+    font-style: italic;
+    color: var(--gold-bright);
+  }
+
+  .s-voice__quote a {
+    color: var(--gold-bright);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* The words in full: the card grows to fit them, no inner scroll */
+  .s-voice__scroll {
+    max-width: 46rem;
+  }
+
+  .s-voice__scroll > p {
+    margin: 0;
+  }
+
+  .s-voice__scroll > * + * {
+    margin-top: var(--space-sm);
+  }
+
+  /* Without a video the portrait takes the full height of the column instead: 9:16 */
+  .s-voice__media:not(:has(.s-voice__video)) .s-voice__photo {
+    aspect-ratio: 9 / 16;
+  }
+
+  /* Portrait, and the video below it when there is one, in a thin gold frame */
+  .s-voice__media {
+    display: grid;
+    gap: var(--space-sm);
+    max-width: 16rem;
+  }
+
+  .s-voice__video {
+    padding: 4px;
+    border: 1px solid var(--gold-bright);
+    background: rgba(0, 0, 0, 0.18);
+    box-shadow: 0 0 0 1px rgba(216, 182, 129, 0.25), var(--shadow-tone);
+  }
+
+  .s-voice__video .s-video {
+    inset: 4px;
+  }
+
+  @media (min-width: 900px) {
+    .s-voice {
+      grid-template-columns: 16rem minmax(0, 1fr);
+      align-items: start;
+    }
+  }
+}

@@ -1,0 +1,207 @@
+@layer sections {
+  /* ==========================================================================
+     Mini carousel (s-mini)
+     A few photos in one picture space, one at a time. Swipe, or use the plain
+     arrows or the dots (both added by js/interactions.js initMiniCarousels()).
+     Without scripts the strip still scrolls sideways. The frame is 3:2, the shape
+     of most of the photos; every photo is shown whole, never cropped.
+     ========================================================================== */
+
+  .s-mini {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+  }
+
+  .s-mini__track {
+    display: flex;
+    height: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  .s-mini__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .s-mini__track:focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: -2px;
+  }
+
+  .s-mini .s-mini__slide {
+    position: static;
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    aspect-ratio: auto;
+    object-fit: contain;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  /* Videos in a mini carousel: 16:9 frame; each slide holds a thumbnail link (.s-video) that opens the pop-up player */
+  .s-mini--video {
+    aspect-ratio: 16 / 9;
+    box-shadow: var(--shadow-tile);
+  }
+
+  /* Photos in a card's mini carousel: the same 16:9 frame as the video tiles beside it, filled edge to edge */
+  .s-mini--photo {
+    aspect-ratio: 16 / 9;
+    box-shadow: var(--shadow-tile);
+  }
+
+  .s-mini--photo .s-mini__slide {
+    object-fit: cover;
+    object-position: 50% 25%;
+  }
+
+  /* Portrait carousel: a 3:4 frame filled edge to edge. Its photos are prepared as 3:4 crops
+     (file names ending -3x4) framed by hand: subject centred, a small even margin above the head.
+     If a photo is not yet cropped, the top of it is kept in view. For people and costumes. */
+  .s-mini--portrait {
+    aspect-ratio: 3 / 4;
+    max-width: 26rem;
+    margin-inline: auto;
+    box-shadow: var(--shadow-tile);
+  }
+
+  .s-mini--portrait .s-mini__slide {
+    object-fit: cover;
+    object-position: 50% 0;
+  }
+
+  /* Controls in a glass notch rising from the bottom edge of the photo: frosted glass (the photo blurred
+     and softly darkened behind it), top corners rounded, no outline. Inside it a short hairline (the current
+     photo's part in gold) between two small gold arrows. The carousel also moves by itself
+     (initAutoMotion in js/interactions.js). */
+  .s-mini[data-mini-bound="1"] {
+    --mini-line: min(7rem, 100% - 9rem); /* the length of the line */
+    --mini-gold: var(--gold-bright);
+    --mini-tab-h: 2.1rem;
+    --mini-corner: 0.8rem;
+  }
+
+  .s-mini__dots {
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(var(--mini-line) + 5rem);
+    height: var(--mini-tab-h);
+    padding: 0 2.5rem;
+    display: flex;
+    align-items: center;
+    background: rgba(24, 14, 20, 0.32);
+    -webkit-backdrop-filter: blur(10px) saturate(1.2);
+    backdrop-filter: blur(10px) saturate(1.2);
+    border-radius: var(--mini-corner) var(--mini-corner) 0 0;
+  }
+
+  .s-mini__arrow {
+    position: absolute;
+    z-index: 2;
+    bottom: calc(var(--mini-tab-h) / 2);
+    transform: translateY(50%);
+    width: 1.75rem;
+    height: 1.75rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--mini-gold);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color var(--duration) var(--ease), opacity var(--duration) var(--ease);
+  }
+
+  .s-mini__arrow:hover:not(:disabled) {
+    color: var(--ivory);
+  }
+
+  .s-mini__arrow--prev {
+    left: calc(50% - var(--mini-line) / 2 - 2.1rem);
+  }
+
+  .s-mini__arrow--next {
+    right: calc(50% - var(--mini-line) / 2 - 2.1rem);
+  }
+
+  .s-mini__arrow svg {
+    width: 0.95rem;
+    height: 0.95rem;
+    stroke-width: 1.5;
+  }
+
+  .s-mini__arrow:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+
+  .s-mini__arrow:focus-visible,
+  .s-mini__dot:focus-visible {
+    outline: 1px solid var(--gold-bright);
+    outline-offset: 2px;
+  }
+
+  .s-mini__dot {
+    flex: 1 1 0;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  .s-mini__dot::before {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background: rgba(216, 182, 129, 0.45);
+    transition: background-color var(--duration) var(--ease), height var(--duration) var(--ease);
+  }
+
+  .s-mini__dot:hover::before {
+    background: var(--mini-gold);
+  }
+
+  /* The current photo's part of the line */
+  .s-mini__dot[aria-current="true"]::before {
+    height: 2px;
+    background: var(--mini-gold);
+  }
+
+  /* Touch screens: arrows and notch big enough for a thumb (44px), the line a little longer */
+  @media (pointer: coarse) {
+    .s-mini[data-mini-bound="1"] {
+      --mini-tab-h: 2.75rem;
+      --mini-line: min(6rem, 100% - 12rem);
+    }
+
+    .s-mini__dots {
+      width: calc(var(--mini-line) + 6.5rem);
+      padding: 0 3.25rem;
+    }
+
+    .s-mini__arrow {
+      width: 2.75rem;
+      height: 2.75rem;
+    }
+
+    .s-mini__arrow--prev {
+      left: calc(50% - var(--mini-line) / 2 - 2.9rem);
+    }
+
+    .s-mini__arrow--next {
+      right: calc(50% - var(--mini-line) / 2 - 2.9rem);
+    }
+  }
+}

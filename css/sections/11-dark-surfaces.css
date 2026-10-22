@@ -1,0 +1,221 @@
+@layer sections {
+  /* ==========================================================================
+     22. Dark surfaces — text and cards
+     Layer 3. One place that keeps text readable on burgundy, navy, olive and dark panels.
+     ========================================================================== */
+
+  /* Dark-band headings — never inherit light-surface --text / --navy */
+
+  .alt-band--burgundy .alt-spaced,
+  .alt-band--navy .alt-spaced,
+  .alt-band--olive .alt-spaced {
+    color: var(--gold-bright);
+    opacity: 0.92;
+  }
+
+  .alt-band--burgundy,
+  .alt-band--navy,
+  .alt-band--olive,
+  .s-split-text--dark,
+  .s-section__content--dark,
+  .s-section__content--olive,
+  .s-section__content--navy,
+  .s-band {
+    color: var(--text-on-dark-muted);
+  }
+
+  .alt-band--burgundy .alt-section-head__title,
+  .alt-band--navy .alt-section-head__title,
+  .alt-band--olive .alt-section-head__title,
+  .alt-band--burgundy .alt-interlude__display,
+  .alt-band--navy .alt-interlude__display,
+  .alt-band--olive .alt-interlude__display,
+  .alt-band--burgundy h1,
+  .alt-band--burgundy h2,
+  .alt-band--burgundy h3,
+  .alt-band--navy h1,
+  .alt-band--navy h2,
+  .alt-band--navy h3,
+  .alt-band--olive h1,
+  .alt-band--olive h2,
+  .alt-band--olive h3,
+  .s-split-text--dark .s-section__title,
+  .s-section__content--dark .s-section__title,
+  .s-section__content--olive .s-section__title,
+  .s-section__content--navy .s-section__title,
+  .s-band .s-section__title {
+    color: var(--text-on-dark);
+  }
+
+  .alt-band--burgundy .alt-section-head__eyebrow,
+  .alt-band--navy .alt-section-head__eyebrow,
+  .alt-band--olive .alt-section-head__eyebrow,
+  .s-split-text--dark .s-section__eyebrow,
+  .s-section__content--dark .s-section__eyebrow,
+  .s-section__content--olive .s-section__eyebrow,
+  .s-section__content--navy .s-section__eyebrow,
+  .s-band .s-section__eyebrow {
+    color: var(--gold-bright);
+  }
+
+  .alt-band--burgundy .content-prose,
+  .alt-band--navy .content-prose,
+  .alt-band--olive .content-prose,
+  .alt-band--burgundy .content-prose li,
+  .alt-band--navy .content-prose li,
+  .alt-band--olive .content-prose li,
+  .s-split-text--dark .content-prose,
+  .s-split-text--dark .content-prose li,
+  .s-section__content--dark .content-prose,
+  .s-section__content--olive .content-prose,
+  .s-section__content--navy .content-prose,
+  .s-band .content-prose,
+  .s-band .content-prose li {
+    color: var(--text-on-dark-muted);
+  }
+
+  .alt-band--burgundy .content-prose strong,
+  .alt-band--navy .content-prose strong,
+  .alt-band--olive .content-prose strong,
+  .s-split-text--dark .content-prose strong,
+  .s-section__content--dark .content-prose strong,
+  .s-section__content--olive .content-prose strong,
+  .s-section__content--navy .content-prose strong,
+  .s-band .content-prose strong,
+  .s-split-text--dark .s-timeline__item strong {
+    color: var(--text-on-dark);
+  }
+
+  .alt-band--burgundy .content-prose a,
+  .alt-band--navy .content-prose a,
+  .alt-band--olive .content-prose a,
+  .s-split-text--dark .content-prose a,
+  .s-section__content--dark .content-prose a,
+  .s-section__content--olive .content-prose a,
+  .s-section__content--navy .content-prose a,
+  .s-band .content-prose a {
+    color: var(--gold-bright);
+  }
+
+  .alt-band--burgundy .content-prose a:hover,
+  .alt-band--navy .content-prose a:hover,
+  .alt-band--olive .content-prose a:hover,
+  .s-split-text--dark .content-prose a:hover,
+  .s-section__content--dark .content-prose a:hover,
+  .s-band .content-prose a:hover {
+    color: var(--ivory);
+  }
+
+  .alt-band--burgundy .content-prose blockquote,
+  .alt-band--navy .content-prose blockquote,
+  .alt-band--olive .content-prose blockquote,
+  .s-split-text--dark .content-prose blockquote,
+  .s-section__content--dark .content-prose blockquote,
+  .s-band .content-prose blockquote {
+    color: var(--text-on-dark);
+    border-left-color: var(--gold-bright);
+  }
+
+  .s-split-text--dark .s-timeline__item {
+    color: var(--text-on-dark-muted);
+    border-bottom-color: var(--border-on-dark);
+  }
+
+  .s-split-text--dark .s-timeline__item em {
+    color: var(--text-on-dark);
+  }
+
+  /* Tone-on-tone cards on burgundy bands — partner luxury (NO ivory boxes) */
+
+  .alt-band--burgundy .s-card,
+  .s-split-text--dark .s-card {
+    background: var(--partner-card-bg);
+    border: 1px solid var(--partner-card-border);
+    border-radius: 0;
+    box-shadow: var(--shadow-tone);
+    transition: background var(--duration) var(--ease), var(--transition-surface);
+  }
+
+  .alt-band--burgundy .s-card:hover,
+  .s-split-text--dark .s-card:hover {
+    background: var(--partner-card-bg-hover);
+    border-color: var(--partner-card-border-hover);
+    box-shadow: var(--shadow-tone-hover);
+  }
+
+  .alt-band--burgundy .s-card .content-prose,
+  .s-split-text--dark .s-card .content-prose {
+    color: var(--partner-card-text-muted);
+  }
+
+  .alt-band--burgundy .s-card .content-prose strong,
+  .s-split-text--dark .s-card .content-prose strong {
+    color: var(--gold-bright);
+  }
+
+  .alt-band--burgundy .s-card__title,
+  .s-split-text--dark .s-card__title {
+    color: var(--partner-card-text);
+  }
+
+  .alt-band--burgundy .s-card__label,
+  .s-split-text--dark .s-card__label {
+    color: var(--gold-bright);
+  }
+
+  /* Ivory card islands on navy/olive bands only */
+
+  .alt-band--navy .s-card,
+  .alt-band--olive .s-card {
+    background: var(--surface-card-gradient);
+    border: var(--band-rule);
+    box-shadow: var(--shadow-card-on-dark);
+  }
+
+  .alt-band--navy .s-card .content-prose,
+  .alt-band--olive .s-card .content-prose {
+    color: var(--text-muted);
+  }
+
+  .alt-band--navy .s-card .content-prose strong,
+  .alt-band--olive .s-card .content-prose strong {
+    color: var(--navy);
+  }
+
+  .alt-band--navy .s-card__title,
+  .alt-band--olive .s-card__title {
+    color: var(--navy);
+  }
+
+  .alt-band--navy .s-card__label,
+  .alt-band--olive .s-card__label {
+    color: var(--gold-deep);
+  }
+
+  .alt-band--olive .alt-pillar,
+  .alt-band--navy .alt-pillar,
+  .alt-band--burgundy .alt-pillar {
+    background: var(--surface-card-gradient);
+    border: var(--band-rule);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.14);
+  }
+
+  .alt-band--navy .alt-hscroll__item,
+  .alt-band--burgundy .alt-hscroll__item,
+  .alt-band--olive .alt-hscroll__item {
+    background: rgba(251, 250, 249, 0.08);
+  }
+
+  .alt-band--navy .alt-hscroll__cap,
+  .alt-band--burgundy .alt-hscroll__cap,
+  .alt-band--olive .alt-hscroll__cap {
+    color: var(--text-on-dark);
+    background: rgba(5, 8, 16, 0.35);
+  }
+
+  .alt-band--navy .alt-hscroll__cap strong,
+  .alt-band--burgundy .alt-hscroll__cap strong,
+  .alt-band--olive .alt-hscroll__cap strong {
+    color: var(--text-on-dark);
+  }
+}

@@ -1,0 +1,237 @@
+@layer sections {
+  /* ==========================================================================
+     18. Carousel (alt-carousel, alt-hscroll)
+     ========================================================================== */
+
+  /* Production carousel. Cards run the full width of the band, lined up with the heading; the arrows sit below on the right */
+  .alt-carousel {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    column-gap: var(--space-sm);
+    row-gap: var(--space-lg);
+    margin-top: var(--space-2xl);
+  }
+
+  .alt-carousel__btn--prev {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .alt-carousel__btn--next {
+    grid-column: 3;
+    grid-row: 2;
+  }
+
+  .alt-carousel__viewport {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    min-width: 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .alt-carousel__viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .alt-carousel__track,
+  .alt-hscroll {
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  .alt-carousel__btn {
+    flex-shrink: 0;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    border: 1px solid var(--gold-bright);
+    background: rgba(201, 160, 74, 0.28);
+    color: var(--ivory);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .alt-carousel__btn svg {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  .alt-carousel__btn:hover:not(:disabled) {
+    background: rgba(201, 160, 74, 0.5);
+  }
+
+  .alt-carousel__btn:focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 2px;
+  }
+
+  .alt-carousel__btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  @media (min-width: 768px) {
+    .alt-carousel__btn {
+      width: 3rem;
+      height: 3rem;
+    }
+
+    .alt-carousel__btn svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  .alt-hscroll__item {
+    flex: 0 0 min(68vw, 18rem);
+    min-width: 0;
+    scroll-snap-align: start;
+    border: var(--band-rule);
+    overflow: hidden;
+    background: rgba(251, 250, 249, 0.06);
+  }
+
+  /* Whole cards only: two across on a tablet, three on a computer (1px spare so half-pixel widths never clip the last card's border) */
+  @media (min-width: 768px) {
+    .alt-hscroll__item {
+      flex-basis: calc((100% - var(--space-md)) / 2 - 1px);
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .alt-hscroll__item {
+      flex-basis: calc((100% - 2 * var(--space-md)) / 3 - 1px);
+    }
+  }
+
+  .alt-hscroll__item img {
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    /* A wide photo can name the part to keep: style="--photo-focus-x: 60%" on the img */
+    object-position: var(--photo-focus-x, 50%) var(--photo-focus-y, 50%);
+    width: 100%;
+  }
+
+  .alt-hscroll__cap {
+    padding: var(--space-sm);
+    font-size: var(--text-caption);
+    border-top: var(--band-rule);
+    color: var(--text-on-dark);
+  }
+
+  /* ==========================================================================
+     19. Stats strip inside a band
+     ========================================================================== */
+
+  .alt-band .v-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    background: transparent;
+    border-block: var(--band-rule);
+    margin-top: 0;
+  }
+
+  .alt-band .v-stats--flush {
+    margin-top: 0;
+  }
+
+  @media (min-width: 768px) {
+    .alt-band .v-stats {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .alt-band .v-stats__cell {
+    padding: var(--space-2xl) var(--space-md);
+    text-align: center;
+    border-right: 1px solid rgba(157, 121, 73, 0.2);
+  }
+
+  .alt-band .v-stats__cell:last-child {
+    border-right: none;
+  }
+
+  .alt-band .v-stats__num {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    color: var(--navy);
+    line-height: 1;
+  }
+
+  .alt-band .v-stats__label {
+    font-size: var(--text-caption);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: var(--space-xs);
+  }
+
+  .alt-band .v-stats__cell:nth-child(1) .v-stats__label {
+    color: var(--gold);
+  }
+
+  .alt-band .v-stats__cell:nth-child(2) .v-stats__label {
+    color: var(--sage);
+  }
+
+  .alt-band .v-stats__cell:nth-child(3) .v-stats__label {
+    color: var(--gold-deep);
+  }
+
+  .alt-band .v-stats__cell:nth-child(4) .v-stats__label {
+    color: var(--lavender);
+  }
+
+  /* ==========================================================================
+     20. Portraits (client-portrait)
+     ========================================================================== */
+
+  .client-portrait-grid {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .client-portrait-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .client-portrait-grid--4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .client-portrait {
+    text-align: center;
+  }
+
+  .client-portrait img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    display: block;
+    margin-bottom: var(--space-xs);
+  }
+
+  .client-portrait__name {
+    font-size: var(--text-small);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .client-portrait__role {
+    font-size: var(--text-caption);
+    color: var(--text-muted, #666);
+    margin: var(--space-2xs) 0 0;
+  }
+}

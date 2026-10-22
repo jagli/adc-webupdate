@@ -1,0 +1,102 @@
+@layer sections {
+  /* ==========================================================================
+     23. Palette accents
+     Layer 3. One accent hue per card or eyebrow, in rotation.
+     ========================================================================== */
+
+  /* News cards on ivory — one pallet hue per card label + top rule */
+
+  .alt-band--ivory .s-cards .s-card:nth-child(3n+1) {
+    border-top: 3px solid var(--sage);
+  }
+
+  .alt-band--ivory .s-cards .s-card:nth-child(3n+1) .s-card__label {
+    color: var(--sage);
+  }
+
+  .alt-band--ivory .s-cards .s-card:nth-child(3n+2) {
+    border-top: 3px solid var(--peach);
+  }
+
+  .alt-band--ivory .s-cards .s-card:nth-child(3n+2) .s-card__label {
+    color: var(--peach);
+  }
+
+  .alt-band--ivory .s-cards .s-card:nth-child(3n+3) {
+    border-top: 3px solid var(--lavender);
+  }
+
+  .alt-band--ivory .s-cards .s-card:nth-child(3n+3) .s-card__label {
+    color: var(--lavender);
+  }
+
+  /* Section eyebrows — vertical rotation on light bands (approved sections stay gold) */
+
+  .alt-band--ivory[aria-label="Introduction"] .alt-section-head__eyebrow {
+    color: var(--gold);
+  }
+
+  .alt-band--mist[aria-label="At a glance"] .alt-section-head__eyebrow {
+    color: var(--peach);
+  }
+
+  .alt-band--mist[aria-label="Abhinava Dance School"] .alt-section-head__eyebrow {
+    color: var(--gold-bright);
+  }
+
+  .alt-band--ivory[aria-label="Artistic Directors"] .alt-section-head__eyebrow {
+    color: var(--sage);
+  }
+
+  .alt-band--mist[aria-label="Core Elements"] .alt-section-head__eyebrow {
+    color: var(--gold);
+  }
+
+  .alt-band--ivory[aria-label="Your journey with Abhinava"] .alt-section-head__eyebrow {
+    color: var(--gold);
+  }
+
+  /* Inner pages — each section names its eyebrow hue (s-section--accent-…); down a page they rotate
+     gold, sage, peach, deep gold. Set on the section, not worked out from its position */
+
+  main > .s-section.s-section--accent-gold .s-section__eyebrow {
+    color: var(--gold);
+  }
+
+  main > .s-section.s-section--accent-sage .s-section__eyebrow {
+    color: var(--sage);
+  }
+
+  main > .s-section.s-section--accent-peach .s-section__eyebrow {
+    color: var(--peach);
+  }
+
+  main > .s-section.s-section--accent-gold-deep .s-section__eyebrow {
+    color: var(--gold-deep);
+  }
+
+  main > .s-section .s-section__content--dark .s-section__eyebrow,
+  main > .s-section .s-section__content--olive .s-section__eyebrow,
+  main > .s-section .s-section__content--navy .s-section__eyebrow {
+    color: var(--gold-bright);
+  }
+
+  /* Dark bands — single highlight word via em (peach / citron tints) */
+
+  .alt-band--burgundy .content-prose--on-dark em,
+  .alt-band--navy .content-prose--on-dark em {
+    color: var(--peach-on-dark);
+    font-style: italic;
+  }
+
+  .alt-band--olive .content-prose--on-dark em {
+    color: var(--citron-on-dark);
+    font-style: italic;
+  }
+
+  .alt-band--burgundy .alt-interlude__display em,
+  .alt-band--navy .alt-interlude__display em,
+  .alt-band--olive .alt-interlude__display em {
+    color: var(--gold-bright);
+  }
+}

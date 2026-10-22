@@ -1,0 +1,18 @@
+@layer sections {
+  /* ==========================================================================
+     24. Phones — reading and tapping comfort
+     ========================================================================== */
+
+  @media (max-width: 767px) {
+    .alt-section-head__eyebrow,
+    .alt-spaced {
+      font-size: var(--text-label);
+    }
+
+    /* A card title that is a link: tall enough to tap */
+    .s-card__title a {
+      display: inline-block;
+      padding-block: var(--space-xs);
+    }
+  }
+}

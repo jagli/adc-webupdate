@@ -1,0 +1,214 @@
+@layer sections {
+  /* ==========================================================================
+     3. Section — text only (s-split-text)
+     ========================================================================== */
+
+  .s-split-text {
+    padding-block: var(--section-space-compact);
+    padding-inline: var(--layout-gutter);
+    background: var(--surface-ivory-gradient);
+  }
+
+  .s-split-text--dark {
+    background: var(--surface-burgundy-gradient);
+    border-top: var(--divider-on-dark);
+    box-shadow: inset 0 1px 0 rgba(216, 182, 129, 0.06);
+  }
+
+  .s-split-text--dark .content-prose em {
+    color: var(--text-on-dark);
+  }
+
+  /* ==========================================================================
+     4. Page introduction (s-page-intro)
+     ========================================================================== */
+
+  .s-page-intro {
+    padding-block: var(--section-space-compact);
+    padding-inline: var(--layout-gutter);
+    background: var(--surface-ivory-muted-gradient);
+    border-bottom: 1px solid var(--gold-dim);
+  }
+
+  /* Centred opening statement: a single paragraph set slightly larger, centred on the page,
+     with a short gold rule above, so the full width is used with balance instead of leaving
+     an empty right half. */
+  .s-page-intro--centred .content-prose,
+  .s-page-intro--centred .s-page-intro__lead {
+    max-width: 58rem;
+    margin-inline: auto;
+    text-align: center;
+    font-size: var(--text-body-lg);
+    line-height: 1.75;
+    text-wrap: balance;
+  }
+
+  /* A quotation as the opening statement (Support): no side rule, centred like the others */
+  .s-page-intro--centred .quote-pull {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .s-page-intro--centred .layout::before {
+    content: "";
+    display: block;
+    width: 3rem;
+    height: 1px;
+    margin: 0 auto var(--space-lg);
+    background: var(--gold);
+  }
+
+  .s-page-intro__lead {
+    font-size: clamp(var(--text-body), 1.5vw, var(--text-body-lg));
+    color: var(--text-muted);
+    max-width: 62ch;
+    line-height: var(--leading-prose);
+  }
+
+  /* ==========================================================================
+     5. Photo band with overlay text (s-band)
+     ========================================================================== */
+
+  .s-band {
+    position: relative;
+    overflow: hidden;
+    min-height: clamp(360px, 55vh, 640px);
+    /* Deep navy: the dark panel the gallery uses; it sits between burgundy sections on the Testimonials page */
+    background: var(--surface-navy-gradient);
+  }
+
+  .s-band > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .s-band__body {
+    position: relative;
+    z-index: 1;
+    padding-block: var(--section-space);
+    padding-inline: var(--layout-gutter);
+    max-width: var(--layout-narrow);
+  }
+
+  @media (min-width: 1200px) {
+    .s-band__body {
+      margin-inline-start: 0;
+    }
+  }
+
+  /* A band that carries a video row (s-bts) uses the full content width, so the row is not squeezed to one side */
+  .s-band__body:has(> .s-bts) {
+    max-width: var(--layout-max);
+  }
+
+  .s-band__body .content-prose {
+    color: var(--text-on-dark-muted);
+  }
+
+  .s-band__body .content-prose strong {
+    color: #fff;
+  }
+
+  /* Behind the Scenes inside a text band (s-bts): text, then the video. From 1100px side by side, the video
+     starting where the photo-led section below splits (50% of the band) and ending at the band's content edge. */
+  .s-bts {
+    display: grid;
+    gap: var(--space-lg);
+    position: relative;
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-2xl);
+  }
+
+  /* Above it, the site's divider: a gold hairline fading out at both ends, a small diamond at its centre */
+  .s-bts::before,
+  .s-bts::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .s-bts::before {
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 8%, var(--gold-dim) 28%, var(--gold-bright) 50%, var(--gold-dim) 72%, transparent 92%);
+  }
+
+  .s-bts::after {
+    top: -4px;
+    left: 50%;
+    width: 7px;
+    height: 7px;
+    background: var(--ivory);
+    border: 1px solid var(--gold-bright);
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  /* A sub-section heading: smaller and lighter than the band's own title above it */
+  .s-bts .s-section__title {
+    margin-bottom: var(--space-sm);
+    font-size: clamp(1.4rem, 1.9vw, 1.75rem);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+
+  .s-bts .s-video {
+    position: relative;
+    inset: auto;
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 1px solid var(--gold-bright);
+    box-shadow: var(--shadow-photo);
+  }
+
+  /* Alternating rows: the video first, the text second */
+  @media (min-width: 1100px) {
+    .s-bts.s-bts--reverse {
+      grid-template-columns: 1fr 50%;
+    }
+
+    .s-bts--reverse > .s-video {
+      order: -1;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .s-bts {
+      grid-template-columns: 50% 1fr;
+      column-gap: var(--space-2xl);
+      align-items: center;
+    }
+  }
+
+  /* Two rows whose videos meet corner to corner (s-bts--joined): no gap between the columns or the rows,
+     the text keeping its distance by padding; the second row has no divider of its own */
+  @media (min-width: 1100px) {
+    .s-bts.s-bts--joined {
+      column-gap: 0;
+    }
+
+    .s-bts--joined .s-bts__text {
+      padding-right: var(--space-2xl);
+    }
+
+    .s-bts--joined.s-bts--reverse .s-bts__text {
+      padding-right: 0;
+      padding-left: var(--space-2xl);
+    }
+
+    .s-bts--joined + .s-bts--joined {
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    .s-bts--joined + .s-bts--joined::before,
+    .s-bts--joined + .s-bts--joined::after {
+      display: none;
+    }
+  }
+}

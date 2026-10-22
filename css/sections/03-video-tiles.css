@@ -1,0 +1,167 @@
+@layer sections {
+  /* Video — a thumbnail with a play button; pressing it opens the pop-up player (lightbox in main.css).
+     Fills a section's picture space, or sits in a 16:9 tile inside text and cards. */
+
+  .s-video {
+    position: absolute;
+    inset: 0;
+    display: block;
+    background: #000;
+  }
+
+  .s-video img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    /* A picture can choose which part the 16:9 tile shows: style="--photo-focus-y: 85%" on the img */
+    object-position: 50% var(--photo-focus-y, 50%);
+  }
+
+  .s-video::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(10,8,7,0.25);
+    transition: var(--transition-surface);
+  }
+
+  .s-video:hover::after,
+  .s-video:focus-visible::after {
+    background: rgba(10,8,7,0.1);
+  }
+
+  .s-video__play {
+    position: absolute;
+    inset: 50% auto auto 50%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    transform: translate(-50%, -50%);
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    background: rgba(10,8,7,0.55);
+    color: var(--gold-bright);
+  }
+
+  .s-video__play svg {
+    width: 44%;
+    height: 44%;
+  }
+
+  .s-video-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .s-video-grid--3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-sm);
+    }
+  }
+
+  /* Four videos: two across on phones and tablets, four in one row from 1024px */
+  @media (min-width: 1024px) {
+    .s-video-grid--4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-sm);
+    }
+  }
+
+  /* A long list of videos: two across on phones, three from 768px, five from 1200px */
+  @media (min-width: 768px) {
+    .s-video-grid--many {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .s-video-grid--many {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: var(--space-sm);
+    }
+  }
+
+  /* Response videos (s-video-wall): one grid with one even gutter across and down; wide videos (16:9) two to a row,
+     upright Shorts (s-video-tile--tall) three to a row below them, every edge lined up.
+     Wide videos run full width on phones, Shorts two across. */
+  .s-video-wall {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-md);
+    align-items: start;
+  }
+
+  .s-video-tile--wide {
+    grid-column: 1 / -1;
+  }
+
+  @media (min-width: 768px) {
+    .s-video-wall {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .s-video-tile--wide {
+      grid-column: span 3;
+    }
+
+    .s-video-tile--tall {
+      grid-column: span 2;
+    }
+  }
+
+  /* Shorts in the wall: a 3:4 frame (not the full 9:16) so the row sits in proportion with the wide videos;
+     the top of the picture kept in view, where the speaker's head is */
+  .s-video-tile--tall .s-video-tile__media {
+    aspect-ratio: 3 / 4;
+  }
+
+  .s-video-tile--tall .s-video-tile__media img {
+    object-position: 50% 20%;
+  }
+
+  /* A row of videos that follows a heading-only s-bts: the heading sits close to its videos */
+  .s-bts:has(> .s-bts__text:only-child) + .s-video-wall {
+    margin-top: var(--space-md);
+  }
+
+  .s-video-tile {
+    min-width: 0;
+    margin: 0;
+  }
+
+  .s-card .s-video-tile {
+    margin-top: var(--space-md);
+  }
+
+  .s-video-tile__media {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    box-shadow: var(--shadow-tile);
+  }
+
+  /* Portrait video tiles (students speaking to camera): a 9:16 frame; the thumbnail is cropped to its centre */
+  .s-video-grid--portrait .s-video-tile__media {
+    aspect-ratio: 9 / 16;
+  }
+
+  .s-video-tile .s-video__play {
+    width: 44px;
+    height: 44px;
+  }
+
+  .s-video-tile__cap {
+    margin-top: var(--space-xs);
+    font-size: var(--text-small);
+    line-height: 1.35;
+  }
+}

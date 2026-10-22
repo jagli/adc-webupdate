@@ -1,0 +1,161 @@
+/* ==========================================================================
+   Abhinava Dance Company — design tokens
+
+   Layer 1. Every colour, type size, spacing and layout value used by the
+   components. Change a value here and it changes everywhere.
+   Do not rename a property: the stylesheets and js/chrome.js read them by name.
+   ========================================================================== */
+
+:root {
+  /* Surfaces — mood board backgrounds ONLY (page chrome) */
+  --ivory: #fbfaf9; /* Background 1 */
+  --ivory-muted: #f1f1e2; /* Background 2 */
+  --mist: #dfedf3; /* Background 3 */
+  --burgundy: #650839; /* Background 4 — dark panels */
+  --olive: #3e402f; /* Background 5 — dark panels */
+  --navy: #0a406a; /* Background 6 — dark panels */
+  --ink: #0a406a;
+  --ink-soft: #3e402f;
+
+  /* Jewel surface gradients — subtle depth, felt not seen */
+  --surface-navy-gradient: radial-gradient(ellipse 110% 90% at 92% 6%, rgba(216, 182, 129, 0.045) 0%, transparent 52%),
+    linear-gradient(168deg, #0a406a 0%, #083558 42%, #0c2e48 78%, #0a2540 100%);
+  --surface-burgundy-gradient: radial-gradient(ellipse 100% 85% at 8% 12%, rgba(216, 182, 129, 0.04) 0%, transparent 50%),
+    linear-gradient(152deg, #650839 0%, #7a0a45 48%, #4a0529 100%);
+  --surface-olive-gradient: radial-gradient(ellipse 95% 80% at 85% 15%, rgba(157, 121, 73, 0.035) 0%, transparent 48%),
+    linear-gradient(160deg, #3e402f 0%, #353728 45%, #2a2c21 100%);
+  --surface-ivory-gradient: radial-gradient(ellipse 110% 75% at 12% 0%, rgba(241, 241, 226, 0.2) 0%, transparent 52%),
+    linear-gradient(172deg, #fbfaf9 0%, #f9f9f4 48%, #f1f1e2 100%);
+  --surface-ivory-muted-gradient: radial-gradient(ellipse 100% 70% at 88% 100%, rgba(251, 250, 249, 0.18) 0%, transparent 50%),
+    linear-gradient(188deg, #f1f1e2 0%, #f6f6ef 52%, #fbfaf9 100%);
+  --surface-mist-gradient: radial-gradient(ellipse 95% 65% at 90% 8%, rgba(196, 214, 225, 0.32) 0%, transparent 48%),
+    linear-gradient(170deg, #dfedf3 0%, #dae8ef 50%, #d4e3ec 100%);
+  --surface-card-gradient: linear-gradient(180deg, #fcfbf9 0%, #fbfaf9 55%, #f9f9f5 100%);
+  --surface-dark-gradient: var(--surface-navy-gradient);
+
+  /* Accents — mood board pallets (intentional UI accents) */
+  --gold: #9d7949;
+  --gold-bright: #d8b681;
+  --gold-deep: #79521f;
+  --gold-dim: rgba(157, 121, 73, 0.35);
+  --sage: #85bba6;
+  --peach: #fcb29e;
+  --citron: #e6e273;
+  --lavender: #c5b3ed;
+  /* Pallet on-dark tints — readable highlight words on jewel bands */
+  --sage-on-dark: #a8d4c4;
+  --peach-on-dark: #fdd4c8;
+  --citron-on-dark: #f0ee96;
+  --lavender-on-dark: #ddd0f5;
+
+  /* Typography scale */
+  /* Type scale — smallest to largest */
+  --text-label: 0.65rem; /* eyebrows and card labels (uppercase, tracked) */
+  --text-caption: 0.75rem; /* captions, stat labels, form labels */
+  --text-small: 0.9rem; /* secondary text, names, timeline */
+  --text-body: 1rem;
+  --text-body-lg: 1.0625rem; /* lead lines and card titles */
+  --text-subtitle: 1.35rem; /* sub-headings */
+  --text-title: clamp(1.5rem, 3vw, 2.25rem); /* section titles */
+  --text-display: clamp(2rem, 4vw, 3rem); /* largest headings */
+  --leading-body: 1.65;
+  --leading-prose: 1.7;
+  --tracking-eyebrow: 0.18em;
+  --tracking-label: 0.14em;
+
+  /* Semantic aliases */
+  --ruby: var(--burgundy);
+  --ruby-deep: #4a0529;
+
+  /* Type — high contrast on light mood-board surfaces */
+  --text: #0a406a; /* navy on cream */
+  --text-muted: #343628; /* olive-deep — readable on ivory/mist */
+  --text-on-dark: #fbfaf9; /* cream on jewel panels / dark gradients */
+  --text-on-dark-muted: rgba(251, 250, 249, 0.92);
+  --text-on-dark-soft: rgba(168, 212, 196, 0.58); /* sage whisper — meta lines on navy */
+  --border-on-dark: rgba(216, 182, 129, 0.22);
+
+  /* Burgundy-band partner cards — lifted #7a0a45 tint, gold hairline, cream text */
+  --partner-card-bg: linear-gradient(165deg, rgba(251, 250, 249, 0.1) 0%, rgba(122, 10, 69, 0.82) 42%, rgba(101, 8, 57, 0.92) 100%);
+  --partner-card-bg-hover: linear-gradient(165deg, rgba(251, 250, 249, 0.12) 0%, rgba(122, 10, 69, 0.92) 42%, rgba(101, 8, 57, 0.98) 100%);
+  --partner-card-border: rgba(216, 182, 129, 0.38);
+  --partner-card-border-hover: rgba(216, 182, 129, 0.55);
+  --partner-card-text: #fbfaf9;
+  --partner-card-text-muted: rgba(251, 250, 249, 0.92);
+
+  /* Borders — editorial hairlines (not chunky sandwich frames) */
+  --border: rgba(157, 121, 73, 0.28);
+  --border-light: #d8b681;
+  --divider: 1px solid var(--gold-dim);
+  --divider-on-dark: 1px solid var(--border-on-dark);
+  --outline: var(--divider);
+  --outline-deep: var(--divider-on-dark);
+
+  --glass: rgba(10, 64, 106, 0.78);
+  --header-h: 80px;
+  /* Logo halo — ivory/champagne radial spotlight behind mark */
+  --logo-end-mult: 3;
+  --logo-visual-h: clamp(48px, 14vw, 57px);
+  --logo-visual-h-md: 64px;
+  --logo-glow-size: 6.6rem;
+  --logo-glow-y: -5px;
+  --logo-glow-a: rgba(251, 250, 249, 0.46);
+  --logo-glow-b: rgba(251, 250, 249, 0.24);
+  --logo-glow-c: rgba(216, 182, 129, 0.07);
+  --draft-red: #c41e1e;
+  --font-sans: "Arsenal", "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Arima Madurai", Georgia, serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --shadow-gold: 0 4px 40px rgba(157, 121, 73, 0.18);
+  --shadow-deep: 0 32px 80px rgba(10, 64, 106, 0.35);
+
+  /* Shadows — one pair (rest, hover) per kind of surface */
+  --shadow-card: 0 8px 28px rgba(10, 64, 106, 0.08), 0 2px 8px rgba(157, 121, 73, 0.1);
+  --shadow-card-hover: 0 14px 40px rgba(10, 64, 106, 0.12), 0 4px 12px rgba(157, 121, 73, 0.14);
+  --shadow-card-on-dark: 0 8px 28px rgba(0, 0, 0, 0.14); /* ivory card on a navy or olive band */
+  --shadow-tile: var(--shadow-gold); /* photo tiles */
+  --shadow-tile-hover: 0 8px 32px rgba(157, 121, 73, 0.28);
+  --shadow-tone: inset 0 1px 0 rgba(251, 250, 249, 0.06); /* tone-on-tone card on a dark band */
+  --shadow-tone-hover: inset 0 1px 0 rgba(251, 250, 249, 0.1), 0 6px 24px rgba(0, 0, 0, 0.12);
+  --shadow-photo: 0 12px 40px rgba(10, 64, 106, 0.12); /* framed photo beside text */
+
+  /* Motion — two speeds, one easing (--ease) */
+  --duration: 0.3s; /* surfaces: borders, shadows, backgrounds */
+  --duration-slow: 0.6s; /* photos scaling on hover */
+  --transition-surface: border-color var(--duration) var(--ease), box-shadow var(--duration) var(--ease);
+
+  /* Layout — mobile (default) · tablet 768px · computer 1200px */
+  --layout-max: 72rem;
+  --layout-narrow: 42rem;
+  --layout-gutter: clamp(1.25rem, 5vw, 3rem);
+  --layout-rail: max(var(--layout-gutter), calc((100% - var(--layout-max)) / 2));
+
+  /* Spacing scale — gaps, margins and padding inside the kit components.
+     The locked parts (header, menu, hero, footer, approved sections) keep their own raw values. */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.25rem;
+  --space-xl: 1.5rem;
+  --space-2xl: 2rem;
+  --space-3xl: 2.5rem;
+  --space-4xl: 3rem;
+
+  /* Section spacing — vertical room above and below a section's content */
+  --section-space: clamp(3.5rem, 8vw, 5rem);
+  --section-space-compact: clamp(2rem, 5vw, 3.5rem);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-h: 88px;
+  }
+}
+
+/* Phones: small uppercase labels one step larger, for reading comfort */
+@media (max-width: 767px) {
+  :root {
+    --text-label: 0.72rem;
+  }
+}

@@ -1,0 +1,613 @@
+/* ==========================================================================
+   Abhinava Dance Company — base styles
+
+   Layer 2 (components). Loads the tokens and the site chrome, then defines
+   the base page, the layout column, and the shared small components.
+   Load order on every page: main.css → luxury.css → sections.css.
+
+   Contents
+   1. Fonts and imports
+   2. Base page
+   3. Skip link
+   4. Layout column
+   5. Buttons
+   6. Body copy
+   7. Draft placeholders
+   8. Sticky sub-menu helpers
+   9. Gallery and lightbox
+   10. Instagram
+   11. Forms
+   12. Progressive images
+   13. Utilities
+   ========================================================================== */
+
+/* ==========================================================================
+   1. Fonts, imports and cascade layers
+   The order of the stylesheets is stated once, here. A rule in a later layer
+   wins over a rule in an earlier one whatever its selector, so an override
+   never needs a longer selector to win:
+   tokens    design settings (tokens.css)
+   main      reset, base page, shared helpers (this file)
+   chrome    header, menu, footer (chrome.css)
+   luxury    hero band and luxury details (luxury.css)
+   sections  page sections (sections.css, built from css/sections/)
+   tokens.css and chrome.css load here, before any rule in this file.
+   ========================================================================== */
+
+@layer tokens, main, chrome, luxury, sections;
+
+@import url("https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@400;500;700&family=Arsenal:ital,wght@0,400;0,700;1,400&display=swap");
+
+@import url("tokens.css") layer(tokens);
+
+@import url("chrome.css") layer(chrome);
+
+@layer main {
+  /* ==========================================================================
+     2. Base page
+     ========================================================================== */
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-size: 17px;
+    overflow-x: hidden;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    color: var(--text);
+    background: var(--surface-ivory-gradient);
+    line-height: var(--leading-prose);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* clip, not hidden: hidden would make the body a scroll box of its own and unstick the section menu */
+  body.nav-open {
+    overflow: clip;
+  }
+
+  .site-main {
+    display: block;
+    outline: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 2px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  a {
+    color: var(--burgundy);
+    text-decoration: none;
+    transition: color 0.25s var(--ease);
+  }
+
+  a:hover {
+    color: var(--gold);
+  }
+
+  /* ==========================================================================
+     3. Skip link
+     ========================================================================== */
+
+  /* Skip link — keyboard access */
+
+  .skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 3000;
+    padding: var(--space-sm) var(--space-md);
+    background: var(--navy);
+    color: var(--ivory);
+    font-size: var(--text-caption);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid var(--gold-bright);
+    transform: translateY(-200%);
+    transition: transform 0.25s var(--ease);
+  }
+
+  .skip-link:focus,
+  .skip-link:focus-visible {
+    transform: translateY(0);
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 2px;
+  }
+
+  /* ==========================================================================
+     4. Layout column
+     One centred column for all content. Coloured bands keep their background
+     full-bleed where noted; their content stays in the column.
+     ========================================================================== */
+
+  .container {
+    width: min(var(--layout-max), calc(100% - 2 * var(--layout-gutter)));
+    margin-inline: auto;
+    padding-inline: var(--layout-gutter);
+  }
+
+  .layout,
+  .alt-band__inner,
+  .site-header__bar,
+  .v-hero__body {
+    box-sizing: border-box;
+    width: min(var(--layout-max), calc(100% - 2 * var(--layout-gutter)));
+    max-width: var(--layout-max);
+    margin-inline: auto;
+    padding-inline: var(--layout-gutter);
+  }
+
+  .layout--nav {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .layout--nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Contained surfaces — colored bands stay within layout max (no viewport bleed) */
+
+  .alt-band,
+  .s-section,
+  .s-band,
+  .s-split-text,
+  .s-page-intro,
+  .instagram-section {
+    box-sizing: border-box;
+    width: min(var(--layout-max), calc(100% - 2 * var(--layout-gutter)));
+    max-width: var(--layout-max);
+    margin-inline: auto;
+  }
+
+  /* Chrome — full-bleed background only; inner bar/container stays layout-width */
+
+  .site-header,
+  .site-footer,
+  .v-chapter__nav {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+  }
+
+  /* Avoid double gutters when a shell wraps a layout/container */
+
+  .alt-band .alt-band__inner,
+  .s-page-intro > .layout,
+  .s-split-text > .layout,
+  .instagram-section > .container {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+
+  /* ==========================================================================
+     5. Buttons
+     ========================================================================== */
+
+  .btn--block {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-md) var(--space-2xl);
+    font-family: var(--font-sans);
+    font-size: var(--text-caption);
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.35s var(--ease);
+    text-decoration: none;
+    border-radius: 0;
+  }
+
+  .btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .btn--gold {
+    background: var(--gold);
+    color: var(--ivory);
+    border: 1px solid var(--gold-deep);
+    box-shadow: inset 0 0 0 1px rgba(251,250,249,0.15), var(--shadow-gold);
+  }
+
+  .btn--gold:hover {
+    background: var(--gold-deep);
+    color: var(--ivory);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 36px rgba(121, 82, 31, 0.28);
+  }
+
+  .btn--outline-light {
+    background: transparent;
+    color: var(--ivory);
+    border: 1px solid var(--gold-bright);
+  }
+
+  .btn--outline-light:hover {
+    border-color: var(--gold);
+    color: var(--gold-bright);
+    background: rgba(157, 121, 73, 0.12);
+  }
+
+  .btn--outline {
+    background: transparent;
+    color: var(--gold-deep);
+    border: 1px solid var(--gold);
+  }
+
+  .btn--outline:hover {
+    background: var(--gold);
+    color: var(--ivory);
+  }
+
+  /* ==========================================================================
+     6. Body copy
+     ========================================================================== */
+
+  /* ==========================================================================
+     7. Draft placeholders
+     Red text marks copy still to come from the client. Hide before launch.
+     ========================================================================== */
+
+  .draft-content,
+  .draft-content * {
+    font-family: var(--font-sans) !important;
+    color: var(--draft-red) !important;
+  }
+
+  /* Placeholder copy on dark jewel panels — peach stays readable, still distinct */
+
+  .s-split-text--dark .draft-content,
+  .s-split-text--dark .draft-content *,
+  .s-section__content--dark .draft-content,
+  .s-section__content--dark .draft-content *,
+  .s-band .draft-content,
+  .s-band .draft-content * {
+    color: var(--peach) !important;
+  }
+
+  /* Copy the client has marked for replacement and not yet supplied: the old
+     wording stays, struck through, until the new wording arrives. */
+
+  .is-pending,
+  .is-pending * {
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+  }
+
+  .is-pending {
+    opacity: 0.7;
+  }
+
+  /* ==========================================================================
+     8. Sticky sub-menu helpers
+     None since 16 October 2026: the section menu sticks with position: sticky (luxury.css, part 4).
+     ========================================================================== */
+
+  /* ==========================================================================
+     9. Gallery and lightbox
+     ========================================================================== */
+
+  .gallery-masonry {
+    columns: 1;
+    column-gap: var(--space-md);
+  }
+
+  @media (min-width: 768px) {
+    .gallery-masonry {
+      columns: 2;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .gallery-masonry {
+      columns: 3;
+    }
+  }
+
+  .gallery-item {
+    break-inside: avoid;
+    margin-bottom: var(--space-md);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    background: var(--surface-olive-gradient);
+  }
+
+  .gallery-item img {
+    width: 100%;
+    transition: transform var(--duration-slow) var(--ease);
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+
+  .gallery-item__caption {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-caption);
+    background: var(--surface-card-gradient);
+    border: 1px solid var(--border-light);
+    border-top: none;
+    color: var(--text-muted);
+  }
+
+  .gallery-item__play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10,8,7,0.4);
+  }
+
+  .gallery-item__play svg {
+    width: 56px;
+    height: 56px;
+    color: var(--gold-bright);
+  }
+
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    background: rgba(10,8,7,0.94);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2xl);
+  }
+
+  .lightbox.open {
+    display: flex;
+  }
+
+  .lightbox__content {
+    max-width: 92vw;
+    max-height: 88vh;
+    position: relative;
+  }
+
+  /* The gallery's photo carries the carousel's controls (glass notch on its bottom edge) */
+  .lightbox__content {
+    --mini-line: 7rem;
+    --mini-gold: var(--gold-bright);
+    --mini-tab-h: 2.1rem;
+    --mini-corner: 0.8rem;
+  }
+
+  .lightbox__content img {
+    display: block;
+    max-height: 85vh;
+    border: 1px solid var(--gold-dim);
+  }
+
+  .lightbox__content iframe {
+    width: min(960px, 92vw);
+    aspect-ratio: 16/9;
+    border: none;
+  }
+
+  .lightbox__close {
+    position: absolute;
+    top: -3rem;
+    right: 0;
+    background: none;
+    border: none;
+    color: var(--gold);
+    cursor: pointer;
+  }
+
+  /* Close button of the video pop-up: it sits inside the content box, above the video's top-right corner. */
+  .lightbox__content .lightbox__close {
+    padding: var(--space-xs);
+  }
+
+  .lightbox__content .lightbox__close svg {
+    display: block;
+    width: 28px;
+    height: 28px;
+  }
+
+  /* ==========================================================================
+     10. Instagram
+     ========================================================================== */
+
+  .section-head__num {
+    font-size: var(--text-caption);
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    margin-bottom: var(--space-sm);
+    font-weight: 600;
+  }
+
+  .section-head__title {
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+  }
+
+  .instagram-section {
+    padding: 3rem var(--layout-gutter);
+    background: var(--surface-dark-gradient);
+  }
+
+  /* A gallery stays hidden until its feed is switched on (js/instagram-data.js) */
+  .instagram-section[hidden] {
+    display: none;
+  }
+
+  .instagram-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .instagram-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+  }
+
+  @media (min-width: 768px) {
+    .instagram-grid {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+
+  .insta-card {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+  }
+
+  .insta-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--duration-slow) var(--ease);
+  }
+
+  .insta-card:hover img {
+    transform: scale(1.1);
+  }
+
+  .insta-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(139,26,45,0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--duration) var(--ease);
+  }
+
+  .insta-card:hover .insta-card__overlay {
+    opacity: 1;
+  }
+
+  .insta-card__overlay svg {
+    width: 28px;
+    color: #fff;
+  }
+
+  /* ==========================================================================
+     11. Forms
+     ========================================================================== */
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    max-width: 480px;
+  }
+
+  /* The note under the contact buttons: its email address in gold (it sits on the burgundy panel), never split */
+  .form__note a {
+    color: var(--gold-bright);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  /* ==========================================================================
+     12. Progressive images
+     ========================================================================== */
+
+  /* Progressive image load — tiny thumb first, sharpen after page load */
+
+  .img-progressive {
+    transition: filter 0.45s ease;
+  }
+
+  .img-progressive:not(.img-progressive--loaded) {
+    filter: blur(10px);
+  }
+
+  .img-progressive--loaded {
+    filter: blur(0);
+  }
+
+  /* ==========================================================================
+     13. Utilities
+     ========================================================================== */
+
+  .u-ml-sm {
+    margin-left: var(--space-xs);
+  }
+
+  .u-mt-xs {
+    margin-top: var(--space-xs);
+  }
+
+  .u-mt-sm {
+    margin-top: var(--space-sm);
+  }
+
+  .u-mt-md {
+    margin-top: var(--space-md);
+  }
+
+  .u-mt-lg {
+    margin-top: var(--space-lg);
+  }
+
+  .u-mt-xl {
+    margin-top: var(--space-xl);
+  }
+
+  .u-text-sm {
+    font-size: var(--text-small);
+  }
+
+  .u-text-sm-md {
+    font-size: var(--text-small);
+  }
+
+  .u-title-sub {
+    margin-top: var(--space-2xl);
+    font-size: var(--text-subtitle);
+  }
+}

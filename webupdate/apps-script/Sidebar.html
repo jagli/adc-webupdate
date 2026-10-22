@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base target="_top">
+<style>
+  :root { --ink:#1d2433; --muted:#5b6170; --gold:#9d7949; --navy:#0a2a45; --line:#e3d6bf; --ok:#1d7a46; --bad:#b3261e; --warn:#8a5a00; }
+  * { box-sizing: border-box; }
+  body { font: 14px/1.45 -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--ink); margin: 0; padding: 14px; }
+  h1 { font-size: 16px; margin: 0 0 2px; }
+  .who { color: var(--muted); font-size: 12px; margin-bottom: 14px; }
+  .card { border: 1px solid var(--line); border-radius: 10px; padding: 12px; margin-bottom: 12px; background: #fff; }
+  .state { font-weight: 600; margin-bottom: 4px; }
+  .state.ok { color: var(--ok); } .state.bad { color: var(--bad); } .state.wait { color: var(--warn); }
+  .muted { color: var(--muted); font-size: 12.5px; }
+  button { width: 100%; padding: 11px 12px; margin: 6px 0 0; border: 0; border-radius: 8px; font: inherit; font-weight: 600; cursor: pointer; background: var(--navy); color: #fff; }
+  button.alt { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+  button.good { background: var(--ok); } button.danger { background: #fff; color: var(--bad); border: 1px solid #e6b8b4; }
+  button:disabled { opacity: .45; cursor: default; }
+  a.link { display: block; padding: 10px 12px; margin: 6px 0 0; border-radius: 8px; border: 1px solid var(--line); color: var(--navy); text-decoration: none; font-weight: 600; }
+  a.link small { display: block; font-weight: 400; color: var(--muted); }
+  ul { margin: 6px 0 0; padding-left: 18px; } li { margin: 3px 0; }
+  .problems li { color: var(--bad); }
+  textarea, input, select { width: 100%; font: inherit; padding: 8px; border: 1px solid var(--line); border-radius: 8px; margin-top: 6px; }
+  textarea { min-height: 70px; }
+  .tabs { display: flex; gap: 6px; margin-bottom: 12px; }
+  .tabs button { margin: 0; padding: 7px; font-weight: 500; background: #f4efe5; color: var(--ink); }
+  .tabs button.on { background: var(--navy); color: #fff; }
+  .msg { padding: 9px 11px; border-radius: 8px; background: #eef6f0; color: var(--ok); margin-bottom: 10px; display: none; }
+  .msg.bad { background: #fdecea; color: var(--bad); }
+  .user { display: flex; justify-content: space-between; align-items: center; gap: 6px; padding: 6px 0; border-bottom: 1px solid #f0eadf; font-size: 13px; }
+  .user button { width: auto; margin: 0; padding: 4px 8px; font-size: 12px; }
+  .log div { padding: 6px 0; border-bottom: 1px solid #f0eadf; font-size: 12.5px; }
+  .spin { display: inline-block; width: 12px; height: 12px; border: 2px solid #d9cdb6; border-top-color: var(--navy); border-radius: 50%; animation: s 1s linear infinite; vertical-align: -2px; margin-right: 6px; }
+  @keyframes s { to { transform: rotate(360deg); } }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+  <h1>Website</h1>
+  <div class="who" id="who">Loading…</div>
+  <div class="msg" id="msg"></div>
+  <div class="tabs" id="tabs" hidden>
+    <button class="on" data-tab="main">Changes</button>
+    <button data-tab="users" id="tab-users" hidden>Users</button>
+    <button data-tab="log" id="tab-log" hidden>Activity</button>
+  </div>
+
+  <div id="main">
+    <div class="card">
+      <div class="state" id="state">…</div>
+      <div class="muted" id="state-detail"></div>
+      <ul class="problems" id="problems" hidden></ul>
+      <ul id="changes" hidden></ul>
+      <div id="links" hidden>
+        <a class="link" id="review-link" target="_blank">See only what changed ↗<small>The change page, with Before / After</small></a>
+        <a class="link" id="preview-link" target="_blank">Open the full preview ↗<small>The whole website with your changes</small></a>
+      </div>
+    </div>
+
+    <div class="card" id="editor-actions">
+      <button id="btn-preview">① Update preview</button>
+      <div class="muted">Builds a preview from the Sheet (about 2 minutes). Nothing goes live.</div>
+      <textarea id="note" placeholder="Note for the moderator (optional)"></textarea>
+      <button id="btn-submit" class="alt">② Submit for review</button>
+    </div>
+
+    <div class="card" id="moderator-actions" hidden>
+      <div class="state">③ Review</div>
+      <div class="muted">Look at the change page first. Approve puts exactly that on abhinava.dance.</div>
+      <button id="btn-approve" class="good">Approve &amp; publish</button>
+      <textarea id="reject-note" placeholder="What should the editor change? (needed to send back)"></textarea>
+      <button id="btn-reject" class="danger">Send back with this note</button>
+    </div>
+
+    <div class="card" id="owner-actions" hidden>
+      <div class="state">Owner</div>
+      <button id="btn-undo" class="danger">Undo the last publish</button>
+      <div class="muted">Puts the previous version of abhinava.dance back.</div>
+    </div>
+  </div>
+
+  <div id="users" hidden>
+    <div class="card">
+      <div class="state">Add or change a person</div>
+      <input id="u-email" placeholder="Google account (email)">
+      <input id="u-name" placeholder="Name (optional)">
+      <select id="u-role"><option>Editor</option><option>Moderator</option></select>
+      <button id="btn-save-user">Save</button>
+      <div class="muted">They get access to this Sheet straight away. Remove them below to take it away.</div>
+    </div>
+    <div class="card" id="user-list"></div>
+  </div>
+
+  <div id="log" hidden><div class="card log" id="log-list"></div></div>
+
+<script>
+  var S = null, timer = null;
+  function $(id) { return document.getElementById(id); }
+  function say(text, bad) { var m = $("msg"); m.textContent = text; m.className = "msg" + (bad ? " bad" : ""); m.style.display = text ? "block" : "none"; }
+  function busy(btn, on, label) { btn.disabled = on; if (on) { btn.dataset.l = btn.innerHTML; btn.innerHTML = '<span class="spin"></span>' + (label || "Working…"); } else if (btn.dataset.l) btn.innerHTML = btn.dataset.l; }
+  function call(fn, args, btn, label) {
+    if (btn) busy(btn, true, label);
+    return new Promise(function (ok) {
+      google.script.run.withSuccessHandler(function (r) { if (btn) busy(btn, false); ok(r); })
+        .withFailureHandler(function (e) { if (btn) busy(btn, false); say("Something went wrong: " + e.message, true); ok(null); })[fn].apply(null, args || []);
+    });
+  }
+  function list(el, items) { el.innerHTML = ""; (items || []).forEach(function (t) { var li = document.createElement("li"); li.textContent = t; el.appendChild(li); }); el.hidden = !(items && items.length); }
+
+  function render(s) {
+    S = s;
+    var role = s.role || "";
+    $("who").textContent = s.me + (role ? " · " + role : " · not on the Users list");
+    var st = s.state || {};
+    var label = { building: "Building the preview…", ready: "Preview ready — check it", waiting: "Waiting for the moderator", problems: "Some things need fixing", publishing: "Publishing…", rejected: "Sent back — see the note", published: "Live on abhinava.dance" }[st.status] || "No preview yet";
+    var cls = { ready: "ok", published: "ok", problems: "bad", rejected: "bad", building: "wait", waiting: "wait", publishing: "wait" }[st.status] || "";
+    if (st.status === "publishing" && s.publish && s.publish.sha === st.sha) { label = s.publish.ok ? "Live on abhinava.dance" : (s.publish.netlify === "2" ? "Approved — the owner still has to connect Netlify" : "Publishing did not finish — the owner can see why"); cls = s.publish.ok ? "ok" : "bad"; }
+    $("state").innerHTML = (st.status === "building" || st.status === "publishing" && !(s.publish && s.publish.sha === st.sha) ? '<span class="spin"></span>' : "") + label;
+    $("state").className = "state " + cls;
+    var detail = [];
+    if (st.by) detail.push("Preview by " + st.by);
+    if (st.submittedBy && st.status === "waiting") detail.push("submitted by " + st.submittedBy + (st.note ? " — “" + st.note + "”" : ""));
+    if (st.status === "rejected") detail.push("Note from " + st.rejectedBy + ": “" + st.rejectNote + "”");
+    if (s.contentChanged) detail.push("The Sheet has changed since this preview — press Update preview again.");
+    $("state-detail").textContent = detail.join(" · ");
+    list($("problems"), st.status === "problems" ? st.problems : []);
+    var ch = (st.changes || []).map(function (c) { return c.page + " › " + c.section + ": " + c.changes.join("; "); });
+    list($("changes"), (st.status === "ready" || st.status === "waiting") ? ch : []);
+    $("links").hidden = !(st.status === "ready" || st.status === "waiting" || st.status === "rejected");
+    $("review-link").href = s.reviewUrl + "?t=" + Date.now();
+    $("preview-link").href = s.previewUrl + "?t=" + Date.now();
+    var canEdit = /Editor|Moderator|Super admin/.test(role), canMod = /Moderator|Super admin/.test(role), own = role === "Super admin";
+    $("editor-actions").hidden = !canEdit;
+    $("btn-submit").disabled = !(st.status === "ready") || s.contentChanged;
+    $("moderator-actions").hidden = !canMod;
+    $("btn-approve").disabled = !(st.status === "waiting" || st.status === "ready") || s.contentChanged;
+    $("btn-reject").disabled = !(st.status === "waiting" || st.status === "ready");
+    $("owner-actions").hidden = !own;
+    $("tabs").hidden = !(own || canMod);
+    $("tab-users").hidden = !own; $("tab-log").hidden = !(own || canMod);
+    clearTimeout(timer);
+    if (st.status === "building" || st.status === "publishing") timer = setTimeout(refresh, 10000);
+  }
+  function refresh() { call("getStatus").then(function (s) { if (s) render(s); }); }
+
+  $("btn-preview").onclick = function () { say(""); call("updatePreview", [], this, "Sending…").then(function (r) { if (r) say(r.message, !r.ok); refresh(); }); };
+  $("btn-submit").onclick = function () { call("submitForReview", [$("note").value], this).then(function (r) { if (r) say(r.message, !r.ok); refresh(); }); };
+  $("btn-approve").onclick = function () { if (!confirm("Publish these changes to abhinava.dance now?")) return; call("approveAndPublish", [], this, "Publishing…").then(function (r) { if (r) say(r.message, !r.ok); refresh(); }); };
+  $("btn-reject").onclick = function () { call("rejectChanges", [$("reject-note").value], this).then(function (r) { if (r) say(r.message, !r.ok); refresh(); }); };
+  $("btn-undo").onclick = function () { if (!confirm("Put the previous version of abhinava.dance back?")) return; call("rollbackLast", [], this).then(function (r) { if (r) say(r.message, !r.ok); }); };
+
+  document.querySelectorAll("#tabs button").forEach(function (b) {
+    b.onclick = function () {
+      document.querySelectorAll("#tabs button").forEach(function (x) { x.classList.toggle("on", x === b); });
+      ["main", "users", "log"].forEach(function (t) { $(t).hidden = t !== b.dataset.tab; });
+      if (b.dataset.tab === "users") loadUsers();
+      if (b.dataset.tab === "log") loadLog();
+    };
+  });
+  function loadUsers() {
+    call("listUsers").then(function (us) {
+      var box = $("user-list"); box.innerHTML = '<div class="state">People</div>';
+      (us || []).forEach(function (u) {
+        var row = document.createElement("div"); row.className = "user";
+        row.innerHTML = "<span><b></b><br><span class='muted'></span></span>";
+        row.querySelector("b").textContent = u.name || u.email;
+        row.querySelector(".muted").textContent = u.email + " · " + u.role;
+        if (u.role !== "Super admin") {
+          var edit = document.createElement("button"); edit.className = "alt"; edit.textContent = "Edit";
+          edit.onclick = function () { $("u-email").value = u.email; $("u-name").value = u.name; $("u-role").value = u.role; $("u-email").focus(); };
+          var del = document.createElement("button"); del.className = "danger"; del.textContent = "Remove";
+          del.onclick = function () { if (confirm("Remove " + u.email + "? They will lose access to this Sheet.")) call("removeUser", [u.email], del).then(function (r) { if (r) say(r.message, !r.ok); loadUsers(); }); };
+          var btns = document.createElement("span"); btns.appendChild(edit); btns.appendChild(del); row.appendChild(btns);
+        }
+        box.appendChild(row);
+      });
+    });
+  }
+  $("btn-save-user").onclick = function () { call("saveUser", [$("u-email").value, $("u-role").value, $("u-name").value], this).then(function (r) { if (r) { say(r.message, !r.ok); if (r.ok) { $("u-email").value = ""; $("u-name").value = ""; } } loadUsers(); }); };
+  function loadLog() {
+    call("getLog", [40]).then(function (rows) {
+      var box = $("log-list"); box.innerHTML = '<div class="state">Recent activity</div>';
+      (rows || []).forEach(function (r) { var d = document.createElement("div"); d.innerHTML = "<b></b> · <span class='muted'></span><br>"; d.querySelector("b").textContent = r[2]; d.querySelector(".muted").textContent = r[0] + " · " + r[1]; d.appendChild(document.createTextNode(r[3] || "")); box.appendChild(d); });
+      if (!rows || !rows.length) box.appendChild(document.createTextNode("Nothing yet."));
+    });
+  }
+  refresh();
+</script>
+</body>
+</html>

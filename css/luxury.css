@@ -1,0 +1,793 @@
+/* ==========================================================================
+   Abhinava Dance Company — hero and image-led components
+
+   Layer 2 (components). The page hero and its scroll effects, the stats
+   strip, the section menu and the gallery page.
+   Loaded after main.css and before sections.css.
+
+   Contents
+   1. Hero
+   2. Labels and micro copy
+   3. Stats strip
+   4. Section menu
+   5. Gallery page
+   6. Page rhythm
+   7. Small-screen adjustments to shared components
+   ========================================================================== */
+
+@layer luxury {
+  /* ==========================================================================
+     1. Hero
+     Scroll effect values (--hero-media-scale, --hero-media-blur, --hero-body-blur)
+     are written by js/chrome.js. Do not change without approval.
+     ========================================================================== */
+
+  .v-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+    background: var(--ink);
+    margin-top: calc(-1 * var(--header-h));
+    padding-top: var(--header-h);
+  }
+
+  /* Hero band — the hero used on pages with a recomposed, band-shaped photo. Two layouts only:
+     computer (768px and wider): a wide band about half as tall as it is wide, filled by the photo, text low at the left;
+     mobile (under 768px): the photo in a band across the top, text below it on the page's ground colour.
+     Text is light by default (for a dark or mid-tone photo); add .v-hero--light for dark text on a bright photo.
+
+     FRAMING — per layout, these numbers size the band and place the photo in it:
+     --hero-frame   height of the band
+     --hero-zoom    1 = the photo's whole height fits the band (nothing cut top or bottom); 1.2 is 20% larger
+     --hero-x       where the photo sits across: 0 against the left edge, 1 against the right edge
+     --hero-y       when zoomed in, which part stays in view down: 0 top, 0.5 middle, 1 bottom
+     --hero-ratio   the photo's own shape, width ÷ height (2.0833 for a 2000 × 960 photo, the band's own shape)
+     --hero-ground  the colour behind and, on mobile, below the photo: match it to the photo
+     --hero-title-scale  headline size against the standard: 1 = standard, 0.85 = 15% smaller (for a long headline)
+     Per-page values are set on the page's own hero (#about-us, #store …) below. */
+
+  .v-hero--band {
+    --hero-frame: min(max(48vw, 600px), 100vh);
+    --hero-zoom: 1;
+    --hero-x: 1;
+    --hero-y: 0;
+    --hero-ratio: 2.0833;
+    --hero-ground: var(--ink);
+    --hero-title-scale: 1;
+    --hero-photo-w: calc(var(--hero-frame) * var(--hero-zoom) * var(--hero-ratio));
+    min-height: calc(var(--hero-frame) + var(--header-h));
+    background: var(--hero-ground);
+  }
+
+  /* The hero box starts one header-height above the screen; the band starts at the top of the screen. */
+  .v-hero--band .v-hero__media {
+    top: var(--header-h);
+    bottom: auto;
+    height: var(--hero-frame);
+    overflow: hidden;
+  }
+
+  .v-hero--band .v-hero__media img {
+    inset: auto;
+    top: calc((100% - 100% * var(--hero-zoom)) * var(--hero-y));
+    left: calc((100% - var(--hero-photo-w)) * var(--hero-x));
+    width: var(--hero-photo-w);
+    height: calc(100% * var(--hero-zoom));
+  }
+
+  /* A soft dark wash behind the text, low at the left */
+  .v-hero--band .v-hero__shade {
+    background: linear-gradient(75deg, rgba(20, 8, 24, 0.5) 0%, rgba(20, 8, 24, 0.22) 32%, rgba(20, 8, 24, 0) 56%);
+  }
+
+  .v-hero--band .v-hero__body {
+    position: relative;
+    left: calc(-1 * clamp(0px, (100vw - 1440px) * 0.28, 140px));
+    margin-block: auto 0;
+    padding-block: 0 clamp(2rem, 4.5vw, 5rem);
+  }
+
+  /* Label: the standard label size (--text-label, 0.65rem) on every screen. */
+  .v-hero--band .v-label {
+    margin-bottom: 0.85rem;
+    font-size: var(--text-label);
+  }
+
+  .v-hero--band .v-hero__title {
+    margin-bottom: clamp(0.8rem, 1.2vw, 1.4rem);
+    font-size: calc(clamp(2.25rem, 4.4vw, 5.25rem) * var(--hero-title-scale));
+  }
+
+  .v-hero--band .v-micro {
+    max-width: 31rem;
+    font-size: 0.82rem;
+    line-height: 1.65;
+  }
+
+  .v-hero--band .v-hero__actions {
+    gap: 0.8rem;
+    margin-top: clamp(1.25rem, 2vw, 2.25rem);
+  }
+
+  .v-hero--band .btn {
+    padding: 0.95rem 1.55rem;
+    font-size: 0.62rem;
+  }
+
+  /* Dark text for a bright photo, on a light grey ground (Home) */
+  .v-hero--light {
+    --hero-ground: linear-gradient(180deg, #b4b8bd 0%, #c1c4c9 50%, #cbcfd6 100%);
+  }
+
+  .v-hero--light .v-hero__shade {
+    background: linear-gradient(90deg, rgba(243, 245, 247, 0.5) 0%, rgba(243, 245, 247, 0.25) 30%, rgba(243, 245, 247, 0) 52%);
+  }
+
+  .v-hero--light .v-label {
+    color: var(--gold-deep);
+  }
+
+  .v-hero--light .v-hero__title {
+    color: var(--burgundy);
+    text-shadow: none;
+  }
+
+  .v-hero--light .v-hero__title em {
+    color: var(--gold);
+  }
+
+  .v-hero--light .v-micro {
+    color: var(--text-muted);
+  }
+
+  .v-hero--light .btn--outline-light {
+    color: var(--burgundy);
+    border-color: var(--gold);
+  }
+
+  /* Per page: ground colour matched to the photo */
+  #about-us.v-hero--band {
+    --hero-ground: linear-gradient(180deg, #a25132 0%, #8a3a62 45%, #5a2060 100%);
+    --hero-title-scale: 0.85;
+  }
+
+  #performances.v-hero--band {
+    --hero-ground: linear-gradient(180deg, #07090d 0%, #0d1016 45%, #15181e 100%);
+  }
+
+  #school.v-hero--band {
+    --hero-ground: linear-gradient(180deg, #2c1a78 0%, #1b1040 45%, #0c0812 100%);
+  }
+
+  #activities.v-hero--band {
+    --hero-ground: linear-gradient(180deg, #b18a67 0%, #8a6447 45%, #5e3f2c 100%);
+  }
+
+  #store.v-hero--band {
+    --hero-ground: linear-gradient(180deg, #b30808 0%, #86190b 45%, #4a1107 100%);
+  }
+
+  #support-us.v-hero--band {
+    --hero-ground: linear-gradient(180deg, #22384d 0%, #1b2c3d 45%, #101820 100%);
+  }
+
+  #contact-us.v-hero--band {
+    --hero-ground: linear-gradient(180deg, #000 0%, #030304 45%, #0a0a0c 100%);
+  }
+
+  #research.v-hero--band {
+    --hero-ground: linear-gradient(180deg, #4b4946 0%, #55524f 45%, #302e2c 100%);
+  }
+
+  #credentials.v-hero--band {
+    --hero-ground: linear-gradient(180deg, #2a0618 0%, #3a0a26 45%, #0d0810 100%);
+  }
+
+  #gallery.v-hero--band {
+    --hero-ground: linear-gradient(180deg, #1e2018 0%, #262a20 45%, #080b0e 100%);
+  }
+
+  #testimonials.v-hero--band {
+    --hero-ground: linear-gradient(180deg, #0a1830 0%, #0a1226 45%, #060810 100%);
+  }
+
+  /* Mobile and tablet: the band runs across the top; the text follows below it (on a tablet the text
+     over the photo would sit on the dancers). Tablets take a shorter band, set just after this block. */
+  @media (max-width: 1099px) {
+    .v-hero--band {
+      --hero-frame: 80vw;
+      --hero-x: 0.93;
+    }
+
+    /* As tall as its photo and text: no empty space below the text */
+    .v-hero.v-hero--band {
+      min-height: 0;
+    }
+
+    .v-hero--light {
+      --hero-ground: linear-gradient(180deg, #c7cbd1 0%, #dbe2e8 45%, #eef1f4 100%);
+    }
+
+    /* Activities: both dancers, with a little wall to the left of her face */
+    #activities.v-hero--band {
+      --hero-x: 0.84;
+    }
+
+    /* Store, Contact, Research: the subject stands in the middle of the photo. Gallery, Testimonials: abstract, centred. */
+    #store.v-hero--band,
+    #contact-us.v-hero--band,
+    #research.v-hero--band,
+    #gallery.v-hero--band,
+    #testimonials.v-hero--band {
+      --hero-x: 0.5;
+    }
+
+    /* Performances: a shorter band, so the whole line of eight dancers fits the width */
+    #performances.v-hero--band {
+      --hero-frame: 64vw;
+      --hero-x: 0.72;
+    }
+
+    /* Support: a shorter band, so the whole group of eight fits the width */
+    #support-us.v-hero--band {
+      --hero-frame: 64vw;
+      --hero-x: 1;
+    }
+
+    /* Honours: the award photo stands right of centre */
+    #credentials.v-hero--band {
+      --hero-x: 0.9;
+    }
+
+    /* About: the two faces sit left of centre in the photo. School: the sharp centre of the stage. */
+    #about-us.v-hero--band,
+    #school.v-hero--band {
+      --hero-x: 0.62;
+    }
+
+    .v-hero--band .v-hero__media {
+      top: calc(var(--header-h) + 2.5rem);
+      -webkit-mask-image: linear-gradient(180deg, #000 0, #000 95%, transparent 100%);
+      mask-image: linear-gradient(180deg, #000 0, #000 95%, transparent 100%);
+    }
+
+    .v-hero--band .v-hero__shade {
+      background: none;
+    }
+
+    .v-hero--band .v-hero__body {
+      left: 0;
+      margin-block: calc(2.5rem + var(--hero-frame) + 0.75rem) 0;
+      padding-block: 0 calc(2rem + 60px);
+    }
+
+    .v-hero--band .v-hero__title {
+      margin-bottom: 1rem;
+      font-size: calc(clamp(2.25rem, 10vw, 3rem) * var(--hero-title-scale));
+    }
+
+    .v-hero--band .v-micro {
+      font-size: var(--text-body);
+    }
+
+    .v-hero--band .v-hero__actions {
+      gap: 1rem;
+      margin-top: 1.75rem;
+    }
+
+    .v-hero--band .btn {
+      padding: 0.95rem 2.1rem;
+      font-size: 0.78rem;
+    }
+  }
+
+  /* Tablet: the mobile layout with a shorter band, so the photo does not fill the screen */
+  @media (min-width: 768px) and (max-width: 1099px) {
+    .v-hero--band {
+      --hero-frame: 56vw;
+    }
+
+    #performances.v-hero--band,
+    #support-us.v-hero--band {
+      --hero-frame: 45vw;
+    }
+  }
+
+  .v-hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .v-hero__media img,
+  .v-hero__media video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    object-position: center 25%;
+  }
+
+  /* Scroll FX — image scales from 30% depth; blur hits 80% when hero bottom meets header (initScrollFx) */
+
+  .v-hero.v-hero--media-fx .v-hero__media img,
+  .v-hero.v-hero--media-fx .v-hero__media video {
+    transform: scale(var(--hero-media-scale, 1));
+    filter: blur(var(--hero-media-blur, 0px));
+    transform-origin: center 25%;
+    will-change: transform, filter;
+  }
+
+  .v-hero.v-hero--media-fx .v-hero__shade {
+    filter: blur(calc(var(--hero-media-blur, 0px) * 0.35));
+    will-change: filter;
+  }
+
+  .v-hero.v-hero--body-fx .v-hero__body {
+    filter: blur(var(--hero-body-blur, 0px));
+    will-change: filter;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .v-hero.v-hero--scroll-fx .v-hero__media img,
+    .v-hero.v-hero--scroll-fx .v-hero__media video,
+    .v-hero.v-hero--scroll-fx .v-hero__body,
+    .v-hero.v-hero--scroll-fx .v-hero__shade {
+      transform: none !important;
+      filter: none !important;
+      will-change: auto;
+    }
+  }
+
+  .v-hero__shade {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    /* Dark gradients already carry depth — navy at bottom for type legibility */
+    background: linear-gradient(0deg, rgba(10, 64, 106, 0.72) 0%, rgba(10, 64, 106, 0.2) 40%, rgba(5, 8, 16, 0.15) 100%);
+  }
+
+  .v-hero__body {
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+    margin-top: calc(var(--header-h) + 25svh);
+    padding-block: 0 calc(5rem + 50px);
+  }
+
+  .v-hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 9vw, 7rem);
+    font-weight: 500;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--ivory);
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 24px rgba(5, 8, 16, 0.35);
+  }
+
+  .v-hero__title em {
+    font-style: italic;
+    color: var(--gold-bright);
+  }
+
+  .v-hero__actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+
+  /* Short hero — gallery, secondary */
+
+  /* Image grain overlay on heroes — watch-brand texture */
+
+  .v-hero__shade::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  @media (max-width: 767px) {
+    .v-hero {
+      min-height: 100svh;
+    }
+
+    .v-hero__body {
+      margin-top: calc(var(--header-h) + 25svh);
+      padding: 0 clamp(1.25rem, 5vw, 2rem) calc(3.5rem + 50px);
+    }
+
+    .v-hero__title {
+      font-size: clamp(2.5rem, 12vw, 3.75rem);
+    }
+
+    .v-hero__actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .v-hero__actions .btn {
+      justify-content: center;
+      width: 100%;
+    }
+  }
+
+  /* ==========================================================================
+     2. Labels and micro copy
+     ========================================================================== */
+
+  .v-label {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    margin-bottom: 1rem;
+  }
+
+  .v-micro {
+    font-size: clamp(var(--text-body), 1.5vw, var(--text-body-lg));
+    line-height: var(--leading-body);
+    color: var(--text-on-dark-muted);
+    max-width: 36ch;
+  }
+
+  @media (max-width: 767px) {
+    .v-micro {
+      max-width: none;
+    }
+
+    .v-label {
+      letter-spacing: 0.22em;
+    }
+  }
+
+  /* ==========================================================================
+     3. Stats strip
+     ========================================================================== */
+
+  .v-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-top: var(--divider);
+    border-bottom: var(--divider);
+    background: var(--surface-mist-gradient); /* mood board bg3 */
+  }
+
+  @media (min-width: 768px) {
+    .v-stats {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .v-stats__cell {
+    padding: var(--space-4xl) var(--space-2xl);
+    text-align: center;
+    border-right: 1px solid var(--gold-dim);
+    background: transparent;
+  }
+
+  .v-stats__cell:last-child {
+    border-right: none;
+  }
+
+  .v-stats__num {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--burgundy);
+    line-height: 1;
+    font-weight: 500;
+  }
+
+  .v-stats__label {
+    font-size: var(--text-caption);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    margin-top: var(--space-xs);
+    font-weight: 700;
+  }
+
+  .v-stats__cell:nth-child(1) .v-stats__label {
+    color: var(--gold);
+  }
+
+  .v-stats__cell:nth-child(2) .v-stats__label {
+    color: var(--sage);
+  }
+
+  .v-stats__cell:nth-child(3) .v-stats__label {
+    color: var(--gold-deep);
+  }
+
+  .v-stats__cell:nth-child(4) .v-stats__label {
+    color: var(--lavender);
+  }
+
+  @media (max-width: 767px) {
+    .v-stats__cell {
+      padding: var(--space-2xl) var(--space-md);
+    }
+
+    .v-stats__num {
+      font-size: clamp(2rem, 8vw, 2.75rem);
+    }
+  }
+
+  /* ==========================================================================
+     4. Section menu
+     The in-page menu under the hero. It sticks under the header by itself (position: sticky), so it
+     lands there smoothly at any scroll speed and never lets the page show between the two.
+     js/interactions.js adds .is-floating (shadow only, while it is stuck) and .active.
+     ========================================================================== */
+
+  /* Stuck 1px up: the header's last pixel row is a transparent border, and page content showed through it */
+  .v-chapter__nav {
+    position: sticky;
+    top: calc(var(--header-h) - 1px);
+    z-index: 900;
+    display: flex;
+    justify-content: center;
+    background: rgba(251, 250, 249, 0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gold-dim);
+    box-shadow: none;
+  }
+
+  /* A section reached from the menu (or a link to it) lands with its top edge right under the stuck menu,
+     not hidden behind the header and the menu. --chapter-nav-h is the menu's height, set by js/interactions.js;
+     on a page without a menu it is 0, and the section lands right under the header. */
+  main > section[id] {
+    scroll-margin-top: calc(var(--header-h) - 1px + var(--chapter-nav-h, 0px));
+  }
+
+  .v-chapter__nav.is-floating {
+    background: rgba(251, 250, 249, 0.98);
+    box-shadow: 0 1px 0 rgba(157, 121, 73, 0.12);
+  }
+
+  .v-chapter__nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .v-chapter__nav a {
+    position: relative;
+    flex-shrink: 0;
+    padding: 1rem 1.5rem;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: none;
+    transition: color 0.25s;
+  }
+
+  .v-chapter__nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 4px;
+    background: transparent;
+    transition: background 0.25s;
+    pointer-events: none;
+  }
+
+  .v-chapter__nav a:hover {
+    color: var(--burgundy);
+  }
+
+  .v-chapter__nav a:hover::after {
+    background: var(--gold);
+  }
+
+  .v-chapter__nav a.active {
+    color: var(--burgundy);
+    font-weight: 800;
+  }
+
+  .v-chapter__nav a.active::after {
+    background: var(--gold-bright);
+  }
+
+  @media (max-width: 767px) {
+    .v-chapter__nav a {
+      padding: 0.85rem 1rem;
+    }
+  }
+
+  /* ==========================================================================
+     5. Gallery page
+     ========================================================================== */
+
+  .v-gallery-wrap {
+    padding-block: clamp(1.25rem, 5vw, 3rem);
+    background: var(--surface-dark-gradient);
+  }
+
+  /* A wall of photos (Pinterest style): js/gallery.js places each photo in the shortest column
+     (2, 3 or 4 columns by screen width); one even gutter across and down; each frame the shape of
+     its own photo (gallery-item--wide 3:2, --tall 2:3, otherwise square) */
+  .v-gallery-wrap .gallery-masonry {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    columns: auto;
+  }
+
+  /* On the Gallery page the Instagram row sits on the deep olive panel, so it does not repeat the gallery's navy;
+     its tiles carry a thin gold frame to stand off the olive */
+  .v-gallery-wrap ~ .instagram-section {
+    background: var(--surface-olive-gradient);
+  }
+
+  .v-gallery-wrap ~ .instagram-section .insta-card {
+    border: 1px solid var(--gold-dim);
+  }
+
+  .v-gallery-wrap .gallery-masonry__col {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .v-gallery-wrap .gallery-item {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--surface-olive-gradient);
+    margin-bottom: 0;
+    border: 1px solid var(--gold-bright);
+    box-shadow: var(--shadow-tile);
+    transition: var(--transition-surface);
+  }
+
+  .v-gallery-wrap .gallery-item:hover {
+    border-color: var(--gold);
+    box-shadow: var(--shadow-tile-hover);
+  }
+
+  .v-gallery-wrap .gallery-item--wide {
+    aspect-ratio: 3/2;
+  }
+
+  .v-gallery-wrap .gallery-item--tall {
+    aspect-ratio: 2/3;
+  }
+
+  .v-gallery-wrap .gallery-item__video-thumb {
+    position: absolute;
+    inset: 0;
+  }
+
+  .v-gallery-wrap .gallery-item img,
+  .v-gallery-wrap .gallery-item__video-thumb img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    transition: transform var(--duration-slow) var(--ease), filter var(--duration-slow) var(--ease);
+  }
+
+  .v-gallery-wrap .gallery-item__caption {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: var(--space-md) var(--space-lg);
+    background: linear-gradient(0deg, rgba(10,8,7,0.85) 0%, transparent 100%);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0;
+    transform: translateY(0.5rem);
+    transition: all var(--duration) var(--ease);
+    border: none;
+  }
+
+  .v-gallery-wrap .gallery-item:hover img {
+    transform: scale(1.06);
+  }
+
+  .v-gallery-wrap .gallery-item:hover .gallery-item__caption {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .v-gallery-wrap .gallery-item__play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10,8,7,0.25);
+    transition: background var(--duration) var(--ease);
+  }
+
+  .v-gallery-wrap .gallery-item:hover .gallery-item__play {
+    background: rgba(10,8,7,0.4);
+  }
+
+  @media (max-width: 767px) {
+    .v-gallery-wrap .gallery-masonry {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .v-gallery-wrap .gallery-item__caption {
+      opacity: 1;
+      transform: none;
+      font-size: 0.72rem;
+    }
+  }
+
+  @media (pointer: coarse) {
+    .gallery-item {
+      -webkit-tap-highlight-color: transparent;
+    }
+  }
+
+  /* ==========================================================================
+     6. Page rhythm
+     ========================================================================== */
+
+  /* Prevent horizontal bleed. clip, not hidden: hidden would make the body a scroll box of its own,
+     and the section menu could no longer stick under the header */
+
+  body {
+    overflow-x: clip;
+  }
+
+  /* Subtle page rhythm — alternating sections breathe */
+
+  main > section + section,
+  main > .v-stats + section {
+    margin-top: 0;
+  }
+
+  /* ==========================================================================
+     7. Small-screen adjustments to shared components
+     Buttons, lightbox, Instagram header and footer are defined in main.css and chrome.css.
+     ========================================================================== */
+
+  @media (max-width: 767px) {
+    .btn {
+      width: auto;
+      justify-content: center;
+    }
+
+    .lightbox {
+      padding: var(--space-md);
+    }
+
+    .instagram-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .instagram-header .btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+    }
+  }
+}

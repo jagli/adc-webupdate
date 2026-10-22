@@ -1,0 +1,311 @@
+@layer sections {
+  /* ==========================================================================
+     11. Colour bands (alt-band)
+     ========================================================================== */
+
+  .alt-band {
+    padding-block: var(--band-space-xl);
+    padding-inline: var(--layout-gutter);
+  }
+
+  .alt-band--ivory {
+    background: var(--surface-ivory-gradient);
+  }
+
+  .alt-band--mist {
+    background: var(--surface-mist-gradient);
+  }
+
+  .alt-band--burgundy {
+    background: var(--surface-burgundy-gradient);
+  }
+
+  .alt-band--olive {
+    background: var(--surface-olive-gradient);
+  }
+
+  .alt-band--navy {
+    background: var(--surface-navy-gradient);
+  }
+
+  .alt-band--center {
+    text-align: center;
+  }
+
+  .alt-band__inner--cards {
+    margin-top: var(--space-3xl);
+  }
+
+  .alt-band__cta {
+    margin-top: var(--space-xl);
+  }
+
+  .alt-band__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    justify-content: center;
+    margin-top: var(--space-3xl);
+  }
+
+  /* ==========================================================================
+     12. Band headings and lead text (alt-section-head)
+     ========================================================================== */
+
+  .alt-section-head {
+    margin-bottom: 1.75rem;
+  }
+
+  .alt-section-head--center {
+    text-align: center;
+  }
+
+  .alt-section-head--center .alt-section-head__rule {
+    margin-inline: auto;
+  }
+
+  .alt-section-head__rule {
+    width: 3rem;
+    height: 1px;
+    background: var(--gold-bright);
+    margin: 0 0 var(--space-lg);
+    border: none;
+  }
+
+  .alt-section-head__eyebrow {
+    font-size: var(--text-label);
+    font-weight: 700;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 var(--space-sm);
+  }
+
+  .alt-section-head--on-dark .alt-section-head__eyebrow {
+    color: var(--gold-bright);
+  }
+
+  .alt-section-head__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-weight: 500;
+    line-height: 1.12;
+    margin: 0;
+    color: var(--text);
+  }
+
+  .alt-section-head--on-dark .alt-section-head__title {
+    color: var(--text-on-dark);
+  }
+
+  .alt-section-head__title--display {
+    margin-top: var(--space-xl);
+  }
+
+  .alt-spaced {
+    display: block;
+    font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(251, 250, 249, 0.55);
+    margin-bottom: var(--space-xs);
+  }
+
+  .alt-lead {
+    max-width: 48ch;
+    margin: 0 0 var(--space-xl);
+    font-size: var(--text-body-lg);
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  .alt-lead--on-dark {
+    color: var(--text-on-dark-muted);
+  }
+
+  /* ==========================================================================
+     13. Interlude statement (alt-interlude)
+     ========================================================================== */
+
+  .alt-interlude__display {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.08;
+    margin: 0;
+    color: var(--text);
+  }
+
+  .alt-interlude__display em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .alt-interlude {
+    display: grid;
+    gap: var(--space-3xl);
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .alt-interlude {
+      grid-template-columns: 1fr 1.1fr;
+    }
+  }
+
+  /* ==========================================================================
+     14. Photo split (alt-split)
+     ========================================================================== */
+
+  .alt-split {
+    display: grid;
+    gap: var(--space-3xl);
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .alt-split {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* When a row of cards follows the split in the same band (Home, Guru-Shishya), the split uses the
+     cards' gap, so the photo and text edges line up with the card columns below */
+  .alt-band:has(.s-cards) > .alt-split {
+    column-gap: var(--space-md);
+  }
+
+  /* Snug split (Home, Who We Are): less air above and below; columns match the other splits */
+  .alt-band--snug {
+    padding-block: calc(var(--band-space-xl) * 0.7);
+  }
+
+  .alt-split__visual {
+    border: var(--band-rule);
+    overflow: hidden;
+    box-shadow: var(--shadow-photo);
+  }
+
+  /* A photo can choose which part the 4:5 frame shows: style="--photo-focus-x: 37%" on the img */
+  .alt-split__visual img {
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    object-position: var(--photo-focus-x, 50%) var(--photo-focus-y, 50%);
+    width: 100%;
+  }
+
+  /* Wide photo shown whole at its own shape, not cropped to 4:5 (Home, Guru-Shishya) */
+
+  /* A photo split whose photo fills the height of the text beside it (alt-split--fill): a wider photo column,
+     a narrower gap, and the photo as tall as the text but never narrower than 3:4, so wide poses keep their
+     hands (if the text is taller still, the photo is centred). It keeps its focus (--photo-focus-x / -y). */
+  @media (min-width: 1100px) {
+    .alt-split.alt-split--fill {
+      grid-template-columns: 1.12fr 0.88fr;
+      align-items: stretch;
+      column-gap: var(--space-xl);
+    }
+
+    .alt-split--fill > .alt-split__visual {
+      align-self: center;
+      container-type: inline-size;
+      border: 0;
+      box-shadow: none;
+      overflow: visible;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .alt-split--fill > .alt-split__visual img {
+      width: 100%;
+      height: min(100%, 133.33cqi);
+      aspect-ratio: auto;
+      border: var(--band-rule);
+      box-shadow: var(--shadow-photo);
+    }
+  }
+
+  /* Tablet: stacked, the photo across the full width at 4:3 with the heads kept in view (a little of the
+     legs may be trimmed at the foot), the text below */
+  @media (min-width: 768px) and (max-width: 1099px) {
+    .alt-split.alt-split--fill {
+      grid-template-columns: 1fr;
+      row-gap: var(--space-xl);
+    }
+
+    .alt-split--fill > .alt-split__visual img {
+      aspect-ratio: 4 / 3;
+      object-position: var(--photo-focus-x, 50%) 0;
+    }
+  }
+
+  .alt-split__visual--natural img {
+    aspect-ratio: auto;
+    height: auto;
+  }
+
+  /* Two subjects side by side in one band (Home, Culture Alive): each with its own photo carousel,
+     a display-face title and its text. One column on a phone. */
+  .alt-duo {
+    display: grid;
+    gap: var(--space-3xl);
+    margin-top: var(--space-2xl);
+  }
+
+  @media (min-width: 900px) {
+    .alt-duo {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+    }
+  }
+
+  .alt-duo__item .s-mini {
+    box-shadow: var(--shadow-photo);
+    border: var(--band-rule);
+  }
+
+  .alt-duo__item .s-mini .s-mini__slide {
+    object-fit: cover;
+    object-position: 50% 30%;
+  }
+
+  .alt-duo__title {
+    margin: var(--space-lg) 0 var(--space-sm);
+    font-family: var(--font-display);
+    font-size: var(--text-subtitle);
+    font-weight: 400;
+    color: var(--gold-bright);
+  }
+
+  .alt-duo__item .content-prose p {
+    font-size: var(--text-small);
+    line-height: 1.75;
+  }
+
+  .alt-duo__more {
+    margin-top: var(--space-2xl);
+    text-align: center;
+  }
+
+  .alt-duo__more a {
+    font-family: var(--font-display);
+    font-size: var(--text-body-lg);
+    letter-spacing: 0.02em;
+    color: var(--gold-bright);
+    text-decoration: none;
+    padding-bottom: 0.2em;
+    border-bottom: 1px solid rgba(216, 182, 129, 0.45);
+    transition: border-color var(--duration) var(--ease), color var(--duration) var(--ease);
+  }
+
+  .alt-duo__more a:hover,
+  .alt-duo__more a:focus-visible {
+    color: var(--text-on-dark);
+    border-bottom-color: var(--gold-bright);
+  }
+
+  /* Testimonials, From Performances & Tours: the intro line uses the band's full width */
+  #audience-testimonials .s-band__body > .content-prose {
+    max-width: none;
+  }
+}

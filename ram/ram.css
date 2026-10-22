@@ -1,0 +1,75 @@
+/* Hidden feature (#ram): only the playable lighting desk needs styles of its own; everything else uses the site's sections */
+.ram-desk {
+  display: grid;
+  gap: var(--space-lg);
+  max-width: 760px;
+}
+
+.ram-desk__stage {
+  position: relative;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 30% 60% at 50% 35%, rgba(255, 246, 220, calc(var(--s, 0.9) * 0.85)), transparent 70%),
+    radial-gradient(ellipse 60% 90% at 15% 0, rgba(220, 40, 60, calc(var(--r, 0.7) * 0.8)), transparent 70%),
+    radial-gradient(ellipse 60% 90% at 50% 0, rgba(255, 170, 40, calc(var(--a, 0.8) * 0.8)), transparent 70%),
+    radial-gradient(ellipse 60% 90% at 85% 0, rgba(40, 90, 230, calc(var(--b, 0.4) * 0.8)), transparent 70%),
+    #0b0710;
+  border: 1px solid var(--gold-bright);
+  box-shadow: var(--shadow-card);
+}
+
+.ram-desk__name {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  line-height: 1;
+  color: #fff;
+  opacity: calc(0.25 + var(--s, 0.9) * 0.75);
+  text-shadow: 0 0 calc(var(--s, 0.9) * 30px) rgba(255, 236, 190, 0.8);
+}
+
+.ram-desk__role {
+  margin-top: var(--space-xs);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--gold-bright);
+}
+
+.ram-desk__faders {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background: #1a1620;
+  border: 1px solid #3a3440;
+}
+
+.ram-desk__faders label {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: #d8d2c8;
+}
+
+.ram-desk__faders input {
+  writing-mode: vertical-lr;
+  direction: rtl;
+  height: 140px;
+  accent-color: var(--gold);
+  cursor: pointer;
+}
+
+/* The badge photo at half its height: the top is kept (head and badges), only the bottom is trimmed */
+.ram-badges > img {
+  height: auto;
+  aspect-ratio: 9 / 8;
+  object-fit: cover;
+  object-position: center top;
+}

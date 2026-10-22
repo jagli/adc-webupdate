@@ -1,0 +1,3186 @@
+@layer sections {
+  /* ==========================================================================
+     Abhinava Dance Company — page sections
+
+     Edit the parts in css/sections/ (one file per group below), then run
+     npm run css:build: it joins them, in file-name order, into
+     css/sections.css, the one stylesheet the pages load. Never edit
+     css/sections.css by hand; npm run check fails if it differs from the parts.
+
+     Layer 2 (components) in parts 1–21, then Layer 3 (scoped overrides) in
+     parts 22–23. Inner pages use the s-* sections; the home page and the
+     partner bands use the alt-* bands. Loaded last, after main.css and luxury.css.
+
+     Contents — part file (in css/sections/) and the sections it holds
+     01-band-tokens ............... 1. Band tokens
+     02-section ................... 2. Section — photo beside text (s-section): picture panels, contained widths, dividers
+     03-video-tiles ............... Video thumbnails (s-video, s-video-grid)
+     04-text-sections ............. 3. Text only (s-split-text) · 4. Page introduction (s-page-intro) · 5. Photo band (s-band)
+     05-prose-cards-covers ........ 6. Body copy (content-prose) · 7. Cards (s-cards) · 8. Cover photos (media-cover)
+     06-timeline-productions ...... 9. Timeline (s-timeline) · 10. Production tiles (s-prod)
+     07-colour-bands .............. 11. Colour bands (alt-band) · 12. Band headings · 13. Interlude · 14. Photo split
+     08-pillars-partners .......... 15. Pillars — Core Elements · 16. Partners
+     (17. Journey steps: removed 13 October 2026, merged into the Home school block)
+     09-carousel-stats-portraits .. 18. Carousel (alt-carousel) · 19. Stats strip · 20. Portraits (client-portrait)
+     10-quotes-voices ............. 21. Pull quotes, quotation cards (s-quotes), testimonial rows (s-voice)
+     11-dark-surfaces ............. 22. Dark surfaces — text and cards
+     12-palette-accents ........... 23. Palette accents
+     13-phones .................... 24. Phones — reading and tapping comfort
+     14-mini-carousel ............. Mini carousel (s-mini)
+     15-production-popup .......... Production pop-up (s-pop)
+     16-next-page ................. Next page band (alt-next): the last band of every page
+     ========================================================================== */
+
+  /* ==========================================================================
+     1. Band tokens
+     ========================================================================== */
+
+  :root {
+    --band-max: var(--layout-max);
+    --band-space-xl: clamp(3.5rem, 8vw, 5rem); /* bands hold the approved sections: kept apart from --section-space on purpose */
+    --band-rule: 1px solid var(--gold-bright);
+  }
+}
+
+@layer sections {
+  /* ==========================================================================
+     2. Section — photo beside text (s-section)
+     ========================================================================== */
+
+  .s-section {
+    display: grid;
+    background: var(--surface-ivory-gradient); /* mood board bg1 */
+  }
+
+  /* The second tone of the page rhythm: set on the section itself (s-section--tone-alt), never worked out
+     from its position, so adding or moving a section leaves the others as they are */
+  .s-section.s-section--tone-alt {
+    background: var(--surface-ivory-muted-gradient); /* mood board bg2 rhythm */
+  }
+
+  @media (min-width: 1100px) {
+    .s-section {
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+    }
+
+    .s-section--reverse .s-section__visual {
+      order: 2;
+    }
+
+    /* Photo-led section with a long list (s-section--scroll-text): the photo carousel takes the larger share
+       and sets the height at 4:3, so landscape photos are seen almost whole; the text panel matches that
+       height (height 0, min-height 100%: it adds nothing to the row) and its list scrolls, as in Milestones */
+    .s-section.s-section--scroll-text {
+      /* The text panel starts where a framed photo in the next section starts: half-way plus the panel's padding */
+      grid-template-columns: calc(50% + var(--space-2xl)) 1fr;
+    }
+
+    .s-section--scroll-text > .s-section__visual--fill > .s-mini {
+      height: auto;
+      min-height: 0;
+      aspect-ratio: 4 / 3;
+    }
+
+    .s-section--scroll-text > .s-section__content {
+      height: 0;
+      min-height: 100%;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+
+    .s-section--scroll-text > .s-section__content > .content-prose {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      padding-right: var(--space-sm);
+      /* The list fades in under the heading and out at its foot: a hint that it scrolls, no hard edges */
+      -webkit-mask-image: linear-gradient(to bottom, transparent, #000 1.25rem, #000 calc(100% - 2.5rem), transparent);
+      mask-image: linear-gradient(to bottom, transparent, #000 1.25rem, #000 calc(100% - 2.5rem), transparent);
+      padding-top: 1rem;
+      padding-bottom: 2rem;
+    }
+
+    /* The scrollbar as part of the design: a gold hairline down the right of the list, a slim gold bar riding on it */
+    .s-section--scroll-text > .s-section__content > .content-prose::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .s-section--scroll-text > .s-section__content > .content-prose::-webkit-scrollbar-track {
+      background: linear-gradient(rgba(216, 182, 129, 0.35), rgba(216, 182, 129, 0.35)) center / 1px 100% no-repeat;
+    }
+
+    .s-section--scroll-text > .s-section__content > .content-prose::-webkit-scrollbar-thumb {
+      background: var(--gold-bright);
+      border-radius: 3px;
+    }
+
+    /* Browsers without the styled scrollbar above (Firefox): a thin gold one */
+    @supports not selector(::-webkit-scrollbar) {
+      .s-section--scroll-text > .s-section__content > .content-prose {
+        scrollbar-width: thin;
+        scrollbar-color: var(--gold-bright) rgba(216, 182, 129, 0.18);
+      }
+    }
+
+    /* The two lists one under the other in the narrower text panel */
+    .s-section--scroll-text .s-lists-2 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .s-section {
+      padding-inline: 0;
+    }
+  }
+
+  /* Picture panel beside the text (s-section__visual) — one standard for the whole site:
+     the panel takes the section's own background and holds one framed picture, centred, with the same
+     space all round. The frame is always the same: a thin gold rule and a soft shadow.
+     Proportion: photos and photo carousels 4:3, videos 16:9, people/costume carousels 3:4
+     (.s-mini--portrait). Photos fill their frame; the upper part (heads, headroom) is kept in view.
+     The --whole and --fill modifiers are kept in the markup but no longer change the look. */
+
+  .s-section__visual {
+    min-width: 0; /* lets long words wrap instead of widening the page on small phones */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-lg) var(--layout-gutter);
+    background: transparent;
+  }
+
+  @media (min-width: 768px) {
+    .s-section__visual {
+      padding: var(--space-2xl);
+    }
+  }
+
+  .s-section__visual > img,
+  .s-section__visual > .s-mini,
+  .s-section__visual > .s-video {
+    position: relative;
+    inset: auto;
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    border: 1px solid var(--gold-bright);
+    box-shadow: var(--shadow-photo);
+  }
+
+  .s-section__visual > img,
+  .s-section__visual > .s-mini:not(.s-mini--portrait) {
+    aspect-ratio: 4 / 3;
+  }
+
+  .s-section__visual > img,
+  .s-section__visual > .s-mini .s-mini__slide {
+    object-fit: cover;
+    /* A photo can name its own focus when the panel crops it: style="--photo-focus-y: 42%" (and --photo-focus-x) on the img */
+    object-position: var(--photo-focus-x, 50%) var(--photo-focus-y, 30%);
+  }
+
+  .s-section__visual > .s-video {
+    aspect-ratio: 16 / 9;
+  }
+
+  .s-section__visual > .s-mini--portrait {
+    max-width: 26rem;
+  }
+
+  /* A photo or photo carousel beside long text grows with the text, so no empty band is left above and below it */
+  .s-section__visual > img,
+  .s-section__visual > .s-mini:not(.s-mini--portrait, .s-mini--video, .s-mini--photo) {
+    align-self: stretch;
+  }
+
+  /* Two short lists side by side inside a text panel (Noteworthy Performances); one column on phones */
+  .s-lists-2 {
+    display: grid;
+    gap: 0 var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .s-lists-2 {
+      grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+      column-gap: var(--space-md);
+    }
+  }
+
+  /* Long lists: a size smaller and tighter lines, so both lists sit compactly side by side */
+  .s-lists-2 ul {
+    font-size: 0.92em;
+    line-height: 1.45;
+  }
+
+  .s-lists-2 li + li {
+    margin-top: 0.35em;
+  }
+
+  .s-lists-2 p {
+    margin-block: 0 0.6em;
+  }
+
+  /* Cards placed inside a dark text panel keep the dark text of a card, not the panel's cream text */
+  .s-section__content .s-card .content-prose {
+    color: var(--text-muted);
+  }
+
+  /* A section held to the width of the page's content column, so its edges line up with the cards below it */
+  @media (min-width: 768px) {
+    .s-section--contained {
+      width: calc(min(var(--layout-max), 100% - 2 * var(--layout-gutter)) - 2 * var(--layout-gutter));
+      margin-inline: auto;
+    }
+  }
+
+  /* Inside a contained band the content keeps an even inner margin instead of the page gutter */
+  @media (min-width: 768px) {
+    .s-section--contained > .layout,
+    .s-section--contained > .alt-band__inner {
+      width: auto;
+      max-width: none;
+      padding-inline: var(--space-2xl);
+    }
+  }
+
+  /* Between two contained bands: a soft shadow, deepest at the centre, tapering and fading away towards both ends */
+  .s-section--contained + .s-section--contained {
+    position: relative;
+  }
+
+  .s-section--contained + .s-section--contained::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 26px;
+    pointer-events: none;
+    background: radial-gradient(ellipse 58% 100% at 50% 0, rgba(52, 40, 24, 0.11), rgba(52, 40, 24, 0.04) 50%, transparent 80%);
+  }
+
+  /* A band that also carries the gold divider over the shadow: a fading hairline with a small diamond at its centre */
+  .s-section--contained + .s-section--ruled::before {
+    background: linear-gradient(90deg, transparent 12%, var(--gold-dim) 30%, var(--gold-bright) 50%, var(--gold-dim) 70%, transparent 88%) top / 100% 1px no-repeat,
+      radial-gradient(ellipse 58% 100% at 50% 0, rgba(52, 40, 24, 0.11), rgba(52, 40, 24, 0.04) 50%, transparent 80%);
+  }
+
+  .s-section--contained + .s-section--ruled::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    top: -4px;
+    left: 50%;
+    width: 7px;
+    height: 7px;
+    pointer-events: none;
+    background: var(--ivory);
+    border: 1px solid var(--gold-bright);
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  /* A contained band uses the same top and bottom space as the picture panels around it, so the dividers sit evenly */
+  @media (min-width: 768px) {
+    .alt-band.s-section--contained {
+      padding-block: var(--space-2xl);
+    }
+  }
+
+  /* A section that keeps a gap before the next one (when two full-bleed sections would otherwise touch) */
+  .s-section--gap-after {
+    position: relative;
+    margin-bottom: var(--section-space-compact);
+  }
+
+  /* Its foot carries the site's divider (a fading gold hairline, a small diamond at the centre); the section
+     after the gap then needs no shadow of its own */
+  .s-section--gap-after::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 9px;
+    pointer-events: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 9'%3E%3Crect x='2' y='2' width='5' height='5' transform='rotate(45 4.5 4.5)' fill='%23fbfaf9' stroke='%23d8b681' stroke-width='1'/%3E%3C/svg%3E") center / 9px 9px no-repeat,
+      linear-gradient(90deg, transparent 12%, var(--gold-dim) 30%, var(--gold-bright) 50%, var(--gold-dim) 70%, transparent 88%) center / 100% 1px no-repeat;
+  }
+
+  /* Below the gallery panel (gallery.html): the site's soft shadow divider (deepest at the centre, fading towards both ends)
+     falls into the gap, in place of the gold hairline the gap would otherwise carry */
+  .v-gallery-wrap.s-section--gap-after::after {
+    top: 100%;
+    bottom: auto;
+    height: 26px;
+    background: radial-gradient(ellipse 58% 100% at 50% 0, rgba(52, 40, 24, 0.11), rgba(52, 40, 24, 0.04) 50%, transparent 80%);
+  }
+
+  .s-section--gap-after + .s-section--contained::before {
+    display: none;
+  }
+
+  /* Full-bleed picture panel (s-section__visual--fill): the carousel fills the panel edge to edge, no frame or margin */
+  .s-section__visual--fill {
+    padding: 0;
+  }
+
+  .s-section__visual--fill > .s-video {
+    position: relative;
+    inset: auto;
+    align-self: stretch;
+    width: 100%;
+    min-height: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .s-section__visual--fill > img,
+  .s-section__visual--fill > .s-mini {
+    align-self: stretch;
+    height: 100%;
+    min-height: 100%;
+    aspect-ratio: auto;
+    border: 0;
+    box-shadow: none;
+  }
+
+  /* On phones an upright full-bleed photo is capped, so it does not fill the whole screen */
+  @media (max-width: 1099px) {
+    .s-section__visual--fill > img {
+      max-height: 26rem;
+      object-fit: cover;
+    }
+  }
+
+  /* On tablets (stacked, the frame wide and short) a full-bleed photo keeps its own shape, centred,
+     instead of being cut to a wide strip */
+  @media (min-width: 768px) and (max-width: 1099px) {
+    .s-section__visual--fill:has(> img) {
+      display: flex;
+      justify-content: center;
+    }
+
+    .s-section__visual--fill > img {
+      width: min(100%, 34rem);
+      height: auto;
+      max-height: none;
+      aspect-ratio: auto;
+    }
+  }
+
+  /* On wider screens a full-bleed photo takes the height of the text beside it and never makes the section taller */
+  @media (min-width: 1100px) {
+    .s-section__visual--fill > img {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      min-height: 0;
+    }
+  }
+
+  /* A video picture that carries its own title (s-video--whole) is shown whole, never cropped,
+     centred on the dark of its stage curtain (Store · Productions & Media) */
+  .s-section__visual--fill > .s-video.s-video--whole {
+    background: #1d0405;
+  }
+
+  .s-section__visual--fill > .s-video.s-video--whole img {
+    object-fit: contain;
+  }
+
+  /* A full-bleed photo whose dancers must stay whole, raised hands to feet (s-section__visual--uncropped):
+     never cut; it keeps its own shape at the panel's full width, and the text panel beside it matches its height */
+  .s-section__visual--fill.s-section__visual--uncropped > img {
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+  }
+
+  @media (min-width: 1100px) {
+    .s-section__visual--fill.s-section__visual--uncropped > img {
+      position: static;
+      width: 100%;
+      min-height: 0;
+    }
+  }
+
+  /* A video tile in a picture panel takes the full width of the frame */
+  .s-section__visual > .s-video-tile {
+    width: 100%;
+  }
+
+  /* Classic picture panel (s-section--classic): the earlier treatment, kept for the School page at the
+     owner's request (15 October 2026). The photo fills the panel edge to edge; a --whole panel shows
+     the whole photo with spare space in the colour of the text panel beside it. */
+  .s-section--classic .s-section__visual {
+    display: block;
+    padding: 0;
+    min-height: clamp(260px, 42vw, 480px);
+    overflow: hidden;
+    background: var(--surface-olive-gradient);
+  }
+
+  .s-section--classic .s-section__visual > img,
+  .s-section--classic .s-section__visual > .s-mini,
+  .s-section--classic .s-section__visual > .s-video {
+    border: 0;
+    box-shadow: none;
+  }
+
+  .s-section--classic .s-section__visual > .s-video {
+    position: absolute;
+    inset: 0;
+    aspect-ratio: auto;
+  }
+
+  .s-section--classic .s-section__visual > img {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    aspect-ratio: auto;
+    object-position: 50% 50%;
+  }
+
+  .s-section--classic .s-section__visual--whole {
+    display: flex;
+    align-items: center;
+    min-height: 0;
+    background: transparent;
+  }
+
+  .s-section--classic .s-section__visual--whole > img {
+    position: static;
+    height: auto;
+  }
+
+  /* A photo in a classic carousel can fill its frame instead of sitting whole inside it: one photo
+     (s-mini__slide--snug) or every photo of the carousel (s-mini--snug), so they all meet the frame's edges
+     alike. Scaled to the frame and trimmed, the focus set with --photo-focus-y. From 1100px only: narrower, the
+     frame is taller than a 2:3 photo (tablets) or wide and short (phones), and the photo would lose hands, heads or feet. */
+  @media (min-width: 1100px) {
+    .s-section--classic .s-section__visual > .s-mini.s-mini--snug .s-mini__slide,
+    .s-section--classic .s-section__visual > .s-mini .s-mini__slide.s-mini__slide--snug {
+      object-fit: cover;
+      object-position: 50% var(--photo-focus-y, 50%);
+    }
+  }
+
+  .s-section--classic .s-section__visual > .s-mini:not(.s-mini--portrait) {
+    aspect-ratio: 3 / 2;
+  }
+
+  /* Phones and tablets: an upright carousel (s-mini--upright) keeps its 7:10 frame across the full width,
+     each photo filling it */
+  @media (max-width: 1099px) {
+    .s-section--classic .s-section__visual > .s-mini.s-mini--upright {
+      aspect-ratio: 7 / 10;
+      height: auto;
+    }
+
+    .s-section--classic .s-section__visual > .s-mini.s-mini--upright .s-mini__slide {
+      object-fit: cover;
+      object-position: 50% var(--photo-focus-y, 50%);
+    }
+  }
+
+  /* Phones and tablets: a classic carousel that fills its frame there too (s-mini--snug-small), in a 9:10
+     frame between upright and square photos; each photo's focus with --photo-focus-y-small */
+  @media (max-width: 1099px) {
+    .s-section--classic .s-section__visual > .s-mini.s-mini--snug-small {
+      aspect-ratio: var(--mini-ratio-small, 1.16 / 1);
+    }
+
+    .s-section--classic .s-section__visual > .s-mini.s-mini--snug-small .s-mini__slide {
+      object-fit: cover;
+      object-position: 50% var(--photo-focus-y-small, 50%);
+    }
+  }
+
+  /* Phones and tablets: a tall photo in a classic panel (photo--trim-tablet) is trimmed top and bottom to a
+     wider frame, --tablet-ratio (4 / 3 unless the photo names another), its focus set with --photo-focus-y */
+  @media (max-width: 1099px) {
+    .s-section--classic .s-section__visual > img.photo--trim-tablet {
+      aspect-ratio: var(--tablet-ratio, 4 / 3);
+      height: auto;
+      object-fit: cover;
+      object-position: 50% var(--photo-focus-y, 50%);
+    }
+  }
+
+  /* A classic carousel of upright photos (s-mini--upright, with s-mini--snug): from 1100px the frame takes
+     their shape, 0.7 wide to 1 tall, and sets the panel's height, so each photo loses only a sliver */
+  @media (min-width: 1100px) {
+    .s-section--classic .s-section__visual > .s-mini.s-mini--upright {
+      aspect-ratio: 7 / 10;
+      height: auto;
+    }
+  }
+
+  .s-section--classic .s-section__visual > .s-mini .s-mini__slide {
+    object-fit: contain;
+    object-position: 50% 50%;
+  }
+
+  .s-section--classic:has(.s-section__content--dark) .s-section__visual--whole {
+    background: var(--surface-burgundy-gradient);
+  }
+
+  .s-section--classic:has(.s-section__content--olive) .s-section__visual--whole {
+    background: var(--surface-olive-gradient);
+  }
+
+  .s-section--classic:has(.s-section__content--navy) .s-section__visual--whole {
+    background: var(--surface-navy-gradient);
+  }
+
+  .s-section--classic:has(.s-section__content--mist) .s-section__visual--whole {
+    background: var(--surface-mist-gradient);
+  }
+
+  /* Long words (email addresses) wrap inside inner-page sections instead of widening the page */
+  .s-section__content,
+  .s-split-text,
+  .s-page-intro,
+  .s-band__body {
+    overflow-wrap: break-word;
+  }
+
+  .s-section__content {
+    min-width: 0; /* lets long words wrap instead of widening the page on small phones */
+    padding: var(--section-space-compact) var(--layout-gutter);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .s-section__content--dark {
+    background: var(--surface-burgundy-gradient);
+    box-shadow: inset 1px 0 0 var(--border-on-dark);
+  }
+
+  @media (max-width: 1099px) {
+    .s-section__content--dark {
+      box-shadow: inset 0 1px 0 var(--border-on-dark);
+    }
+  }
+
+  .s-section__content--dark .s-section__title--on-dark {
+    color: var(--text-on-dark);
+  }
+
+  .s-section__title {
+    font-family: var(--font-display);
+    font-size: var(--text-title);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--gold);
+    margin-bottom: var(--space-md);
+  }
+
+  .s-section__eyebrow {
+    font-size: var(--text-label);
+    font-weight: 700;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--burgundy);
+    margin-bottom: var(--space-sm);
+  }
+
+  /* Alternating dark surfaces for luxury rhythm */
+
+  .s-section__content--olive {
+    background: var(--surface-olive-gradient);
+  }
+
+  .s-section__content--navy {
+    background: var(--surface-navy-gradient);
+  }
+
+  .s-section__content--mist {
+    background: var(--surface-mist-gradient);
+  }
+}
+
+@layer sections {
+  /* Video — a thumbnail with a play button; pressing it opens the pop-up player (lightbox in main.css).
+     Fills a section's picture space, or sits in a 16:9 tile inside text and cards. */
+
+  .s-video {
+    position: absolute;
+    inset: 0;
+    display: block;
+    background: #000;
+  }
+
+  .s-video img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    /* A picture can choose which part the 16:9 tile shows: style="--photo-focus-y: 85%" on the img */
+    object-position: 50% var(--photo-focus-y, 50%);
+  }
+
+  .s-video::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(10,8,7,0.25);
+    transition: var(--transition-surface);
+  }
+
+  .s-video:hover::after,
+  .s-video:focus-visible::after {
+    background: rgba(10,8,7,0.1);
+  }
+
+  .s-video__play {
+    position: absolute;
+    inset: 50% auto auto 50%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    transform: translate(-50%, -50%);
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    background: rgba(10,8,7,0.55);
+    color: var(--gold-bright);
+  }
+
+  .s-video__play svg {
+    width: 44%;
+    height: 44%;
+  }
+
+  .s-video-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .s-video-grid--3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-sm);
+    }
+  }
+
+  /* Four videos: two across on phones and tablets, four in one row from 1024px */
+  @media (min-width: 1024px) {
+    .s-video-grid--4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-sm);
+    }
+  }
+
+  /* A long list of videos: two across on phones, three from 768px, five from 1200px */
+  @media (min-width: 768px) {
+    .s-video-grid--many {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .s-video-grid--many {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: var(--space-sm);
+    }
+  }
+
+  /* Response videos (s-video-wall): one grid with one even gutter across and down; wide videos (16:9) two to a row,
+     upright Shorts (s-video-tile--tall) three to a row below them, every edge lined up.
+     Wide videos run full width on phones, Shorts two across. */
+  .s-video-wall {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-md);
+    align-items: start;
+  }
+
+  .s-video-tile--wide {
+    grid-column: 1 / -1;
+  }
+
+  @media (min-width: 768px) {
+    .s-video-wall {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .s-video-tile--wide {
+      grid-column: span 3;
+    }
+
+    .s-video-tile--tall {
+      grid-column: span 2;
+    }
+  }
+
+  /* Shorts in the wall: a 3:4 frame (not the full 9:16) so the row sits in proportion with the wide videos;
+     the top of the picture kept in view, where the speaker's head is */
+  .s-video-tile--tall .s-video-tile__media {
+    aspect-ratio: 3 / 4;
+  }
+
+  .s-video-tile--tall .s-video-tile__media img {
+    object-position: 50% 20%;
+  }
+
+  /* A row of videos that follows a heading-only s-bts: the heading sits close to its videos */
+  .s-bts:has(> .s-bts__text:only-child) + .s-video-wall {
+    margin-top: var(--space-md);
+  }
+
+  .s-video-tile {
+    min-width: 0;
+    margin: 0;
+  }
+
+  .s-card .s-video-tile {
+    margin-top: var(--space-md);
+  }
+
+  .s-video-tile__media {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    box-shadow: var(--shadow-tile);
+  }
+
+  /* Portrait video tiles (students speaking to camera): a 9:16 frame; the thumbnail is cropped to its centre */
+  .s-video-grid--portrait .s-video-tile__media {
+    aspect-ratio: 9 / 16;
+  }
+
+  .s-video-tile .s-video__play {
+    width: 44px;
+    height: 44px;
+  }
+
+  .s-video-tile__cap {
+    margin-top: var(--space-xs);
+    font-size: var(--text-small);
+    line-height: 1.35;
+  }
+}
+
+@layer sections {
+  /* ==========================================================================
+     3. Section — text only (s-split-text)
+     ========================================================================== */
+
+  .s-split-text {
+    padding-block: var(--section-space-compact);
+    padding-inline: var(--layout-gutter);
+    background: var(--surface-ivory-gradient);
+  }
+
+  .s-split-text--dark {
+    background: var(--surface-burgundy-gradient);
+    border-top: var(--divider-on-dark);
+    box-shadow: inset 0 1px 0 rgba(216, 182, 129, 0.06);
+  }
+
+  .s-split-text--dark .content-prose em {
+    color: var(--text-on-dark);
+  }
+
+  /* ==========================================================================
+     4. Page introduction (s-page-intro)
+     ========================================================================== */
+
+  .s-page-intro {
+    padding-block: var(--section-space-compact);
+    padding-inline: var(--layout-gutter);
+    background: var(--surface-ivory-muted-gradient);
+    border-bottom: 1px solid var(--gold-dim);
+  }
+
+  /* Centred opening statement: a single paragraph set slightly larger, centred on the page,
+     with a short gold rule above, so the full width is used with balance instead of leaving
+     an empty right half. */
+  .s-page-intro--centred .content-prose,
+  .s-page-intro--centred .s-page-intro__lead {
+    max-width: 58rem;
+    margin-inline: auto;
+    text-align: center;
+    font-size: var(--text-body-lg);
+    line-height: 1.75;
+    text-wrap: balance;
+  }
+
+  /* A quotation as the opening statement (Support): no side rule, centred like the others */
+  .s-page-intro--centred .quote-pull {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .s-page-intro--centred .layout::before {
+    content: "";
+    display: block;
+    width: 3rem;
+    height: 1px;
+    margin: 0 auto var(--space-lg);
+    background: var(--gold);
+  }
+
+  .s-page-intro__lead {
+    font-size: clamp(var(--text-body), 1.5vw, var(--text-body-lg));
+    color: var(--text-muted);
+    max-width: 62ch;
+    line-height: var(--leading-prose);
+  }
+
+  /* ==========================================================================
+     5. Photo band with overlay text (s-band)
+     ========================================================================== */
+
+  .s-band {
+    position: relative;
+    overflow: hidden;
+    min-height: clamp(360px, 55vh, 640px);
+    /* Deep navy: the dark panel the gallery uses; it sits between burgundy sections on the Testimonials page */
+    background: var(--surface-navy-gradient);
+  }
+
+  .s-band > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .s-band__body {
+    position: relative;
+    z-index: 1;
+    padding-block: var(--section-space);
+    padding-inline: var(--layout-gutter);
+    max-width: var(--layout-narrow);
+  }
+
+  @media (min-width: 1200px) {
+    .s-band__body {
+      margin-inline-start: 0;
+    }
+  }
+
+  /* A band that carries a video row (s-bts) uses the full content width, so the row is not squeezed to one side */
+  .s-band__body:has(> .s-bts) {
+    max-width: var(--layout-max);
+  }
+
+  .s-band__body .content-prose {
+    color: var(--text-on-dark-muted);
+  }
+
+  .s-band__body .content-prose strong {
+    color: #fff;
+  }
+
+  /* Behind the Scenes inside a text band (s-bts): text, then the video. From 1100px side by side, the video
+     starting where the photo-led section below splits (50% of the band) and ending at the band's content edge. */
+  .s-bts {
+    display: grid;
+    gap: var(--space-lg);
+    position: relative;
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-2xl);
+  }
+
+  /* Above it, the site's divider: a gold hairline fading out at both ends, a small diamond at its centre */
+  .s-bts::before,
+  .s-bts::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .s-bts::before {
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 8%, var(--gold-dim) 28%, var(--gold-bright) 50%, var(--gold-dim) 72%, transparent 92%);
+  }
+
+  .s-bts::after {
+    top: -4px;
+    left: 50%;
+    width: 7px;
+    height: 7px;
+    background: var(--ivory);
+    border: 1px solid var(--gold-bright);
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  /* A sub-section heading: smaller and lighter than the band's own title above it */
+  .s-bts .s-section__title {
+    margin-bottom: var(--space-sm);
+    font-size: clamp(1.4rem, 1.9vw, 1.75rem);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+
+  .s-bts .s-video {
+    position: relative;
+    inset: auto;
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 1px solid var(--gold-bright);
+    box-shadow: var(--shadow-photo);
+  }
+
+  /* Alternating rows: the video first, the text second */
+  @media (min-width: 1100px) {
+    .s-bts.s-bts--reverse {
+      grid-template-columns: 1fr 50%;
+    }
+
+    .s-bts--reverse > .s-video {
+      order: -1;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .s-bts {
+      grid-template-columns: 50% 1fr;
+      column-gap: var(--space-2xl);
+      align-items: center;
+    }
+  }
+
+  /* Two rows whose videos meet corner to corner (s-bts--joined): no gap between the columns or the rows,
+     the text keeping its distance by padding; the second row has no divider of its own */
+  @media (min-width: 1100px) {
+    .s-bts.s-bts--joined {
+      column-gap: 0;
+    }
+
+    .s-bts--joined .s-bts__text {
+      padding-right: var(--space-2xl);
+    }
+
+    .s-bts--joined.s-bts--reverse .s-bts__text {
+      padding-right: 0;
+      padding-left: var(--space-2xl);
+    }
+
+    .s-bts--joined + .s-bts--joined {
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    .s-bts--joined + .s-bts--joined::before,
+    .s-bts--joined + .s-bts--joined::after {
+      display: none;
+    }
+  }
+}
+
+@layer sections {
+  /* ==========================================================================
+     6. Body copy (content-prose)
+     ========================================================================== */
+
+  .content-prose {
+    color: var(--text-muted);
+    font-family: var(--font-sans);
+    font-size: clamp(var(--text-body), 1.5vw, var(--text-body-lg));
+    line-height: var(--leading-prose);
+    max-width: 62ch;
+  }
+
+  .content-prose p + p {
+    margin-top: var(--space-md);
+  }
+
+  .content-prose ul,
+  .content-prose ol {
+    margin: var(--space-md) 0 var(--space-md) var(--space-lg);
+  }
+
+  .content-prose li {
+    margin-bottom: var(--space-2xs);
+  }
+
+  .content-prose strong {
+    color: var(--navy);
+    font-weight: 700;
+  }
+
+  .content-prose a {
+    color: var(--burgundy);
+    font-weight: 700;
+  }
+
+  .content-prose a:hover {
+    color: var(--gold);
+  }
+
+  .content-prose em {
+    font-style: italic;
+  }
+
+  .content-prose blockquote {
+    margin-top: var(--space-md);
+    padding-left: var(--space-md);
+    border-left: 2px solid var(--gold-dim);
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--gold-deep);
+  }
+
+  .content-prose blockquote + * {
+    margin-top: var(--space-md);
+  }
+
+  .content-prose--on-dark {
+    color: var(--text-on-dark-muted);
+  }
+
+  .content-prose--on-dark strong {
+    color: var(--text-on-dark);
+  }
+
+  .content-prose--on-dark li {
+    color: var(--text-on-dark-muted);
+  }
+
+  .content-prose--on-dark a {
+    color: var(--gold-bright);
+  }
+
+  .content-prose--on-dark a:hover {
+    color: var(--ivory);
+  }
+
+  .content-prose--on-dark blockquote {
+    border-left-color: var(--gold-bright);
+    color: var(--text-on-dark);
+  }
+
+  /* ==========================================================================
+     7. Cards (s-cards, s-card)
+     ========================================================================== */
+
+  .s-cards {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: 1fr;
+    margin-top: var(--space-xl);
+  }
+
+  @media (min-width: 768px) {
+    .s-cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Columns follow the content.
+     Text cards: two across on tablets, three or four across on computers.
+     Photo cards (faculty): three across from tablets up.
+     A lone last text card takes the full row instead of leaving a gap beside it. */
+  @media (min-width: 768px) {
+    .s-cards--3:has(.media-cover) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .s-cards:not(.s-cards--3):not(.s-cards--4) > .s-card:last-child:nth-child(odd):not(:has(.media-cover)) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1199px) {
+    .s-cards--3:not(:has(.media-cover)) > .s-card:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .s-cards--3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .s-cards--4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .s-cards--3 > .s-card:last-child:nth-child(3n + 1):not(:has(.media-cover)) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* Picture cards (s-cards--tiles): two across from tablets up. Titles keep two lines of room so every
+     picture in a row starts at the same height; a lone last card stays card-sized, centred. */
+  @media (min-width: 768px) {
+    .s-cards--tiles .s-card__title {
+      min-height: calc(2 * 1.3em);
+    }
+
+    .s-cards.s-cards--tiles > .s-card:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: calc((100% - var(--space-md)) / 2);
+    }
+  }
+
+  /* min-width and overflow-wrap: long words (email addresses) wrap inside a narrow card */
+  .s-card {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    background: var(--surface-card-gradient);
+    border: 1px solid var(--gold-bright);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-xl);
+    transition: var(--transition-surface);
+  }
+
+  .s-card:hover {
+    border-color: var(--gold);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  .s-card__label {
+    font-size: var(--text-label);
+    font-weight: 700;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--burgundy);
+    margin-bottom: var(--space-xs);
+  }
+
+  .s-card__title {
+    font-family: var(--font-display);
+    font-size: var(--text-body-lg);
+    color: var(--gold);
+    line-height: 1.3;
+    font-weight: 500;
+  }
+
+  /* Titled cards (s-cards--titled): each card names a subject (Home, the four dance forms) in the
+     site's own pattern: a small gold capital eyebrow, then the name on one line in the display face.
+     The name scales with the card so the longest one fits on a single line. */
+  .s-cards--titled .s-card {
+    padding: var(--space-xl) var(--space-lg);
+  }
+
+  .s-cards--titled .s-card__label {
+    margin-bottom: var(--space-xs);
+  }
+
+  .s-cards--titled .s-card__title {
+    font-size: clamp(1.05rem, 1.3vw, 1.2rem); /* capped where the cards stop growing, so the longest name fits */
+    font-weight: 400;
+    line-height: 1.25;
+    white-space: nowrap;
+  }
+
+  .s-cards--titled .s-card__title a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .s-cards--titled .s-card .content-prose {
+    margin-top: var(--space-sm);
+    font-size: var(--text-small);
+    line-height: 1.7;
+    color: var(--text-muted);
+    text-wrap: pretty;
+  }
+
+  .alt-band .s-cards {
+    margin-top: var(--space-lg);
+  }
+
+  .alt-band .s-card {
+    background: var(--surface-card-gradient);
+    border: var(--band-rule);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* ==========================================================================
+     8. Cover photos (media-cover)
+     ========================================================================== */
+
+  /* Card / portrait cover media — replaces repeated img inline styles (Phase C1) */
+
+  .media-cover {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    margin-bottom: var(--space-sm);
+  }
+
+  /* News card (s-card--news): a 16:9 photo across the top, then label and title */
+
+  .s-card--news {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .s-card__media {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: 50% 30%;
+  }
+
+  /* Wide posters with the title on the left */
+  .s-card__media--start {
+    object-position: 0 50%;
+  }
+
+  .s-card__body {
+    padding: var(--space-lg) var(--space-xl) var(--space-xl);
+  }
+
+  /* Portrait photos (faculty cards): tall frame, keep heads in view */
+
+  .media-cover--portrait {
+    aspect-ratio: 3 / 4;
+    object-position: 50% 20%;
+  }
+
+  /* Card links on their own lines (About → Media enquiries): each link is a full-width row
+     with a hairline gold rule, the name large in the display face and the arrow at the right edge. */
+  .s-card__links {
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--space-lg);
+    border-top: 1px solid var(--gold-bright);
+  }
+
+  .s-card__links a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--gold-bright);
+    font-family: var(--font-display);
+    font-size: var(--text-subtitle);
+    line-height: 1.25;
+    text-decoration: none;
+    color: var(--burgundy);
+    transition: color 0.25s ease;
+  }
+
+  .s-card__links a::after {
+    content: "\2192";
+    font-family: var(--font-body, inherit);
+    font-size: 1.1rem;
+    color: var(--gold);
+    transition: transform 0.25s ease;
+  }
+
+  .s-card__links a:hover,
+  .s-card__links a:focus-visible {
+    color: var(--gold-deep);
+  }
+
+  .s-card__links a:hover::after,
+  .s-card__links a:focus-visible::after {
+    transform: translateX(4px);
+  }
+
+  /* Download tiles (About → Press Kit): each file shown as a print on an ivory mount —
+     a quiet frame, the page floating with a soft shadow, a small gold tag, the name centred
+     below in the display face and a hairline "Download" line. Narrow and airy, not boxed. */
+  .s-downloads {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-xl);
+    margin-top: var(--space-xl);
+    padding: calc(var(--space-xl) * 1.5);
+    background: var(--surface-navy-gradient);
+    border: 1px solid var(--gold-bright);
+    box-shadow: var(--shadow-card);
+  }
+
+  .s-download {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: var(--text-on-dark);
+    text-decoration: none;
+  }
+
+  .s-download__cover {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    padding: 9%;
+    background: var(--surface-card-gradient);
+    border: 1px solid var(--gold-bright);
+    transition: border-color 0.3s ease;
+  }
+
+  .s-download__cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    box-shadow: 0 1px 2px rgba(60, 40, 20, 0.12), 0 10px 24px -8px rgba(60, 40, 20, 0.3);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .s-download:hover .s-download__cover,
+  .s-download:focus-visible .s-download__cover {
+    border-color: var(--gold);
+  }
+
+  .s-download:hover .s-download__cover img,
+  .s-download:focus-visible .s-download__cover img {
+    transform: translateY(-4px);
+    box-shadow: 0 2px 4px rgba(60, 40, 20, 0.12), 0 18px 32px -10px rgba(60, 40, 20, 0.38);
+  }
+
+  .s-download__badge {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    padding: 0.25em 0.75em;
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    color: var(--gold-deep);
+    background: #fbf8f2;
+    border: 1px solid var(--gold-bright);
+  }
+
+  .s-download__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    padding-top: var(--space-md);
+  }
+
+  .s-download__title {
+    font-family: var(--font-display);
+    font-size: var(--text-subtitle);
+    line-height: 1.2;
+    color: var(--gold-bright);
+  }
+
+  .s-download__note {
+    margin-bottom: var(--space-sm);
+    font-size: var(--text-small);
+    line-height: 1.5;
+    color: var(--text-on-dark-muted);
+  }
+
+  .s-download__action {
+    margin-top: auto;
+    padding-bottom: 0.3em;
+    font-size: 0.66rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--text-on-dark);
+    background: linear-gradient(var(--gold-bright), var(--gold-bright)) bottom center / 30% 1px no-repeat;
+    transition: background-size 0.3s ease;
+  }
+
+  .s-download:hover .s-download__action,
+  .s-download:focus-visible .s-download__action {
+    background-size: 100% 1px;
+  }
+
+  .s-download__action::before {
+    content: "\2193\2002";
+  }
+
+  .s-download__meta {
+    color: var(--text-on-dark-muted);
+  }
+
+  .s-download__meta::before {
+    content: "\00b7\2002";
+  }
+
+  @media (max-width: 640px) {
+    .s-downloads {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+      padding: var(--space-lg) var(--space-md);
+    }
+
+    .s-download {
+      flex-direction: row;
+      gap: var(--space-md);
+      text-align: left;
+    }
+
+    .s-download__cover {
+      flex: 0 0 30%;
+      padding: 6%;
+    }
+
+    .s-download__title {
+      font-size: var(--text-body-lg);
+    }
+
+    .s-download__action {
+      white-space: nowrap;
+      background-position: bottom left;
+    }
+
+    .s-download__body {
+      align-items: flex-start;
+      padding-top: 0;
+    }
+
+    .s-download__badge {
+      top: 0;
+      right: 0;
+      padding: 0.15em 0.5em;
+    }
+  }
+}
+
+@layer sections {
+  /* ==========================================================================
+     9. Timeline (s-timeline)
+     ========================================================================== */
+
+  .s-timeline {
+    margin-top: var(--space-md);
+    max-height: 420px;
+    overflow-y: auto;
+    padding: 1rem var(--space-sm) 2rem 0;
+    /* Fades in under the heading and out at its foot, as the Noteworthy list does */
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 1.25rem, #000 calc(100% - 2.5rem), transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 1.25rem, #000 calc(100% - 2.5rem), transparent);
+  }
+
+  /* The Noteworthy scrollbar: a gold hairline with a slim gold bar riding on it */
+  .s-timeline::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .s-timeline::-webkit-scrollbar-track {
+    background: linear-gradient(rgba(216, 182, 129, 0.35), rgba(216, 182, 129, 0.35)) center / 1px 100% no-repeat;
+  }
+
+  .s-timeline::-webkit-scrollbar-thumb {
+    background: var(--gold-bright);
+    border-radius: 3px;
+  }
+
+  @supports not selector(::-webkit-scrollbar) {
+    .s-timeline {
+      scrollbar-width: thin;
+      scrollbar-color: var(--gold-bright) rgba(216, 182, 129, 0.18);
+    }
+  }
+
+  .s-timeline__item {
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: var(--text-small);
+    color: var(--text-muted);
+  }
+
+  .s-timeline__item strong {
+    color: var(--text);
+  }
+
+  /* ==========================================================================
+     10. Production tiles (s-prod)
+     ========================================================================== */
+
+  .s-prod {
+    position: relative;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    background: var(--surface-olive-gradient);
+    border: 1px solid var(--gold-bright);
+    box-shadow: var(--shadow-tile);
+    transition: var(--transition-surface);
+  }
+
+  .s-prod:hover {
+    border-color: var(--gold);
+    box-shadow: var(--shadow-tile-hover);
+  }
+
+  .s-prod img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .s-prod__cap {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: var(--space-md);
+    background: linear-gradient(0deg, rgba(5, 8, 16, 0.88) 0%, transparent 100%);
+  }
+
+  .s-prod__cap strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--text-small);
+    color: var(--gold-bright);
+    font-weight: 500;
+  }
+
+  /* A poster that opens its production in the pop-up (s-pop, below) */
+  .s-prod[data-production][role="button"] {
+    cursor: pointer;
+  }
+
+  .s-prod[data-production]:focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 2px;
+  }
+
+  .s-prod-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+    padding: 0;
+  }
+
+  @media (min-width: 768px) {
+    .s-prod-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .s-prod-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+
+@layer sections {
+  /* ==========================================================================
+     11. Colour bands (alt-band)
+     ========================================================================== */
+
+  .alt-band {
+    padding-block: var(--band-space-xl);
+    padding-inline: var(--layout-gutter);
+  }
+
+  .alt-band--ivory {
+    background: var(--surface-ivory-gradient);
+  }
+
+  .alt-band--mist {
+    background: var(--surface-mist-gradient);
+  }
+
+  .alt-band--burgundy {
+    background: var(--surface-burgundy-gradient);
+  }
+
+  .alt-band--olive {
+    background: var(--surface-olive-gradient);
+  }
+
+  .alt-band--navy {
+    background: var(--surface-navy-gradient);
+  }
+
+  .alt-band--center {
+    text-align: center;
+  }
+
+  .alt-band__inner--cards {
+    margin-top: var(--space-3xl);
+  }
+
+  .alt-band__cta {
+    margin-top: var(--space-xl);
+  }
+
+  .alt-band__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    justify-content: center;
+    margin-top: var(--space-3xl);
+  }
+
+  /* ==========================================================================
+     12. Band headings and lead text (alt-section-head)
+     ========================================================================== */
+
+  .alt-section-head {
+    margin-bottom: 1.75rem;
+  }
+
+  .alt-section-head--center {
+    text-align: center;
+  }
+
+  .alt-section-head--center .alt-section-head__rule {
+    margin-inline: auto;
+  }
+
+  .alt-section-head__rule {
+    width: 3rem;
+    height: 1px;
+    background: var(--gold-bright);
+    margin: 0 0 var(--space-lg);
+    border: none;
+  }
+
+  .alt-section-head__eyebrow {
+    font-size: var(--text-label);
+    font-weight: 700;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 var(--space-sm);
+  }
+
+  .alt-section-head--on-dark .alt-section-head__eyebrow {
+    color: var(--gold-bright);
+  }
+
+  .alt-section-head__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-weight: 500;
+    line-height: 1.12;
+    margin: 0;
+    color: var(--text);
+  }
+
+  .alt-section-head--on-dark .alt-section-head__title {
+    color: var(--text-on-dark);
+  }
+
+  .alt-section-head__title--display {
+    margin-top: var(--space-xl);
+  }
+
+  .alt-spaced {
+    display: block;
+    font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(251, 250, 249, 0.55);
+    margin-bottom: var(--space-xs);
+  }
+
+  .alt-lead {
+    max-width: 48ch;
+    margin: 0 0 var(--space-xl);
+    font-size: var(--text-body-lg);
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  .alt-lead--on-dark {
+    color: var(--text-on-dark-muted);
+  }
+
+  /* ==========================================================================
+     13. Interlude statement (alt-interlude)
+     ========================================================================== */
+
+  .alt-interlude__display {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.08;
+    margin: 0;
+    color: var(--text);
+  }
+
+  .alt-interlude__display em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .alt-interlude {
+    display: grid;
+    gap: var(--space-3xl);
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .alt-interlude {
+      grid-template-columns: 1fr 1.1fr;
+    }
+  }
+
+  /* ==========================================================================
+     14. Photo split (alt-split)
+     ========================================================================== */
+
+  .alt-split {
+    display: grid;
+    gap: var(--space-3xl);
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .alt-split {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* When a row of cards follows the split in the same band (Home, Guru-Shishya), the split uses the
+     cards' gap, so the photo and text edges line up with the card columns below */
+  .alt-band:has(.s-cards) > .alt-split {
+    column-gap: var(--space-md);
+  }
+
+  /* Snug split (Home, Who We Are): less air above and below; columns match the other splits */
+  .alt-band--snug {
+    padding-block: calc(var(--band-space-xl) * 0.7);
+  }
+
+  .alt-split__visual {
+    border: var(--band-rule);
+    overflow: hidden;
+    box-shadow: var(--shadow-photo);
+  }
+
+  /* A photo can choose which part the 4:5 frame shows: style="--photo-focus-x: 37%" on the img */
+  .alt-split__visual img {
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    object-position: var(--photo-focus-x, 50%) var(--photo-focus-y, 50%);
+    width: 100%;
+  }
+
+  /* Wide photo shown whole at its own shape, not cropped to 4:5 (Home, Guru-Shishya) */
+
+  /* A photo split whose photo fills the height of the text beside it (alt-split--fill): a wider photo column,
+     a narrower gap, and the photo as tall as the text but never narrower than 3:4, so wide poses keep their
+     hands (if the text is taller still, the photo is centred). It keeps its focus (--photo-focus-x / -y). */
+  @media (min-width: 1100px) {
+    .alt-split.alt-split--fill {
+      grid-template-columns: 1.12fr 0.88fr;
+      align-items: stretch;
+      column-gap: var(--space-xl);
+    }
+
+    .alt-split--fill > .alt-split__visual {
+      align-self: center;
+      container-type: inline-size;
+      border: 0;
+      box-shadow: none;
+      overflow: visible;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .alt-split--fill > .alt-split__visual img {
+      width: 100%;
+      height: min(100%, 133.33cqi);
+      aspect-ratio: auto;
+      border: var(--band-rule);
+      box-shadow: var(--shadow-photo);
+    }
+  }
+
+  /* Tablet: stacked, the photo across the full width at 4:3 with the heads kept in view (a little of the
+     legs may be trimmed at the foot), the text below */
+  @media (min-width: 768px) and (max-width: 1099px) {
+    .alt-split.alt-split--fill {
+      grid-template-columns: 1fr;
+      row-gap: var(--space-xl);
+    }
+
+    .alt-split--fill > .alt-split__visual img {
+      aspect-ratio: 4 / 3;
+      object-position: var(--photo-focus-x, 50%) 0;
+    }
+  }
+
+  .alt-split__visual--natural img {
+    aspect-ratio: auto;
+    height: auto;
+  }
+
+  /* Two subjects side by side in one band (Home, Culture Alive): each with its own photo carousel,
+     a display-face title and its text. One column on a phone. */
+  .alt-duo {
+    display: grid;
+    gap: var(--space-3xl);
+    margin-top: var(--space-2xl);
+  }
+
+  @media (min-width: 900px) {
+    .alt-duo {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+    }
+  }
+
+  .alt-duo__item .s-mini {
+    box-shadow: var(--shadow-photo);
+    border: var(--band-rule);
+  }
+
+  .alt-duo__item .s-mini .s-mini__slide {
+    object-fit: cover;
+    object-position: 50% 30%;
+  }
+
+  .alt-duo__title {
+    margin: var(--space-lg) 0 var(--space-sm);
+    font-family: var(--font-display);
+    font-size: var(--text-subtitle);
+    font-weight: 400;
+    color: var(--gold-bright);
+  }
+
+  .alt-duo__item .content-prose p {
+    font-size: var(--text-small);
+    line-height: 1.75;
+  }
+
+  .alt-duo__more {
+    margin-top: var(--space-2xl);
+    text-align: center;
+  }
+
+  .alt-duo__more a {
+    font-family: var(--font-display);
+    font-size: var(--text-body-lg);
+    letter-spacing: 0.02em;
+    color: var(--gold-bright);
+    text-decoration: none;
+    padding-bottom: 0.2em;
+    border-bottom: 1px solid rgba(216, 182, 129, 0.45);
+    transition: border-color var(--duration) var(--ease), color var(--duration) var(--ease);
+  }
+
+  .alt-duo__more a:hover,
+  .alt-duo__more a:focus-visible {
+    color: var(--text-on-dark);
+    border-bottom-color: var(--gold-bright);
+  }
+
+  /* Testimonials, From Performances & Tours: the intro line uses the band's full width */
+  #audience-testimonials .s-band__body > .content-prose {
+    max-width: none;
+  }
+}
+
+@layer sections {
+  /* ==========================================================================
+     15. Pillars — Core Elements (alt-pillar)
+     APPROVED by the client (July 2026). Mist band, opaque ivory cards. Do not restyle.
+     ========================================================================== */
+
+  .alt-pillars {
+    display: grid;
+    gap: var(--space-lg);
+    margin-top: var(--space-2xl);
+  }
+
+  @media (min-width: 768px) {
+    .alt-pillars--3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .alt-pillar {
+    background: var(--surface-card-gradient);
+    border: var(--band-rule);
+    border-top: 3px solid var(--gold);
+    padding: var(--space-xl) 1.75rem;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+  }
+
+  .alt-pillar__label {
+    font-size: var(--text-label);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin: 0 0 var(--space-sm);
+    font-weight: 700;
+  }
+
+  .alt-pillar__body {
+    margin: 0;
+    font-size: var(--text-small);
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  .alt-pillar__body strong {
+    color: var(--navy);
+  }
+
+  /* ==========================================================================
+     16. Partners (alt-partner-card)
+     APPROVED by the client (July 2026). Burgundy band, tone-on-tone cards. Do not restyle.
+     ========================================================================== */
+
+  .alt-partners__intro {
+    max-width: 62ch;
+    margin: 0;
+    color: var(--text-on-dark-muted);
+  }
+
+  .alt-partners__grid {
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: 1fr;
+    margin-top: 1.75rem;
+  }
+
+  @media (min-width: 768px) {
+    .alt-partners__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .alt-partners__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Tone-on-tone cards on burgundy band — translucent lift, gold hairline, no ivory boxes */
+
+  .alt-partner-card {
+    background: var(--partner-card-bg);
+    border: 1px solid var(--partner-card-border);
+    border-radius: 0;
+    box-shadow: inset 0 1px 0 rgba(251, 250, 249, 0.06);
+    padding: var(--space-xl) 1.75rem;
+    transition: background 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  }
+
+  .alt-partner-card:hover {
+    background: var(--partner-card-bg-hover);
+    border-color: var(--partner-card-border-hover);
+    box-shadow: inset 0 1px 0 rgba(251, 250, 249, 0.1), 0 6px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .alt-partner-card__label {
+    font-size: var(--text-label);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    margin: 0 0 var(--space-sm);
+  }
+
+  .alt-partner-card__body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    line-height: 1.65;
+    color: var(--partner-card-text-muted);
+  }
+
+  .alt-partner-card__body strong {
+    color: var(--partner-card-text);
+    font-weight: 700;
+  }
+
+  /* Partner cards sit on burgundy — keep inner text light (not dark-band prose navy) */
+
+  .alt-band--burgundy .alt-partner-card__body,
+  .alt-band--burgundy .alt-partner-card__body strong {
+    color: var(--text-on-dark);
+  }
+}
+
+@layer sections {
+  /* ==========================================================================
+     18. Carousel (alt-carousel, alt-hscroll)
+     ========================================================================== */
+
+  /* Production carousel. Cards run the full width of the band, lined up with the heading; the arrows sit below on the right */
+  .alt-carousel {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    column-gap: var(--space-sm);
+    row-gap: var(--space-lg);
+    margin-top: var(--space-2xl);
+  }
+
+  .alt-carousel__btn--prev {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .alt-carousel__btn--next {
+    grid-column: 3;
+    grid-row: 2;
+  }
+
+  .alt-carousel__viewport {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    min-width: 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .alt-carousel__viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .alt-carousel__track,
+  .alt-hscroll {
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  .alt-carousel__btn {
+    flex-shrink: 0;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    border: 1px solid var(--gold-bright);
+    background: rgba(201, 160, 74, 0.28);
+    color: var(--ivory);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .alt-carousel__btn svg {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  .alt-carousel__btn:hover:not(:disabled) {
+    background: rgba(201, 160, 74, 0.5);
+  }
+
+  .alt-carousel__btn:focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 2px;
+  }
+
+  .alt-carousel__btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  @media (min-width: 768px) {
+    .alt-carousel__btn {
+      width: 3rem;
+      height: 3rem;
+    }
+
+    .alt-carousel__btn svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  .alt-hscroll__item {
+    flex: 0 0 min(68vw, 18rem);
+    min-width: 0;
+    scroll-snap-align: start;
+    border: var(--band-rule);
+    overflow: hidden;
+    background: rgba(251, 250, 249, 0.06);
+  }
+
+  /* Whole cards only: two across on a tablet, three on a computer (1px spare so half-pixel widths never clip the last card's border) */
+  @media (min-width: 768px) {
+    .alt-hscroll__item {
+      flex-basis: calc((100% - var(--space-md)) / 2 - 1px);
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .alt-hscroll__item {
+      flex-basis: calc((100% - 2 * var(--space-md)) / 3 - 1px);
+    }
+  }
+
+  .alt-hscroll__item img {
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    /* A wide photo can name the part to keep: style="--photo-focus-x: 60%" on the img */
+    object-position: var(--photo-focus-x, 50%) var(--photo-focus-y, 50%);
+    width: 100%;
+  }
+
+  .alt-hscroll__cap {
+    padding: var(--space-sm);
+    font-size: var(--text-caption);
+    border-top: var(--band-rule);
+    color: var(--text-on-dark);
+  }
+
+  /* ==========================================================================
+     19. Stats strip inside a band
+     ========================================================================== */
+
+  .alt-band .v-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    background: transparent;
+    border-block: var(--band-rule);
+    margin-top: 0;
+  }
+
+  .alt-band .v-stats--flush {
+    margin-top: 0;
+  }
+
+  @media (min-width: 768px) {
+    .alt-band .v-stats {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .alt-band .v-stats__cell {
+    padding: var(--space-2xl) var(--space-md);
+    text-align: center;
+    border-right: 1px solid rgba(157, 121, 73, 0.2);
+  }
+
+  .alt-band .v-stats__cell:last-child {
+    border-right: none;
+  }
+
+  .alt-band .v-stats__num {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    color: var(--navy);
+    line-height: 1;
+  }
+
+  .alt-band .v-stats__label {
+    font-size: var(--text-caption);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: var(--space-xs);
+  }
+
+  .alt-band .v-stats__cell:nth-child(1) .v-stats__label {
+    color: var(--gold);
+  }
+
+  .alt-band .v-stats__cell:nth-child(2) .v-stats__label {
+    color: var(--sage);
+  }
+
+  .alt-band .v-stats__cell:nth-child(3) .v-stats__label {
+    color: var(--gold-deep);
+  }
+
+  .alt-band .v-stats__cell:nth-child(4) .v-stats__label {
+    color: var(--lavender);
+  }
+
+  /* ==========================================================================
+     20. Portraits (client-portrait)
+     ========================================================================== */
+
+  .client-portrait-grid {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .client-portrait-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .client-portrait-grid--4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .client-portrait {
+    text-align: center;
+  }
+
+  .client-portrait img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    display: block;
+    margin-bottom: var(--space-xs);
+  }
+
+  .client-portrait__name {
+    font-size: var(--text-small);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .client-portrait__role {
+    font-size: var(--text-caption);
+    color: var(--text-muted, #666);
+    margin: var(--space-2xs) 0 0;
+  }
+}
+
+@layer sections {
+  /* ==========================================================================
+     21. Pull quotes (quote-pull)
+     ========================================================================== */
+
+  .quote-pull {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    color: var(--text);
+    border-left: 2px solid var(--gold);
+    padding-left: var(--space-md);
+    max-width: 62ch;
+  }
+
+  .quote-pull--compact {
+    font-size: var(--text-body-lg);
+  }
+
+  /* Quotation cards (s-quotes) — several short testimonials in two balanced columns.
+     Body type, not the display face, so long quotes stay calm; a single gold mark and a hairline
+     carry the decoration. The columns let short and long quotes sit together without gaps. */
+
+  .s-quotes {
+    margin-top: var(--space-xl);
+    columns: 1;
+    column-gap: var(--space-xl);
+  }
+
+  @media (min-width: 768px) {
+    .s-quotes {
+      columns: 2;
+    }
+  }
+
+  .s-quote {
+    break-inside: avoid;
+    margin: 0 0 var(--space-lg);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--gold-bright);
+  }
+
+  .s-quote__text {
+    margin: 0;
+    font-size: var(--text-small);
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  .s-quote__text::before {
+    content: "\201C";
+    display: block;
+    font-family: var(--font-display);
+    font-size: 2.25rem;
+    line-height: 1;
+    color: var(--gold);
+    margin-bottom: var(--space-2xs);
+  }
+
+  .s-quote__by {
+    margin-top: var(--space-sm);
+    font-size: var(--text-label);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+
+  .s-quotes + .s-video-grid {
+    margin-top: var(--space-xl);
+  }
+
+  /* Testimonial rows (s-voice) — one person per row: portrait beside one block of limited height that
+     holds the words and then the video, scrolled with a slim gold bar only when it is longer than the box; on a phone the parts stack. Tone-on-tone on the dark band. */
+
+  .s-voices {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .s-voice {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    padding: var(--space-lg);
+    background: var(--partner-card-bg);
+    border: 1px solid var(--partner-card-border);
+    box-shadow: var(--shadow-tone);
+  }
+
+  .s-voice__photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .s-voice__name {
+    margin: 0 0 var(--space-2xs);
+    font-family: var(--font-display);
+    font-size: var(--text-subtitle);
+    font-weight: 400;
+    color: var(--partner-card-text);
+  }
+
+  .s-voice .s-card__label {
+    margin-bottom: var(--space-sm);
+    color: var(--gold-bright);
+  }
+
+  .s-voice__quote,
+  .s-voice__bio {
+    margin: 0;
+    font-size: var(--text-small);
+    line-height: 1.7;
+    color: var(--partner-card-text-muted);
+  }
+
+  .s-voice__bio {
+    font-style: italic;
+    color: var(--gold-bright);
+  }
+
+  .s-voice__quote a {
+    color: var(--gold-bright);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* The words in full: the card grows to fit them, no inner scroll */
+  .s-voice__scroll {
+    max-width: 46rem;
+  }
+
+  .s-voice__scroll > p {
+    margin: 0;
+  }
+
+  .s-voice__scroll > * + * {
+    margin-top: var(--space-sm);
+  }
+
+  /* Without a video the portrait takes the full height of the column instead: 9:16 */
+  .s-voice__media:not(:has(.s-voice__video)) .s-voice__photo {
+    aspect-ratio: 9 / 16;
+  }
+
+  /* Portrait, and the video below it when there is one, in a thin gold frame */
+  .s-voice__media {
+    display: grid;
+    gap: var(--space-sm);
+    max-width: 16rem;
+  }
+
+  .s-voice__video {
+    padding: 4px;
+    border: 1px solid var(--gold-bright);
+    background: rgba(0, 0, 0, 0.18);
+    box-shadow: 0 0 0 1px rgba(216, 182, 129, 0.25), var(--shadow-tone);
+  }
+
+  .s-voice__video .s-video {
+    inset: 4px;
+  }
+
+  @media (min-width: 900px) {
+    .s-voice {
+      grid-template-columns: 16rem minmax(0, 1fr);
+      align-items: start;
+    }
+  }
+}
+
+@layer sections {
+  /* ==========================================================================
+     22. Dark surfaces — text and cards
+     Layer 3. One place that keeps text readable on burgundy, navy, olive and dark panels.
+     ========================================================================== */
+
+  /* Dark-band headings — never inherit light-surface --text / --navy */
+
+  .alt-band--burgundy .alt-spaced,
+  .alt-band--navy .alt-spaced,
+  .alt-band--olive .alt-spaced {
+    color: var(--gold-bright);
+    opacity: 0.92;
+  }
+
+  .alt-band--burgundy,
+  .alt-band--navy,
+  .alt-band--olive,
+  .s-split-text--dark,
+  .s-section__content--dark,
+  .s-section__content--olive,
+  .s-section__content--navy,
+  .s-band {
+    color: var(--text-on-dark-muted);
+  }
+
+  .alt-band--burgundy .alt-section-head__title,
+  .alt-band--navy .alt-section-head__title,
+  .alt-band--olive .alt-section-head__title,
+  .alt-band--burgundy .alt-interlude__display,
+  .alt-band--navy .alt-interlude__display,
+  .alt-band--olive .alt-interlude__display,
+  .alt-band--burgundy h1,
+  .alt-band--burgundy h2,
+  .alt-band--burgundy h3,
+  .alt-band--navy h1,
+  .alt-band--navy h2,
+  .alt-band--navy h3,
+  .alt-band--olive h1,
+  .alt-band--olive h2,
+  .alt-band--olive h3,
+  .s-split-text--dark .s-section__title,
+  .s-section__content--dark .s-section__title,
+  .s-section__content--olive .s-section__title,
+  .s-section__content--navy .s-section__title,
+  .s-band .s-section__title {
+    color: var(--text-on-dark);
+  }
+
+  .alt-band--burgundy .alt-section-head__eyebrow,
+  .alt-band--navy .alt-section-head__eyebrow,
+  .alt-band--olive .alt-section-head__eyebrow,
+  .s-split-text--dark .s-section__eyebrow,
+  .s-section__content--dark .s-section__eyebrow,
+  .s-section__content--olive .s-section__eyebrow,
+  .s-section__content--navy .s-section__eyebrow,
+  .s-band .s-section__eyebrow {
+    color: var(--gold-bright);
+  }
+
+  .alt-band--burgundy .content-prose,
+  .alt-band--navy .content-prose,
+  .alt-band--olive .content-prose,
+  .alt-band--burgundy .content-prose li,
+  .alt-band--navy .content-prose li,
+  .alt-band--olive .content-prose li,
+  .s-split-text--dark .content-prose,
+  .s-split-text--dark .content-prose li,
+  .s-section__content--dark .content-prose,
+  .s-section__content--olive .content-prose,
+  .s-section__content--navy .content-prose,
+  .s-band .content-prose,
+  .s-band .content-prose li {
+    color: var(--text-on-dark-muted);
+  }
+
+  .alt-band--burgundy .content-prose strong,
+  .alt-band--navy .content-prose strong,
+  .alt-band--olive .content-prose strong,
+  .s-split-text--dark .content-prose strong,
+  .s-section__content--dark .content-prose strong,
+  .s-section__content--olive .content-prose strong,
+  .s-section__content--navy .content-prose strong,
+  .s-band .content-prose strong,
+  .s-split-text--dark .s-timeline__item strong {
+    color: var(--text-on-dark);
+  }
+
+  .alt-band--burgundy .content-prose a,
+  .alt-band--navy .content-prose a,
+  .alt-band--olive .content-prose a,
+  .s-split-text--dark .content-prose a,
+  .s-section__content--dark .content-prose a,
+  .s-section__content--olive .content-prose a,
+  .s-section__content--navy .content-prose a,
+  .s-band .content-prose a {
+    color: var(--gold-bright);
+  }
+
+  .alt-band--burgundy .content-prose a:hover,
+  .alt-band--navy .content-prose a:hover,
+  .alt-band--olive .content-prose a:hover,
+  .s-split-text--dark .content-prose a:hover,
+  .s-section__content--dark .content-prose a:hover,
+  .s-band .content-prose a:hover {
+    color: var(--ivory);
+  }
+
+  .alt-band--burgundy .content-prose blockquote,
+  .alt-band--navy .content-prose blockquote,
+  .alt-band--olive .content-prose blockquote,
+  .s-split-text--dark .content-prose blockquote,
+  .s-section__content--dark .content-prose blockquote,
+  .s-band .content-prose blockquote {
+    color: var(--text-on-dark);
+    border-left-color: var(--gold-bright);
+  }
+
+  .s-split-text--dark .s-timeline__item {
+    color: var(--text-on-dark-muted);
+    border-bottom-color: var(--border-on-dark);
+  }
+
+  .s-split-text--dark .s-timeline__item em {
+    color: var(--text-on-dark);
+  }
+
+  /* Tone-on-tone cards on burgundy bands — partner luxury (NO ivory boxes) */
+
+  .alt-band--burgundy .s-card,
+  .s-split-text--dark .s-card {
+    background: var(--partner-card-bg);
+    border: 1px solid var(--partner-card-border);
+    border-radius: 0;
+    box-shadow: var(--shadow-tone);
+    transition: background var(--duration) var(--ease), var(--transition-surface);
+  }
+
+  .alt-band--burgundy .s-card:hover,
+  .s-split-text--dark .s-card:hover {
+    background: var(--partner-card-bg-hover);
+    border-color: var(--partner-card-border-hover);
+    box-shadow: var(--shadow-tone-hover);
+  }
+
+  .alt-band--burgundy .s-card .content-prose,
+  .s-split-text--dark .s-card .content-prose {
+    color: var(--partner-card-text-muted);
+  }
+
+  .alt-band--burgundy .s-card .content-prose strong,
+  .s-split-text--dark .s-card .content-prose strong {
+    color: var(--gold-bright);
+  }
+
+  .alt-band--burgundy .s-card__title,
+  .s-split-text--dark .s-card__title {
+    color: var(--partner-card-text);
+  }
+
+  .alt-band--burgundy .s-card__label,
+  .s-split-text--dark .s-card__label {
+    color: var(--gold-bright);
+  }
+
+  /* Ivory card islands on navy/olive bands only */
+
+  .alt-band--navy .s-card,
+  .alt-band--olive .s-card {
+    background: var(--surface-card-gradient);
+    border: var(--band-rule);
+    box-shadow: var(--shadow-card-on-dark);
+  }
+
+  .alt-band--navy .s-card .content-prose,
+  .alt-band--olive .s-card .content-prose {
+    color: var(--text-muted);
+  }
+
+  .alt-band--navy .s-card .content-prose strong,
+  .alt-band--olive .s-card .content-prose strong {
+    color: var(--navy);
+  }
+
+  .alt-band--navy .s-card__title,
+  .alt-band--olive .s-card__title {
+    color: var(--navy);
+  }
+
+  .alt-band--navy .s-card__label,
+  .alt-band--olive .s-card__label {
+    color: var(--gold-deep);
+  }
+
+  .alt-band--olive .alt-pillar,
+  .alt-band--navy .alt-pillar,
+  .alt-band--burgundy .alt-pillar {
+    background: var(--surface-card-gradient);
+    border: var(--band-rule);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.14);
+  }
+
+  .alt-band--navy .alt-hscroll__item,
+  .alt-band--burgundy .alt-hscroll__item,
+  .alt-band--olive .alt-hscroll__item {
+    background: rgba(251, 250, 249, 0.08);
+  }
+
+  .alt-band--navy .alt-hscroll__cap,
+  .alt-band--burgundy .alt-hscroll__cap,
+  .alt-band--olive .alt-hscroll__cap {
+    color: var(--text-on-dark);
+    background: rgba(5, 8, 16, 0.35);
+  }
+
+  .alt-band--navy .alt-hscroll__cap strong,
+  .alt-band--burgundy .alt-hscroll__cap strong,
+  .alt-band--olive .alt-hscroll__cap strong {
+    color: var(--text-on-dark);
+  }
+}
+
+@layer sections {
+  /* ==========================================================================
+     23. Palette accents
+     Layer 3. One accent hue per card or eyebrow, in rotation.
+     ========================================================================== */
+
+  /* News cards on ivory — one pallet hue per card label + top rule */
+
+  .alt-band--ivory .s-cards .s-card:nth-child(3n+1) {
+    border-top: 3px solid var(--sage);
+  }
+
+  .alt-band--ivory .s-cards .s-card:nth-child(3n+1) .s-card__label {
+    color: var(--sage);
+  }
+
+  .alt-band--ivory .s-cards .s-card:nth-child(3n+2) {
+    border-top: 3px solid var(--peach);
+  }
+
+  .alt-band--ivory .s-cards .s-card:nth-child(3n+2) .s-card__label {
+    color: var(--peach);
+  }
+
+  .alt-band--ivory .s-cards .s-card:nth-child(3n+3) {
+    border-top: 3px solid var(--lavender);
+  }
+
+  .alt-band--ivory .s-cards .s-card:nth-child(3n+3) .s-card__label {
+    color: var(--lavender);
+  }
+
+  /* Section eyebrows — vertical rotation on light bands (approved sections stay gold) */
+
+  .alt-band--ivory[aria-label="Introduction"] .alt-section-head__eyebrow {
+    color: var(--gold);
+  }
+
+  .alt-band--mist[aria-label="At a glance"] .alt-section-head__eyebrow {
+    color: var(--peach);
+  }
+
+  .alt-band--mist[aria-label="Abhinava Dance School"] .alt-section-head__eyebrow {
+    color: var(--gold-bright);
+  }
+
+  .alt-band--ivory[aria-label="Artistic Directors"] .alt-section-head__eyebrow {
+    color: var(--sage);
+  }
+
+  .alt-band--mist[aria-label="Core Elements"] .alt-section-head__eyebrow {
+    color: var(--gold);
+  }
+
+  .alt-band--ivory[aria-label="Your journey with Abhinava"] .alt-section-head__eyebrow {
+    color: var(--gold);
+  }
+
+  /* Inner pages — each section names its eyebrow hue (s-section--accent-…); down a page they rotate
+     gold, sage, peach, deep gold. Set on the section, not worked out from its position */
+
+  main > .s-section.s-section--accent-gold .s-section__eyebrow {
+    color: var(--gold);
+  }
+
+  main > .s-section.s-section--accent-sage .s-section__eyebrow {
+    color: var(--sage);
+  }
+
+  main > .s-section.s-section--accent-peach .s-section__eyebrow {
+    color: var(--peach);
+  }
+
+  main > .s-section.s-section--accent-gold-deep .s-section__eyebrow {
+    color: var(--gold-deep);
+  }
+
+  main > .s-section .s-section__content--dark .s-section__eyebrow,
+  main > .s-section .s-section__content--olive .s-section__eyebrow,
+  main > .s-section .s-section__content--navy .s-section__eyebrow {
+    color: var(--gold-bright);
+  }
+
+  /* Dark bands — single highlight word via em (peach / citron tints) */
+
+  .alt-band--burgundy .content-prose--on-dark em,
+  .alt-band--navy .content-prose--on-dark em {
+    color: var(--peach-on-dark);
+    font-style: italic;
+  }
+
+  .alt-band--olive .content-prose--on-dark em {
+    color: var(--citron-on-dark);
+    font-style: italic;
+  }
+
+  .alt-band--burgundy .alt-interlude__display em,
+  .alt-band--navy .alt-interlude__display em,
+  .alt-band--olive .alt-interlude__display em {
+    color: var(--gold-bright);
+  }
+}
+
+@layer sections {
+  /* ==========================================================================
+     24. Phones — reading and tapping comfort
+     ========================================================================== */
+
+  @media (max-width: 767px) {
+    .alt-section-head__eyebrow,
+    .alt-spaced {
+      font-size: var(--text-label);
+    }
+
+    /* A card title that is a link: tall enough to tap */
+    .s-card__title a {
+      display: inline-block;
+      padding-block: var(--space-xs);
+    }
+  }
+}
+
+@layer sections {
+  /* ==========================================================================
+     Mini carousel (s-mini)
+     A few photos in one picture space, one at a time. Swipe, or use the plain
+     arrows or the dots (both added by js/interactions.js initMiniCarousels()).
+     Without scripts the strip still scrolls sideways. The frame is 3:2, the shape
+     of most of the photos; every photo is shown whole, never cropped.
+     ========================================================================== */
+
+  .s-mini {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+  }
+
+  .s-mini__track {
+    display: flex;
+    height: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  .s-mini__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .s-mini__track:focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: -2px;
+  }
+
+  .s-mini .s-mini__slide {
+    position: static;
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    aspect-ratio: auto;
+    object-fit: contain;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  /* Videos in a mini carousel: 16:9 frame; each slide holds a thumbnail link (.s-video) that opens the pop-up player */
+  .s-mini--video {
+    aspect-ratio: 16 / 9;
+    box-shadow: var(--shadow-tile);
+  }
+
+  /* Photos in a card's mini carousel: the same 16:9 frame as the video tiles beside it, filled edge to edge */
+  .s-mini--photo {
+    aspect-ratio: 16 / 9;
+    box-shadow: var(--shadow-tile);
+  }
+
+  .s-mini--photo .s-mini__slide {
+    object-fit: cover;
+    object-position: 50% 25%;
+  }
+
+  /* Portrait carousel: a 3:4 frame filled edge to edge. Its photos are prepared as 3:4 crops
+     (file names ending -3x4) framed by hand: subject centred, a small even margin above the head.
+     If a photo is not yet cropped, the top of it is kept in view. For people and costumes. */
+  .s-mini--portrait {
+    aspect-ratio: 3 / 4;
+    max-width: 26rem;
+    margin-inline: auto;
+    box-shadow: var(--shadow-tile);
+  }
+
+  .s-mini--portrait .s-mini__slide {
+    object-fit: cover;
+    object-position: 50% 0;
+  }
+
+  /* Controls in a glass notch rising from the bottom edge of the photo: frosted glass (the photo blurred
+     and softly darkened behind it), top corners rounded, no outline. Inside it a short hairline (the current
+     photo's part in gold) between two small gold arrows. The carousel also moves by itself
+     (initAutoMotion in js/interactions.js). */
+  .s-mini[data-mini-bound="1"] {
+    --mini-line: min(7rem, 100% - 9rem); /* the length of the line */
+    --mini-gold: var(--gold-bright);
+    --mini-tab-h: 2.1rem;
+    --mini-corner: 0.8rem;
+  }
+
+  .s-mini__dots {
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(var(--mini-line) + 5rem);
+    height: var(--mini-tab-h);
+    padding: 0 2.5rem;
+    display: flex;
+    align-items: center;
+    background: rgba(24, 14, 20, 0.32);
+    -webkit-backdrop-filter: blur(10px) saturate(1.2);
+    backdrop-filter: blur(10px) saturate(1.2);
+    border-radius: var(--mini-corner) var(--mini-corner) 0 0;
+  }
+
+  .s-mini__arrow {
+    position: absolute;
+    z-index: 2;
+    bottom: calc(var(--mini-tab-h) / 2);
+    transform: translateY(50%);
+    width: 1.75rem;
+    height: 1.75rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--mini-gold);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color var(--duration) var(--ease), opacity var(--duration) var(--ease);
+  }
+
+  .s-mini__arrow:hover:not(:disabled) {
+    color: var(--ivory);
+  }
+
+  .s-mini__arrow--prev {
+    left: calc(50% - var(--mini-line) / 2 - 2.1rem);
+  }
+
+  .s-mini__arrow--next {
+    right: calc(50% - var(--mini-line) / 2 - 2.1rem);
+  }
+
+  .s-mini__arrow svg {
+    width: 0.95rem;
+    height: 0.95rem;
+    stroke-width: 1.5;
+  }
+
+  .s-mini__arrow:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+
+  .s-mini__arrow:focus-visible,
+  .s-mini__dot:focus-visible {
+    outline: 1px solid var(--gold-bright);
+    outline-offset: 2px;
+  }
+
+  .s-mini__dot {
+    flex: 1 1 0;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  .s-mini__dot::before {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background: rgba(216, 182, 129, 0.45);
+    transition: background-color var(--duration) var(--ease), height var(--duration) var(--ease);
+  }
+
+  .s-mini__dot:hover::before {
+    background: var(--mini-gold);
+  }
+
+  /* The current photo's part of the line */
+  .s-mini__dot[aria-current="true"]::before {
+    height: 2px;
+    background: var(--mini-gold);
+  }
+
+  /* Touch screens: arrows and notch big enough for a thumb (44px), the line a little longer */
+  @media (pointer: coarse) {
+    .s-mini[data-mini-bound="1"] {
+      --mini-tab-h: 2.75rem;
+      --mini-line: min(6rem, 100% - 12rem);
+    }
+
+    .s-mini__dots {
+      width: calc(var(--mini-line) + 6.5rem);
+      padding: 0 3.25rem;
+    }
+
+    .s-mini__arrow {
+      width: 2.75rem;
+      height: 2.75rem;
+    }
+
+    .s-mini__arrow--prev {
+      left: calc(50% - var(--mini-line) / 2 - 2.9rem);
+    }
+
+    .s-mini__arrow--next {
+      right: calc(50% - var(--mini-line) / 2 - 2.9rem);
+    }
+  }
+}
+
+@layer sections {
+  /* ==========================================================================
+     Production pop-up (s-pop)
+     One production, shown over the page when its poster is pressed. Built by
+     js/productions.js from js/productions-data.js; the panel is an ordinary
+     s-section (picture beside text) and its picture space is a mini carousel
+     of the production's photos and videos.
+     ========================================================================== */
+
+  .s-pop {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md);
+    background: rgba(10, 8, 7, 0.9);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .s-pop__panel {
+    position: relative;
+    width: min(1200px, 100%);
+    max-height: 100%;
+    margin: auto;
+    overflow-y: auto;
+    border: 1px solid var(--gold-bright);
+  }
+
+  /* The panel is the only s-section in the pop-up, so it always takes the first ivory */
+  .s-pop .s-pop__panel {
+    background: var(--surface-ivory-gradient);
+  }
+
+  .s-pop .s-section__content {
+    padding-top: calc(var(--section-space-compact) + var(--space-md));
+  }
+
+  .s-pop__close {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--gold);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* On a phone the picture is at the top, so the cross sits on the photo */
+  @media (max-width: 767px) {
+    .s-pop__close {
+      color: #fff;
+      filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.65));
+    }
+  }
+
+  .s-pop__close svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .s-pop__close:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: -4px;
+  }
+
+  /* A video among the photos: its still picture with a play button, then the player in the same space */
+  .s-mini .s-pop__video {
+    position: relative;
+    display: block;
+    border: 0;
+    background: #000;
+  }
+
+  .s-pop__video img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* In a photo carousel that fills its frame, the video's picture fills it too */
+  .s-mini--photo .s-pop__video img {
+    object-fit: cover;
+  }
+}
+
+@layer sections {
+  /* ==========================================================================
+     Next page (alt-next)
+     The last band of every page: a short note about the next page in the menu order, so a visitor
+     is led on. The burgundy band of the partners section (alt-partners), heading and one line;
+     the whole band is the link, with no button or arrow added.
+     ========================================================================== */
+
+  /* A pocket, not a band: always a gap above it, and narrower than the narrowest section on the page
+     (the contained sections are one gutter in from the page column on each side; this is two) */
+  .alt-next.alt-band {
+    width: calc(100% - 4 * var(--layout-gutter));
+    margin-top: var(--section-space-compact);
+  }
+
+  @media (min-width: 768px) {
+    .alt-next.alt-band {
+      width: calc(min(var(--layout-max), 100% - 2 * var(--layout-gutter)) - 4 * var(--layout-gutter));
+    }
+  }
+
+  .alt-next__link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .alt-next__link:hover .alt-section-head__title,
+  .alt-next__link:focus-visible .alt-section-head__title {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+}
+
+@layer sections {
+  /* ==========================================================================
+     Featured event (s-feature)
+     A small gold label, the event's title, then its date and venue, for the photo
+     beside the list of upcoming shows (Performances). On phones and tablets, where the photo
+     is wide and short, it is a dark plate joined under the photo; from 1100px it lies on the
+     lower part of the photo, centred, inside its gold frame. Which event is featured will come
+     from the Sheet later.
+     ========================================================================== */
+
+  .s-section__visual:has(> .s-feature) {
+    flex-direction: column;
+  }
+
+  .s-feature {
+    width: 100%;
+    margin: 0;
+    padding: var(--space-md) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    text-align: center;
+    color: var(--ivory);
+    background: rgb(40, 24, 31);
+    border: 1px solid var(--gold-bright);
+    border-top: 0;
+  }
+
+  @media (min-width: 1100px) {
+    .s-section__visual:has(> .s-feature) {
+      flex-direction: row;
+    }
+
+    /* On the photo: the panel's padding plus the frame's 1px rule, so it sits exactly inside the frame */
+    .s-feature {
+      position: absolute;
+      z-index: 1;
+      top: calc(74% - 50px); /* just below the dancers' hems; the text is centred in it, raised 50px */
+      left: calc(var(--space-2xl) + 1px);
+      right: calc(var(--space-2xl) + 1px);
+      bottom: calc(var(--space-2xl) + 1px);
+      width: auto;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: var(--space-md) var(--space-lg) calc(var(--space-md) + 50px);
+      border: 0;
+      background: linear-gradient(to top, rgba(28, 16, 22, 0.8) 0%, rgba(28, 16, 22, 0.55) 70%, transparent 100%);
+      pointer-events: none;
+    }
+  }
+
+  .s-feature__label {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+  }
+
+  .s-feature__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    font-weight: 400;
+    line-height: 1.15;
+  }
+
+  .s-feature__meta {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    opacity: 0.9;
+  }
+
+  /* A short gold rule under the date and venue, like the rule over section headings */
+  .s-feature::after {
+    content: "";
+    width: 3rem;
+    height: 1px;
+    margin-top: 0.75rem;
+    background: var(--gold-bright);
+  }
+}

@@ -1,0 +1,93 @@
+@layer sections {
+  /* ==========================================================================
+     Production pop-up (s-pop)
+     One production, shown over the page when its poster is pressed. Built by
+     js/productions.js from js/productions-data.js; the panel is an ordinary
+     s-section (picture beside text) and its picture space is a mini carousel
+     of the production's photos and videos.
+     ========================================================================== */
+
+  .s-pop {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md);
+    background: rgba(10, 8, 7, 0.9);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .s-pop__panel {
+    position: relative;
+    width: min(1200px, 100%);
+    max-height: 100%;
+    margin: auto;
+    overflow-y: auto;
+    border: 1px solid var(--gold-bright);
+  }
+
+  /* The panel is the only s-section in the pop-up, so it always takes the first ivory */
+  .s-pop .s-pop__panel {
+    background: var(--surface-ivory-gradient);
+  }
+
+  .s-pop .s-section__content {
+    padding-top: calc(var(--section-space-compact) + var(--space-md));
+  }
+
+  .s-pop__close {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--gold);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* On a phone the picture is at the top, so the cross sits on the photo */
+  @media (max-width: 767px) {
+    .s-pop__close {
+      color: #fff;
+      filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.65));
+    }
+  }
+
+  .s-pop__close svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .s-pop__close:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: -4px;
+  }
+
+  /* A video among the photos: its still picture with a play button, then the player in the same space */
+  .s-mini .s-pop__video {
+    position: relative;
+    display: block;
+    border: 0;
+    background: #000;
+  }
+
+  .s-pop__video img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* In a photo carousel that fills its frame, the video's picture fills it too */
+  .s-mini--photo .s-pop__video img {
+    object-fit: cover;
+  }
+}

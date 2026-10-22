@@ -1,0 +1,464 @@
+@layer sections {
+  /* ==========================================================================
+     6. Body copy (content-prose)
+     ========================================================================== */
+
+  .content-prose {
+    color: var(--text-muted);
+    font-family: var(--font-sans);
+    font-size: clamp(var(--text-body), 1.5vw, var(--text-body-lg));
+    line-height: var(--leading-prose);
+    max-width: 62ch;
+  }
+
+  .content-prose p + p {
+    margin-top: var(--space-md);
+  }
+
+  .content-prose ul,
+  .content-prose ol {
+    margin: var(--space-md) 0 var(--space-md) var(--space-lg);
+  }
+
+  .content-prose li {
+    margin-bottom: var(--space-2xs);
+  }
+
+  .content-prose strong {
+    color: var(--navy);
+    font-weight: 700;
+  }
+
+  .content-prose a {
+    color: var(--burgundy);
+    font-weight: 700;
+  }
+
+  .content-prose a:hover {
+    color: var(--gold);
+  }
+
+  .content-prose em {
+    font-style: italic;
+  }
+
+  .content-prose blockquote {
+    margin-top: var(--space-md);
+    padding-left: var(--space-md);
+    border-left: 2px solid var(--gold-dim);
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--gold-deep);
+  }
+
+  .content-prose blockquote + * {
+    margin-top: var(--space-md);
+  }
+
+  .content-prose--on-dark {
+    color: var(--text-on-dark-muted);
+  }
+
+  .content-prose--on-dark strong {
+    color: var(--text-on-dark);
+  }
+
+  .content-prose--on-dark li {
+    color: var(--text-on-dark-muted);
+  }
+
+  .content-prose--on-dark a {
+    color: var(--gold-bright);
+  }
+
+  .content-prose--on-dark a:hover {
+    color: var(--ivory);
+  }
+
+  .content-prose--on-dark blockquote {
+    border-left-color: var(--gold-bright);
+    color: var(--text-on-dark);
+  }
+
+  /* ==========================================================================
+     7. Cards (s-cards, s-card)
+     ========================================================================== */
+
+  .s-cards {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: 1fr;
+    margin-top: var(--space-xl);
+  }
+
+  @media (min-width: 768px) {
+    .s-cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Columns follow the content.
+     Text cards: two across on tablets, three or four across on computers.
+     Photo cards (faculty): three across from tablets up.
+     A lone last text card takes the full row instead of leaving a gap beside it. */
+  @media (min-width: 768px) {
+    .s-cards--3:has(.media-cover) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .s-cards:not(.s-cards--3):not(.s-cards--4) > .s-card:last-child:nth-child(odd):not(:has(.media-cover)) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1199px) {
+    .s-cards--3:not(:has(.media-cover)) > .s-card:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .s-cards--3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .s-cards--4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .s-cards--3 > .s-card:last-child:nth-child(3n + 1):not(:has(.media-cover)) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* Picture cards (s-cards--tiles): two across from tablets up. Titles keep two lines of room so every
+     picture in a row starts at the same height; a lone last card stays card-sized, centred. */
+  @media (min-width: 768px) {
+    .s-cards--tiles .s-card__title {
+      min-height: calc(2 * 1.3em);
+    }
+
+    .s-cards.s-cards--tiles > .s-card:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: calc((100% - var(--space-md)) / 2);
+    }
+  }
+
+  /* min-width and overflow-wrap: long words (email addresses) wrap inside a narrow card */
+  .s-card {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    background: var(--surface-card-gradient);
+    border: 1px solid var(--gold-bright);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-xl);
+    transition: var(--transition-surface);
+  }
+
+  .s-card:hover {
+    border-color: var(--gold);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  .s-card__label {
+    font-size: var(--text-label);
+    font-weight: 700;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--burgundy);
+    margin-bottom: var(--space-xs);
+  }
+
+  .s-card__title {
+    font-family: var(--font-display);
+    font-size: var(--text-body-lg);
+    color: var(--gold);
+    line-height: 1.3;
+    font-weight: 500;
+  }
+
+  /* Titled cards (s-cards--titled): each card names a subject (Home, the four dance forms) in the
+     site's own pattern: a small gold capital eyebrow, then the name on one line in the display face.
+     The name scales with the card so the longest one fits on a single line. */
+  .s-cards--titled .s-card {
+    padding: var(--space-xl) var(--space-lg);
+  }
+
+  .s-cards--titled .s-card__label {
+    margin-bottom: var(--space-xs);
+  }
+
+  .s-cards--titled .s-card__title {
+    font-size: clamp(1.05rem, 1.3vw, 1.2rem); /* capped where the cards stop growing, so the longest name fits */
+    font-weight: 400;
+    line-height: 1.25;
+    white-space: nowrap;
+  }
+
+  .s-cards--titled .s-card__title a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .s-cards--titled .s-card .content-prose {
+    margin-top: var(--space-sm);
+    font-size: var(--text-small);
+    line-height: 1.7;
+    color: var(--text-muted);
+    text-wrap: pretty;
+  }
+
+  .alt-band .s-cards {
+    margin-top: var(--space-lg);
+  }
+
+  .alt-band .s-card {
+    background: var(--surface-card-gradient);
+    border: var(--band-rule);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* ==========================================================================
+     8. Cover photos (media-cover)
+     ========================================================================== */
+
+  /* Card / portrait cover media — replaces repeated img inline styles (Phase C1) */
+
+  .media-cover {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    margin-bottom: var(--space-sm);
+  }
+
+  /* News card (s-card--news): a 16:9 photo across the top, then label and title */
+
+  .s-card--news {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .s-card__media {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: 50% 30%;
+  }
+
+  /* Wide posters with the title on the left */
+  .s-card__media--start {
+    object-position: 0 50%;
+  }
+
+  .s-card__body {
+    padding: var(--space-lg) var(--space-xl) var(--space-xl);
+  }
+
+  /* Portrait photos (faculty cards): tall frame, keep heads in view */
+
+  .media-cover--portrait {
+    aspect-ratio: 3 / 4;
+    object-position: 50% 20%;
+  }
+
+  /* Card links on their own lines (About → Media enquiries): each link is a full-width row
+     with a hairline gold rule, the name large in the display face and the arrow at the right edge. */
+  .s-card__links {
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--space-lg);
+    border-top: 1px solid var(--gold-bright);
+  }
+
+  .s-card__links a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--gold-bright);
+    font-family: var(--font-display);
+    font-size: var(--text-subtitle);
+    line-height: 1.25;
+    text-decoration: none;
+    color: var(--burgundy);
+    transition: color 0.25s ease;
+  }
+
+  .s-card__links a::after {
+    content: "\2192";
+    font-family: var(--font-body, inherit);
+    font-size: 1.1rem;
+    color: var(--gold);
+    transition: transform 0.25s ease;
+  }
+
+  .s-card__links a:hover,
+  .s-card__links a:focus-visible {
+    color: var(--gold-deep);
+  }
+
+  .s-card__links a:hover::after,
+  .s-card__links a:focus-visible::after {
+    transform: translateX(4px);
+  }
+
+  /* Download tiles (About → Press Kit): each file shown as a print on an ivory mount —
+     a quiet frame, the page floating with a soft shadow, a small gold tag, the name centred
+     below in the display face and a hairline "Download" line. Narrow and airy, not boxed. */
+  .s-downloads {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-xl);
+    margin-top: var(--space-xl);
+    padding: calc(var(--space-xl) * 1.5);
+    background: var(--surface-navy-gradient);
+    border: 1px solid var(--gold-bright);
+    box-shadow: var(--shadow-card);
+  }
+
+  .s-download {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: var(--text-on-dark);
+    text-decoration: none;
+  }
+
+  .s-download__cover {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    padding: 9%;
+    background: var(--surface-card-gradient);
+    border: 1px solid var(--gold-bright);
+    transition: border-color 0.3s ease;
+  }
+
+  .s-download__cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    box-shadow: 0 1px 2px rgba(60, 40, 20, 0.12), 0 10px 24px -8px rgba(60, 40, 20, 0.3);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .s-download:hover .s-download__cover,
+  .s-download:focus-visible .s-download__cover {
+    border-color: var(--gold);
+  }
+
+  .s-download:hover .s-download__cover img,
+  .s-download:focus-visible .s-download__cover img {
+    transform: translateY(-4px);
+    box-shadow: 0 2px 4px rgba(60, 40, 20, 0.12), 0 18px 32px -10px rgba(60, 40, 20, 0.38);
+  }
+
+  .s-download__badge {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    padding: 0.25em 0.75em;
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    color: var(--gold-deep);
+    background: #fbf8f2;
+    border: 1px solid var(--gold-bright);
+  }
+
+  .s-download__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    padding-top: var(--space-md);
+  }
+
+  .s-download__title {
+    font-family: var(--font-display);
+    font-size: var(--text-subtitle);
+    line-height: 1.2;
+    color: var(--gold-bright);
+  }
+
+  .s-download__note {
+    margin-bottom: var(--space-sm);
+    font-size: var(--text-small);
+    line-height: 1.5;
+    color: var(--text-on-dark-muted);
+  }
+
+  .s-download__action {
+    margin-top: auto;
+    padding-bottom: 0.3em;
+    font-size: 0.66rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--text-on-dark);
+    background: linear-gradient(var(--gold-bright), var(--gold-bright)) bottom center / 30% 1px no-repeat;
+    transition: background-size 0.3s ease;
+  }
+
+  .s-download:hover .s-download__action,
+  .s-download:focus-visible .s-download__action {
+    background-size: 100% 1px;
+  }
+
+  .s-download__action::before {
+    content: "\2193\2002";
+  }
+
+  .s-download__meta {
+    color: var(--text-on-dark-muted);
+  }
+
+  .s-download__meta::before {
+    content: "\00b7\2002";
+  }
+
+  @media (max-width: 640px) {
+    .s-downloads {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+      padding: var(--space-lg) var(--space-md);
+    }
+
+    .s-download {
+      flex-direction: row;
+      gap: var(--space-md);
+      text-align: left;
+    }
+
+    .s-download__cover {
+      flex: 0 0 30%;
+      padding: 6%;
+    }
+
+    .s-download__title {
+      font-size: var(--text-body-lg);
+    }
+
+    .s-download__action {
+      white-space: nowrap;
+      background-position: bottom left;
+    }
+
+    .s-download__body {
+      align-items: flex-start;
+      padding-top: 0;
+    }
+
+    .s-download__badge {
+      top: 0;
+      right: 0;
+      padding: 0.15em 0.5em;
+    }
+  }
+}

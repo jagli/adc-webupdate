@@ -1,0 +1,34 @@
+@layer sections {
+  /* ==========================================================================
+     Next page (alt-next)
+     The last band of every page: a short note about the next page in the menu order, so a visitor
+     is led on. The burgundy band of the partners section (alt-partners), heading and one line;
+     the whole band is the link, with no button or arrow added.
+     ========================================================================== */
+
+  /* A pocket, not a band: always a gap above it, and narrower than the narrowest section on the page
+     (the contained sections are one gutter in from the page column on each side; this is two) */
+  .alt-next.alt-band {
+    width: calc(100% - 4 * var(--layout-gutter));
+    margin-top: var(--section-space-compact);
+  }
+
+  @media (min-width: 768px) {
+    .alt-next.alt-band {
+      width: calc(min(var(--layout-max), 100% - 2 * var(--layout-gutter)) - 4 * var(--layout-gutter));
+    }
+  }
+
+  .alt-next__link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .alt-next__link:hover .alt-section-head__title,
+  .alt-next__link:focus-visible .alt-section-head__title {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+}

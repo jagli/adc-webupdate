@@ -1,0 +1,565 @@
+@layer sections {
+  /* ==========================================================================
+     2. Section — photo beside text (s-section)
+     ========================================================================== */
+
+  .s-section {
+    display: grid;
+    background: var(--surface-ivory-gradient); /* mood board bg1 */
+  }
+
+  /* The second tone of the page rhythm: set on the section itself (s-section--tone-alt), never worked out
+     from its position, so adding or moving a section leaves the others as they are */
+  .s-section.s-section--tone-alt {
+    background: var(--surface-ivory-muted-gradient); /* mood board bg2 rhythm */
+  }
+
+  @media (min-width: 1100px) {
+    .s-section {
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+    }
+
+    .s-section--reverse .s-section__visual {
+      order: 2;
+    }
+
+    /* Photo-led section with a long list (s-section--scroll-text): the photo carousel takes the larger share
+       and sets the height at 4:3, so landscape photos are seen almost whole; the text panel matches that
+       height (height 0, min-height 100%: it adds nothing to the row) and its list scrolls, as in Milestones */
+    .s-section.s-section--scroll-text {
+      /* The text panel starts where a framed photo in the next section starts: half-way plus the panel's padding */
+      grid-template-columns: calc(50% + var(--space-2xl)) 1fr;
+    }
+
+    .s-section--scroll-text > .s-section__visual--fill > .s-mini {
+      height: auto;
+      min-height: 0;
+      aspect-ratio: 4 / 3;
+    }
+
+    .s-section--scroll-text > .s-section__content {
+      height: 0;
+      min-height: 100%;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+
+    .s-section--scroll-text > .s-section__content > .content-prose {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      padding-right: var(--space-sm);
+      /* The list fades in under the heading and out at its foot: a hint that it scrolls, no hard edges */
+      -webkit-mask-image: linear-gradient(to bottom, transparent, #000 1.25rem, #000 calc(100% - 2.5rem), transparent);
+      mask-image: linear-gradient(to bottom, transparent, #000 1.25rem, #000 calc(100% - 2.5rem), transparent);
+      padding-top: 1rem;
+      padding-bottom: 2rem;
+    }
+
+    /* The scrollbar as part of the design: a gold hairline down the right of the list, a slim gold bar riding on it */
+    .s-section--scroll-text > .s-section__content > .content-prose::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .s-section--scroll-text > .s-section__content > .content-prose::-webkit-scrollbar-track {
+      background: linear-gradient(rgba(216, 182, 129, 0.35), rgba(216, 182, 129, 0.35)) center / 1px 100% no-repeat;
+    }
+
+    .s-section--scroll-text > .s-section__content > .content-prose::-webkit-scrollbar-thumb {
+      background: var(--gold-bright);
+      border-radius: 3px;
+    }
+
+    /* Browsers without the styled scrollbar above (Firefox): a thin gold one */
+    @supports not selector(::-webkit-scrollbar) {
+      .s-section--scroll-text > .s-section__content > .content-prose {
+        scrollbar-width: thin;
+        scrollbar-color: var(--gold-bright) rgba(216, 182, 129, 0.18);
+      }
+    }
+
+    /* The two lists one under the other in the narrower text panel */
+    .s-section--scroll-text .s-lists-2 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .s-section {
+      padding-inline: 0;
+    }
+  }
+
+  /* Picture panel beside the text (s-section__visual) — one standard for the whole site:
+     the panel takes the section's own background and holds one framed picture, centred, with the same
+     space all round. The frame is always the same: a thin gold rule and a soft shadow.
+     Proportion: photos and photo carousels 4:3, videos 16:9, people/costume carousels 3:4
+     (.s-mini--portrait). Photos fill their frame; the upper part (heads, headroom) is kept in view.
+     The --whole and --fill modifiers are kept in the markup but no longer change the look. */
+
+  .s-section__visual {
+    min-width: 0; /* lets long words wrap instead of widening the page on small phones */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-lg) var(--layout-gutter);
+    background: transparent;
+  }
+
+  @media (min-width: 768px) {
+    .s-section__visual {
+      padding: var(--space-2xl);
+    }
+  }
+
+  .s-section__visual > img,
+  .s-section__visual > .s-mini,
+  .s-section__visual > .s-video {
+    position: relative;
+    inset: auto;
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    border: 1px solid var(--gold-bright);
+    box-shadow: var(--shadow-photo);
+  }
+
+  .s-section__visual > img,
+  .s-section__visual > .s-mini:not(.s-mini--portrait) {
+    aspect-ratio: 4 / 3;
+  }
+
+  .s-section__visual > img,
+  .s-section__visual > .s-mini .s-mini__slide {
+    object-fit: cover;
+    /* A photo can name its own focus when the panel crops it: style="--photo-focus-y: 42%" (and --photo-focus-x) on the img */
+    object-position: var(--photo-focus-x, 50%) var(--photo-focus-y, 30%);
+  }
+
+  .s-section__visual > .s-video {
+    aspect-ratio: 16 / 9;
+  }
+
+  .s-section__visual > .s-mini--portrait {
+    max-width: 26rem;
+  }
+
+  /* A photo or photo carousel beside long text grows with the text, so no empty band is left above and below it */
+  .s-section__visual > img,
+  .s-section__visual > .s-mini:not(.s-mini--portrait, .s-mini--video, .s-mini--photo) {
+    align-self: stretch;
+  }
+
+  /* Two short lists side by side inside a text panel (Noteworthy Performances); one column on phones */
+  .s-lists-2 {
+    display: grid;
+    gap: 0 var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .s-lists-2 {
+      grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+      column-gap: var(--space-md);
+    }
+  }
+
+  /* Long lists: a size smaller and tighter lines, so both lists sit compactly side by side */
+  .s-lists-2 ul {
+    font-size: 0.92em;
+    line-height: 1.45;
+  }
+
+  .s-lists-2 li + li {
+    margin-top: 0.35em;
+  }
+
+  .s-lists-2 p {
+    margin-block: 0 0.6em;
+  }
+
+  /* Cards placed inside a dark text panel keep the dark text of a card, not the panel's cream text */
+  .s-section__content .s-card .content-prose {
+    color: var(--text-muted);
+  }
+
+  /* A section held to the width of the page's content column, so its edges line up with the cards below it */
+  @media (min-width: 768px) {
+    .s-section--contained {
+      width: calc(min(var(--layout-max), 100% - 2 * var(--layout-gutter)) - 2 * var(--layout-gutter));
+      margin-inline: auto;
+    }
+  }
+
+  /* Inside a contained band the content keeps an even inner margin instead of the page gutter */
+  @media (min-width: 768px) {
+    .s-section--contained > .layout,
+    .s-section--contained > .alt-band__inner {
+      width: auto;
+      max-width: none;
+      padding-inline: var(--space-2xl);
+    }
+  }
+
+  /* Between two contained bands: a soft shadow, deepest at the centre, tapering and fading away towards both ends */
+  .s-section--contained + .s-section--contained {
+    position: relative;
+  }
+
+  .s-section--contained + .s-section--contained::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 26px;
+    pointer-events: none;
+    background: radial-gradient(ellipse 58% 100% at 50% 0, rgba(52, 40, 24, 0.11), rgba(52, 40, 24, 0.04) 50%, transparent 80%);
+  }
+
+  /* A band that also carries the gold divider over the shadow: a fading hairline with a small diamond at its centre */
+  .s-section--contained + .s-section--ruled::before {
+    background: linear-gradient(90deg, transparent 12%, var(--gold-dim) 30%, var(--gold-bright) 50%, var(--gold-dim) 70%, transparent 88%) top / 100% 1px no-repeat,
+      radial-gradient(ellipse 58% 100% at 50% 0, rgba(52, 40, 24, 0.11), rgba(52, 40, 24, 0.04) 50%, transparent 80%);
+  }
+
+  .s-section--contained + .s-section--ruled::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    top: -4px;
+    left: 50%;
+    width: 7px;
+    height: 7px;
+    pointer-events: none;
+    background: var(--ivory);
+    border: 1px solid var(--gold-bright);
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  /* A contained band uses the same top and bottom space as the picture panels around it, so the dividers sit evenly */
+  @media (min-width: 768px) {
+    .alt-band.s-section--contained {
+      padding-block: var(--space-2xl);
+    }
+  }
+
+  /* A section that keeps a gap before the next one (when two full-bleed sections would otherwise touch) */
+  .s-section--gap-after {
+    position: relative;
+    margin-bottom: var(--section-space-compact);
+  }
+
+  /* Its foot carries the site's divider (a fading gold hairline, a small diamond at the centre); the section
+     after the gap then needs no shadow of its own */
+  .s-section--gap-after::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 9px;
+    pointer-events: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 9'%3E%3Crect x='2' y='2' width='5' height='5' transform='rotate(45 4.5 4.5)' fill='%23fbfaf9' stroke='%23d8b681' stroke-width='1'/%3E%3C/svg%3E") center / 9px 9px no-repeat,
+      linear-gradient(90deg, transparent 12%, var(--gold-dim) 30%, var(--gold-bright) 50%, var(--gold-dim) 70%, transparent 88%) center / 100% 1px no-repeat;
+  }
+
+  /* Below the gallery panel (gallery.html): the site's soft shadow divider (deepest at the centre, fading towards both ends)
+     falls into the gap, in place of the gold hairline the gap would otherwise carry */
+  .v-gallery-wrap.s-section--gap-after::after {
+    top: 100%;
+    bottom: auto;
+    height: 26px;
+    background: radial-gradient(ellipse 58% 100% at 50% 0, rgba(52, 40, 24, 0.11), rgba(52, 40, 24, 0.04) 50%, transparent 80%);
+  }
+
+  .s-section--gap-after + .s-section--contained::before {
+    display: none;
+  }
+
+  /* Full-bleed picture panel (s-section__visual--fill): the carousel fills the panel edge to edge, no frame or margin */
+  .s-section__visual--fill {
+    padding: 0;
+  }
+
+  .s-section__visual--fill > .s-video {
+    position: relative;
+    inset: auto;
+    align-self: stretch;
+    width: 100%;
+    min-height: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .s-section__visual--fill > img,
+  .s-section__visual--fill > .s-mini {
+    align-self: stretch;
+    height: 100%;
+    min-height: 100%;
+    aspect-ratio: auto;
+    border: 0;
+    box-shadow: none;
+  }
+
+  /* On phones an upright full-bleed photo is capped, so it does not fill the whole screen */
+  @media (max-width: 1099px) {
+    .s-section__visual--fill > img {
+      max-height: 26rem;
+      object-fit: cover;
+    }
+  }
+
+  /* On tablets (stacked, the frame wide and short) a full-bleed photo keeps its own shape, centred,
+     instead of being cut to a wide strip */
+  @media (min-width: 768px) and (max-width: 1099px) {
+    .s-section__visual--fill:has(> img) {
+      display: flex;
+      justify-content: center;
+    }
+
+    .s-section__visual--fill > img {
+      width: min(100%, 34rem);
+      height: auto;
+      max-height: none;
+      aspect-ratio: auto;
+    }
+  }
+
+  /* On wider screens a full-bleed photo takes the height of the text beside it and never makes the section taller */
+  @media (min-width: 1100px) {
+    .s-section__visual--fill > img {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      min-height: 0;
+    }
+  }
+
+  /* A video picture that carries its own title (s-video--whole) is shown whole, never cropped,
+     centred on the dark of its stage curtain (Store · Productions & Media) */
+  .s-section__visual--fill > .s-video.s-video--whole {
+    background: #1d0405;
+  }
+
+  .s-section__visual--fill > .s-video.s-video--whole img {
+    object-fit: contain;
+  }
+
+  /* A full-bleed photo whose dancers must stay whole, raised hands to feet (s-section__visual--uncropped):
+     never cut; it keeps its own shape at the panel's full width, and the text panel beside it matches its height */
+  .s-section__visual--fill.s-section__visual--uncropped > img {
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+  }
+
+  @media (min-width: 1100px) {
+    .s-section__visual--fill.s-section__visual--uncropped > img {
+      position: static;
+      width: 100%;
+      min-height: 0;
+    }
+  }
+
+  /* A video tile in a picture panel takes the full width of the frame */
+  .s-section__visual > .s-video-tile {
+    width: 100%;
+  }
+
+  /* Classic picture panel (s-section--classic): the earlier treatment, kept for the School page at the
+     owner's request (15 October 2026). The photo fills the panel edge to edge; a --whole panel shows
+     the whole photo with spare space in the colour of the text panel beside it. */
+  .s-section--classic .s-section__visual {
+    display: block;
+    padding: 0;
+    min-height: clamp(260px, 42vw, 480px);
+    overflow: hidden;
+    background: var(--surface-olive-gradient);
+  }
+
+  .s-section--classic .s-section__visual > img,
+  .s-section--classic .s-section__visual > .s-mini,
+  .s-section--classic .s-section__visual > .s-video {
+    border: 0;
+    box-shadow: none;
+  }
+
+  .s-section--classic .s-section__visual > .s-video {
+    position: absolute;
+    inset: 0;
+    aspect-ratio: auto;
+  }
+
+  .s-section--classic .s-section__visual > img {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    aspect-ratio: auto;
+    object-position: 50% 50%;
+  }
+
+  .s-section--classic .s-section__visual--whole {
+    display: flex;
+    align-items: center;
+    min-height: 0;
+    background: transparent;
+  }
+
+  .s-section--classic .s-section__visual--whole > img {
+    position: static;
+    height: auto;
+  }
+
+  /* A photo in a classic carousel can fill its frame instead of sitting whole inside it: one photo
+     (s-mini__slide--snug) or every photo of the carousel (s-mini--snug), so they all meet the frame's edges
+     alike. Scaled to the frame and trimmed, the focus set with --photo-focus-y. From 1100px only: narrower, the
+     frame is taller than a 2:3 photo (tablets) or wide and short (phones), and the photo would lose hands, heads or feet. */
+  @media (min-width: 1100px) {
+    .s-section--classic .s-section__visual > .s-mini.s-mini--snug .s-mini__slide,
+    .s-section--classic .s-section__visual > .s-mini .s-mini__slide.s-mini__slide--snug {
+      object-fit: cover;
+      object-position: 50% var(--photo-focus-y, 50%);
+    }
+  }
+
+  .s-section--classic .s-section__visual > .s-mini:not(.s-mini--portrait) {
+    aspect-ratio: 3 / 2;
+  }
+
+  /* Phones and tablets: an upright carousel (s-mini--upright) keeps its 7:10 frame across the full width,
+     each photo filling it */
+  @media (max-width: 1099px) {
+    .s-section--classic .s-section__visual > .s-mini.s-mini--upright {
+      aspect-ratio: 7 / 10;
+      height: auto;
+    }
+
+    .s-section--classic .s-section__visual > .s-mini.s-mini--upright .s-mini__slide {
+      object-fit: cover;
+      object-position: 50% var(--photo-focus-y, 50%);
+    }
+  }
+
+  /* Phones and tablets: a classic carousel that fills its frame there too (s-mini--snug-small), in a 9:10
+     frame between upright and square photos; each photo's focus with --photo-focus-y-small */
+  @media (max-width: 1099px) {
+    .s-section--classic .s-section__visual > .s-mini.s-mini--snug-small {
+      aspect-ratio: var(--mini-ratio-small, 1.16 / 1);
+    }
+
+    .s-section--classic .s-section__visual > .s-mini.s-mini--snug-small .s-mini__slide {
+      object-fit: cover;
+      object-position: 50% var(--photo-focus-y-small, 50%);
+    }
+  }
+
+  /* Phones and tablets: a tall photo in a classic panel (photo--trim-tablet) is trimmed top and bottom to a
+     wider frame, --tablet-ratio (4 / 3 unless the photo names another), its focus set with --photo-focus-y */
+  @media (max-width: 1099px) {
+    .s-section--classic .s-section__visual > img.photo--trim-tablet {
+      aspect-ratio: var(--tablet-ratio, 4 / 3);
+      height: auto;
+      object-fit: cover;
+      object-position: 50% var(--photo-focus-y, 50%);
+    }
+  }
+
+  /* A classic carousel of upright photos (s-mini--upright, with s-mini--snug): from 1100px the frame takes
+     their shape, 0.7 wide to 1 tall, and sets the panel's height, so each photo loses only a sliver */
+  @media (min-width: 1100px) {
+    .s-section--classic .s-section__visual > .s-mini.s-mini--upright {
+      aspect-ratio: 7 / 10;
+      height: auto;
+    }
+  }
+
+  .s-section--classic .s-section__visual > .s-mini .s-mini__slide {
+    object-fit: contain;
+    object-position: 50% 50%;
+  }
+
+  .s-section--classic:has(.s-section__content--dark) .s-section__visual--whole {
+    background: var(--surface-burgundy-gradient);
+  }
+
+  .s-section--classic:has(.s-section__content--olive) .s-section__visual--whole {
+    background: var(--surface-olive-gradient);
+  }
+
+  .s-section--classic:has(.s-section__content--navy) .s-section__visual--whole {
+    background: var(--surface-navy-gradient);
+  }
+
+  .s-section--classic:has(.s-section__content--mist) .s-section__visual--whole {
+    background: var(--surface-mist-gradient);
+  }
+
+  /* Long words (email addresses) wrap inside inner-page sections instead of widening the page */
+  .s-section__content,
+  .s-split-text,
+  .s-page-intro,
+  .s-band__body {
+    overflow-wrap: break-word;
+  }
+
+  .s-section__content {
+    min-width: 0; /* lets long words wrap instead of widening the page on small phones */
+    padding: var(--section-space-compact) var(--layout-gutter);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .s-section__content--dark {
+    background: var(--surface-burgundy-gradient);
+    box-shadow: inset 1px 0 0 var(--border-on-dark);
+  }
+
+  @media (max-width: 1099px) {
+    .s-section__content--dark {
+      box-shadow: inset 0 1px 0 var(--border-on-dark);
+    }
+  }
+
+  .s-section__content--dark .s-section__title--on-dark {
+    color: var(--text-on-dark);
+  }
+
+  .s-section__title {
+    font-family: var(--font-display);
+    font-size: var(--text-title);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--gold);
+    margin-bottom: var(--space-md);
+  }
+
+  .s-section__eyebrow {
+    font-size: var(--text-label);
+    font-weight: 700;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--burgundy);
+    margin-bottom: var(--space-sm);
+  }
+
+  /* Alternating dark surfaces for luxury rhythm */
+
+  .s-section__content--olive {
+    background: var(--surface-olive-gradient);
+  }
+
+  .s-section__content--navy {
+    background: var(--surface-navy-gradient);
+  }
+
+  .s-section__content--mist {
+    background: var(--surface-mist-gradient);
+  }
+}

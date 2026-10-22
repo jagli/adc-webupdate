@@ -1,0 +1,118 @@
+@layer sections {
+  /* ==========================================================================
+     9. Timeline (s-timeline)
+     ========================================================================== */
+
+  .s-timeline {
+    margin-top: var(--space-md);
+    max-height: 420px;
+    overflow-y: auto;
+    padding: 1rem var(--space-sm) 2rem 0;
+    /* Fades in under the heading and out at its foot, as the Noteworthy list does */
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 1.25rem, #000 calc(100% - 2.5rem), transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 1.25rem, #000 calc(100% - 2.5rem), transparent);
+  }
+
+  /* The Noteworthy scrollbar: a gold hairline with a slim gold bar riding on it */
+  .s-timeline::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .s-timeline::-webkit-scrollbar-track {
+    background: linear-gradient(rgba(216, 182, 129, 0.35), rgba(216, 182, 129, 0.35)) center / 1px 100% no-repeat;
+  }
+
+  .s-timeline::-webkit-scrollbar-thumb {
+    background: var(--gold-bright);
+    border-radius: 3px;
+  }
+
+  @supports not selector(::-webkit-scrollbar) {
+    .s-timeline {
+      scrollbar-width: thin;
+      scrollbar-color: var(--gold-bright) rgba(216, 182, 129, 0.18);
+    }
+  }
+
+  .s-timeline__item {
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: var(--text-small);
+    color: var(--text-muted);
+  }
+
+  .s-timeline__item strong {
+    color: var(--text);
+  }
+
+  /* ==========================================================================
+     10. Production tiles (s-prod)
+     ========================================================================== */
+
+  .s-prod {
+    position: relative;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    background: var(--surface-olive-gradient);
+    border: 1px solid var(--gold-bright);
+    box-shadow: var(--shadow-tile);
+    transition: var(--transition-surface);
+  }
+
+  .s-prod:hover {
+    border-color: var(--gold);
+    box-shadow: var(--shadow-tile-hover);
+  }
+
+  .s-prod img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .s-prod__cap {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: var(--space-md);
+    background: linear-gradient(0deg, rgba(5, 8, 16, 0.88) 0%, transparent 100%);
+  }
+
+  .s-prod__cap strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--text-small);
+    color: var(--gold-bright);
+    font-weight: 500;
+  }
+
+  /* A poster that opens its production in the pop-up (s-pop, below) */
+  .s-prod[data-production][role="button"] {
+    cursor: pointer;
+  }
+
+  .s-prod[data-production]:focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 2px;
+  }
+
+  .s-prod-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+    padding: 0;
+  }
+
+  @media (min-width: 768px) {
+    .s-prod-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .s-prod-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}

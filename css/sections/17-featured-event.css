@@ -1,0 +1,83 @@
+@layer sections {
+  /* ==========================================================================
+     Featured event (s-feature)
+     A small gold label, the event's title, then its date and venue, for the photo
+     beside the list of upcoming shows (Performances). On phones and tablets, where the photo
+     is wide and short, it is a dark plate joined under the photo; from 1100px it lies on the
+     lower part of the photo, centred, inside its gold frame. Which event is featured will come
+     from the Sheet later.
+     ========================================================================== */
+
+  .s-section__visual:has(> .s-feature) {
+    flex-direction: column;
+  }
+
+  .s-feature {
+    width: 100%;
+    margin: 0;
+    padding: var(--space-md) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    text-align: center;
+    color: var(--ivory);
+    background: rgb(40, 24, 31);
+    border: 1px solid var(--gold-bright);
+    border-top: 0;
+  }
+
+  @media (min-width: 1100px) {
+    .s-section__visual:has(> .s-feature) {
+      flex-direction: row;
+    }
+
+    /* On the photo: the panel's padding plus the frame's 1px rule, so it sits exactly inside the frame */
+    .s-feature {
+      position: absolute;
+      z-index: 1;
+      top: calc(74% - 50px); /* just below the dancers' hems; the text is centred in it, raised 50px */
+      left: calc(var(--space-2xl) + 1px);
+      right: calc(var(--space-2xl) + 1px);
+      bottom: calc(var(--space-2xl) + 1px);
+      width: auto;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: var(--space-md) var(--space-lg) calc(var(--space-md) + 50px);
+      border: 0;
+      background: linear-gradient(to top, rgba(28, 16, 22, 0.8) 0%, rgba(28, 16, 22, 0.55) 70%, transparent 100%);
+      pointer-events: none;
+    }
+  }
+
+  .s-feature__label {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+  }
+
+  .s-feature__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    font-weight: 400;
+    line-height: 1.15;
+  }
+
+  .s-feature__meta {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    opacity: 0.9;
+  }
+
+  /* A short gold rule under the date and venue, like the rule over section headings */
+  .s-feature::after {
+    content: "";
+    width: 3rem;
+    height: 1px;
+    margin-top: 0.75rem;
+    background: var(--gold-bright);
+  }
+}

@@ -1,0 +1,1589 @@
+{
+  "generated_at": "2026-10-17T10:46:52.796Z",
+  "display_max_px": 1600,
+  "thumb_max_px": 480,
+  "jpeg_quality": 82,
+  "sources": [
+    "assets/client",
+    "assets/images"
+  ],
+  "site_root": "assets/web",
+  "counts": {
+    "files": 379,
+    "written": 1,
+    "skipped": 173
+  },
+  "bytes": {
+    "source": 134342149,
+    "web": 36139065,
+    "thumbs": 3899961
+  },
+  "files": [
+    {
+      "source": "assets/client/001.jpg",
+      "web": "assets/web/client/001.jpg",
+      "thumb": "assets/web/thumbs/client/001.jpg",
+      "width": 1290,
+      "height": 1467,
+      "bytes": 229835,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/002a.jpg",
+      "web": "assets/web/client/002a.jpg",
+      "thumb": "assets/web/thumbs/client/002a.jpg",
+      "width": 1504,
+      "height": 1600,
+      "bytes": 432618,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/003.jpg",
+      "web": "assets/web/client/003.jpg",
+      "thumb": "assets/web/thumbs/client/003.jpg",
+      "width": 1067,
+      "height": 1600,
+      "bytes": 105477,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/004.jpg",
+      "web": "assets/web/client/004.jpg",
+      "thumb": "assets/web/thumbs/client/004.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 287170,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/005.jpg",
+      "web": "assets/web/client/005.jpg",
+      "thumb": "assets/web/thumbs/client/005.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 302498,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/006.jpg",
+      "web": "assets/web/client/006.jpg",
+      "thumb": "assets/web/thumbs/client/006.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 225878,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/010c.jpg",
+      "web": "assets/web/client/010c.jpg",
+      "thumb": "assets/web/thumbs/client/010c.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 183177,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/011.jpg",
+      "web": "assets/web/client/011.jpg",
+      "thumb": "assets/web/thumbs/client/011.jpg",
+      "width": 1600,
+      "height": 1461,
+      "bytes": 135462,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/013-advisory-dheeraj-wali.jpg",
+      "web": "assets/web/client/013-advisory-dheeraj-wali.jpg",
+      "thumb": "assets/web/thumbs/client/013-advisory-dheeraj-wali.jpg",
+      "width": 362,
+      "height": 312,
+      "bytes": 12833,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/013-advisory-ganesh-sir.jpg",
+      "web": "assets/web/client/013-advisory-ganesh-sir.jpg",
+      "thumb": "assets/web/thumbs/client/013-advisory-ganesh-sir.jpg",
+      "width": 362,
+      "height": 312,
+      "bytes": 20226,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/013-advisory-hari-ravikumar.jpg",
+      "web": "assets/web/client/013-advisory-hari-ravikumar.jpg",
+      "thumb": "assets/web/thumbs/client/013-advisory-hari-ravikumar.jpg",
+      "width": 362,
+      "height": 353,
+      "bytes": 16361,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/013-backstage-ajay.jpg",
+      "web": "assets/web/client/013-backstage-ajay.jpg",
+      "thumb": "assets/web/thumbs/client/013-backstage-ajay.jpg",
+      "width": 912,
+      "height": 1171,
+      "bytes": 156496,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/013-backstage-anand-behere.jpg",
+      "web": "assets/web/client/013-backstage-anand-behere.jpg",
+      "thumb": "assets/web/thumbs/client/013-backstage-anand-behere.jpg",
+      "width": 300,
+      "height": 349,
+      "bytes": 12627,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/013-backstage-santosh.jpg",
+      "web": "assets/web/client/013-backstage-santosh.jpg",
+      "thumb": "assets/web/thumbs/client/013-backstage-santosh.jpg",
+      "width": 912,
+      "height": 1171,
+      "bytes": 85467,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/013-dancers-anumathi.jpg",
+      "web": "assets/web/client/013-dancers-anumathi.jpg",
+      "thumb": "assets/web/thumbs/client/013-dancers-anumathi.jpg",
+      "width": 1066,
+      "height": 1600,
+      "bytes": 231947,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/013-dancers-apoorva.jpg",
+      "web": "assets/web/client/013-dancers-apoorva.jpg",
+      "thumb": "assets/web/thumbs/client/013-dancers-apoorva.jpg",
+      "width": 1066,
+      "height": 1600,
+      "bytes": 533593,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/013-dancers-manavi.jpg",
+      "web": "assets/web/client/013-dancers-manavi.jpg",
+      "thumb": "assets/web/thumbs/client/013-dancers-manavi.jpg",
+      "width": 1066,
+      "height": 1600,
+      "bytes": 316452,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/013-dancers-rohini.jpg",
+      "web": "assets/web/client/013-dancers-rohini.jpg",
+      "thumb": "assets/web/thumbs/client/013-dancers-rohini.jpg",
+      "width": 1066,
+      "height": 1600,
+      "bytes": 309584,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/013-dancers-sanchi-behere.jpg",
+      "web": "assets/web/client/013-dancers-sanchi-behere.jpg",
+      "thumb": "assets/web/thumbs/client/013-dancers-sanchi-behere.jpg",
+      "width": 1066,
+      "height": 1600,
+      "bytes": 388780,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/013-dancers-sanchita.jpg",
+      "web": "assets/web/client/013-dancers-sanchita.jpg",
+      "thumb": "assets/web/thumbs/client/013-dancers-sanchita.jpg",
+      "width": 1066,
+      "height": 1600,
+      "bytes": 329485,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/013-dancers-sanika.jpg",
+      "web": "assets/web/client/013-dancers-sanika.jpg",
+      "thumb": "assets/web/thumbs/client/013-dancers-sanika.jpg",
+      "width": 1066,
+      "height": 1600,
+      "bytes": 296602,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/013-dancers-spurthi.jpg",
+      "web": "assets/web/client/013-dancers-spurthi.jpg",
+      "thumb": "assets/web/thumbs/client/013-dancers-spurthi.jpg",
+      "width": 960,
+      "height": 1280,
+      "bytes": 185469,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/013-on-stage-team-apoorva.jpg",
+      "web": "assets/web/client/013-on-stage-team-apoorva.jpg",
+      "thumb": "assets/web/thumbs/client/013-on-stage-team-apoorva.jpg",
+      "width": 1066,
+      "height": 1600,
+      "bytes": 533593,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/013-on-stage-team-manavi.jpg",
+      "web": "assets/web/client/013-on-stage-team-manavi.jpg",
+      "thumb": "assets/web/thumbs/client/013-on-stage-team-manavi.jpg",
+      "width": 1066,
+      "height": 1600,
+      "bytes": 316452,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/013-on-stage-team-rohini.jpg",
+      "web": "assets/web/client/013-on-stage-team-rohini.jpg",
+      "thumb": "assets/web/thumbs/client/013-on-stage-team-rohini.jpg",
+      "width": 1066,
+      "height": 1600,
+      "bytes": 309584,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/014.jpg",
+      "web": "assets/web/client/014.jpg",
+      "thumb": "assets/web/thumbs/client/014.jpg",
+      "width": 1067,
+      "height": 1600,
+      "bytes": 335466,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/015.jpg",
+      "web": "assets/web/client/015.jpg",
+      "thumb": "assets/web/thumbs/client/015.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 303627,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/016-artistic-directors-vision-2.jpg",
+      "web": "assets/web/client/016-artistic-directors-vision-2.jpg",
+      "thumb": "assets/web/thumbs/client/016-artistic-directors-vision-2.jpg",
+      "width": 1125,
+      "height": 2000,
+      "bytes": 252690,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/017.jpg",
+      "web": "assets/web/client/017.jpg",
+      "thumb": "assets/web/thumbs/client/017.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 130691,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/018.jpg",
+      "web": "assets/web/client/018.jpg",
+      "thumb": "assets/web/thumbs/client/018.jpg",
+      "width": 1600,
+      "height": 1083,
+      "bytes": 237984,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/021.jpg",
+      "web": "assets/web/client/021.jpg",
+      "thumb": "assets/web/thumbs/client/021.jpg",
+      "width": 1600,
+      "height": 1017,
+      "bytes": 275858,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/022.jpg",
+      "web": "assets/web/client/022.jpg",
+      "thumb": "assets/web/thumbs/client/022.jpg",
+      "width": 1600,
+      "height": 1062,
+      "bytes": 361343,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/023.jpg",
+      "web": "assets/web/client/023.jpg",
+      "thumb": "assets/web/thumbs/client/023.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 84159,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/024.jpg",
+      "web": "assets/web/client/024.jpg",
+      "thumb": "assets/web/thumbs/client/024.jpg",
+      "width": 1600,
+      "height": 1063,
+      "bytes": 161453,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/025.jpg",
+      "web": "assets/web/client/025.jpg",
+      "thumb": "assets/web/thumbs/client/025.jpg",
+      "width": 1600,
+      "height": 1066,
+      "bytes": 159204,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/026.jpg",
+      "web": "assets/web/client/026.jpg",
+      "thumb": "assets/web/thumbs/client/026.jpg",
+      "width": 1600,
+      "height": 1081,
+      "bytes": 422840,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/030-tall.jpg",
+      "web": "assets/web/client/030-tall.jpg",
+      "thumb": "assets/web/thumbs/client/030-tall.jpg",
+      "width": 1558,
+      "height": 1600,
+      "bytes": 180162,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/030.jpg",
+      "web": "assets/web/client/030.jpg",
+      "thumb": "assets/web/thumbs/client/030.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 221435,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/031.jpg",
+      "web": "assets/web/client/031.jpg",
+      "thumb": "assets/web/thumbs/client/031.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 201529,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/032-fix.jpg",
+      "web": "assets/web/client/032-fix.jpg",
+      "thumb": "assets/web/thumbs/client/032-fix.jpg",
+      "width": 1000,
+      "height": 847,
+      "bytes": 158693,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/033.jpg",
+      "web": "assets/web/client/033.jpg",
+      "thumb": "assets/web/thumbs/client/033.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 183177,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/034-apoorva.jpg",
+      "web": "assets/web/client/034-apoorva.jpg",
+      "thumb": "assets/web/thumbs/client/034-apoorva.jpg",
+      "width": 1066,
+      "height": 1600,
+      "bytes": 533593,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/034-harshita.jpg",
+      "web": "assets/web/client/034-harshita.jpg",
+      "thumb": "assets/web/thumbs/client/034-harshita.jpg",
+      "width": 1066,
+      "height": 1600,
+      "bytes": 318135,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/034-indu.jpg",
+      "web": "assets/web/client/034-indu.jpg",
+      "thumb": "assets/web/thumbs/client/034-indu.jpg",
+      "width": 1066,
+      "height": 1600,
+      "bytes": 360521,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/034-manasa.jpg",
+      "web": "assets/web/client/034-manasa.jpg",
+      "thumb": "assets/web/thumbs/client/034-manasa.jpg",
+      "width": 1066,
+      "height": 1600,
+      "bytes": 462275,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/034-manavi.jpg",
+      "web": "assets/web/client/034-manavi.jpg",
+      "thumb": "assets/web/thumbs/client/034-manavi.jpg",
+      "width": 1066,
+      "height": 1600,
+      "bytes": 316452,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/034-medha.jpg",
+      "web": "assets/web/client/034-medha.jpg",
+      "thumb": "assets/web/thumbs/client/034-medha.jpg",
+      "width": 1066,
+      "height": 1600,
+      "bytes": 341498,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/034-meera.jpg",
+      "web": "assets/web/client/034-meera.jpg",
+      "thumb": "assets/web/thumbs/client/034-meera.jpg",
+      "width": 1066,
+      "height": 1600,
+      "bytes": 369344,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/034-pooja.jpg",
+      "web": "assets/web/client/034-pooja.jpg",
+      "thumb": "assets/web/thumbs/client/034-pooja.jpg",
+      "width": 1066,
+      "height": 1600,
+      "bytes": 303216,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/034-rohini-edit.jpg",
+      "web": "assets/web/client/034-rohini-edit.jpg",
+      "thumb": "assets/web/thumbs/client/034-rohini-edit.jpg",
+      "width": 1067,
+      "height": 1600,
+      "bytes": 152517,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/034-sanchita.jpg",
+      "web": "assets/web/client/034-sanchita.jpg",
+      "thumb": "assets/web/thumbs/client/034-sanchita.jpg",
+      "width": 1066,
+      "height": 1600,
+      "bytes": 329485,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/034-spurti.jpg",
+      "web": "assets/web/client/034-spurti.jpg",
+      "thumb": "assets/web/thumbs/client/034-spurti.jpg",
+      "width": 960,
+      "height": 1280,
+      "bytes": 185469,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/035.jpg",
+      "web": "assets/web/client/035.jpg",
+      "thumb": "assets/web/thumbs/client/035.jpg",
+      "width": 1600,
+      "height": 1600,
+      "bytes": 136780,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/037A-tall.jpg",
+      "web": "assets/web/client/037A-tall.jpg",
+      "thumb": "assets/web/thumbs/client/037A-tall.jpg",
+      "width": 1498,
+      "height": 1600,
+      "bytes": 319597,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/037b-edit.jpg",
+      "web": "assets/web/client/037b-edit.jpg",
+      "thumb": "assets/web/thumbs/client/037b-edit.jpg",
+      "width": 1549,
+      "height": 1600,
+      "bytes": 234130,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/041.jpg",
+      "web": "assets/web/client/041.jpg",
+      "thumb": "assets/web/thumbs/client/041.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 323865,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/046.jpg",
+      "web": "assets/web/client/046.jpg",
+      "thumb": "assets/web/thumbs/client/046.jpg",
+      "width": 1600,
+      "height": 899,
+      "bytes": 94846,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/049-tall.jpg",
+      "web": "assets/web/client/049-tall.jpg",
+      "thumb": "assets/web/thumbs/client/049-tall.jpg",
+      "width": 1555,
+      "height": 1600,
+      "bytes": 156620,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/054.jpg",
+      "web": "assets/web/client/054.jpg",
+      "thumb": "assets/web/thumbs/client/054.jpg",
+      "width": 1280,
+      "height": 640,
+      "bytes": 88440,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/about-us-nirupama-rajendra-2-edit.jpg",
+      "web": "assets/web/client/about-us-nirupama-rajendra-2-edit.jpg",
+      "thumb": "assets/web/thumbs/client/about-us-nirupama-rajendra-2-edit.jpg",
+      "width": 1002,
+      "height": 1600,
+      "bytes": 150754,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/about-us-nirupama-rajendra-edit.jpg",
+      "web": "assets/web/client/about-us-nirupama-rajendra-edit.jpg",
+      "thumb": "assets/web/thumbs/client/about-us-nirupama-rajendra-edit.jpg",
+      "width": 1600,
+      "height": 1323,
+      "bytes": 172864,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/about-us-nirupama-rajendra.jpg",
+      "web": "assets/web/client/about-us-nirupama-rajendra.jpg",
+      "thumb": "assets/web/thumbs/client/about-us-nirupama-rajendra.jpg",
+      "width": 1600,
+      "height": 1024,
+      "bytes": 143935,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/arjun-bharadwaj-pic-3x4.jpg",
+      "web": "assets/web/client/arjun-bharadwaj-pic-3x4.jpg",
+      "thumb": "assets/web/thumbs/client/arjun-bharadwaj-pic-3x4.jpg",
+      "width": 712,
+      "height": 950,
+      "bytes": 164332,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/award-attendance.jpg",
+      "web": "assets/web/client/award-attendance.jpg",
+      "thumb": "assets/web/thumbs/client/award-attendance.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 140453,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/award-drushti-puraskaar.jpg",
+      "web": "assets/web/client/award-drushti-puraskaar.jpg",
+      "thumb": "assets/web/thumbs/client/award-drushti-puraskaar.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 202367,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/award-kala-sarathi.jpg",
+      "web": "assets/web/client/award-kala-sarathi.jpg",
+      "thumb": "assets/web/thumbs/client/award-kala-sarathi.jpg",
+      "width": 1125,
+      "height": 1051,
+      "bytes": 174456,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/award-karnataka-kalashree.jpg",
+      "web": "assets/web/client/award-karnataka-kalashree.jpg",
+      "thumb": "assets/web/thumbs/client/award-karnataka-kalashree.jpg",
+      "width": 1600,
+      "height": 1063,
+      "bytes": 169976,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/award-nritya-choodamani.jpg",
+      "web": "assets/web/client/award-nritya-choodamani.jpg",
+      "thumb": "assets/web/thumbs/client/award-nritya-choodamani.jpg",
+      "width": 1011,
+      "height": 720,
+      "bytes": 84492,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/award-purandara-acharya.jpg",
+      "web": "assets/web/client/award-purandara-acharya.jpg",
+      "thumb": "assets/web/thumbs/client/award-purandara-acharya.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 234708,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/bhidesis-thumbnail.jpg",
+      "web": "assets/web/client/bhidesis-thumbnail.jpg",
+      "thumb": "assets/web/thumbs/client/bhidesis-thumbnail.jpg",
+      "width": 893,
+      "height": 1600,
+      "bytes": 92966,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/class-to-classics-01.jpg",
+      "web": "assets/web/client/class-to-classics-01.jpg",
+      "thumb": "assets/web/thumbs/client/class-to-classics-01.jpg",
+      "width": 1067,
+      "height": 1600,
+      "bytes": 108620,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/class-to-classics-02.jpg",
+      "web": "assets/web/client/class-to-classics-02.jpg",
+      "thumb": "assets/web/thumbs/client/class-to-classics-02.jpg",
+      "width": 1067,
+      "height": 1600,
+      "bytes": 66373,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/class-to-classics-03.jpg",
+      "web": "assets/web/client/class-to-classics-03.jpg",
+      "thumb": "assets/web/thumbs/client/class-to-classics-03.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 100365,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/coleena-thumbnail.jpg",
+      "web": "assets/web/client/coleena-thumbnail.jpg",
+      "thumb": "assets/web/thumbs/client/coleena-thumbnail.jpg",
+      "width": 919,
+      "height": 1600,
+      "bytes": 73776,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/collaborator-anoor-anantha-kirshna-sharma.jpg",
+      "web": "assets/web/client/collaborator-anoor-anantha-kirshna-sharma.jpg",
+      "thumb": "assets/web/thumbs/client/collaborator-anoor-anantha-kirshna-sharma.jpg",
+      "width": 1067,
+      "height": 1600,
+      "bytes": 160099,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/collaborator-bickram-ghosh.jpg",
+      "web": "assets/web/client/collaborator-bickram-ghosh.jpg",
+      "thumb": "assets/web/thumbs/client/collaborator-bickram-ghosh.jpg",
+      "width": 1067,
+      "height": 1600,
+      "bytes": 143819,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/collaborator-faiyaz-khan-2-3x4.jpg",
+      "web": "assets/web/client/collaborator-faiyaz-khan-2-3x4.jpg",
+      "thumb": "assets/web/thumbs/client/collaborator-faiyaz-khan-2-3x4.jpg",
+      "width": 780,
+      "height": 1040,
+      "bytes": 136056,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/collaborator-jayanthi-kumaresh-and-kumaresh.jpg",
+      "web": "assets/web/client/collaborator-jayanthi-kumaresh-and-kumaresh.jpg",
+      "thumb": "assets/web/thumbs/client/collaborator-jayanthi-kumaresh-and-kumaresh.jpg",
+      "width": 1067,
+      "height": 1600,
+      "bytes": 125144,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/collaborator-mysore-manjunath.jpg",
+      "web": "assets/web/client/collaborator-mysore-manjunath.jpg",
+      "thumb": "assets/web/thumbs/client/collaborator-mysore-manjunath.jpg",
+      "width": 1067,
+      "height": 1600,
+      "bytes": 130461,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/collaborator-praveen-d-rao.jpg",
+      "web": "assets/web/client/collaborator-praveen-d-rao.jpg",
+      "thumb": "assets/web/thumbs/client/collaborator-praveen-d-rao.jpg",
+      "width": 1067,
+      "height": 1600,
+      "bytes": 76600,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/collaborator-pravin-godkhindi.jpg",
+      "web": "assets/web/client/collaborator-pravin-godkhindi.jpg",
+      "thumb": "assets/web/thumbs/client/collaborator-pravin-godkhindi.jpg",
+      "width": 1067,
+      "height": 1600,
+      "bytes": 197689,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/collaborator-vinod-gowda.jpg",
+      "web": "assets/web/client/collaborator-vinod-gowda.jpg",
+      "thumb": "assets/web/thumbs/client/collaborator-vinod-gowda.jpg",
+      "width": 1067,
+      "height": 1600,
+      "bytes": 218094,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/company-team.jpg",
+      "web": "assets/web/client/company-team.jpg",
+      "thumb": "assets/web/thumbs/client/company-team.jpg",
+      "width": 1432,
+      "height": 920,
+      "bytes": 97820,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/dance-karma-evening-session-thumbnail.jpg",
+      "web": "assets/web/client/dance-karma-evening-session-thumbnail.jpg",
+      "thumb": "assets/web/thumbs/client/dance-karma-evening-session-thumbnail.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 179093,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/dance-karma-morning-session-thumbnail-2.jpg",
+      "web": "assets/web/client/dance-karma-morning-session-thumbnail-2.jpg",
+      "thumb": "assets/web/thumbs/client/dance-karma-morning-session-thumbnail-2.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 207341,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/dhaara-thumbnail-2.jpg",
+      "web": "assets/web/client/dhaara-thumbnail-2.jpg",
+      "thumb": "assets/web/thumbs/client/dhaara-thumbnail-2.jpg",
+      "width": 1290,
+      "height": 700,
+      "bytes": 112683,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/four-pillars-1.jpg",
+      "web": "assets/web/client/four-pillars-1.jpg",
+      "thumb": "assets/web/thumbs/client/four-pillars-1.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 322015,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/four-pillars-3.jpg",
+      "web": "assets/web/client/four-pillars-3.jpg",
+      "thumb": "assets/web/thumbs/client/four-pillars-3.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 184814,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/four-pillars-4.jpg",
+      "web": "assets/web/client/four-pillars-4.jpg",
+      "thumb": "assets/web/thumbs/client/four-pillars-4.jpg",
+      "width": 1600,
+      "height": 1459,
+      "bytes": 242839,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/four-pillars-5.jpg",
+      "web": "assets/web/client/four-pillars-5.jpg",
+      "thumb": "assets/web/thumbs/client/four-pillars-5.jpg",
+      "width": 1280,
+      "height": 960,
+      "bytes": 198774,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/gallery-title.jpg",
+      "web": "assets/web/client/gallery-title.jpg",
+      "thumb": "assets/web/thumbs/client/gallery-title.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 89617,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/get-abhinava.jpg",
+      "web": "assets/web/client/get-abhinava.jpg",
+      "thumb": "assets/web/thumbs/client/get-abhinava.jpg",
+      "width": 1067,
+      "height": 1600,
+      "bytes": 200879,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/kaladwaraka-thumbnail.jpg",
+      "web": "assets/web/client/kaladwaraka-thumbnail.jpg",
+      "thumb": "assets/web/thumbs/client/kaladwaraka-thumbnail.jpg",
+      "width": 1600,
+      "height": 905,
+      "bytes": 130373,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/kavya-chitra-geetha-nrithya-thumbnail.jpg",
+      "web": "assets/web/client/kavya-chitra-geetha-nrithya-thumbnail.jpg",
+      "thumb": "assets/web/thumbs/client/kavya-chitra-geetha-nrithya-thumbnail.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 166399,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/madanothsava-1-thumbnail.jpg",
+      "web": "assets/web/client/madanothsava-1-thumbnail.jpg",
+      "thumb": "assets/web/thumbs/client/madanothsava-1-thumbnail.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 426006,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/madanothsava-2-thumbnail.jpg",
+      "web": "assets/web/client/madanothsava-2-thumbnail.jpg",
+      "thumb": "assets/web/thumbs/client/madanothsava-2-thumbnail.jpg",
+      "width": 1600,
+      "height": 1214,
+      "bytes": 216648,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/madanothsava-3-thumbnail.jpg",
+      "web": "assets/web/client/madanothsava-3-thumbnail.jpg",
+      "thumb": "assets/web/thumbs/client/madanothsava-3-thumbnail.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 365650,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/madanothsava-home-page-2.jpg",
+      "web": "assets/web/client/madanothsava-home-page-2.jpg",
+      "thumb": "assets/web/thumbs/client/madanothsava-home-page-2.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 181112,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/madanothsava-home-page-3.jpg",
+      "web": "assets/web/client/madanothsava-home-page-3.jpg",
+      "thumb": "assets/web/thumbs/client/madanothsava-home-page-3.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 246831,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/madanothsava-home-page-4.jpg",
+      "web": "assets/web/client/madanothsava-home-page-4.jpg",
+      "thumb": "assets/web/thumbs/client/madanothsava-home-page-4.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 346523,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/maulik-workshop-02.jpg",
+      "web": "assets/web/client/maulik-workshop-02.jpg",
+      "thumb": "assets/web/thumbs/client/maulik-workshop-02.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 267588,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/maulik-workshop-03.jpg",
+      "web": "assets/web/client/maulik-workshop-03.jpg",
+      "thumb": "assets/web/thumbs/client/maulik-workshop-03.jpg",
+      "width": 1600,
+      "height": 1094,
+      "bytes": 171401,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/maulik-workshop-04.jpg",
+      "web": "assets/web/client/maulik-workshop-04.jpg",
+      "thumb": "assets/web/thumbs/client/maulik-workshop-04.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 282372,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/maulik-workshop-thumbnail.jpg",
+      "web": "assets/web/client/maulik-workshop-thumbnail.jpg",
+      "thumb": "assets/web/thumbs/client/maulik-workshop-thumbnail.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 304037,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/maulik-workshop-video-cover.jpg",
+      "web": "assets/web/client/maulik-workshop-video-cover.jpg",
+      "thumb": "assets/web/thumbs/client/maulik-workshop-video-cover.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 166441,
+      "skipped": false
+    },
+    {
+      "source": "assets/client/medha-and-rohini.jpg",
+      "web": "assets/web/client/medha-and-rohini.jpg",
+      "thumb": "assets/web/thumbs/client/medha-and-rohini.jpg",
+      "width": 1067,
+      "height": 1600,
+      "bytes": 142225,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/milan-01.jpg",
+      "web": "assets/web/client/milan-01.jpg",
+      "thumb": "assets/web/thumbs/client/milan-01.jpg",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 262004,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/milan-02.jpg",
+      "web": "assets/web/client/milan-02.jpg",
+      "thumb": "assets/web/thumbs/client/milan-02.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 190919,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/milan-02a.jpg",
+      "web": "assets/web/client/milan-02a.jpg",
+      "thumb": "assets/web/thumbs/client/milan-02a.jpg",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 326322,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/milan-03.jpg",
+      "web": "assets/web/client/milan-03.jpg",
+      "thumb": "assets/web/thumbs/client/milan-03.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 277020,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/milan-04.jpg",
+      "web": "assets/web/client/milan-04.jpg",
+      "thumb": "assets/web/thumbs/client/milan-04.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 228707,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/milan-05.jpg",
+      "web": "assets/web/client/milan-05.jpg",
+      "thumb": "assets/web/thumbs/client/milan-05.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 246124,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/noteworthy-1.jpg",
+      "web": "assets/web/client/noteworthy-1.jpg",
+      "thumb": "assets/web/thumbs/client/noteworthy-1.jpg",
+      "width": 1600,
+      "height": 818,
+      "bytes": 121293,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/noteworthy-2.jpg",
+      "web": "assets/web/client/noteworthy-2.jpg",
+      "thumb": "assets/web/thumbs/client/noteworthy-2.jpg",
+      "width": 1600,
+      "height": 1066,
+      "bytes": 187905,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/noteworthy-3.jpg",
+      "web": "assets/web/client/noteworthy-3.jpg",
+      "thumb": "assets/web/thumbs/client/noteworthy-3.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 248318,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/noteworthy-4.jpg",
+      "web": "assets/web/client/noteworthy-4.jpg",
+      "thumb": "assets/web/thumbs/client/noteworthy-4.jpg",
+      "width": 1280,
+      "height": 960,
+      "bytes": 161527,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/noteworthy-5.jpg",
+      "web": "assets/web/client/noteworthy-5.jpg",
+      "thumb": "assets/web/thumbs/client/noteworthy-5.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 161014,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/noteworthy-6.jpg",
+      "web": "assets/web/client/noteworthy-6.jpg",
+      "thumb": "assets/web/thumbs/client/noteworthy-6.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 184302,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/noteworthy-7.jpg",
+      "web": "assets/web/client/noteworthy-7.jpg",
+      "thumb": "assets/web/thumbs/client/noteworthy-7.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 347788,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/parva-thumbnail-1.jpg",
+      "web": "assets/web/client/parva-thumbnail-1.jpg",
+      "thumb": "assets/web/thumbs/client/parva-thumbnail-1.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 179396,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/radha-thumbnail.jpg",
+      "web": "assets/web/client/radha-thumbnail.jpg",
+      "thumb": "assets/web/thumbs/client/radha-thumbnail.jpg",
+      "width": 960,
+      "height": 1600,
+      "bytes": 143293,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/rangapravesh-shreya.jpg",
+      "web": "assets/web/client/rangapravesh-shreya.jpg",
+      "thumb": "assets/web/thumbs/client/rangapravesh-shreya.jpg",
+      "width": 683,
+      "height": 1024,
+      "bytes": 66620,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/rangapravesha-01.jpg",
+      "web": "assets/web/client/rangapravesha-01.jpg",
+      "thumb": "assets/web/thumbs/client/rangapravesha-01.jpg",
+      "width": 1067,
+      "height": 1600,
+      "bytes": 194981,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/rangapravesha-02.jpg",
+      "web": "assets/web/client/rangapravesha-02.jpg",
+      "thumb": "assets/web/thumbs/client/rangapravesha-02.jpg",
+      "width": 1067,
+      "height": 1600,
+      "bytes": 168416,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/rangapravesha-04.jpg",
+      "web": "assets/web/client/rangapravesha-04.jpg",
+      "thumb": "assets/web/thumbs/client/rangapravesha-04.jpg",
+      "width": 1067,
+      "height": 1600,
+      "bytes": 102351,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/rangapravesha-07-edit.jpg",
+      "web": "assets/web/client/rangapravesha-07-edit.jpg",
+      "thumb": "assets/web/thumbs/client/rangapravesha-07-edit.jpg",
+      "width": 1090,
+      "height": 1600,
+      "bytes": 103364,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/rangapravesha-08.jpg",
+      "web": "assets/web/client/rangapravesha-08.jpg",
+      "thumb": "assets/web/thumbs/client/rangapravesha-08.jpg",
+      "width": 1067,
+      "height": 1600,
+      "bytes": 201171,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/rangapravesha-09.jpg",
+      "web": "assets/web/client/rangapravesha-09.jpg",
+      "thumb": "assets/web/thumbs/client/rangapravesha-09.jpg",
+      "width": 1170,
+      "height": 1600,
+      "bytes": 117058,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/rangapravesha-10-edit.jpg",
+      "web": "assets/web/client/rangapravesha-10-edit.jpg",
+      "thumb": "assets/web/thumbs/client/rangapravesha-10-edit.jpg",
+      "width": 880,
+      "height": 1251,
+      "bytes": 100440,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/rangapravesha-medha-1.jpg",
+      "web": "assets/web/client/rangapravesha-medha-1.jpg",
+      "thumb": "assets/web/thumbs/client/rangapravesha-medha-1.jpg",
+      "width": 1067,
+      "height": 1600,
+      "bytes": 183630,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/rangapravesha-sanchita.jpg",
+      "web": "assets/web/client/rangapravesha-sanchita.jpg",
+      "thumb": "assets/web/thumbs/client/rangapravesha-sanchita.jpg",
+      "width": 1065,
+      "height": 1600,
+      "bytes": 175306,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/rasaaraadhanam-thumbnail.jpg",
+      "web": "assets/web/client/rasaaraadhanam-thumbnail.jpg",
+      "thumb": "assets/web/thumbs/client/rasaaraadhanam-thumbnail.jpg",
+      "width": 1280,
+      "height": 854,
+      "bytes": 63264,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/samvedana-thumbnail-2.jpg",
+      "web": "assets/web/client/samvedana-thumbnail-2.jpg",
+      "thumb": "assets/web/thumbs/client/samvedana-thumbnail-2.jpg",
+      "width": 1600,
+      "height": 703,
+      "bytes": 138611,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/saraswati-horizontal.jpg",
+      "web": "assets/web/client/saraswati-horizontal.jpg",
+      "thumb": "assets/web/thumbs/client/saraswati-horizontal.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 240240,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/school-apply-now.jpg",
+      "web": "assets/web/client/school-apply-now.jpg",
+      "thumb": "assets/web/thumbs/client/school-apply-now.jpg",
+      "width": 1067,
+      "height": 1600,
+      "bytes": 250181,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/school-comprehensive-training-thumbnail-trimmed.jpg",
+      "web": "assets/web/client/school-comprehensive-training-thumbnail-trimmed.jpg",
+      "thumb": "assets/web/thumbs/client/school-comprehensive-training-thumbnail-trimmed.jpg",
+      "width": 1600,
+      "height": 848,
+      "bytes": 149026,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/school-natyashastra-karanas-edit.jpg",
+      "web": "assets/web/client/school-natyashastra-karanas-edit.jpg",
+      "thumb": "assets/web/thumbs/client/school-natyashastra-karanas-edit.jpg",
+      "width": 1340,
+      "height": 1600,
+      "bytes": 207016,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/school-natyashastra-karanas.jpg",
+      "web": "assets/web/client/school-natyashastra-karanas.jpg",
+      "thumb": "assets/web/thumbs/client/school-natyashastra-karanas.jpg",
+      "width": 1067,
+      "height": 1600,
+      "bytes": 182484,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/sharvari-thumbnail.jpg",
+      "web": "assets/web/client/sharvari-thumbnail.jpg",
+      "thumb": "assets/web/thumbs/client/sharvari-thumbnail.jpg",
+      "width": 893,
+      "height": 1600,
+      "bytes": 131309,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/upcoming-shows-list-pic-edit.jpg",
+      "web": "assets/web/client/upcoming-shows-list-pic-edit.jpg",
+      "thumb": "assets/web/thumbs/client/upcoming-shows-list-pic-edit.jpg",
+      "width": 734,
+      "height": 1600,
+      "bytes": 106500,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/vandemataram-thumbnail.jpg",
+      "web": "assets/web/client/vandemataram-thumbnail.jpg",
+      "thumb": "assets/web/thumbs/client/vandemataram-thumbnail.jpg",
+      "width": 1600,
+      "height": 908,
+      "bytes": 314287,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/vasantha-suprabhatham-thumbnail.jpg",
+      "web": "assets/web/client/vasantha-suprabhatham-thumbnail.jpg",
+      "thumb": "assets/web/thumbs/client/vasantha-suprabhatham-thumbnail.jpg",
+      "width": 1600,
+      "height": 1142,
+      "bytes": 285692,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/vijayadashami-01.jpg",
+      "web": "assets/web/client/vijayadashami-01.jpg",
+      "thumb": "assets/web/thumbs/client/vijayadashami-01.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 187817,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/vijayadashami-02.jpg",
+      "web": "assets/web/client/vijayadashami-02.jpg",
+      "thumb": "assets/web/thumbs/client/vijayadashami-02.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 228345,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/vijayadashami-03.jpg",
+      "web": "assets/web/client/vijayadashami-03.jpg",
+      "thumb": "assets/web/thumbs/client/vijayadashami-03.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 175288,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/vijayadashami-04.jpg",
+      "web": "assets/web/client/vijayadashami-04.jpg",
+      "thumb": "assets/web/thumbs/client/vijayadashami-04.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 216530,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/vijayadashami-05.jpg",
+      "web": "assets/web/client/vijayadashami-05.jpg",
+      "thumb": "assets/web/thumbs/client/vijayadashami-05.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 145708,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/vijayadashami-07.jpg",
+      "web": "assets/web/client/vijayadashami-07.jpg",
+      "thumb": "assets/web/thumbs/client/vijayadashami-07.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 134310,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/vijayadashami-08.jpg",
+      "web": "assets/web/client/vijayadashami-08.jpg",
+      "thumb": "assets/web/thumbs/client/vijayadashami-08.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 166207,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/vijayadashami-09.jpg",
+      "web": "assets/web/client/vijayadashami-09.jpg",
+      "thumb": "assets/web/thumbs/client/vijayadashami-09.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 273507,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/vijayadashami-10.jpg",
+      "web": "assets/web/client/vijayadashami-10.jpg",
+      "thumb": "assets/web/thumbs/client/vijayadashami-10.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 120481,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/vijayadashami-11.jpg",
+      "web": "assets/web/client/vijayadashami-11.jpg",
+      "thumb": "assets/web/thumbs/client/vijayadashami-11.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 177492,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/vijayadashami-12.jpg",
+      "web": "assets/web/client/vijayadashami-12.jpg",
+      "thumb": "assets/web/thumbs/client/vijayadashami-12.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 277229,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/vijayadashami-thumbnail.jpg",
+      "web": "assets/web/client/vijayadashami-thumbnail.jpg",
+      "thumb": "assets/web/thumbs/client/vijayadashami-thumbnail.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 255573,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/vijayadashami.jpg",
+      "web": "assets/web/client/vijayadashami.jpg",
+      "thumb": "assets/web/thumbs/client/vijayadashami.jpg",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 289232,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/workshop-kumudini-lakhia.jpg",
+      "web": "assets/web/client/workshop-kumudini-lakhia.jpg",
+      "thumb": "assets/web/thumbs/client/workshop-kumudini-lakhia.jpg",
+      "width": 1600,
+      "height": 1588,
+      "bytes": 184342,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/workshop-maharajji.jpg",
+      "web": "assets/web/client/workshop-maharajji.jpg",
+      "thumb": "assets/web/thumbs/client/workshop-maharajji.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 115150,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/workshop-maya-rao.jpg",
+      "web": "assets/web/client/workshop-maya-rao.jpg",
+      "thumb": "assets/web/thumbs/client/workshop-maya-rao.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 73813,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/workshop-nirupama-dma.jpg",
+      "web": "assets/web/client/workshop-nirupama-dma.jpg",
+      "thumb": "assets/web/thumbs/client/workshop-nirupama-dma.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 147591,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/workshop-padma-subrahmanyam-1.jpg",
+      "web": "assets/web/client/workshop-padma-subrahmanyam-1.jpg",
+      "thumb": "assets/web/thumbs/client/workshop-padma-subrahmanyam-1.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 206607,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/workshop-padma-subrahmanyam-2.jpg",
+      "web": "assets/web/client/workshop-padma-subrahmanyam-2.jpg",
+      "thumb": "assets/web/thumbs/client/workshop-padma-subrahmanyam-2.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 167202,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/workshop-padma-subrahmanyam-3.jpg",
+      "web": "assets/web/client/workshop-padma-subrahmanyam-3.jpg",
+      "thumb": "assets/web/thumbs/client/workshop-padma-subrahmanyam-3.jpg",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 162319,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/workshop-padma-subrahmanyam-4.jpg",
+      "web": "assets/web/client/workshop-padma-subrahmanyam-4.jpg",
+      "thumb": "assets/web/thumbs/client/workshop-padma-subrahmanyam-4.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 89423,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/workshop-padma-subrahmanyam-5.jpg",
+      "web": "assets/web/client/workshop-padma-subrahmanyam-5.jpg",
+      "thumb": "assets/web/thumbs/client/workshop-padma-subrahmanyam-5.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 190297,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/workshop-padma-subrahmanyam-6.jpg",
+      "web": "assets/web/client/workshop-padma-subrahmanyam-6.jpg",
+      "thumb": "assets/web/thumbs/client/workshop-padma-subrahmanyam-6.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 203806,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/workshop-padma-subrahmanyam-7.jpg",
+      "web": "assets/web/client/workshop-padma-subrahmanyam-7.jpg",
+      "thumb": "assets/web/thumbs/client/workshop-padma-subrahmanyam-7.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 168843,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/workshop-padma-subrahmanyam-8.jpg",
+      "web": "assets/web/client/workshop-padma-subrahmanyam-8.jpg",
+      "thumb": "assets/web/thumbs/client/workshop-padma-subrahmanyam-8.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 250542,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/workshop-padma-subrahmanyam.jpg",
+      "web": "assets/web/client/workshop-padma-subrahmanyam.jpg",
+      "thumb": "assets/web/thumbs/client/workshop-padma-subrahmanyam.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 169772,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/yuva-abhinava-1.jpg",
+      "web": "assets/web/client/yuva-abhinava-1.jpg",
+      "thumb": "assets/web/thumbs/client/yuva-abhinava-1.jpg",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 305148,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/yuva-abhinava-2.jpg",
+      "web": "assets/web/client/yuva-abhinava-2.jpg",
+      "thumb": "assets/web/thumbs/client/yuva-abhinava-2.jpg",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 279298,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/yuva-abhinava-3.jpg",
+      "web": "assets/web/client/yuva-abhinava-3.jpg",
+      "thumb": "assets/web/thumbs/client/yuva-abhinava-3.jpg",
+      "width": 1200,
+      "height": 1600,
+      "bytes": 240460,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/yuva-abhinava-4.jpg",
+      "web": "assets/web/client/yuva-abhinava-4.jpg",
+      "thumb": "assets/web/thumbs/client/yuva-abhinava-4.jpg",
+      "width": 1200,
+      "height": 1600,
+      "bytes": 228740,
+      "skipped": true
+    },
+    {
+      "source": "assets/client/yuva-abhinava-5.jpg",
+      "web": "assets/web/client/yuva-abhinava-5.jpg",
+      "thumb": "assets/web/thumbs/client/yuva-abhinava-5.jpg",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 310668,
+      "skipped": true
+    },
+    {
+      "source": "assets/images/site-images/032-fix.png",
+      "web": "assets/web/images/site-images/032-fix.jpg",
+      "thumb": "assets/web/thumbs/images/site-images/032-fix.jpg",
+      "width": 1000,
+      "height": 847,
+      "bytes": 76806,
+      "skipped": true
+    }
+  ]
+}

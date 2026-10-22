@@ -1,0 +1,12 @@
+{
+  "name": "adc-webupdate",
+  "private": true,
+  "description": "Abhinava Dance Company website — updated from a Google Sheet. The robot builds a preview and publishes to abhinava.dance when the moderator approves.",
+  "scripts": {
+    "build": "node webupdate/build.mjs --content content/live.json",
+    "test": "node webupdate/test/roundtrip.mjs && node webupdate/test/edits.mjs && node webupdate/test/sheet-roundtrip.mjs"
+  },
+  "dependencies": {
+    "sharp": "0.33.5"
+  }
+}

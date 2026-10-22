@@ -1,0 +1,43 @@
+@layer sections {
+  /* ==========================================================================
+     Abhinava Dance Company — page sections
+
+     Edit the parts in css/sections/ (one file per group below), then run
+     npm run css:build: it joins them, in file-name order, into
+     css/sections.css, the one stylesheet the pages load. Never edit
+     css/sections.css by hand; npm run check fails if it differs from the parts.
+
+     Layer 2 (components) in parts 1–21, then Layer 3 (scoped overrides) in
+     parts 22–23. Inner pages use the s-* sections; the home page and the
+     partner bands use the alt-* bands. Loaded last, after main.css and luxury.css.
+
+     Contents — part file (in css/sections/) and the sections it holds
+     01-band-tokens ............... 1. Band tokens
+     02-section ................... 2. Section — photo beside text (s-section): picture panels, contained widths, dividers
+     03-video-tiles ............... Video thumbnails (s-video, s-video-grid)
+     04-text-sections ............. 3. Text only (s-split-text) · 4. Page introduction (s-page-intro) · 5. Photo band (s-band)
+     05-prose-cards-covers ........ 6. Body copy (content-prose) · 7. Cards (s-cards) · 8. Cover photos (media-cover)
+     06-timeline-productions ...... 9. Timeline (s-timeline) · 10. Production tiles (s-prod)
+     07-colour-bands .............. 11. Colour bands (alt-band) · 12. Band headings · 13. Interlude · 14. Photo split
+     08-pillars-partners .......... 15. Pillars — Core Elements · 16. Partners
+     (17. Journey steps: removed 13 October 2026, merged into the Home school block)
+     09-carousel-stats-portraits .. 18. Carousel (alt-carousel) · 19. Stats strip · 20. Portraits (client-portrait)
+     10-quotes-voices ............. 21. Pull quotes, quotation cards (s-quotes), testimonial rows (s-voice)
+     11-dark-surfaces ............. 22. Dark surfaces — text and cards
+     12-palette-accents ........... 23. Palette accents
+     13-phones .................... 24. Phones — reading and tapping comfort
+     14-mini-carousel ............. Mini carousel (s-mini)
+     15-production-popup .......... Production pop-up (s-pop)
+     16-next-page ................. Next page band (alt-next): the last band of every page
+     ========================================================================== */
+
+  /* ==========================================================================
+     1. Band tokens
+     ========================================================================== */
+
+  :root {
+    --band-max: var(--layout-max);
+    --band-space-xl: clamp(3.5rem, 8vw, 5rem); /* bands hold the approved sections: kept apart from --section-space on purpose */
+    --band-rule: 1px solid var(--gold-bright);
+  }
+}

@@ -1,0 +1,85 @@
+# Approve & publish: started by the moderator from the Google Sheet. Builds the live site from the
+# exact content that was previewed, uploads it to Netlify (abhinava.dance), records it in content/
+# live.json with a publish-… tag (for Undo), and writes status/publish.json for the Sheet.
+name: Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      by: { description: "Who approved", required: true }
+      sha: { description: "The preview to publish (commit on the preview branch)", required: true }
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-save --no-audit --no-fund sharp@0.33.5
+      - uses: actions/cache@v4
+        with:
+          path: webupdate/.cache
+          key: media-${{ github.run_id }}
+          restore-keys: media-
+      - name: The previewed content
+        run: |
+          git fetch -q origin preview
+          git show "${{ inputs.sha }}:content/preview.json" > /tmp/preview.json
+      - name: Build the live site
+        env:
+          INSTAGRAM_FEED_MAIN: ${{ secrets.INSTAGRAM_FEED_MAIN }}
+          INSTAGRAM_FEED_SCHOOL: ${{ secrets.INSTAGRAM_FEED_SCHOOL }}
+        run: node webupdate/build.mjs --content /tmp/preview.json --out ../out
+      - name: Upload to Netlify
+        id: netlify
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          set +e
+          node webupdate/netlify-deploy.mjs ../out/site "Published by ${{ inputs.by }}"
+          code=$?
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          [ $code = 1 ] && exit 1 || exit 0
+      - name: Record it (content, photos, tag, log)
+        if: steps.netlify.outputs.code == '0'
+        run: |
+          cp ../out/content.json content/live.json
+          mkdir -p assets/web/content assets/web/thumbs/content
+          cp -R ../out/site/assets/web/content/. assets/web/content/ 2>/dev/null || true
+          cp -R ../out/site/assets/web/thumbs/content/. assets/web/thumbs/content/ 2>/dev/null || true
+          cp ../out/site/js/instagram-data.js js/instagram-data.js 2>/dev/null || true
+          mkdir -p log
+          [ -f log/publishes.csv ] || echo "When,Who,Preview,Netlify" > log/publishes.csv
+          echo "$(date -u +%Y-%m-%dT%H:%M:%SZ),${{ inputs.by }},${{ inputs.sha }},live" >> log/publishes.csv
+          git add -A
+          git -c user.name="Website robot" -c user.email="actions@users.noreply.github.com" commit -q -m "Published by ${{ inputs.by }}"
+          tag="publish-$(date -u +%Y%m%d-%H%M%S)"
+          git tag "$tag"
+          git push -q origin main "$tag"
+      - name: Status for the Sheet
+        if: always()
+        run: |
+          ok=${{ job.status == 'success' && steps.netlify.outputs.code == '0' }}
+          cat > /tmp/publish.json <<JSON
+          {"ok": $ok, "netlify": "${{ steps.netlify.outputs.code }}", "sha": "${{ inputs.sha }}", "by": "${{ inputs.by }}", "at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"}
+          JSON
+          git fetch -q origin status:status 2>/dev/null || true
+          rm -rf /tmp/st && mkdir /tmp/st && cd /tmp/st && git init -q && git checkout -q -b status
+          mkdir -p status
+          git -C "$GITHUB_WORKSPACE" show status:status/preview.json > status/preview.json 2>/dev/null || true
+          cp /tmp/publish.json status/publish.json
+          git add -A && git -c user.name="Website robot" -c user.email="actions@users.noreply.github.com" commit -q -m "Publish status"
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" status
