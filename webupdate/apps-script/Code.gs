@@ -90,7 +90,7 @@ function can_(what) {
   var r = roleOf_(me_());
   if (what === "edit") return r === ROLE.editor || r === ROLE.moderator || r === ROLE.owner;
   if (what === "moderate") return r === ROLE.moderator || r === ROLE.owner;
-  if (what === "own") return r === ROLE.owner;
+  if (what === "own") return r === ROLE.owner || !SpreadsheetApp.getActive().getSheetByName("Users"); // first set-up: whoever runs it becomes the owner
   return false;
 }
 
