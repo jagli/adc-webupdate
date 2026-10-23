@@ -164,6 +164,7 @@ header h1{font-size:18px;margin:0;font-weight:600}header p{margin:0;opacity:.85;
 .wu-stage{background:#e9e4da;border-radius:8px;padding:10px;overflow:auto}
 .wu-frame{display:block;width:100%;height:600px;border:0;background:#fff;margin:0 auto;transition:width .2s}
 .wu-stage.phone .wu-frame{width:390px;max-width:100%}
+.wu-frame[hidden]{display:none}
 .legend{font-size:13px;color:var(--muted);margin:0 0 18px}.legend b{outline:3px solid #e9b44c;padding:0 4px}
 .empty{background:#fff;border:1px solid var(--line);border-radius:10px;padding:30px;text-align:center;color:var(--muted)}
 </style></head><body>
