@@ -1707,7 +1707,7 @@
       {
        "key": "about/our-mission/t1",
        "kind": "photos",
-       "what": "Photos — one per line (Drive links), or one Drive folder link",
+       "what": "Photos (one per line)",
        "value": "assets/web/client/four-pillars-4.jpg\nassets/web/client/four-pillars-3.jpg\nassets/web/client/four-pillars-5.jpg\nassets/web/client/four-pillars-1.jpg"
       },
       {
@@ -3404,7 +3404,7 @@
      "lists": [
       {
        "key": "performances/upcoming-list/1",
-       "what": "List",
+       "what": "Upcoming shows",
        "columns": [
         {
          "what": "Item",
@@ -3619,7 +3619,7 @@
       {
        "key": "performances/past-performances/t1",
        "kind": "photos",
-       "what": "Photos — one per line (Drive links), or one Drive folder link",
+       "what": "Photos (one per line)",
        "value": "assets/web/client/noteworthy-1.jpg\nassets/web/client/noteworthy-2.jpg\nassets/web/client/noteworthy-3.jpg\nassets/web/client/noteworthy-4.jpg\nassets/web/client/noteworthy-5.jpg\nassets/web/client/noteworthy-6.jpg\nassets/web/client/noteworthy-7.jpg"
       },
       {
@@ -4250,7 +4250,7 @@
       {
        "key": "school/apply/t1",
        "kind": "photos",
-       "what": "Photos — one per line (Drive links), or one Drive folder link",
+       "what": "Photos (one per line)",
        "value": "assets/web/client/school-apply-now.jpg\nassets/web/client/037b-edit.jpg"
       },
       {
@@ -4282,6 +4282,12 @@
        "kind": "text",
        "what": "Text",
        "value": "**Student Showcase:** Latest *Dance Karma 2025* — annual student performance celebrating progress and artistry."
+      },
+      {
+       "key": "school/apply/t7",
+       "kind": "text",
+       "what": "Text",
+       "value": "**Application forms (PDF):**"
       }
      ],
      "lists": [
@@ -4344,6 +4350,43 @@
          "cells": {
           "Button": "Contact us",
           "Button link": "contact.html"
+         }
+        }
+       ]
+      },
+      {
+       "key": "school/apply/3",
+       "what": "Items",
+       "columns": [
+        {
+         "what": "Button",
+         "kind": "text",
+         "link": true
+        }
+       ],
+       "rows": [
+        {
+         "key": "school/apply/3/1",
+         "show": true,
+         "cells": {
+          "Button": "Apply for Kathak at Basavanagudi",
+          "Button link": "assets/web/files/forms/2026-27-admission-kathak-basavanagudi.pdf"
+         }
+        },
+        {
+         "key": "school/apply/3/2",
+         "show": true,
+         "cells": {
+          "Button": "Apply for Bharatanatyam at Basavanagudi",
+          "Button link": "assets/web/files/forms/2026-27-admission-bharatanatyam-basavanagudi.pdf"
+         }
+        },
+        {
+         "key": "school/apply/3/3",
+         "show": true,
+         "cells": {
+          "Button": "Apply for Kathak at Rajaji Nagar",
+          "Button link": "assets/web/files/forms/2026-27-admission-kathak-rajajinagar.pdf"
          }
         }
        ]
@@ -4460,7 +4503,7 @@
       {
        "key": "school/beyond-the-classroom/t1",
        "kind": "photos",
-       "what": "Photos — one per line (Drive links), or one Drive folder link",
+       "what": "Photos (one per line)",
        "value": "assets/web/client/rangapravesha-01.jpg\nassets/web/client/rangapravesha-02.jpg\nassets/web/client/rangapravesha-medha-1.jpg\nassets/web/client/rangapravesha-08.jpg\nassets/web/client/rangapravesha-sanchita.jpg\nassets/web/client/rangapravesha-04.jpg\nassets/web/client/rangapravesha-07-edit.jpg\nassets/web/client/rangapravesha-09.jpg\nassets/web/client/rangapravesh-shreya.jpg\nassets/web/client/rangapravesha-10-edit.jpg"
       },
       {
@@ -4513,7 +4556,7 @@
       {
        "key": "school/vijayadashami/t1",
        "kind": "photos",
-       "what": "Photos — one per line (Drive links), or one Drive folder link",
+       "what": "Photos (one per line)",
        "value": "assets/web/client/vijayadashami-thumbnail.jpg\nassets/web/client/vijayadashami-01.jpg\nassets/web/client/vijayadashami-02.jpg\nassets/web/client/vijayadashami-03.jpg\nassets/web/client/vijayadashami-04.jpg\nassets/web/client/vijayadashami-05.jpg\nassets/web/client/vijayadashami-07.jpg\nassets/web/client/vijayadashami-08.jpg\nassets/web/client/vijayadashami-09.jpg\nassets/web/client/vijayadashami-10.jpg\nassets/web/client/vijayadashami-11.jpg\nassets/web/client/vijayadashami-12.jpg\nassets/web/client/vijayadashami.jpg"
       },
       {
@@ -4544,7 +4587,7 @@
       {
        "key": "school/milan/t1",
        "kind": "photos",
-       "what": "Photos — one per line (Drive links), or one Drive folder link",
+       "what": "Photos (one per line)",
        "value": "assets/web/client/milan-01.jpg\nassets/web/client/milan-02.jpg\nassets/web/client/milan-02a.jpg\nassets/web/client/milan-03.jpg\nassets/web/client/milan-04.jpg\nassets/web/client/milan-05.jpg"
       },
       {
@@ -5509,7 +5552,7 @@
       {
        "key": "store/dance-apparel/t1",
        "kind": "photos",
-       "what": "Photos — one per line (Drive links), or one Drive folder link",
+       "what": "Photos (one per line)",
        "value": "assets/web/client/store-costume-01-3x4.jpg\nassets/web/client/store-costume-02-3x4.jpg\nassets/web/client/store-costume-03-3x4.jpg\nassets/web/client/store-costume-04-3x4.jpg\nassets/web/client/store-costume-05-3x4.jpg\nassets/web/client/store-costume-06-3x4.jpg\nassets/web/client/store-costume-07-3x4.jpg\nassets/web/client/store-costume-08-3x4.jpg\nassets/web/client/store-costume-09-3x4.jpg\nassets/web/client/store-costume-10-3x4.jpg\nassets/web/client/store-costume-11-3x4.jpg"
       },
       {
@@ -5909,7 +5952,7 @@
       {
        "key": "support/scholarships/t1",
        "kind": "photos",
-       "what": "Photos — one per line (Drive links), or one Drive folder link",
+       "what": "Photos (one per line)",
        "value": "assets/web/client/scholar-pradyota-3x4.jpg\nassets/web/client/scholar-dharithri-hamsini-3x4.jpg\nassets/web/client/scholar-sharvari-3x4.jpg\nassets/web/client/scholar-naisha-3x4.jpg\nassets/web/client/scholar-akshitha-chandrappa-3x4.jpg\nassets/web/client/scholar-deepika-chandrappa-3x4.jpg\nassets/web/client/scholar-ardra-3x4.jpg"
       },
       {
@@ -7662,6 +7705,6 @@
  },
  "drive": {},
  "by": "learn@jagli.com",
- "at": "2026-10-23T09:57:30.056Z",
- "hash": "X9mQjsI4gMFIonni"
+ "at": "2026-10-23T10:43:01.446Z",
+ "hash": "x93yzWtYv3TInonC"
 }
