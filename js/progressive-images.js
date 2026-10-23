@@ -27,8 +27,21 @@
     hi.src = fullSrc;
   }
 
+  /* Full size only for photos that come near the screen: a long page (the gallery) must not
+     fetch every full-size photo at once. */
+  const near = "IntersectionObserver" in window
+    ? new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          near.unobserve(e.target);
+          upgrade(e.target, e.target.dataset.fullSrc);
+        });
+      }, { rootMargin: "400px 0px" })
+    : null;
+
   function scheduleUpgrade(img, fullSrc) {
     const run = function () {
+      if (near) { near.observe(img); return; }
       if ("requestIdleCallback" in window) {
         requestIdleCallback(function () { upgrade(img, fullSrc); }, { timeout: 2500 });
       } else {

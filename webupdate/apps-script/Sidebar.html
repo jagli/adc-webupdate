@@ -132,8 +132,9 @@
     var st = s.state || {};
     var label = { building: st.autoSubmit ? "Sending… building the preview (about 2 minutes)" : "Building the preview…", ready: "Preview ready", waiting: "Waiting for the moderator", problems: "Some things need fixing", publishing: "Publishing…", rejected: "Sent back by the moderator", published: "Live on abhinava.dance ✓" }[st.status] || "No changes sent yet";
     var cls = { ready: "ok", published: "ok", problems: "bad", rejected: "bad", building: "wait", waiting: "wait", publishing: "wait" }[st.status] || "";
-    if (st.status === "publishing" && s.publish && s.publish.sha === st.sha) { label = s.publish.ok ? "Live on abhinava.dance" : (s.publish.netlify === "2" ? "Approved — the owner still has to connect Netlify" : "Publishing did not finish — the owner can see why"); cls = s.publish.ok ? "ok" : "bad"; }
-    $("state").innerHTML = (st.status === "building" || st.status === "publishing" && !(s.publish && s.publish.sha === st.sha) ? '<span class="spin"></span>' : "") + label;
+    var pubFresh = s.publish && s.publish.sha === st.sha && (!st.approvedAt || Date.parse(s.publish.at || 0) >= Date.parse(st.approvedAt) - 5000);
+    if (st.status === "publishing" && pubFresh) { label = s.publish.ok ? "Live on abhinava.dance" : (s.publish.netlify === "2" ? "Approved — the owner still has to connect Netlify" : "Publishing did not finish — the owner can see why"); cls = s.publish.ok ? "ok" : "bad"; }
+    $("state").innerHTML = (st.status === "building" || st.status === "publishing" && !pubFresh ? '<span class="spin"></span>' : "") + label;
     $("state").className = "state " + cls;
     var detail = [];
     if (st.submittedBy && (st.status === "waiting" || st.status === "building")) detail.push("Sent by " + st.submittedBy + (st.note ? " — “" + st.note + "”" : ""));
@@ -152,6 +153,7 @@
     $("editor-actions").hidden = !canEdit;
     $("row-tools").hidden = !canEdit;
     $("btn-send").disabled = st.status === "building" || st.status === "publishing";
+    $("btn-reject").title = "";
     $("moderator-actions").hidden = !canMod;
     $("btn-approve").disabled = !(st.status === "waiting" || st.status === "ready") || s.contentChanged;
     $("btn-reject").disabled = !(st.status === "waiting" || st.status === "ready");
@@ -164,8 +166,10 @@
   function refresh() { call("getStatus").then(function (s) { if (s) render(s); }); }
 
   /* row tools: always act on the row that is selected when the button is pressed */
+  var shownRow = null;
   function showRow(r) {
     var ok = r && r.ok;
+    shownRow = ok ? { sheet: r.sheet, row: r.row } : null;
     $("row-label").innerHTML = ok ? "<b></b><br><span></span>" : "";
     if (ok) { $("row-label").querySelector("b").textContent = "“" + r.label + "”"; $("row-label").querySelector("span").textContent = r.sheet + " tab, row " + r.row + " · " + r.kind + (r.shown ? "" : " · hidden"); }
     else $("row-label").textContent = (r && r.message) || "Click a row in a page tab first.";
@@ -175,7 +179,7 @@
     $("btn-add").disabled = !ok; $("btn-toggle").disabled = !ok;
     $("btn-toggle").textContent = ok && !r.shown ? "Show" : "Hide";
   }
-  function rowAction(name, btn) { call("rowTool", [name], btn).then(function (r) { if (r) say(r.message, !r.ok); lastRow = ""; watchRow(); }); }
+  function rowAction(name, btn) { call("rowTool", [name, shownRow], btn).then(function (r) { if (r) say(r.message, !r.ok); lastRow = ""; watchRow(); }); }
   /* follow the clicked row: ask every 2 seconds while this panel is open and visible */
   var rowBusy = false, lastRow = "";
   function watchRow() {

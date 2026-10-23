@@ -20,6 +20,12 @@
  * A row an editor inserts by hand (empty column A) belongs to the group above it.
  */
 
+/** A cell as text: a date typed into a text cell reads "8 Jan 2027", not a long computer date. */
+function cellText_(v) {
+  if (v instanceof Date) return eventDate_(v);
+  return String(v);
+}
+
 function parseKey_(a) {
   var s = String(a || "");
   var i = s.indexOf("|");
@@ -92,7 +98,7 @@ function readPageRows_(v, page) {
     if (k.type === "slot") {
       endGroups();
       var p = k.rest.split("|");
-      var slot = { key: p[0], kind: p[1], what: String(row[1]), value: String(row[2]) };
+      var slot = { key: p[0], kind: p[1], what: String(row[1]), value: cellText_(row[2]) };
       if (p[1] === "photo") slot.alt = String(row[3]);
       if (p[2] === "link") slot.href = String(row[3]);
       block.slots.push(slot); continue;
@@ -144,7 +150,7 @@ function readPageRows_(v, page) {
     }
     if ((k.type === "row" || k.type === "") && list) {
       var cells = {};
-      for (var c = 0; c < list.names.length; c++) cells[list.names[c]] = row[c + 2] === "" || row[c + 2] === undefined ? "" : String(row[c + 2]);
+      for (var c = 0; c < list.names.length; c++) cells[list.names[c]] = row[c + 2] === "" || row[c + 2] === undefined ? "" : cellText_(row[c + 2]);
       var filled = Object.keys(cells).some(function (x) { return String(cells[x]).trim(); });
       if (!filled && !k.rest) { card = null; continue; }
       card = { key: k.rest || ("new-" + r), show: row[1] !== false, cells: cells, sheetRow: r + 1, multi: {}, multiSeen: {}, title: String(row[2] || "").replace(/\*/g, "").slice(0, 40) };

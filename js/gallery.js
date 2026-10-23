@@ -44,7 +44,7 @@ class AdcGallery {
           ${item.caption ? `<div class="gallery-item__caption">${item.caption}</div>` : ""}`;
       } else {
         el.innerHTML = `
-          <img src="${item.src}" alt="${item.caption || "Gallery image"}" loading="lazy" decoding="async">
+          <img src="${this.thumb(item.src)}" data-full-src="${item.src}" alt="${item.caption || "Gallery image"}" loading="lazy" decoding="async">
           ${item.caption ? `<div class="gallery-item__caption">${item.caption}</div>` : ""}`;
       }
 
@@ -75,6 +75,11 @@ class AdcGallery {
       heights[shortest] += height;
     });
     this.grid.replaceChildren(...columns);
+  }
+
+  /** Small preview first (the full photo loads when the tile comes near the screen). */
+  thumb(src) {
+    return /^assets\/web\//.test(src) && !/\/thumbs\//.test(src) ? src.replace("assets/web/", "assets/web/thumbs/") : src;
   }
 
   youtubeId(url) {

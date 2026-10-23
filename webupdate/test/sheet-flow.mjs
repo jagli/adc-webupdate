@@ -60,6 +60,7 @@ const width = (rows) => rows.reduce((m, r) => Math.max(m, r.length), 5);
 const pad = (rows) => { const w = width(rows); return rows.map((r) => { const x = r.slice(); while (x.length < w) x.push(""); return x; }); };
 
 let active = null;
+const cacheStore = {};
 const g = {
   SpreadsheetApp: {
     getActiveSheet: () => active.sheet,
@@ -74,6 +75,8 @@ const g = {
     getUi: () => ({ alert() {} }),
   },
   Session: { getActiveUser: () => ({ getEmail: () => user }), getEffectiveUser: () => user },
+  LockService: { getScriptLock: () => ({ tryLock: () => true, releaseLock() {} }) },
+  CacheService: { getScriptCache: () => ({ get: (k) => cacheStore[k] ?? null, put: (k, v) => (cacheStore[k] = v) }) },
   PropertiesService: { getScriptProperties: () => ({ getProperty: (k) => props[k] ?? null, setProperty: (k, v) => (props[k] = v) }) },
   UrlFetchApp: {
     fetch: (url, o = {}) => {
@@ -129,6 +132,10 @@ const i = perf.findIndex((r) => /^slot\|performances\/upcoming-shows\/t2\|text/.
 const keep = perf[i][2];
 perf[i][2] = "Changed after the preview";
 user = "mod@example.com";
+const waitBefore = g.getStatus().contentChanged;
+props.STATE = JSON.stringify({ ...JSON.parse(props.STATE), when: new Date(Date.now() - 60000).toISOString() });
+g.onEdit();
+ok(waitBefore === false && g.getStatus().contentChanged === true, "the panel notices an edit after sending (and only reads the Sheet after an edit)");
 ok(/changed since these changes were sent/.test(g.approveAndPublish().message), "approve refused when the Sheet changed after the preview");
 perf[i][2] = keep;
 const a = g.approveAndPublish();
@@ -136,6 +143,8 @@ ok(a.ok && calls.some(([m, u]) => m === "POST" && /publish\.yml\/dispatches/.tes
 ok(g.rejectChanges("").ok === false, "send back needs a note");
 // the one-button flow: Send my changes → preview → goes to the moderator by itself; Send back
 user = "ed@example.com";
+ok(/being published/.test(g.sendChanges("x").message), "no new send while the site is being published");
+props.STATE = JSON.stringify({ ...JSON.parse(props.STATE), status: "published" });
 const mailsBefore = mails.length;
 const sc = g.sendChanges("new photos");
 ok(sc.ok && g.getStatus().state.status === "waiting", "Send my changes: once the preview is ready it waits for the moderator by itself");

@@ -76,6 +76,13 @@ function users_() {
 }
 
 function roleOf_(email) {
+  var cache = CacheService.getScriptCache(), key = "role:" + email + ":" + (PropertiesService.getScriptProperties().getProperty("USERS_V") || 0), hit = cache.get(key);
+  if (hit !== null) return hit;
+  var role = roleLookup_(email);
+  cache.put(key, role, 300);
+  return role;
+}
+function roleLookup_(email) {
   var u = users_().filter(function (x) { return x.email === email; })[0];
   if (u) return u.role;
   // the Sheet's owner is always the super admin, even before the Users tab exists
@@ -272,8 +279,22 @@ function resolveDrive_(content) {
 
 /* ── the buttons ───────────────────────────────────────────────────────── */
 
-function updatePreview() {
+/** One action at a time: two people pressing buttons together must not mix up the state. */
+function locked_(fn) {
+  var lock = LockService.getScriptLock();
+  if (!lock.tryLock(30000)) return { ok: false, message: "Someone else is sending or publishing right now. Try again in a minute." };
+  try { return fn(); } finally { lock.releaseLock(); }
+}
+
+function updatePreview(send) {
+  return locked_(function () { return updatePreview_(send); });
+}
+
+function updatePreview_(send) {
   if (!can_("edit")) return { ok: false, message: "Your account is not on the Users list. Ask the owner to add you." };
+  var cur = state_();
+  if (cur.status === "publishing") return { ok: false, message: "The website is being published right now. Send again in a few minutes." };
+  if (cur.status === "building" && Date.now() - Date.parse(cur.when || 0) < 8 * 60000) return { ok: false, message: "A preview is already being made (" + (cur.by || "someone") + "). Wait until it is ready, then send again." };
   if (!setting_("GITHUB_TOKEN")) return { ok: false, message: "Previews are switched off in this copy of the Sheet (it has no website key, on purpose). Typing and the row buttons still work. Previews and publishing happen in the real “ADC Website” Sheet." };
   var content = readContent_();
   var problems = content.problems.concat(resolveDrive_(content));
@@ -291,7 +312,9 @@ function updatePreview() {
   var sha = putFile_("content/preview.json", JSON.stringify(content, null, 1), "Preview requested by " + me_(), "preview");
   var run = gh_("POST", "/repos/" + setting_("GITHUB_REPO") + "/actions/workflows/preview.yml/dispatches", { ref: "main", inputs: { sha: sha } });
   if (run.code !== 204) return { ok: false, message: "Saved, but the preview could not be started (GitHub said " + run.code + "). Try again in a minute." };
-  setState_({ status: "building", by: me_(), when: content.at, sha: sha, hash: hash, problems: [] });
+  var next = { status: "building", by: me_(), when: content.at, sha: sha, hash: hash, problems: [] };
+  if (send) { next.autoSubmit = true; next.submittedBy = me_(); next.note = send.note || ""; }
+  setState_(next);
   log_("Update preview", "Preview requested (" + sha.slice(0, 7) + ")");
   return { ok: true, message: "Building the preview… it takes about 2 minutes. The Website panel shows when it is ready." };
 }
@@ -301,11 +324,8 @@ function updatePreview() {
  * moderator (an email goes out). Nothing goes live until the moderator presses Publish.
  */
 function sendChanges(note) {
-  var r = updatePreview();
+  var r = updatePreview({ note: note || "" });
   if (!r.ok) return r;
-  var st = state_();
-  st.autoSubmit = true; st.submittedBy = me_(); st.note = note || "";
-  setState_(st);
   return { ok: true, message: "Sending… the preview takes about 2 minutes, then it goes to the moderator by itself." };
 }
 
@@ -322,8 +342,8 @@ function getStatus() {
   if (st.status === "building" || st.status === "waiting" || st.status === "ready" || st.status === "publishing") {
     var raw = rawFile_("status/preview.json", "status");
     if (raw) {
-      var s = JSON.parse(raw);
-      if (s.sha === st.sha || s.hash === st.hash) {
+      var s = {}; try { s = JSON.parse(raw); } catch (e) {}
+      if (s.sha === st.sha && (!s.at || !st.when || Date.parse(s.at) >= Date.parse(st.when) - 60000)) {
         if (s.ok && st.status === "building") {
           st.status = st.autoSubmit ? "waiting" : "ready"; st.changes = s.changes || [];
           if (st.autoSubmit) { delete st.autoSubmit; setState_(st); log_("Sent to the moderator", st.note || ""); notifyModerators_(st); }
@@ -334,8 +354,8 @@ function getStatus() {
     }
     var pub = rawFile_("status/publish.json", "status");
     if (pub) {
-      out.publish = JSON.parse(pub);
-      if (st.status === "publishing" && out.publish.sha === st.sha) {
+      try { out.publish = JSON.parse(pub); } catch (e) { out.publish = {}; }
+      if (st.status === "publishing" && out.publish.sha === st.sha && (!st.approvedAt || Date.parse(out.publish.at || 0) >= Date.parse(st.approvedAt) - 5000)) {
         if (out.publish.ok) { st.status = "published"; st.publishError = ""; setState_(st); }
         else {
           // nothing went live: back to waiting, so it can be approved again once fixed
@@ -348,9 +368,28 @@ function getStatus() {
     }
   }
   out.state = st;
-  out.contentChanged = st.hash && (st.status === "ready" || st.status === "waiting") ? currentHash_() !== st.hash : false;
+  out.contentChanged = st.hash && (st.status === "ready" || st.status === "waiting") ? changedSince_(st) : false;
   return out;
 }
+
+/**
+ * Has the Sheet changed since these changes were sent? Reading every tab takes many seconds, so
+ * it is done only when someone has edited since (onEdit and the row buttons note the time), and
+ * the answer is remembered until the next edit.
+ */
+function changedSince_(st) {
+  var edited = Number(PropertiesService.getScriptProperties().getProperty("EDITED_AT") || 0);
+  if (!edited || edited <= Date.parse(st.when || 0)) return false;
+  var cache = CacheService.getScriptCache(), key = "changed:" + st.hash + ":" + edited, hit = cache.get(key);
+  if (hit) return hit === "1";
+  var changed = currentHash_() !== st.hash;
+  cache.put(key, changed ? "1" : "0", 21600);
+  return changed;
+}
+function usersChanged_() { var p = PropertiesService.getScriptProperties(); p.setProperty("USERS_V", String(Number(p.getProperty("USERS_V") || 0) + 1)); }
+function noteEdit_() { PropertiesService.getScriptProperties().setProperty("EDITED_AT", String(Date.now())); }
+/** Simple trigger: any typing in the Sheet. */
+function onEdit() { noteEdit_(); }
 
 /** A fingerprint of what editors wrote (words, photos, lists, contact details, productions). */
 function hash_(c) {
@@ -375,23 +414,26 @@ function submitForReview(note) {
   return { ok: true, message: "Sent to the moderator for review." };
 }
 
-function approveAndPublish() {
+function approveAndPublish() { return locked_(approveAndPublish_); }
+function approveAndPublish_() {
   if (!can_("moderate")) return { ok: false, message: "Only the moderator can publish." };
   var st = state_();
   if (st.status !== "waiting" && st.status !== "ready") return { ok: false, message: "There is nothing waiting to be published." };
   if (currentHash_() !== st.hash) return { ok: false, message: "The Sheet has changed since these changes were sent. Ask the editor to press Send my changes again, so you publish exactly what you checked." };
   var r = gh_("POST", "/repos/" + setting_("GITHUB_REPO") + "/actions/workflows/publish.yml/dispatches", { ref: "main", inputs: { by: me_(), sha: st.sha } });
   if (r.code !== 204) return { ok: false, message: "Could not start publishing (GitHub said " + r.code + ")." };
-  st.status = "publishing"; st.approvedBy = me_(); setState_(st);
+  st.status = "publishing"; st.approvedBy = me_(); st.approvedAt = new Date().toISOString(); setState_(st);
   log_("Approved & published", "Preview " + String(st.sha).slice(0, 7) + " sent live");
   if (st.submittedBy && st.submittedBy !== me_()) MailApp.sendEmail(st.submittedBy, "Your website changes are going live", "Approved by " + me_() + ". abhinava.dance updates in a few minutes.");
   return { ok: true, message: "Publishing… abhinava.dance updates in a few minutes." };
 }
 
-function rejectChanges(note) {
+function rejectChanges(note) { return locked_(function () { return rejectChanges_(note); }); }
+function rejectChanges_(note) {
   if (!can_("moderate")) return { ok: false, message: "Only the moderator can send changes back." };
   if (!String(note || "").trim()) return { ok: false, message: "Please write a short note so the editor knows what to change." };
   var st = state_();
+  if (st.status !== "waiting" && st.status !== "ready") return { ok: false, message: "There is nothing waiting to be sent back." };
   st.status = "rejected"; st.rejectNote = note; st.rejectedBy = me_(); setState_(st);
   log_("Sent back", note);
   if (st.submittedBy) MailApp.sendEmail(st.submittedBy, "Website changes sent back", "Note from " + me_() + ":\n\n" + note + "\n\nMake the changes in the Sheet, then press Send my changes again.\n" + SpreadsheetApp.getActive().getUrl());
@@ -424,6 +466,7 @@ function saveUser(email, role, name) {
   else s.appendRow([email, role, name || ""]);
   try { SpreadsheetApp.getActive().addEditor(email); } catch (e) {}
   log_(u ? "User changed" : "User added", email + " → " + role);
+  usersChanged_();
   return { ok: true, message: (u ? "Updated " : "Added ") + email + " as " + role + ". They can now open this Sheet." };
 }
 
@@ -436,6 +479,7 @@ function removeUser(email) {
   usersSheet_().deleteRow(u.row);
   try { SpreadsheetApp.getActive().removeEditor(email); } catch (e) {}
   log_("User removed", email);
+  usersChanged_();
   return { ok: true, message: "Removed " + email + ". They can no longer open this Sheet." };
 }
 
@@ -537,11 +581,13 @@ function getSelectedRow() {
   return { ok: true, label: describeRow_(t), kind: kind, canUp: !!t.unit.prev, canDown: !!t.unit.next, shown: t.sheet.getRange(t.r + 1, 2).getValue() !== false, sheet: t.sheet.getName(), row: t.r + 1 };
 }
 
-function rowTool(action) {
+function rowTool(action, expect) {
   if (!can_("edit")) return { ok: false, message: "Your account is not on the Users list." };
   var t = rowTarget_();
   if (t.error) return { ok: false, message: t.error };
+  if (expect && (expect.sheet !== t.sheet.getName() || expect.row !== t.r + 1)) return { ok: false, message: "The selection changed — check the row named in the panel, then press the button again." };
   var s = t.sheet, u = t.unit, label = describeRow_(t);
+  noteEdit_();
   var rows = function (a, b) { return s.getRange((a + 1) + ":" + (b + 1)); };
   if (action === "up" || action === "down") {
     var other = action === "up" ? u.prev : u.next;
