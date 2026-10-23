@@ -2,3 +2,4 @@ node_modules/
 webupdate/.cache/
 webupdate/.out/
 .DS_Store
+assets/web/content/files/

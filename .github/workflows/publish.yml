@@ -59,6 +59,8 @@ jobs:
           cp ../out/content.json content/live.json
           mkdir -p assets/web/content assets/web/thumbs/content
           cp -R ../out/site/assets/web/content/. assets/web/content/ 2>/dev/null || true
+          rm -rf assets/web/content/files
+          node webupdate/netlify-record.mjs ../out/site
           cp -R ../out/site/assets/web/thumbs/content/. assets/web/thumbs/content/ 2>/dev/null || true
           cp ../out/site/js/instagram-data.js js/instagram-data.js 2>/dev/null || true
           mkdir -p log
