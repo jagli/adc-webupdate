@@ -79,7 +79,9 @@ function sectionSnippet(html, index) {
 const frameDoc = (head, body, base, marks) => `<!doctype html><html><head><meta charset="utf-8"><base href="${base}">${head}</head><body><main class="site-main">${body}</main>
 <script>(function(){var m=${JSON.stringify(marks || null)};if(!m)return;var t=new Set(m.t),s=new Set(m.s);
 document.querySelectorAll('main > :not(.wu-faded) *').forEach(function(e){if(e.tagName==='IMG'){var u=(e.getAttribute('src')||'').replace(/^.*?assets\\//,'assets/');if(!s.has(u))e.classList.add('wu-mark');return;}
-if(e.children.length&&[].some.call(e.children,function(c){return !/^(STRONG|EM|B|I|A|BR)$/.test(c.tagName)}))return;var x=e.textContent.replace(/\\s+/g,' ').trim();if(x&&!t.has(x))e.classList.add('wu-mark');});})();
+if(e.children.length&&[].some.call(e.children,function(c){return !/^(STRONG|EM|B|I|A|BR)$/.test(c.tagName)}))return;var x=e.textContent.replace(/\\s+/g,' ').trim();if(x&&!t.has(x))e.classList.add('wu-mark');});
+/* a change inside a box that scrolls (a long list): scroll that box to it */
+var first=document.querySelector('.wu-mark');for(var p=first&&first.parentElement;p&&p!==document.body;p=p.parentElement){if(p.scrollHeight>p.clientHeight+4&&/(auto|scroll)/.test(getComputedStyle(p).overflowY)){p.scrollTop=first.offsetTop-p.offsetTop-p.clientHeight/3;break;}}})();
 function size(){parent.postMessage({wuH:document.documentElement.scrollHeight,id:frameElement&&frameElement.id},'*')}addEventListener('load',size);setTimeout(size,800);</script></body></html>`;
 
 function textsAndImages(html) {
