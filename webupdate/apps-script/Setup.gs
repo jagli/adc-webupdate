@@ -184,7 +184,7 @@ function pageTab_(ss, pg, data) {
     var n = r[1] - r[0] + 1, formulas = [];
     for (var i = r[0]; i <= r[1]; i++) formulas.push(['=IF(OR(D' + (i + 1) + '="",C' + (i + 1) + '="Video"),"",' + previewFormula_("D" + (i + 1)).slice(1) + ')']);
     s.getRange(r[0] + 1, 3, n, 1).setDataValidation(SpreadsheetApp.newDataValidation().requireValueInList(["Photo", "Video"], true).build());
-    s.getRange(r[0] + 1, 5, n, 1).setDataValidation(SpreadsheetApp.newDataValidation().requireValueInList(["Wide", "Tall"], true).build());
+    s.getRange(r[0] + 1, 5, n, 1).setDataValidation(SpreadsheetApp.newDataValidation().requireValueInList(["Wide", "Tall", "Extra tall"], true).build());
     s.getRange(r[0] + 1, 7, n, 1).setFormulas(formulas);
     s.setRowHeights(r[0] + 1, n, 70);
   });

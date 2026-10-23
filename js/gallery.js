@@ -18,8 +18,8 @@ class AdcGallery {
     this.grid = this.container.querySelector(".gallery-masonry");
     this.items.forEach((item, i) => {
       const el = document.createElement("article");
-      // The frame takes the photo's own shape (wide, tall or square), so nothing is cropped
-      const shape = item.type === "video" || item.shape === "wide" ? "gallery-item--wide" : item.shape === "tall" ? "gallery-item--tall" : "";
+      // The frame takes the photo's own shape (wide, tall, extra tall or square), so nothing is cropped
+      const shape = item.type === "video" || item.shape === "wide" ? "gallery-item--wide" : item.shape === "tall" ? "gallery-item--tall" : item.shape === "slim" ? "gallery-item--slim" : "";
       el.className = `gallery-item ${shape}`.trim();
       el.setAttribute("role", "listitem");
       el.dataset.index = i;
@@ -69,7 +69,7 @@ class AdcGallery {
     });
     const heights = new Array(count).fill(0);
     this.tiles.forEach((tile) => {
-      const height = tile.classList.contains("gallery-item--tall") ? 1.5 : tile.classList.contains("gallery-item--wide") ? 2 / 3 : 1;
+      const height = tile.classList.contains("gallery-item--slim") ? 16 / 9 : tile.classList.contains("gallery-item--tall") ? 1.5 : tile.classList.contains("gallery-item--wide") ? 2 / 3 : 1;
       const shortest = heights.indexOf(Math.min(...heights));
       columns[shortest].appendChild(tile);
       heights[shortest] += height;

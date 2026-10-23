@@ -156,7 +156,7 @@ function readPageRows_(v, page) {
     if (k.type === "galleryfolder") { if (String(row[2]).trim()) (block.galleryFolder = String(row[2]).trim()); continue; }
     if ((k.type === "grow" || k.type === "") && gallery) {
       if (!String(row[3]).trim()) { if (k.rest) warnEmpty(r, "a gallery photo or video"); continue; }
-      gallery.rows.push({ show: row[1] !== false, type: /video/i.test(row[2]) ? "video" : "image", src: String(row[3]).trim(), shape: /tall/i.test(row[4]) ? "tall" : "wide", caption: String(row[5] || ""), sheetRow: r + 1 });
+      gallery.rows.push({ show: row[1] !== false, type: /video/i.test(row[2]) ? "video" : "image", src: String(row[3]).trim(), shape: /extra/i.test(row[4]) ? "slim" : /tall/i.test(row[4]) ? "tall" : "wide", caption: String(row[5] || ""), sheetRow: r + 1 });
     }
   }
   // put the item rows back into their cards and carousels
@@ -239,7 +239,7 @@ function layoutPage_(pg, data) {
       push(["galleryfolder|" + b.gallery.key, "Drive folder (optional)", "", "Paste a Drive folder link to add all its photos at the end of the gallery."], { type: "folder" });
       push(["gallery|" + b.gallery.key, "Show", "Type", "Photo or YouTube link", "Shape", "Caption", "Picture"], { type: "listhead", cols: 5 });
       b.gallery.rows.forEach(function (g) {
-        push(["grow|1", g.show !== false, g.type === "video" ? "Video" : "Photo", g.src, g.shape === "tall" ? "Tall" : "Wide", g.caption || "", ""], { type: "grow" });
+        push(["grow|1", g.show !== false, g.type === "video" ? "Video" : "Photo", g.src, g.shape === "slim" ? "Extra tall" : g.shape === "tall" ? "Tall" : "Wide", g.caption || "", ""], { type: "grow" });
       });
     }
     push([""], { type: "gap" });

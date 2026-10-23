@@ -325,7 +325,7 @@ function fieldEdits(src, f, cell, base = 0) {
 /** One gallery entry in its standard form (videos have no shape). */
 export function galleryRow(g) {
   const caption = g.caption ?? "";
-  return g.type === "video" ? { type: "video", src: g.src, caption } : { type: "image", src: g.src, shape: g.shape === "tall" ? "tall" : "wide", caption };
+  return g.type === "video" ? { type: "video", src: g.src, caption } : { type: "image", src: g.src, shape: g.shape === "tall" || g.shape === "slim" ? g.shape : "wide", caption };
 }
 
 /** Turn a Sheet row (cells by column name) into per-field values for one item's fields. */

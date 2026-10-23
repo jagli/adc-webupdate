@@ -671,6 +671,11 @@
     aspect-ratio: 2/3;
   }
 
+  /* phone-camera portraits (9:16) */
+  .v-gallery-wrap .gallery-item--slim {
+    aspect-ratio: 9/16;
+  }
+
   .v-gallery-wrap .gallery-item__video-thumb {
     position: absolute;
     inset: 0;
