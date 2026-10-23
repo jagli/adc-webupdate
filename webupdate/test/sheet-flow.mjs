@@ -196,5 +196,11 @@ const res = g.updatePreview();
 ok(res.ok === false && res.problems.some((m) => /Performances tab, row .* untick Show instead/.test(m)), "Update preview stops on a cleared event: " + (res.problems || [])[0]);
 perfSheet.values[ev - 1] = keepEv;
 
+// a newer publish (made outside this preview) clears a stale "ready"
+props.STATE = JSON.stringify({ status: "ready", when: "2026-01-01T00:00:00Z", sha: "old1234", hash: "h" });
+const realFetch = g.UrlFetchApp.fetch;
+g.UrlFetchApp.fetch = (url, o) => /status\/publish\.json/.test(url) ? { getResponseCode: () => 200, getContentText: () => JSON.stringify({ ok: true, sha: "new9999", at: "2026-02-01T00:00:00Z", by: "owner@example.com" }) } : realFetch(url, o);
+ok(g.getStatus().state.status === "published", "a newer publish clears an out-of-date preview in the panel");
+g.UrlFetchApp.fetch = realFetch;
 console.log(fails ? `\n${fails} problem(s)` : "\nThe Sheet's code works end to end (simulated Google).");
 process.exit(fails ? 1 : 0);

@@ -355,6 +355,10 @@ function getStatus() {
     var pub = rawFile_("status/publish.json", "status");
     if (pub) {
       try { out.publish = JSON.parse(pub); } catch (e) { out.publish = {}; }
+      // a publish made after this preview (from the Sheet or by the owner directly) makes it out of date
+      if ((st.status === "ready" || st.status === "waiting") && out.publish.ok && out.publish.at && Date.parse(out.publish.at) > Date.parse(st.when || 0) && out.publish.sha !== st.sha) {
+        st = { status: "published", when: out.publish.at, by: out.publish.by || "" }; setState_(st);
+      }
       if (st.status === "publishing" && out.publish.sha === st.sha && (!st.approvedAt || Date.parse(out.publish.at || 0) >= Date.parse(st.approvedAt) - 5000)) {
         if (out.publish.ok) { st.status = "published"; st.publishError = ""; setState_(st); }
         else {
