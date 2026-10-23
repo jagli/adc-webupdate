@@ -31,5 +31,13 @@
 
 Until step 3 is done, everything works except the last step: Approve shows "the owner still has to connect Netlify", and the live site stays as it is.
 
+## Big downloads (press photos zip, PDFs)
+
+1. Put the file in the shared Drive (adc X jagli) and share it as "Anyone with the link".
+2. Paste its Drive link in the row's **Link or file** cell, and update the size in **Details**.
+3. Preview, then Approve & publish.
+
+The robot copies the file from Drive straight to Netlify. Git never holds it: `content/netlify-files.json` keeps only its name, size and fingerprint, so Undo can put it back on the site. Keep the file on Drive.
+
 ## When the developer changes a page's layout
 The developer copies the new pages into the update project. Editors' content is kept by key, and anything new or dropped is listed. Then you run **Website ▸ Owner ▸ Set up the Sheet** once, so the tabs show the new layout.
