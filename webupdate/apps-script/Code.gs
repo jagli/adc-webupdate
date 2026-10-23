@@ -1,7 +1,7 @@
 /**
  * ADC Website — the "Website" menu and sidebar inside the Google Sheet.
  *
- * Editors change words, photos and lists in the tabs, then press Update preview. The robot on
+ * Editors change words, photos and lists in the tabs, then press Send my changes. The robot on
  * GitHub builds the preview and a change page; the moderator approves (it goes live) or sends it
  * back with a note. Everything is recorded in the Log tab.
  *
@@ -27,7 +27,7 @@ var PRODUCTION_COLUMNS = ["Production", "Label", "Length", "Artists", "Style", "
 var SITE = "https://abhinava.dance/";
 var COLORS = {
   band: "#0a2a45", bandText: "#ffffff", note: "#5b6170", edit: "#fffbea", head: "#f1e6cf", listNote: "#faf5ea",
-  title: "#6a0f3b", problem: "#fde2e1", key: "#eeeeee"
+  title: "#6a0f3b", problem: "#fde2e1", key: "#eeeeee", item: "#fffdf2", itemRow: "#fbfaf6"
 };
 var ROLE = { owner: "Super admin", moderator: "Moderator", editor: "Editor" };
 
@@ -38,9 +38,7 @@ function onOpen() {
   ui.createMenu("Website")
     .addItem("Open the Website panel", "openPanel")
     .addSeparator()
-    .addItem("① Update preview", "menuPreview")
-    .addItem("② Submit for review", "menuSubmit")
-    .addItem("③ Review (moderator)", "openPanel")
+    .addItem("Send my changes", "menuSend")
     .addSeparator()
     .addItem("How this works", "openHelp")
     .addSubMenu(ui.createMenu("Owner")
@@ -61,8 +59,7 @@ function openLog() {
   var s = SpreadsheetApp.getActive().getSheetByName("Log");
   if (s) SpreadsheetApp.getActive().setActiveSheet(s);
 }
-function menuPreview() { var r = updatePreview(); toast_(r.message); openPanel(); }
-function menuSubmit() { var r = submitForReview(""); toast_(r.message); }
+function menuSend() { var r = sendChanges(""); toast_(r.message); openPanel(); }
 function toast_(m) { SpreadsheetApp.getActive().toast(m, "Website", 8); }
 
 /* ── who is using it ───────────────────────────────────────────────────── */
@@ -188,20 +185,20 @@ function readContent_() {
       content.global[k.rest] = k.rest === "showSchoolInstagram" ? gv[i][2] === true || /^yes$/i.test(gv[i][2]) : String(gv[i][2]);
     }
   }
+  content.problems = [];
   var p = ss.getSheetByName("Productions");
   if (p) {
-    var pv = p.getDataRange().getValues();
-    var head = pv[2];
-    for (var r = 3; r < pv.length; r++) {
-      if (!String(pv[r][0]).trim()) continue;
-      var row = {};
-      for (var c = 0; c < PRODUCTION_COLUMNS.length; c++) row[PRODUCTION_COLUMNS[c]] = String(pv[r][head.indexOf(PRODUCTION_COLUMNS[c])] === undefined ? "" : pv[r][head.indexOf(PRODUCTION_COLUMNS[c])]);
-      content.productions.push(row);
-    }
+    var pr = readProductions_(p.getDataRange().getValues());
+    content.productions = pr.productions.map(function (x) { var row = {}; PRODUCTION_COLUMNS.forEach(function (c) { row[c] = x[c] || ""; }); return row; });
+    pr.problems.forEach(function (m) { content.problems.push("Tab Productions, " + m); });
   }
   PAGES.forEach(function (pg) {
     var s = ss.getSheetByName(pg[1]);
-    if (s) content.pages[pg[0]] = readPageTab_(s, pg[0]);
+    if (!s) return;
+    var d = readPageTab_(s, pg[0]);
+    (d.problems || []).forEach(function (m) { content.problems.push(pg[1] + " tab, " + m); });
+    delete d.problems;
+    content.pages[pg[0]] = d;
   });
   return content;
 }
@@ -243,7 +240,10 @@ function resolveDrive_(content) {
       } else entry.mimeType = item.getMimeType();
       drive[id] = entry;
     } catch (e) {
-      problems.push(where + ": the Drive link cannot be opened — check it is a link to " + (folder ? "a folder" : "a file") + " and that it is shared");
+      // a single file owned by someone else may not open here even when it is public; the robot
+      // downloads it like any visitor and stops with a plain message if it really cannot
+      if (!folder) return;
+      problems.push(where + ": the Drive link cannot be opened — check it is a link to a folder and that it is shared");
     }
   }
   Object.keys(content.pages).forEach(function (pg) {
@@ -265,7 +265,7 @@ function resolveDrive_(content) {
       }
     });
   });
-  content.productions.forEach(function (p, i) { if (driveId_(p.Poster)) check(p.Poster, "Productions › row " + (i + 4) + " › Poster", false); });
+  content.productions.forEach(function (p, i) { if (driveId_(p.Poster)) check(p.Poster, "Productions › " + p.Production + " › Poster", false); });
   content.drive = drive;
   return problems;
 }
@@ -274,9 +274,10 @@ function resolveDrive_(content) {
 
 function updatePreview() {
   if (!can_("edit")) return { ok: false, message: "Your account is not on the Users list. Ask the owner to add you." };
-  if (!setting_("GITHUB_TOKEN")) return { ok: false, message: "The website connection is not set up yet (owner: Website ▸ Owner ▸ Check settings)." };
+  if (!setting_("GITHUB_TOKEN")) return { ok: false, message: "Previews are switched off in this copy of the Sheet (it has no website key, on purpose). Typing and the row buttons still work. Previews and publishing happen in the real “ADC Website” Sheet." };
   var content = readContent_();
-  var problems = resolveDrive_(content);
+  var problems = content.problems.concat(resolveDrive_(content));
+  delete content.problems;
   if (problems.length) {
     var st = state_(); st.problems = problems; st.status = "problems"; st.when = new Date().toISOString(); setState_(st);
     return { ok: false, message: "Please fix " + problems.length + " thing(s) — see the Website panel.", problems: problems };
@@ -295,6 +296,25 @@ function updatePreview() {
   return { ok: true, message: "Building the preview… it takes about 2 minutes. The Website panel shows when it is ready." };
 }
 
+/**
+ * The editor's one button: build the preview and, as soon as it is ready, hand it to the
+ * moderator (an email goes out). Nothing goes live until the moderator presses Publish.
+ */
+function sendChanges(note) {
+  var r = updatePreview();
+  if (!r.ok) return r;
+  var st = state_();
+  st.autoSubmit = true; st.submittedBy = me_(); st.note = note || "";
+  setState_(st);
+  return { ok: true, message: "Sending… the preview takes about 2 minutes, then it goes to the moderator by itself." };
+}
+
+function notifyModerators_(st) {
+  var mods = users_().filter(function (u) { return u.role === ROLE.moderator || u.role === ROLE.owner; }).map(function (u) { return u.email; });
+  if (mods.length) MailApp.sendEmail(mods.join(","), "Website changes waiting for you",
+    (st.submittedBy || "An editor") + " has sent website changes.\n\n" + (st.note ? "Note: " + st.note + "\n\n" : "") + "See what changed: " + pagesUrl_() + "review/\n\nTo publish or send back: open the Google Sheet ▸ Website ▸ Open the Website panel.\n" + SpreadsheetApp.getActive().getUrl());
+}
+
 /** Status for the sidebar: reads the robot's status file. */
 function getStatus() {
   var st = state_();
@@ -304,7 +324,11 @@ function getStatus() {
     if (raw) {
       var s = JSON.parse(raw);
       if (s.sha === st.sha || s.hash === st.hash) {
-        if (s.ok && st.status === "building") { st.status = "ready"; st.changes = s.changes || []; setState_(st); }
+        if (s.ok && st.status === "building") {
+          st.status = st.autoSubmit ? "waiting" : "ready"; st.changes = s.changes || [];
+          if (st.autoSubmit) { delete st.autoSubmit; setState_(st); log_("Sent to the moderator", st.note || ""); notifyModerators_(st); }
+          else setState_(st);
+        }
         if (!s.ok && st.status === "building") { st.status = "problems"; st.problems = s.problems || ["The build stopped — see GitHub"]; setState_(st); log_("Preview problems", st.problems.join(" | ")); }
       }
     }
@@ -336,6 +360,7 @@ function hash_(c) {
 
 function currentHash_() {
   var c = readContent_();
+  delete c.problems;
   Object.keys(c.pages).forEach(function (pg) { c.pages[pg].blocks.forEach(function (b) { b.lists.forEach(function (l) { l.rows.forEach(function (r) { delete r.sheetRow; }); }); if (b.gallery) b.gallery.rows.forEach(function (g) { delete g.sheetRow; }); }); });
   return hash_(c);
 }
@@ -346,9 +371,7 @@ function submitForReview(note) {
   if (st.status !== "ready") return { ok: false, message: st.status === "building" ? "The preview is still being built — wait for it to be ready." : "Press Update preview first, then check it." };
   st.status = "waiting"; st.submittedBy = me_(); st.note = note || ""; setState_(st);
   log_("Submitted for review", note);
-  var mods = users_().filter(function (u) { return u.role === ROLE.moderator || u.role === ROLE.owner; }).map(function (u) { return u.email; });
-  if (mods.length) MailApp.sendEmail(mods.join(","), "Website changes waiting for your review",
-    me_() + " has sent website changes for review.\n\n" + (note ? "Note: " + note + "\n\n" : "") + "See only what changed: " + pagesUrl_() + "review/\n\nTo publish or send back: open the Google Sheet ▸ Website ▸ Review.\n" + SpreadsheetApp.getActive().getUrl());
+  notifyModerators_(st);
   return { ok: true, message: "Sent to the moderator for review." };
 }
 
@@ -356,7 +379,7 @@ function approveAndPublish() {
   if (!can_("moderate")) return { ok: false, message: "Only the moderator can publish." };
   var st = state_();
   if (st.status !== "waiting" && st.status !== "ready") return { ok: false, message: "There is nothing waiting to be published." };
-  if (currentHash_() !== st.hash) return { ok: false, message: "The Sheet has changed since this preview. Press Update preview first so you approve exactly what will go live." };
+  if (currentHash_() !== st.hash) return { ok: false, message: "The Sheet has changed since these changes were sent. Ask the editor to press Send my changes again, so you publish exactly what you checked." };
   var r = gh_("POST", "/repos/" + setting_("GITHUB_REPO") + "/actions/workflows/publish.yml/dispatches", { ref: "main", inputs: { by: me_(), sha: st.sha } });
   if (r.code !== 204) return { ok: false, message: "Could not start publishing (GitHub said " + r.code + ")." };
   st.status = "publishing"; st.approvedBy = me_(); setState_(st);
@@ -371,7 +394,7 @@ function rejectChanges(note) {
   var st = state_();
   st.status = "rejected"; st.rejectNote = note; st.rejectedBy = me_(); setState_(st);
   log_("Sent back", note);
-  if (st.submittedBy) MailApp.sendEmail(st.submittedBy, "Website changes sent back", "Note from " + me_() + ":\n\n" + note + "\n\nMake the changes in the Sheet, then Update preview and Submit again.\n" + SpreadsheetApp.getActive().getUrl());
+  if (st.submittedBy) MailApp.sendEmail(st.submittedBy, "Website changes sent back", "Note from " + me_() + ":\n\n" + note + "\n\nMake the changes in the Sheet, then press Send my changes again.\n" + SpreadsheetApp.getActive().getUrl());
   return { ok: true, message: "Sent back to " + (st.submittedBy || "the editor") + "." };
 }
 
@@ -438,4 +461,126 @@ function getLog(n) {
   if (!s || s.getLastRow() < 2) return [];
   var start = Math.max(2, s.getLastRow() - (n || 30) + 1);
   return s.getRange(start, 1, s.getLastRow() - start + 1, 4).getValues().reverse().map(function (r) { return [Utilities.formatDate(new Date(r[0]), "Asia/Kolkata", "d MMM, HH:mm"), r[1], r[2], r[3]]; });
+}
+
+/* ── the panel's row buttons: Move up, Move down, Add below, Show / hide ───── */
+
+function rowTarget_() {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var range = SpreadsheetApp.getActiveRange();
+  if (!range) return { error: "Click a row in a page tab first." };
+  var last = sheet.getLastRow();
+  var marks = sheet.getRange(1, 1, Math.max(last, 1), 1).getValues().map(function (x) { return x[0]; });
+  var r = range.getRow() - 1;
+  var unit = rowUnit_(marks, r);
+  if (!unit) return { error: "That row is not an item. Click a row that has a Show tick box." };
+  return { sheet: sheet, marks: marks, r: unit.start, unit: unit };
+}
+
+function describeRow_(t) {
+  var row = t.sheet.getRange(t.r + 1, 1, 1, Math.min(t.sheet.getLastColumn(), 8)).getValues()[0];
+  if (t.unit.kind === "prod") return String(row[3] || "(new production)").split("\n")[0].slice(0, 50);
+  var words = row.slice(2).map(function (x) { return x instanceof Date ? eventDate_(x) : String(x); }).filter(function (x) { return x.trim(); })[0] || "(empty row)";
+  return String(words).replace(/\*/g, "").split("\n")[0].slice(0, 50);
+}
+
+/** The gallery's "Drive folder" row: say what is in the pasted folder and what to do next. */
+function folderRowInfo_() {
+  var sheet = SpreadsheetApp.getActiveSheet(), range = SpreadsheetApp.getActiveRange();
+  if (!range) return null;
+  var row = range.getRow();
+  if (parseKey_(sheet.getRange(row, 1).getValue()).type !== "galleryfolder") return null;
+  var link = String(sheet.getRange(row, 3).getValue()).trim();
+  var base = { ok: false, folder: true, sheet: sheet.getName(), row: row };
+  if (!link) { base.message = "Paste a Google Drive folder link in the yellow cell. Its photos will be added at the end of the gallery."; return base; }
+  var id = driveId_(link);
+  if (!id || !/folders\//.test(link)) { base.message = "That is not a folder link. In Drive, right-click the folder ▸ Share ▸ Copy link, and paste it here."; base.bad = true; return base; }
+  var cache = CacheService.getScriptCache(), hit = cache.get("folder:" + id);
+  if (hit) return JSON.parse(hit);
+  try {
+    var f = DriveApp.getFolderById(id), access = f.getSharingAccess();
+    var it = f.getFiles(), photos = [], other = 0, otherNames = [], subs = [];
+    while (it.hasNext()) { var x = it.next(); if (/^image\/(jpeg|png|webp)/.test(x.getMimeType())) photos.push(x.getName()); else { other++; if (otherNames.length < 3) otherNames.push(x.getName()); } }
+    var fit = f.getFolders(); while (fit.hasNext() && subs.length < 5) subs.push(fit.next().getName());
+    photos.sort(function (a, b) { return a.localeCompare(b, undefined, { numeric: true }); });
+    if (access !== DriveApp.Access.ANYONE_WITH_LINK && access !== DriveApp.Access.ANYONE) {
+      base.bad = true;
+      base.message = "Folder “" + f.getName() + "” is not shared yet. In Drive: right-click it ▸ Share ▸ General access: “Anyone with the link”.";
+    } else if (!photos.length) {
+      base.bad = true;
+      base.message = "Folder “" + f.getName() + "” has no JPG or PNG photos directly inside it." +
+        (subs.length ? " It has folders inside (" + subs.join(", ") + ") — open the folder that holds the photos and paste that folder's link instead." : "") +
+        (other ? " It has " + other + " other file(s) (" + otherNames.join(", ") + (other > 3 ? ", …" : "") + ") — videos go on YouTube; iPhone HEIC photos must be saved as JPG." : "") +
+        (!subs.length && !other ? " The folder is empty." : "");
+    } else {
+      base.message = "✓ Folder “" + f.getName() + "”: " + photos.length + " photo" + (photos.length > 1 ? "s" : "") + " (" + photos.slice(0, 3).join(", ") + (photos.length > 3 ? ", …" : "") + "). " +
+        (other ? other + " other file(s) will be skipped (videos go on YouTube; iPhone HEIC photos must be saved as JPG). " : "") +
+        "They will be added after the photos below.  Next: press Send my changes.";
+      base.next = true;
+    }
+  } catch (e) {
+    base.bad = true;
+    base.message = "This folder cannot be opened. Check the link, and that it is shared “Anyone with the link”.";
+  }
+  cache.put("folder:" + id, JSON.stringify(base), 60);
+  return base;
+}
+
+/** What the panel shows about the clicked row. */
+function getSelectedRow() {
+  if (!can_("edit")) return { ok: false, message: "Your account is not on the Users list." };
+  var fr = folderRowInfo_();
+  if (fr) return fr;
+  var t = rowTarget_();
+  if (t.error) return { ok: false, message: t.error };
+  var kind = { row: "item", sub: "list item", pho: "photo", ev: "event", grow: "gallery item", prod: "production" }[t.unit.kind];
+  return { ok: true, label: describeRow_(t), kind: kind, canUp: !!t.unit.prev, canDown: !!t.unit.next, shown: t.sheet.getRange(t.r + 1, 2).getValue() !== false, sheet: t.sheet.getName(), row: t.r + 1 };
+}
+
+function rowTool(action) {
+  if (!can_("edit")) return { ok: false, message: "Your account is not on the Users list." };
+  var t = rowTarget_();
+  if (t.error) return { ok: false, message: t.error };
+  var s = t.sheet, u = t.unit, label = describeRow_(t);
+  var rows = function (a, b) { return s.getRange((a + 1) + ":" + (b + 1)); };
+  if (action === "up" || action === "down") {
+    var other = action === "up" ? u.prev : u.next;
+    if (!other) return { ok: false, message: action === "up" ? "It is already the first one." : "It is already the last one." };
+    var dest = action === "up" ? other.start + 1 : other.end + 2;
+    s.moveRows(rows(u.start, u.end), dest);
+    var newStart = action === "up" ? other.start : u.start + (other.end - other.start + 1);
+    s.setActiveRange(s.getRange(newStart + 1, 3));
+    return { ok: true, message: "Moved “" + label + "” " + action + "." };
+  }
+  if (action === "toggle") {
+    var cell = s.getRange(t.r + 1, 2);
+    var show = cell.getValue() === false;
+    cell.setValue(show);
+    return { ok: true, message: (show ? "Showing “" : "Hidden “") + label + "”." };
+  }
+  if (action === "add") {
+    var lastCol = s.getLastColumn();
+    // a new card gets one empty row for each of its own lists, copied from the card's first item rows
+    var templates = [u.start];
+    if (u.kind === "prod") for (var q = u.start + 1; q <= u.end; q++) templates.push(q);
+    if (u.kind === "row") {
+      var seen = {};
+      for (var i = u.start + 1; i <= u.end; i++) { var f = parseKey_(t.marks[i]).rest.split("|")[0]; if (!seen[f]) { seen[f] = 1; templates.push(i); } }
+    }
+    s.insertRowsAfter(u.end + 1, templates.length);
+    templates.forEach(function (src, j) {
+      var target = s.getRange(u.end + 2 + j, 1, 1, lastCol);
+      s.getRange(src + 1, 1, 1, lastCol).copyTo(target);
+      var formulas = target.getFormulas()[0];
+      var k = parseKey_(t.marks[src]);
+      // a production card keeps its labels (column C) and empties only the values (column D)
+      for (var c = k.type === "prod" || k.type === "pf" ? 4 : 3; c <= lastCol; c++) if (!formulas[c - 1]) target.getCell(1, c).clearContent();
+      var marker = k.type === "sub" ? "sub|" + k.rest.split("|")[0] + "|" : k.type === "pf" ? t.marks[src] : k.type === "pgap" ? "pgap" : k.type + "|";
+      target.getCell(1, 1).setValue(marker);
+      if (k.type !== "pf" && k.type !== "pgap") target.getCell(1, 2).setValue(true);
+    });
+    s.setActiveRange(s.getRange(u.end + 2, u.kind === "prod" ? 4 : 3));
+    return { ok: true, message: u.kind === "prod" ? "Added a new empty production card below “" + label + "”. Type its name and details in the yellow cells." : "Added a new empty row below “" + label + "”. Type in its yellow cells." };
+  }
+  return { ok: false, message: "Unknown action." };
 }

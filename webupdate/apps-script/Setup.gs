@@ -62,20 +62,21 @@ function startTab_(ss) {
     ["Put the photo in Google Drive ▸ right-click ▸ Share ▸ General access: “Anyone with the link” ▸ Copy link. Paste the link into the photo cell. The picture appears next to it.", ""],
     ["Videos: paste the YouTube link.   Many photos at once (a carousel or the gallery): paste a Drive folder link in the “Drive folder” row; photos appear in file-name order (01, 02, …).", "tip"],
     ["", ""],
-    ["3.  Lists (cards, events, people, videos…)", "step"],
-    ["One row = one card / item.  Untick “Show” to hide it (nothing is deleted).  To change the order, drag the row by its number on the left.  To add one, type in an empty row at the bottom of the list.", ""],
-    ["Upcoming shows: start each with the date in bold, e.g. **8 Jan 2027** — what, where. The site puts them in date order and hides past dates by itself.", "tip"],
+    ["3.  Lists — one item = one row", "step"],
+    ["Every card, event, person, photo or line of a list has its own row. Click the row, then use the “Selected row” box in the Website panel:  ▲ Move up · ▼ Move down · ＋ Add below · Hide / Show.", ""],
+    ["To remove something, press Hide (or untick “Show”). Nothing is ever deleted, so you can always Show it again.  Never clear a row to remove it — the preview will stop and tell you.", "tip"],
+    ["Events: one row per show. Date (click the cell for a calendar) · Event · Details · Ticket link. Past dates hide themselves.", "tip"],
+    ["Made a mistake?  Edit ▸ Undo (Ctrl+Z / ⌘+Z).  Older mistakes: File ▸ Version history shows every earlier version of this Sheet.", "tip"],
     ["", ""],
-    ["4.  See it, then send it", "step"],
-    ["Website menu ▸ ① Update preview. In about 2 minutes the Website panel shows two links: the change page (only what you changed, with Before/After) and the full preview.", ""],
-    ["If something is wrong, the panel says which tab and row, in plain words. Fix it and press Update preview again.", "tip"],
-    ["When it looks right: Website ▸ ② Submit for review. The moderator gets an email.", ""],
+    ["4.  Send it", "step"],
+    ["When you are done, press “Send my changes” in the Website panel. In about 2 minutes a preview is ready and the moderator gets an email. Nothing goes live yet.", ""],
+    ["If something is wrong, the panel says which tab and row, in plain words. Fix it and press Send my changes again.", "tip"],
     ["", ""],
     ["5.  Moderator", "step"],
-    ["Website ▸ ③ Review: look at the change page, then Approve & publish (abhinava.dance updates in a few minutes) or Send back with a note.", ""],
+    ["Open the Website panel ▸ “See what changed”. Then press Publish (click twice) — abhinava.dance updates in a few minutes — or write a note and press Send back.", ""],
     ["", ""],
     ["Do not change", "step"],
-    ["The coloured bands, the grey header rows and the tab names. If you do by mistake: Edit ▸ Undo, or ask the owner.", ""]
+    ["The coloured bands, the grey header rows, column A and the tab names. If you do by mistake: Edit ▸ Undo, or ask the owner.", ""]
   ];
   s.getRange(1, 2, lines.length, 1).setValues(lines.map(function (l) { return [l[0]]; })).setWrap(true).setVerticalAlignment("middle");
   s.setColumnWidth(1, 30); s.setColumnWidth(2, 900);
@@ -128,7 +129,10 @@ function pageTab_(ss, pg, data) {
       else if (f.type === "listnote") { b = COLORS.listNote; color = COLORS.note; }
       else if (f.type === "listhead" || f.type === "slothead") { b = COLORS.head; w = "bold"; color = "#3d3424"; }
       else if (f.type === "slot") { if (c === 1) color = COLORS.note; if (c === 2 || (c === 3 && (f.kind === "photo" || f.link))) b = COLORS.edit; }
-      else if (f.type === "row") { if (c >= 2 && c < 2 + f.cols) b = COLORS.edit; }
+      else if (f.type === "row") { if (c >= 2 && c < 2 + f.cols) b = (f.multiCols || []).indexOf(c + 1) >= 0 ? COLORS.key : COLORS.edit; }
+      else if (f.type === "sub") { if (c === f.itemCol - 1) b = COLORS.item; else if (c >= 1) b = COLORS.itemRow; }
+      else if (f.type === "pho") { if (c === 2) b = COLORS.edit; }
+      else if (f.type === "ev") { if (c >= 2 && c <= 5) b = COLORS.edit; }
       else if (f.type === "grow") { if (c >= 2 && c <= 5) b = COLORS.edit; }
       else if (f.type === "folder") { if (c === 1) color = COLORS.note; if (c === 2) b = COLORS.edit; if (c === 3) color = COLORS.note; }
       else if (f.type === "title") { color = COLORS.title; w = "bold"; }
@@ -156,13 +160,21 @@ function pageTab_(ss, pg, data) {
     }
     return out;
   }
-  runs(function (f) { return f.type === "row" || f.type === "grow"; }).forEach(function (r) {
+  runs(function (f) { return f.type === "row" || f.type === "grow" || f.type === "sub" || f.type === "pho" || f.type === "ev"; }).forEach(function (r) {
     var n = r[1] - r[0] + 1, range = s.getRange(r[0] + 1, 2, n, 1);
     range.setNumberFormat("General").insertCheckboxes().setHorizontalAlignment("center");
     range.setValues(values.slice(r[0], r[1] + 1).map(function (row) { return [row[1] === true]; }));
   });
   // list rows with a photo column: one preview formula per row, same column within a list
-  runs(function (f) { return f.type === "row" && f.photoCol; }).forEach(function (r) {
+  // event dates: real dates, so Google shows a calendar to pick from
+  runs(function (f) { return f.type === "ev"; }).forEach(function (r) {
+    var n = r[1] - r[0] + 1, range = s.getRange(r[0] + 1, 3, n, 1);
+    var dates = values.slice(r[0], r[1] + 1).map(function (row) { var d = new Date(Date.parse(String(row[2]).replace(/(\d+)(st|nd|rd|th)/, "$1"))); return [isNaN(d.getTime()) ? row[2] : d]; });
+    range.setNumberFormat("d mmm yyyy").setValues(dates)
+      .setDataValidation(SpreadsheetApp.newDataValidation().requireDate().setAllowInvalid(true).setHelpText("Double-click to pick a date from the calendar, e.g. 8 Jan 2027").build());
+  });
+  // photo previews for list rows, item rows and carousel rows
+  runs(function (f) { return (f.type === "row" || f.type === "sub" || f.type === "pho") && f.photoCol && f.previewCol; }).forEach(function (r) {
     var f0 = fmt[r[0]], n = r[1] - r[0] + 1, formulas = [];
     for (var i = r[0]; i <= r[1]; i++) formulas.push([previewFormula_(colLetter_(fmt[i].photoCol) + (i + 1))]);
     s.getRange(r[0] + 1, f0.previewCol, n, 1).setFormulas(formulas);
@@ -183,7 +195,7 @@ function pageTab_(ss, pg, data) {
       s.setRowHeight(i + 1, 70);
     }
   });
-  s.setColumnWidth(1, 20); s.setColumnWidth(2, 150); s.setColumnWidth(3, 460); s.setColumnWidth(4, 260); s.setColumnWidth(5, 170);
+  s.setColumnWidth(1, 20); s.setColumnWidth(2, 110); s.setColumnWidth(3, 460); s.setColumnWidth(4, 300); s.setColumnWidth(5, 170);
   for (var c = 6; c <= width; c++) s.setColumnWidth(c, 220);
   s.setFrozenRows(2);
   s.hideColumns(1);
@@ -192,25 +204,27 @@ function pageTab_(ss, pg, data) {
   s.getRange(1, 1, s.getMaxRows(), 1).protect().setDescription("Keys — do not change").setWarningOnly(true);
 }
 
-/* ── Productions ── */
+/* ── Productions: one card per production ── */
 function productionsTab_(ss, list) {
   var s = freshSheet_(ss, "Productions");
-  s.getRange(1, 1).setValue("Productions — the poster wall on the Performances page").setFontSize(16).setFontWeight("bold").setFontColor(COLORS.title);
-  s.getRange(2, 1).setValue("One row per production, in the order they appear. Show: Yes or No. Poster: paste a Drive link (portrait 4:5 works best). Drag a row by its number to move it.").setFontColor(COLORS.note);
-  var head = PRODUCTION_COLUMNS.concat(["Preview"]);
-  s.getRange(3, 1, 1, head.length).setValues([head]).setFontWeight("bold").setBackground(COLORS.head);
-  var n = list.length + 5;
-  s.getRange(4, 1, n, PRODUCTION_COLUMNS.length).setNumberFormat("@");
-  if (list.length) s.getRange(4, 1, list.length, PRODUCTION_COLUMNS.length).setValues(list.map(function (p) { return PRODUCTION_COLUMNS.map(function (c) { return p[c] || ""; }); }));
-  s.getRange(4, 1, n, PRODUCTION_COLUMNS.length).setBackground(COLORS.edit).setWrap(true).setVerticalAlignment("top");
-  var showCol = PRODUCTION_COLUMNS.indexOf("Show") + 1, posterCol = PRODUCTION_COLUMNS.indexOf("Poster") + 1;
-  s.getRange(4, showCol, n, 1).setDataValidation(SpreadsheetApp.newDataValidation().requireValueInList(["Yes", "No"], true).build());
-  var formulas = [];
-  for (var i = 0; i < n; i++) formulas.push([previewFormula_(colLetter_(posterCol) + (4 + i))]);
-  s.getRange(4, head.length, n, 1).setFormulas(formulas);
-  s.setRowHeights(4, n, 70);
-  s.setFrozenRows(3); s.setFrozenColumns(1);
-  s.setColumnWidth(1, 200);
-  for (var c = 2; c <= head.length; c++) s.setColumnWidth(c, c === posterCol ? 260 : 140);
-  s.getRange(3, 1, 1, head.length).protect().setDescription("Column names — do not change").setWarningOnly(true);
+  var laid = layoutProductions_(list);
+  var n = laid.rows.length;
+  s.getRange(1, 1, n, 5).setNumberFormat("@").setValues(laid.rows).setWrap(true).setVerticalAlignment("top");
+  s.setRowHeights(1, n, 21); s.autoResizeRows(1, n);
+  var ticks = [], posters = [];
+  laid.fmt.forEach(function (f, i) {
+    var row = i + 1, r = s.getRange(row, 2, 1, 4);
+    if (f.type === "title") s.getRange(row, 2).setFontSize(16).setFontWeight("bold").setFontColor(COLORS.title).setWrap(false);
+    if (f.type === "hint") s.getRange(row, 2).setFontColor(COLORS.note).setFontStyle("italic").setWrap(false);
+    if (f.type === "prod") { r.setBackground(COLORS.band).setFontColor(COLORS.bandText).setFontWeight("bold").setFontSize(12); s.getRange(row, 4).setBackground(COLORS.edit).setFontColor("#000000"); ticks.push(row); }
+    if (f.type === "pf") { s.getRange(row, 3).setFontColor(COLORS.note); s.getRange(row, 4).setBackground(COLORS.edit); }
+    if (f.poster) { posters.push(row); s.setRowHeight(row, 110); }
+  });
+  ticks.forEach(function (row) { s.getRange(row, 2).insertCheckboxes().setNumberFormat("General"); });
+  laid.rows.forEach(function (x, i) { if (laid.fmt[i].type === "prod") s.getRange(i + 1, 2).setValue(x[1]); });
+  posters.forEach(function (row) { s.getRange(row, 5).setFormula(previewFormula_("D" + row)); });
+  s.hideColumns(1);
+  s.setColumnWidth(2, 70); s.setColumnWidth(3, 130); s.setColumnWidth(4, 520); s.setColumnWidth(5, 110);
+  s.setFrozenRows(2);
+  s.getRange(1, 1, s.getMaxRows(), 1).protect().setDescription("Keys — do not change").setWarningOnly(true);
 }

@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 import { readSite, PAGES, PAGE_NAMES } from "../engine/site.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const ctx = { SITE: "https://abhinava.dance/", JSON, String, Object, Math, Array };
+const ctx = { SITE: "https://abhinava.dance/", JSON, String, Object, Math, Array, Date };
 vm.createContext(ctx);
 vm.runInContext(fs.readFileSync(path.join(HERE, "../apps-script/Layout.gs"), "utf8"), ctx);
 const site = readSite(path.join(HERE, "../.."));
@@ -35,7 +35,7 @@ for (const p of PAGES) {
     });
     b.lists.forEach((l, j) => {
       const t = r.lists[j];
-      ok(t && t.key === l.key && t.what === l.what && JSON.stringify(t.columns) === JSON.stringify(l.columns), `${p}: list ${l.key} (${t && t.what})`);
+      ok(t && t.key === l.key && JSON.stringify(t.columns) === JSON.stringify(l.columns), `${p}: list ${l.key} (${t && t.what})`);
       ok(t && t.rows.length === l.rows.length, `${p}: list ${l.key} rows ${t && t.rows.length} vs ${l.rows.length}`);
       l.rows.forEach((row, k) => ok(t && t.rows[k] && t.rows[k].key === row.key && sortObj(clean(t.rows[k].cells)) === sortObj(clean(row.cells)), `${p}: ${row.key}`));
     });
@@ -43,25 +43,101 @@ for (const p of PAGES) {
   });
 }
 
-// editor actions on the Performances tab: move a row, hide a row, add a row by typing in a spare row,
-// insert a brand-new row (empty column A) inside a list, paste a folder link
+// editor actions on the Performances tab, the way an editor (or the panel's buttons) would do them
 const p = "performances";
-const values = toValues(ctx.layoutPage_([p, "Performances"], site.pages[p]));
-const find = (pred) => values.findIndex(pred);
-const evHead = find((r) => String(r[0]).startsWith("list|performances/upcoming-list/1|"));
-values[evHead + 3][1] = false; // hide the 3rd event
-const moved = values.splice(evHead + 1, 1)[0]; values.splice(evHead + 5, 0, moved); // move the 1st event down
-const spare = find((r, i) => i > evHead && r[0] === "row|" && !r[2]);
-values[spare][2] = "**2 Apr 2027** — Typed in a spare row";
-const ins = ["", true, "**3 Apr 2027** — Inserted row"]; while (ins.length < values[0].length) ins.push("");
-values.splice(evHead + 2, 0, ins);
-values[evHead][2] = "Somebody typed over the header"; // visible header text is only a label
-const back = ctx.readPageRows_(values, p);
-const ev = back.blocks.find((b) => b.key === "performances/upcoming-list").lists[0];
-ok(ev.rows.some((r) => r.cells.Item.includes("Typed in a spare row") && r.key === "new-" + (spare + 1)) || ev.rows.some((r) => r.cells.Item.includes("Typed in a spare row")), "spare row read as a new row");
-ok(ev.rows.some((r) => r.cells.Item.includes("Inserted row") && r.key.startsWith("new-")), "inserted row read as a new row");
-ok(ev.rows.filter((r) => r.show === false).length === 1, "one hidden row");
-ok(ev.rows.every((r) => "Item" in r.cells), "typing over a header row changes nothing");
-ok(ev.rows.findIndex((r) => r.key === site.pages[p].blocks.find((b) => b.key === "performances/upcoming-list").lists[0].rows[0].key) > 1, "moved row is lower");
+const live = site.pages[p];
+const fresh = () => toValues(ctx.layoutPage_([p, "Performances"], live));
+const W = fresh()[0].length;
+const blank = (marker) => { const r = [marker, true]; while (r.length < W) r.push(""); return r; };
+const idx = (vals, pred) => vals.findIndex(pred);
+const evOf = (vals) => ctx.readPageRows_(vals, p).blocks.find((b) => b.key === "performances/upcoming-list").lists[0];
+const liveEv = live.blocks.find((b) => b.key === "performances/upcoming-list").lists[0];
+
+// 1. events come back exactly as the page has them
+{
+  const ev = evOf(fresh());
+  ok(ev.rows.length === liveEv.rows.length && ev.rows.every((r, i) => r.cells.Item === liveEv.rows[i].cells.Item), "events: Date | Event | Details | Ticket link read back exactly");
+}
+// 2. hide an event, add one in a new row (marker copied by the panel), add one by hand-inserted row
+{
+  const v = fresh();
+  const h = idx(v, (r) => String(r[0]).startsWith("events|"));
+  v[h + 3][1] = false;
+  const add = blank("ev|"); add[2] = "2 Apr 2027"; add[3] = "Test Premiere"; add[4] = "Chowdiah Hall, Bengaluru"; add[5] = "https://example.com/t";
+  v.splice(h + 2, 0, add);
+  const hand = blank(""); hand[2] = new Date(2027, 3, 3); hand[3] = "Hand Row";
+  v.splice(h + 1, 0, hand);
+  const ev = evOf(v);
+  ok(ev.rows.filter((r) => r.show === false).length === 1, "events: one hidden");
+  ok(ev.rows.some((r) => r.cells.Item === "**2 Apr 2027** — *Test Premiere*: Chowdiah Hall, Bengaluru · [Tickets](https://example.com/t)"), "events: new row written in the site's format");
+  ok(ev.rows.some((r) => r.cells.Item === "**3 Apr 2027** — *Hand Row*"), "events: a date picked from the calendar reads as 3 Apr 2027");
+}
+// 3. a card's own list: one item per row — add, hide, and accidental clearing is caught
+{
+  const v = fresh();
+  const card = idx(v, (r) => String(r[0]).startsWith("row|") && String(r[2]).includes("Cultural Festivals"));
+  const firstItem = card + 1;
+  ok(String(v[firstItem][0]).startsWith("sub|"), "festivals are item rows under their card");
+  const col = v[firstItem].findIndex((x, i) => i > 1 && String(x).trim());
+  const add = blank("sub|List (one per line)|"); add[col] = "Chennai Dance Festival — Chennai";
+  v.splice(firstItem + 1, 0, add);
+  v[firstItem + 2][1] = false; // hide the (old) second festival
+  const back = ctx.readPageRows_(v, p);
+  const list = back.blocks.find((b) => b.key === "performances/past-performances").lists.find((l) => l.rows.some((r) => /Cultural/.test(r.cells.Text)));
+  const items = list.rows.find((r) => /Cultural/.test(r.cells.Text)).cells["List (one per line)"].split("\n");
+  const orig = live.blocks.find((b) => b.key === "performances/past-performances").lists.find((l) => l.key === list.key).rows.find((r) => /Cultural/.test(r.cells.Text)).cells["List (one per line)"].split("\n");
+  ok(items[1] === "Chennai Dance Festival — Chennai" && items.length === orig.length, `festivals: one added, one hidden (${items.length} of ${orig.length + 1})`);
+  ok(!items.includes(orig[1]), "festivals: the hidden one is left out");
+  ok(back.problems.length === 0, "no problems for normal edits");
+  v[firstItem][col] = ""; // an editor clears a festival by mistake
+  const bad = ctx.readPageRows_(v, p);
+  ok(bad.problems.some((m) => /untick Show instead/.test(m)), "clearing an item by mistake is caught: " + (bad.problems[0] || ""));
+}
+// 4. clearing a whole card row by mistake is caught, a carousel photo can be hidden
+{
+  const v = fresh();
+  const card = idx(v, (r) => String(r[0]).startsWith("row|") && String(r[2]).includes("Corporate Shows"));
+  for (let c = 2; c < W; c++) v[card][c] = "";
+  ok(ctx.readPageRows_(v, p).problems.length > 0, "clearing a whole card is caught");
+}
+{
+  const s2 = "school";
+  const v = toValues(ctx.layoutPage_([s2, "School"], site.pages[s2]));
+  const ph = idx(v, (r) => String(r[0]) === "pho|1");
+  v[ph][1] = false;
+  const back = ctx.readPageRows_(v, s2);
+  const origSlot = site.pages[s2].blocks.flatMap((b) => b.slots).find((x) => x.kind === "photos");
+  const slot = back.blocks.flatMap((b) => b.slots).find((x) => x.key === origSlot.key);
+  ok(slot.value.split("\n").length === origSlot.value.split("\n").length - 1, "carousel: one photo hidden");
+}
+// 5. the panel's Move up / Move down: what moves together
+{
+  const v = fresh();
+  const marks = v.map((r) => r[0]);
+  const card = idx(v, (r) => String(r[0]).startsWith("row|") && String(r[2]).includes("Corporate Shows"));
+  const u = ctx.rowUnit_(marks, card);
+  ok(u && u.kind === "row" && u.end > u.start && u.prev && /Cultural/.test(v[u.prev.start][2]), "a card moves with its own items, past the card above");
+  const item = idx(v, (r) => String(r[0]).startsWith("sub|"));
+  const ui = ctx.rowUnit_(marks, item);
+  ok(ui && ui.start === ui.end && !ui.prev && ui.next, "an item moves alone, only among its card's items");
+  ok(ctx.rowUnit_(marks, idx(v, (r) => String(r[0]).startsWith("block|"))) === null, "bands and headers do not move");
+}
+// Productions as cards: read back exactly; hide, clear, new card, moving
+{
+  const P = JSON.parse(JSON.stringify(site.productions));
+  const laid = toValues(ctx.layoutProductions_(P));
+  const back = JSON.parse(JSON.stringify(ctx.readProductions_(laid)));
+  const norm = (l) => l.map((p) => JSON.stringify(Object.fromEntries(["Production", "Show", ...ctx.PRODUCTION_FIELDS].map((c) => [c, String(p[c] ?? (c === "Show" ? "Yes" : ""))]))));
+  ok(back.problems.length === 0 && JSON.stringify(norm(back.productions)) === JSON.stringify(norm(P)), "productions: cards read back the same");
+  const v = laid.map((r) => r.slice());
+  const first = v.findIndex((r) => r[0] === "prod|1");
+  v[first][1] = false;
+  ok(ctx.readProductions_(v).productions[0].Show === "No", "productions: untick hides");
+  const v2 = laid.map((r) => r.slice()); v2[first][3] = "";
+  ok(ctx.readProductions_(v2).problems.length === 1, "productions: a cleared name is caught");
+  const marks = laid.map((r) => r[0]);
+  const u = ctx.rowUnit_(marks, first + 5);
+  ok(u && u.kind === "prod" && u.start === first && u.end === first + ctx.PRODUCTION_FIELDS.length + 1 && !u.prev && u.next, "productions: clicking any detail picks the whole card");
+}
 console.log(fails ? `\n${fails} problem(s)` : "✓ every page lays out and reads back the same; editor actions read correctly");
 process.exit(fails ? 1 : 0);

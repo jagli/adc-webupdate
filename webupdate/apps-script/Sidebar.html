@@ -35,6 +35,12 @@
   .spin { display: inline-block; width: 12px; height: 12px; border: 2px solid #d9cdb6; border-top-color: var(--navy); border-radius: 50%; animation: s 1s linear infinite; vertical-align: -2px; margin-right: 6px; }
   @keyframes s { to { transform: rotate(360deg); } }
   [hidden] { display: none !important; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .grid2 button { margin-top: 6px; padding: 10px 6px; }
+  #row-label b { color: var(--ink); }
+  #row-label.next { color: #1e6b34; font-weight: 600; }
+  #row-label.bad { color: #b3261e; font-weight: 600; }
+  .pulse { box-shadow: 0 0 0 3px #f2c94c; }
 </style>
 </head>
 <body>
@@ -54,24 +60,34 @@
       <ul class="problems" id="problems" hidden></ul>
       <ul id="changes" hidden></ul>
       <div id="links" hidden>
-        <a class="link" id="review-link" target="_blank">See only what changed ↗<small>The change page, with Before / After</small></a>
-        <a class="link" id="preview-link" target="_blank">Open the full preview ↗<small>The whole website with your changes</small></a>
+        <a class="link" id="review-link" target="_blank">See what changed ↗<small>Only the changed parts, with Before / After</small></a>
+        <a class="muted" id="preview-link" target="_blank">or open the whole preview website ↗</a>
+      </div>
+    </div>
+
+    <div class="card" id="row-tools">
+      <div class="state">Selected row</div>
+      <div class="muted" id="row-label">Click a row in a page tab.</div>
+      <div class="grid2">
+        <button id="btn-up" class="alt" disabled>▲ Move up</button>
+        <button id="btn-down" class="alt" disabled>▼ Move down</button>
+        <button id="btn-add" class="alt" disabled>＋ Add below</button>
+        <button id="btn-toggle" class="alt" disabled>Hide</button>
       </div>
     </div>
 
     <div class="card" id="editor-actions">
-      <button id="btn-preview">① Update preview</button>
-      <div class="muted">Builds a preview from the Sheet (about 2 minutes). Nothing goes live.</div>
       <textarea id="note" placeholder="Note for the moderator (optional)"></textarea>
-      <button id="btn-submit" class="alt">② Submit for review</button>
+      <button id="btn-send">Send my changes</button>
+      <div class="muted">Makes a preview (about 2 minutes) and sends it to the moderator. Nothing goes live until the moderator publishes.</div>
     </div>
 
     <div class="card" id="moderator-actions" hidden>
-      <div class="state">③ Review</div>
-      <div class="muted">Look at the change page first. Approve puts exactly that on abhinava.dance.</div>
-      <button id="btn-approve" class="good">Approve &amp; publish</button>
-      <textarea id="reject-note" placeholder="What should the editor change? (needed to send back)"></textarea>
-      <button id="btn-reject" class="danger">Send back with this note</button>
+      <div class="state">Moderator</div>
+      <div class="muted">Open “See what changed” first. Publish puts exactly that on abhinava.dance.</div>
+      <button id="btn-approve" class="good">Publish</button>
+      <textarea id="reject-note" placeholder="Something wrong? Write what to change…"></textarea>
+      <button id="btn-reject" class="danger">Send back</button>
     </div>
 
     <div class="card" id="owner-actions" hidden>
@@ -114,16 +130,16 @@
     var role = s.role || "";
     $("who").textContent = s.me + (role ? " · " + role : " · not on the Users list");
     var st = s.state || {};
-    var label = { building: "Building the preview…", ready: "Preview ready — check it", waiting: "Waiting for the moderator", problems: "Some things need fixing", publishing: "Publishing…", rejected: "Sent back — see the note", published: "Live on abhinava.dance" }[st.status] || "No preview yet";
+    var label = { building: st.autoSubmit ? "Sending… building the preview (about 2 minutes)" : "Building the preview…", ready: "Preview ready", waiting: "Waiting for the moderator", problems: "Some things need fixing", publishing: "Publishing…", rejected: "Sent back by the moderator", published: "Live on abhinava.dance ✓" }[st.status] || "No changes sent yet";
     var cls = { ready: "ok", published: "ok", problems: "bad", rejected: "bad", building: "wait", waiting: "wait", publishing: "wait" }[st.status] || "";
     if (st.status === "publishing" && s.publish && s.publish.sha === st.sha) { label = s.publish.ok ? "Live on abhinava.dance" : (s.publish.netlify === "2" ? "Approved — the owner still has to connect Netlify" : "Publishing did not finish — the owner can see why"); cls = s.publish.ok ? "ok" : "bad"; }
     $("state").innerHTML = (st.status === "building" || st.status === "publishing" && !(s.publish && s.publish.sha === st.sha) ? '<span class="spin"></span>' : "") + label;
     $("state").className = "state " + cls;
     var detail = [];
-    if (st.by) detail.push("Preview by " + st.by);
-    if (st.submittedBy && st.status === "waiting") detail.push("submitted by " + st.submittedBy + (st.note ? " — “" + st.note + "”" : ""));
-    if (st.status === "rejected") detail.push("Note from " + st.rejectedBy + ": “" + st.rejectNote + "”");
-    if (s.contentChanged) detail.push("The Sheet has changed since this preview — press Update preview again.");
+    if (st.submittedBy && (st.status === "waiting" || st.status === "building")) detail.push("Sent by " + st.submittedBy + (st.note ? " — “" + st.note + "”" : ""));
+    if (st.status === "rejected") detail.push("“" + st.rejectNote + "” — " + st.rejectedBy + ". Fix it in the Sheet, then press Send my changes again.");
+    if (st.status === "problems") detail.push("Fix these in the Sheet, then press Send my changes again.");
+    if (s.contentChanged) detail.push("The Sheet has changed since these were sent — press Send my changes again.");
     if (st.publishError && st.status === "waiting") detail.push(st.publishError);
     $("state-detail").textContent = detail.join(" · ");
     list($("problems"), st.status === "problems" ? st.problems : []);
@@ -134,7 +150,8 @@
     $("preview-link").href = s.previewUrl + "?t=" + Date.now();
     var canEdit = /Editor|Moderator|Super admin/.test(role), canMod = /Moderator|Super admin/.test(role), own = role === "Super admin";
     $("editor-actions").hidden = !canEdit;
-    $("btn-submit").disabled = !(st.status === "ready") || s.contentChanged;
+    $("row-tools").hidden = !canEdit;
+    $("btn-send").disabled = st.status === "building" || st.status === "publishing";
     $("moderator-actions").hidden = !canMod;
     $("btn-approve").disabled = !(st.status === "waiting" || st.status === "ready") || s.contentChanged;
     $("btn-reject").disabled = !(st.status === "waiting" || st.status === "ready");
@@ -142,15 +159,50 @@
     $("tabs").hidden = !(own || canMod);
     $("tab-users").hidden = !own; $("tab-log").hidden = !(own || canMod);
     clearTimeout(timer);
-    if (st.status === "building" || st.status === "publishing") timer = setTimeout(refresh, 10000);
+    if (st.status === "building" || st.status === "publishing" || st.status === "waiting") timer = setTimeout(refresh, st.status === "waiting" ? 30000 : 10000);
   }
   function refresh() { call("getStatus").then(function (s) { if (s) render(s); }); }
 
-  $("btn-preview").onclick = function () { say(""); call("updatePreview", [], this, "Sending…").then(function (r) { if (r) say(r.message, !r.ok); refresh(); }); };
-  $("btn-submit").onclick = function () { call("submitForReview", [$("note").value], this).then(function (r) { if (r) say(r.message, !r.ok); refresh(); }); };
-  $("btn-approve").onclick = function () { if (!confirm("Publish these changes to abhinava.dance now?")) return; call("approveAndPublish", [], this, "Publishing…").then(function (r) { if (r) say(r.message, !r.ok); refresh(); }); };
+  /* row tools: always act on the row that is selected when the button is pressed */
+  function showRow(r) {
+    var ok = r && r.ok;
+    $("row-label").innerHTML = ok ? "<b></b><br><span></span>" : "";
+    if (ok) { $("row-label").querySelector("b").textContent = "“" + r.label + "”"; $("row-label").querySelector("span").textContent = r.sheet + " tab, row " + r.row + " · " + r.kind + (r.shown ? "" : " · hidden"); }
+    else $("row-label").textContent = (r && r.message) || "Click a row in a page tab first.";
+    $("row-label").className = "muted" + (r && r.next ? " next" : r && r.bad ? " bad" : "");
+    $("btn-send").classList.toggle("pulse", !!(r && r.next));
+    $("btn-up").disabled = !(ok && r.canUp); $("btn-down").disabled = !(ok && r.canDown);
+    $("btn-add").disabled = !ok; $("btn-toggle").disabled = !ok;
+    $("btn-toggle").textContent = ok && !r.shown ? "Show" : "Hide";
+  }
+  function rowAction(name, btn) { call("rowTool", [name], btn).then(function (r) { if (r) say(r.message, !r.ok); lastRow = ""; watchRow(); }); }
+  /* follow the clicked row: ask every 2 seconds while this panel is open and visible */
+  var rowBusy = false, lastRow = "";
+  function watchRow() {
+    if (rowBusy || document.hidden || $("row-tools").hidden) return;
+    rowBusy = true;
+    google.script.run.withSuccessHandler(function (r) {
+      rowBusy = false;
+      var key = JSON.stringify(r);
+      if (key !== lastRow) { lastRow = key; showRow(r); }
+    }).withFailureHandler(function () { rowBusy = false; }).getSelectedRow();
+  }
+  setInterval(watchRow, 2000);
+  $("btn-up").onclick = function () { rowAction("up", this); };
+  $("btn-down").onclick = function () { rowAction("down", this); };
+  $("btn-add").onclick = function () { rowAction("add", this); };
+  $("btn-toggle").onclick = function () { rowAction("toggle", this); };
+
+  $("btn-send").onclick = function () { say(""); call("sendChanges", [$("note").value], this, "Sending…").then(function (r) { if (r) { say(r.message, !r.ok); if (r.ok) $("note").value = ""; } refresh(); }); };
+  /* ask twice inside the panel instead of a browser pop-up (pop-ups can hide behind windows) */
+  function twice(btn, ask, go) {
+    if (btn.dataset.armed) { clearTimeout(btn._t); delete btn.dataset.armed; btn.textContent = btn.dataset.label; go(); return; }
+    btn.dataset.label = btn.textContent; btn.dataset.armed = "1"; btn.textContent = ask;
+    btn._t = setTimeout(function () { delete btn.dataset.armed; btn.textContent = btn.dataset.label; }, 6000);
+  }
+  $("btn-approve").onclick = function () { var b = this; twice(b, "Click again to publish", function () { call("approveAndPublish", [], b, "Publishing…").then(function (r) { if (r) say(r.message, !r.ok); refresh(); }); }); };
   $("btn-reject").onclick = function () { call("rejectChanges", [$("reject-note").value], this).then(function (r) { if (r) say(r.message, !r.ok); refresh(); }); };
-  $("btn-undo").onclick = function () { if (!confirm("Put the previous version of abhinava.dance back?")) return; call("rollbackLast", [], this).then(function (r) { if (r) say(r.message, !r.ok); }); };
+  $("btn-undo").onclick = function () { var b = this; twice(b, "Click again to put the previous version back", function () { call("rollbackLast", [], b).then(function (r) { if (r) say(r.message, !r.ok); }); }); };
 
   document.querySelectorAll("#tabs button").forEach(function (b) {
     b.onclick = function () {
@@ -172,7 +224,7 @@
           var edit = document.createElement("button"); edit.className = "alt"; edit.textContent = "Edit";
           edit.onclick = function () { $("u-email").value = u.email; $("u-name").value = u.name; $("u-role").value = u.role; $("u-email").focus(); };
           var del = document.createElement("button"); del.className = "danger"; del.textContent = "Remove";
-          del.onclick = function () { if (confirm("Remove " + u.email + "? They will lose access to this Sheet.")) call("removeUser", [u.email], del).then(function (r) { if (r) say(r.message, !r.ok); loadUsers(); }); };
+          del.onclick = function () { twice(del, "Click again to remove", function () { call("removeUser", [u.email], del).then(function (r) { if (r) say(r.message, !r.ok); loadUsers(); }); }); };
           var btns = document.createElement("span"); btns.appendChild(edit); btns.appendChild(del); row.appendChild(btns);
         }
         box.appendChild(row);
