@@ -172,9 +172,11 @@ header h1{font-size:18px;margin:0;font-weight:600}header p{margin:0;opacity:.85;
 <div class="wrap"><p class="legend">Changed words and photos are outlined like <b>this</b>. Faded parts above and below are only there to show where the change sits.</p>
 ${body || `<div class="empty">Nothing has changed since the last publish.</div>`}</div>
 <script>
+/* a picture's height is measured when it is shown (a hidden one measures as zero) */
+function fit(f){setTimeout(function(){try{f.style.height=Math.min(f.contentDocument.documentElement.scrollHeight,2400)+'px'}catch(e){}},60)}
 document.querySelectorAll('.wu-panel').forEach(function(p){
-  p.querySelectorAll('[data-v]').forEach(function(b){b.onclick=function(){p.querySelectorAll('[data-v]').forEach(function(x){x.classList.toggle('on',x===b)});var a=p.querySelector('[id^=a]'),bf=p.querySelector('[id^=b]');a.hidden=b.dataset.v!=='after';bf.hidden=b.dataset.v!=='before';}});
-  p.querySelectorAll('[data-w]').forEach(function(b){b.onclick=function(){p.querySelectorAll('[data-w]').forEach(function(x){x.classList.toggle('on',x===b)});p.querySelector('.wu-stage').classList.toggle('phone',b.dataset.w==='phone');p.querySelectorAll('iframe').forEach(function(f){try{f.contentWindow.postMessage('size','*');var h=f.contentDocument.documentElement.scrollHeight;f.style.height=h+'px'}catch(e){}})}});
+  p.querySelectorAll('[data-v]').forEach(function(b){b.onclick=function(){p.querySelectorAll('[data-v]').forEach(function(x){x.classList.toggle('on',x===b)});var a=p.querySelector('[id^=a]'),bf=p.querySelector('[id^=b]');a.hidden=b.dataset.v!=='after';bf.hidden=b.dataset.v!=='before';fit(b.dataset.v==='after'?a:bf);}});
+  p.querySelectorAll('[data-w]').forEach(function(b){b.onclick=function(){p.querySelectorAll('[data-w]').forEach(function(x){x.classList.toggle('on',x===b)});p.querySelector('.wu-stage').classList.toggle('phone',b.dataset.w==='phone');p.querySelectorAll('iframe').forEach(function(f){if(!f.hidden)fit(f)})}});
 });
 addEventListener('message',function(e){if(e.data&&e.data.wuH&&e.data.id){var f=document.getElementById(e.data.id);if(f)f.style.height=Math.min(e.data.wuH,2400)+'px'}});
 document.querySelectorAll('iframe').forEach(function(f){f.addEventListener('load',function(){try{f.style.height=Math.min(f.contentDocument.documentElement.scrollHeight,2400)+'px'}catch(e){}})});
