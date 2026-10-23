@@ -4383,7 +4383,7 @@
         },
         {
          "key": "school/apply/3/3",
-         "show": true,
+         "show": false,
          "cells": {
           "Button": "Apply for Kathak at Rajaji Nagar",
           "Button link": "assets/web/files/forms/2026-27-admission-kathak-rajajinagar.pdf"
@@ -7705,6 +7705,6 @@
  },
  "drive": {},
  "by": "learn@jagli.com",
- "at": "2026-10-23T10:43:01.446Z",
- "hash": "x93yzWtYv3TInonC"
+ "at": "2026-10-23T10:57:52.925Z",
+ "hash": "zqqL2lMg+QmmhdDi"
 }
