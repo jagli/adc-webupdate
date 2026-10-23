@@ -136,7 +136,7 @@ export function reviewPage({ base, content, before, after, assetBase = "../" }) 
   }
   const head = headLinks(Object.values(after)[0] || "");
   const body = panels.map((p, n) => {
-    const list = `<ul class="wu-changes">${p.changes.map((c) => `<li>${escapeHtml(c)}</li>`).join("")}</ul>`;
+    const list = `<ul class="wu-changes">${p.changes.map((c) => `<li${/: (hidden|removed) “|^removed “/.test(c) ? ' class="wu-gone"' : ""}>${escapeHtml(c)}</li>`).join("")}</ul>`;
     if (p.idx === undefined || p.idx < 0) return `<section class="wu-panel"><h2>${escapeHtml(p.title)}</h2>${list}</section>`;
     const snipA = sectionSnippet(p.htmlAfter, p.idx), snipB = sectionSnippet(p.htmlBefore || p.htmlAfter, p.idx);
     const marks = textsAndImages(snipB);
@@ -167,6 +167,7 @@ header h1{font-size:18px;margin:0;font-weight:600}header p{margin:0;opacity:.85;
 .wu-frame{display:block;width:100%;height:600px;border:0;background:#fff;margin:0 auto;transition:width .2s}
 .wu-stage.phone .wu-frame{width:390px;max-width:100%}
 .wu-frame[hidden]{display:none}
+.wu-gone{color:#b3261e;font-weight:600}.wu-gone::before{content:"⊖ "}
 .legend{font-size:13px;color:var(--muted);margin:0 0 18px}.legend b{outline:3px solid #e9b44c;padding:0 4px}
 .empty{background:#fff;border:1px solid var(--line);border-radius:10px;padding:30px;text-align:center;color:var(--muted)}
 </style></head><body>

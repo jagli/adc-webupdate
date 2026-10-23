@@ -19,7 +19,7 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { apply } from "./engine/model.mjs";
-import { PAGES, PAGE_NAMES, writeGlobal, toCsv, PRODUCTION_COLUMNS } from "./engine/site.mjs";
+import { PAGES, PAGE_NAMES, writeGlobal, toCsv, PRODUCTION_COLUMNS, readSite, mergeContent } from "./engine/site.mjs";
 import { resolveMedia } from "./engine/media.mjs";
 import { validate } from "./engine/validate.mjs";
 import { reviewPage } from "./engine/review.mjs";
@@ -104,7 +104,9 @@ let sha = process.env.COMMIT_REF || process.env.GITHUB_SHA;
 if (!sha) try { sha = execFileSync("git", ["rev-parse", "HEAD"], { cwd: SITE }).toString().trim(); } catch { sha = "0000000-webupdate"; }
 execFileSync(process.execPath, [path.join(STAGE, "export-tools/build-site.mjs"), ...(TEST ? ["--test"] : [])], { cwd: STAGE, stdio: "inherit", env: { ...process.env, COMMIT_REF: sha } });
 fs.renameSync(path.join(STAGE, "dist"), path.join(OUT, "site"));
-fs.writeFileSync(path.join(OUT, "content.json"), JSON.stringify(content, null, 1));
+// the record of what is live: the Sheet's content, plus anything the developer added to the pages
+// that the Sheet does not have yet (so the next "Set up the Sheet" shows it)
+fs.writeFileSync(path.join(OUT, "content.json"), JSON.stringify(mergeContent(content, readSite(SITE)), null, 1));
 
 // 5. change page
 if (base) {

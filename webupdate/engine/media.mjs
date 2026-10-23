@@ -64,8 +64,9 @@ export async function resolveMedia(content, stage, { cache, log = () => {} } = {
         if (cached) { fs.writeFileSync(cached, buf); fs.writeFileSync(cached + ".type", type); }
       }
       if (kind !== "file" && /^video\//.test(type)) throw new Error("is a video — put videos on YouTube and paste the YouTube link");
-      if (type.includes("pdf") || kind === "file") {
-        const ext = type.includes("pdf") ? "pdf" : type.includes("zip") ? "zip" : (drive[id]?.name || "").split(".").pop() || "bin";
+      const isPdf = type.includes("pdf") || buf.subarray(0, 5).toString() === "%PDF-";
+      if (isPdf || kind === "file") {
+        const ext = isPdf ? "pdf" : type.includes("zip") ? "zip" : (drive[id]?.name || "").split(".").pop() || "bin";
         rel = `assets/web/content/files/${label}-${hash}.${ext}`;
         fs.writeFileSync(path.join(stage, rel), buf);
       } else {
