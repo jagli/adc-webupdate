@@ -148,10 +148,9 @@ function putFile_(path, text, message, branch) {
 
 function rawFile_(path, branch) {
   // through the API (not raw.githubusercontent.com, which is cached for minutes)
-  var res = UrlFetchApp.fetch("https://api.github.com/repos/" + setting_("GITHUB_REPO") + "/contents/" + path + "?ref=" + branch, {
-    muteHttpExceptions: true,
-    headers: { Authorization: "Bearer " + setting_("GITHUB_TOKEN"), Accept: "application/vnd.github.raw" }
-  });
+  var headers = { Accept: "application/vnd.github.raw" };
+  if (setting_("GITHUB_TOKEN")) headers.Authorization = "Bearer " + setting_("GITHUB_TOKEN"); // the project is public: reading works without the key
+  var res = UrlFetchApp.fetch("https://api.github.com/repos/" + setting_("GITHUB_REPO") + "/contents/" + path + "?ref=" + branch, { muteHttpExceptions: true, headers: headers });
   return res.getResponseCode() === 200 ? res.getContentText() : "";
 }
 
