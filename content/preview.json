@@ -3662,13 +3662,13 @@
          "show": true,
          "cells": {
           "Text": "**Cultural Festivals**",
-          "List (one per line)": "Rasaaraadhanam — Bangalore\n*Krishnaa — Fire to Frost*, Samskruthi — Houston\nKalakendra — Portland, USA\nKhajuraho — Khajuraho, Madhya Pradesh\nMusic Academy — Chennai\nKrishna Gana Sabha — Chennai\nCentral Sanskrit University — Delhi\nKathak Mahotsav — Delhi\nLucknow Kathak Utsav — Lucknow, Uttar Pradesh\nKonark — Odisha\nSoorya — Kerala\nSICA — Hyderabad\nNishagandhi — Kerala\nMahabharat Utsav — Bhopal\nHampi Utsav — Hampi",
+          "List (one per line)": "Rasaaraadhanam — Bangalore\n*Krishnaa — Fire to Frost*, Samskruthi — Houston\nKalakendra — Portland, USA\nKhajuraho — Khajuraho, Madhya Pradesh\nMusic Academy — Chennai\nKrishna Gana Sabha — Chennai\nCentral Sanskrit University — Delhi\nKathak Mahotsav — Delhi\nLucknow Kathak Utsav — Lucknow, Uttar Pradesh\nKonark — Odisha\nSoorya — Kerala\nSICA — Hyderabad\nNishagandhi — Kerala\nMahabharat Utsav — Bhopal\nHampi Utsav — Hampi\nChennai Dance Festival — Chennai",
           "Text 2": "& more…"
          }
         },
         {
          "key": "performances/past-performances/1/2",
-         "show": true,
+         "show": false,
          "cells": {
           "Text": "**Corporate Shows**",
           "List (one per line)": "Infosys Foundation\nGMR Group\nRatan Tata\nGodrej\nBosch\nHAL\nIFQM\nHoneywell\nWorld Journalists Meet\nDoctors Conference\nISRO",
@@ -7662,6 +7662,6 @@
  },
  "drive": {},
  "by": "learn@jagli.com",
- "at": "2026-10-23T01:34:32.510Z",
- "hash": "X9mQjsI4gMFIonni"
+ "at": "2026-10-23T01:40:11.424Z",
+ "hash": "1v5N+xsCicvWuyqd"
 }
