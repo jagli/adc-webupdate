@@ -4283,6 +4283,12 @@
        "kind": "text",
        "what": "Text",
        "value": "**Student Showcase:** Latest *Dance Karma 2025* — annual student performance celebrating progress and artistry."
+      },
+      {
+       "key": "school/apply/t7",
+       "kind": "text",
+       "what": "Text",
+       "value": "**Application forms (PDF):**"
       }
      ],
      "lists": [
@@ -4345,6 +4351,43 @@
          "cells": {
           "Button": "Contact us",
           "Button link": "contact.html"
+         }
+        }
+       ]
+      },
+      {
+       "key": "school/apply/3",
+       "what": "Items",
+       "columns": [
+        {
+         "what": "Button",
+         "kind": "text",
+         "link": true
+        }
+       ],
+       "rows": [
+        {
+         "key": "school/apply/3/1",
+         "show": true,
+         "cells": {
+          "Button": "Apply for Kathak at Basavanagudi",
+          "Button link": "https://drive.google.com/file/d/1QgzYSIAedfviBSOphv3gqlIEdabcn61u/view"
+         }
+        },
+        {
+         "key": "school/apply/3/2",
+         "show": true,
+         "cells": {
+          "Button": "Apply for Bharatanatyam at Basavanagudi",
+          "Button link": "https://drive.google.com/file/d/1shNGJPO56c3AZToPGES6fjz7iYGSqlcE/view"
+         }
+        },
+        {
+         "key": "school/apply/3/3",
+         "show": true,
+         "cells": {
+          "Button": "Apply for Kathak at Rajaji Nagar",
+          "Button link": "https://drive.google.com/file/d/1k84cdecJoZFPmFQowCbR3Ja7oNFjgPdz/view"
          }
         }
        ]
