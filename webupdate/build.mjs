@@ -104,6 +104,17 @@ let sha = process.env.COMMIT_REF || process.env.GITHUB_SHA;
 if (!sha) try { sha = execFileSync("git", ["rev-parse", "HEAD"], { cwd: SITE }).toString().trim(); } catch { sha = "0000000-webupdate"; }
 execFileSync(process.execPath, [path.join(STAGE, "export-tools/build-site.mjs"), ...(TEST ? ["--test"] : [])], { cwd: STAGE, stdio: "inherit", env: { ...process.env, COMMIT_REF: sha } });
 fs.renameSync(path.join(STAGE, "dist"), path.join(OUT, "site"));
+// a preview is opened again and again: give its page links a build number so the browser never
+// shows a remembered (older) copy of a page (GitHub Pages lets browsers keep pages for 10 minutes)
+if (TEST) {
+  const stamp = Date.now().toString(36);
+  const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)]);
+  for (const f of walk(path.join(OUT, "site")).filter((f) => f.endsWith(".html"))) {
+    const html = fs.readFileSync(f, "utf8");
+    const out = html.replace(/href="((?:\.\.\/)?[a-z0-9-]+\.html)(#[^"]*)?"/gi, (m, page, hash = "") => `href="${page}?p=${stamp}${hash}"`);
+    if (out !== html) fs.writeFileSync(f, out);
+  }
+}
 // the record of what is live: the Sheet's content, plus anything the developer added to the pages
 // that the Sheet does not have yet (so the next "Set up the Sheet" shows it)
 fs.writeFileSync(path.join(OUT, "content.json"), JSON.stringify(mergeContent(content, readSite(SITE)), null, 1));
