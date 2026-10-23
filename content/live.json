@@ -31,7 +31,7 @@
    "Show": "Yes"
   },
   {
-   "Production": "Krishnaa \u2014 Fire to Frost",
+   "Production": "Krishnaa — Fire to Frost",
    "Label": "",
    "Length": "",
    "Artists": "",
@@ -138,8 +138,8 @@
    "Length": "20 minutes",
    "Artists": "",
    "Style": "",
-   "About": "Shakuntala is a love story from the Sanskrit classic *Abhijnana Sakunthala* written by the poet **Kalidasa**. The beautiful maiden Shakunthala who loves nature, treats all the flowers & animals with tender emotions and falls in love with King Dushyanta.\n\nRomance as the primary emotion \u2014 presented as a musical entertainer with an engaging conversation between a bee and a bunch of flowers.",
-   "Performers": "Nirupama \u2013 Rajendra and Abhinava Dance Company",
+   "About": "Shakuntala is a love story from the Sanskrit classic *Abhijnana Sakunthala* written by the poet **Kalidasa**. The beautiful maiden Shakunthala who loves nature, treats all the flowers & animals with tender emotions and falls in love with King Dushyanta.\n\nRomance as the primary emotion — presented as a musical entertainer with an engaging conversation between a bee and a bunch of flowers.",
+   "Performers": "Nirupama – Rajendra and Abhinava Dance Company",
    "Director": "Nirupama - Rajendra",
    "Music": "Praveen D Rao",
    "Lighting": "Rajendra",
@@ -155,7 +155,7 @@
    "Length": "14 minutes",
    "Artists": "",
    "Style": "",
-   "About": "ABHIMANYU features the indomitable spirit of a warrior prince and the intelligence of the military in ancient India \u2014 the coding and decoding of different battle formations from the Great Indian Epic, *Mahabharatha*.\n\nHighlights the heroism of 16-year-old Abhimanyu, son of Arjuna, who decodes Padmavyuha during the Kurukshetra war. Explored through Natyashastra syllables with shades of Kathak.",
+   "About": "ABHIMANYU features the indomitable spirit of a warrior prince and the intelligence of the military in ancient India — the coding and decoding of different battle formations from the Great Indian Epic, *Mahabharatha*.\n\nHighlights the heroism of 16-year-old Abhimanyu, son of Arjuna, who decodes Padmavyuha during the Kurukshetra war. Explored through Natyashastra syllables with shades of Kathak.",
    "Performers": "Abhinava Dance Company",
    "Director": "Nirupama - Rajendra",
    "Music": "Praveen D Rao",
@@ -665,7 +665,7 @@
    "Length": "18 minutes",
    "Artists": "",
    "Style": "",
-   "About": "Kalinga Nartana \u2014 a well-known theme from the childhood adventures of Sri Krishna. Krishna and his friends come to the river Yamuna; upon learning the wicked serpent Kalinga is in the river, Krishna climbs a tree and jumps deep into the water.\n\nAgitated, Kalinga spreads his hoods while Krishna cleverly fights back, dancing joyously on the slippery hoods. The thousand hoods with glowing gems move in circles like a devotee's Neerajana offering to Krishna. Finally, Kalinga surrenders and people rejoice.",
+   "About": "Kalinga Nartana — a well-known theme from the childhood adventures of Sri Krishna. Krishna and his friends come to the river Yamuna; upon learning the wicked serpent Kalinga is in the river, Krishna climbs a tree and jumps deep into the water.\n\nAgitated, Kalinga spreads his hoods while Krishna cleverly fights back, dancing joyously on the slippery hoods. The thousand hoods with glowing gems move in circles like a devotee's Neerajana offering to Krishna. Finally, Kalinga surrenders and people rejoice.",
    "Performers": "Nirupama Rajendra (solo)",
    "Director": "Nirupama - Rajendra",
    "Music": "Rajkumar Bharati",
@@ -762,7 +762,7 @@
    "Show": "No"
   },
   {
-   "Production": "Tillana-Tarana \u2014 Divine Ecstasy",
+   "Production": "Tillana-Tarana — Divine Ecstasy",
    "Label": "",
    "Length": "",
    "Artists": "",
@@ -877,7 +877,7 @@
        "kind": "photo",
        "what": "Top photo",
        "value": "assets/web/hero/home.jpg",
-       "alt": "Nirupama and Rajendra \u2014 artistic directors of Abhinava Dance Company"
+       "alt": "Nirupama and Rajendra — artistic directors of Abhinava Dance Company"
       },
       {
        "key": "index/opening/t2",
@@ -895,7 +895,7 @@
        "key": "index/opening/t4",
        "kind": "text",
        "what": "Line under the title",
-       "value": "Abhinava Dance Company \u2014 enchanting performances, world-class training, and cultural impact from Bangalore."
+       "value": "Abhinava Dance Company — enchanting performances, world-class training, and cultural impact from Bangalore."
       }
      ],
      "lists": [
@@ -963,7 +963,7 @@
          "key": "index/enchanting-performances/1/1",
          "show": true,
          "cells": {
-          "Text": "Abhinava Dance Company (ADC) \u2014 the professional performing arm of Abhinava Arts Centre \u2014 delivers enchanting national and international performances. With its own Production House, ADC creates original concepts, lyrics, music scores, and bespoke costumes & props."
+          "Text": "Abhinava Dance Company (ADC) — the professional performing arm of Abhinava Arts Centre — delivers enchanting national and international performances. With its own Production House, ADC creates original concepts, lyrics, music scores, and bespoke costumes & props."
          }
         },
         {
@@ -1006,10 +1006,10 @@
          "show": true,
          "cells": {
           "Photo": "assets/web/client/054.jpg",
-          "Photo description": "Chakradhaar \u2014 poster of the Kathak evening",
+          "Photo description": "Chakradhaar — poster of the Kathak evening",
           "Small heading": "Latest",
-          "Title": "[Chakradhaar \u2014 a spellbinding Kathak performance by Rohini Prabhath, Maanvi Ramprasad and Apoorva Rao](performances.html#upcoming-shows)",
-          "Text": "[For tickets, click here \u2192](https://in.bookmyshow.com/events/chakradhar/et9vsr0cb2)"
+          "Title": "[Chakradhaar — a spellbinding Kathak performance by Rohini Prabhath, Maanvi Ramprasad and Apoorva Rao](performances.html#upcoming-shows)",
+          "Text": "[For tickets, click here →](https://in.bookmyshow.com/events/chakradhar/et9vsr0cb2)"
          }
         },
         {
@@ -1017,7 +1017,7 @@
          "show": true,
          "cells": {
           "Photo": "assets/web/client/001.jpg",
-          "Photo description": "Sangeet Natak Akademi Award \u2014 Nirupama and Rajendra",
+          "Photo description": "Sangeet Natak Akademi Award — Nirupama and Rajendra",
           "Small heading": "Recognition",
           "Title": "[SNA Award conferred by Hon'ble President Smt. Droupadi Murmu, 6 March 2024](credentials.html)",
           "Text": ""
@@ -1030,7 +1030,7 @@
           "Photo": "assets/web/client/005.jpg",
           "Photo description": "Madanothsava spring festival",
           "Small heading": "Community",
-          "Title": "[Madanothsava \u2014 reviving a 1600-year-old spring festival](activities.html#community-programs)",
+          "Title": "[Madanothsava — reviving a 1600-year-old spring festival](activities.html#community-programs)",
           "Text": ""
          }
         }
@@ -1047,7 +1047,7 @@
        "kind": "photo",
        "what": "Photo",
        "value": "assets/web/client/001.jpg",
-       "alt": "Sangeet Natak Akademi Award \u2014 Nirupama and Rajendra"
+       "alt": "Sangeet Natak Akademi Award — Nirupama and Rajendra"
       },
       {
        "key": "index/sangeet-natak-akademi-award-2023/t2",
@@ -1196,7 +1196,7 @@
        "key": "index/storytellers-from-bharata/t3",
        "kind": "text",
        "what": "Text",
-       "value": "We are storytellers hailing from the land of the oldest oral storytelling tradition \u2014 **Bharata (India)** \u2014 the Land of Cultural Heritage."
+       "value": "We are storytellers hailing from the land of the oldest oral storytelling tradition — **Bharata (India)** — the Land of Cultural Heritage."
       },
       {
        "key": "index/storytellers-from-bharata/t4",
@@ -1208,7 +1208,7 @@
        "key": "index/storytellers-from-bharata/t5",
        "kind": "text",
        "what": "Text",
-       "value": "Based out of Bangalore, South India, our production house \u2014 **Abhinava Dance Company (ADC)** \u2014 stands as one of the premier dance companies in the country."
+       "value": "Based out of Bangalore, South India, our production house — **Abhinava Dance Company (ADC)** — stands as one of the premier dance companies in the country."
       },
       {
        "key": "index/storytellers-from-bharata/t6",
@@ -1220,21 +1220,21 @@
        "key": "index/storytellers-from-bharata/t7",
        "kind": "text",
        "what": "Text",
-       "value": "[Read our full story \u2192](about.html)"
+       "value": "[Read our full story →](about.html)"
       },
       {
        "key": "index/storytellers-from-bharata/t8",
        "kind": "photo",
        "what": "Photo",
        "value": "assets/web/client/002a.jpg",
-       "alt": "Storytellers from Bharata \u2014 Kathakeerthan"
+       "alt": "Storytellers from Bharata — Kathakeerthan"
       }
      ],
      "lists": []
     },
     {
      "key": "index/content-style-performance",
-     "label": "Content \u00b7 Style \u00b7 Performance",
+     "label": "Content · Style · Performance",
      "slots": [
       {
        "key": "index/content-style-performance/t1",
@@ -1246,7 +1246,7 @@
        "key": "index/content-style-performance/t2",
        "kind": "text",
        "what": "Heading",
-       "value": "Content \u00b7 Style \u00b7 Performance"
+       "value": "Content · Style · Performance"
       }
      ],
      "lists": [
@@ -1287,7 +1287,7 @@
          "show": true,
          "cells": {
           "Small heading": "Performance",
-          "Text": "Stories conveyed through human emotions \u2014 light, sound, costume and ambiance creating theatrical spectacle."
+          "Text": "Stories conveyed through human emotions — light, sound, costume and ambiance creating theatrical spectacle."
          }
         }
        ]
@@ -1303,7 +1303,7 @@
        "kind": "photo",
        "what": "Photo",
        "value": "assets/web/client/003.jpg",
-       "alt": "Nirupama and Rajendra \u2014 Artistic Directors"
+       "alt": "Nirupama and Rajendra — Artistic Directors"
       },
       {
        "key": "index/founders/t2",
@@ -1334,7 +1334,7 @@
          "key": "index/founders/1/1",
          "show": true,
          "cells": {
-          "Text": "Nirupama & Rajendra are one of India's foremost classical dancers \u2014 founders of Abhinava Dance Company, recognised worldwide for innovation, creativity, and imagination in Classical Art."
+          "Text": "Nirupama & Rajendra are one of India's foremost classical dancers — founders of Abhinava Dance Company, recognised worldwide for innovation, creativity, and imagination in Classical Art."
          }
         },
         {
@@ -1348,7 +1348,7 @@
          "key": "index/founders/1/3",
          "show": true,
          "cells": {
-          "Text": "[Meet the founders \u2192](about.html#meet-founders)"
+          "Text": "[Meet the founders →](about.html#meet-founders)"
          }
         }
        ]
@@ -1375,7 +1375,7 @@
        "key": "index/productions/t3",
        "kind": "text",
        "what": "Text",
-       "value": "Magical storytelling, breathtaking choreography, original music, and exquisite costumes \u2014 all created in-house."
+       "value": "Magical storytelling, breathtaking choreography, original music, and exquisite costumes — all created in-house."
       },
       {
        "key": "index/productions/t4",
@@ -1477,7 +1477,7 @@
        "key": "index/school/t4",
        "kind": "text",
        "what": "Text",
-       "value": "[Dance School \u2192 Apply](school.html#apply)"
+       "value": "[Dance School → Apply](school.html#apply)"
       }
      ],
      "lists": [
@@ -1496,7 +1496,7 @@
          "key": "index/school/1/1",
          "show": true,
          "cells": {
-          "Text": "The training wing of Abhinava Arts Centre \u2014 offers holistic education in dance and culture to aspiring dancers. Our institute is recognized by ICCR for maintaining international standards of traditional Guru-Shishya Parampara training."
+          "Text": "The training wing of Abhinava Arts Centre — offers holistic education in dance and culture to aspiring dancers. Our institute is recognized by ICCR for maintaining international standards of traditional Guru-Shishya Parampara training."
          }
         },
         {
@@ -1562,7 +1562,7 @@
          "cells": {
           "Small heading": "Research in the school",
           "Title": "[Deshi Marga Adavus](school.html#dma)",
-          "Text": "A novel creation in the space of classical dance by Guru Smt. Nirupama Rajendra, the Deshi Marga Adavus (DMA) represent the bridging of Bharatanatyam's foundational vocabularies with the Margi Karanas of the Natya Shastra. [Learn more about DMA Research \u2192](research.html)"
+          "Text": "A novel creation in the space of classical dance by Guru Smt. Nirupama Rajendra, the Deshi Marga Adavus (DMA) represent the bridging of Bharatanatyam's foundational vocabularies with the Margi Karanas of the Natya Shastra. [Learn more about DMA Research →](research.html)"
          }
         }
        ]
@@ -1589,7 +1589,7 @@
        "key": "index/activities/t3",
        "kind": "text",
        "what": "Text",
-       "value": "[Community programs & workshops \u2192](activities.html)"
+       "value": "[Community programs & workshops →](activities.html)"
       }
      ],
      "lists": [
@@ -1631,7 +1631,7 @@
           "Photos (one per line)": "assets/web/client/006.jpg\nassets/web/client/041.jpg\nassets/web/client/madanothsava-home-page-2.jpg\nassets/web/client/madanothsava-home-page-3.jpg\nassets/web/client/madanothsava-home-page-4.jpg",
           "Title": "Madanothsava",
           "Text": "Madanothsava revives a 1,600-year-old community festival that welcomes the arrival of spring with the same rigour and vibrance once known in earlier times. Abhinava brings this bygone tradition into light once more.",
-          "Text 2": "The festival begins at 7 am as maestro musicians open the day with auspicious music. Artists then move in procession, wearing specially created turbans inspired by the Vijayanagara period. The festival is inaugurated with the release of Madana\u2019s flower arrow \u2014 the God of Love \u2014 followed by song and dance dedicated to spring. Families take part in traditional games, and the community gathers to dance around mango trees.",
+          "Text 2": "The festival begins at 7 am as maestro musicians open the day with auspicious music. Artists then move in procession, wearing specially created turbans inspired by the Vijayanagara period. The festival is inaugurated with the release of Madana’s flower arrow — the God of Love — followed by song and dance dedicated to spring. Families take part in traditional games, and the community gathers to dance around mango trees.",
           "Text 3": "From morning till night, the air fills with Indian classical vocals and instrumental concerts, sand art, various forms of classical dance, folk art, Sanskrit discussion forums and more. Through nature, art and culture, Madanothsava invites everyone to celebrate the gentle yet powerful advent of spring."
          }
         },
@@ -1641,7 +1641,7 @@
          "cells": {
           "Photos (one per line)": "assets/web/client/yuva-abhinava-5.jpg\nassets/web/client/yuva-abhinava-1.jpg\nassets/web/client/yuva-abhinava-2.jpg\nassets/web/client/yuva-abhinava-3.jpg\nassets/web/client/yuva-abhinava-4.jpg",
           "Title": "Yuva Abhinava",
-          "Text": "Yuva Abhinava is a unique initiative that empowers young people to develop skills in the allied arts \u2014 music, painting, literature and more. Talented and able youth are given opportunities to share their creativity with peers through intimate in-house studio concerts.",
+          "Text": "Yuva Abhinava is a unique initiative that empowers young people to develop skills in the allied arts — music, painting, literature and more. Talented and able youth are given opportunities to share their creativity with peers through intimate in-house studio concerts.",
           "Text 2": "In these performances, the young artists introduce classical art to at least sixty to eighty new youngsters who have never before attended a classical programme. Through this simple yet meaningful exchange, Yuva Abhinava helps classical arts reach a new generation while nurturing the confidence and voice of emerging artists.",
           "Text 3": ""
          }
@@ -1682,7 +1682,7 @@
        "key": "about/about-us/t4",
        "kind": "text",
        "what": "Line under the title",
-       "value": "Celebrating excellence in performance, education, research, and community \u2014 rooted in tradition, creative in presentation."
+       "value": "Celebrating excellence in performance, education, research, and community — rooted in tradition, creative in presentation."
       }
      ],
      "lists": []
@@ -1695,7 +1695,7 @@
        "key": "about/part-3/t1",
        "kind": "text",
        "what": "Text",
-       "value": "Abhinava is celebrating **32 years** of Crafting Inspired Dancing in the field of Performing Arts. Based out of Bangalore, South India, **Abhinava Dance Company (ADC)** stands as one of the premier dance companies in the country \u2014 storytellers from the land of Bharata, where **ABHINAVA means \"Classical and all-time-new.\"**"
+       "value": "Abhinava is celebrating **32 years** of Crafting Inspired Dancing in the field of Performing Arts. Based out of Bangalore, South India, **Abhinava Dance Company (ADC)** stands as one of the premier dance companies in the country — storytellers from the land of Bharata, where **ABHINAVA means \"Classical and all-time-new.\"**"
       }
      ],
      "lists": []
@@ -1751,28 +1751,28 @@
          "key": "about/our-mission/1/1",
          "show": true,
          "cells": {
-          "Item": "**ABHINAVA DANCE COMPANY** \u2014 Professional performing & production arm"
+          "Item": "**ABHINAVA DANCE COMPANY** — Professional performing & production arm"
          }
         },
         {
          "key": "about/our-mission/1/2",
          "show": true,
          "cells": {
-          "Item": "**ABHINAVA DANCE SCHOOL** \u2014 Training wing (ICCR recognized, 700+ students)"
+          "Item": "**ABHINAVA DANCE SCHOOL** — Training wing (ICCR recognized, 700+ students)"
          }
         },
         {
          "key": "about/our-mission/1/3",
          "show": true,
          "cells": {
-          "Item": "**COMMUNITY** \u2014 Outreach, Madanothsava, fundraisers, healing through arts"
+          "Item": "**COMMUNITY** — Outreach, Madanothsava, fundraisers, healing through arts"
          }
         },
         {
          "key": "about/our-mission/1/4",
          "show": true,
          "cells": {
-          "Item": "**RESEARCH** \u2014 Deshi Marga Adavu (DMA) & Natyashastra studies"
+          "Item": "**RESEARCH** — Deshi Marga Adavu (DMA) & Natyashastra studies"
          }
         }
        ]
@@ -1878,7 +1878,7 @@
           "Photo description": "The Abhinava Dance Company team",
           "Small heading": "Company",
           "Title": "Abhinava Dance Company",
-          "Text": "A brilliant team of people of Artistic Intelligence \u2014 on stage, backstage, and in the school."
+          "Text": "A brilliant team of people of Artistic Intelligence — on stage, backstage, and in the school."
          }
         }
        ]
@@ -2309,7 +2309,7 @@
        "key": "about/our-history/t5",
        "kind": "text",
        "what": "Text",
-       "value": "We are storytellers hailing from the land of the oldest oral storytelling tradition \u2014 **Bharata (India)**. Our body of work is based on techniques derived from **Natyashastra** \u2014 a 5000-year-old classical text on dramaturgy. Over the years, our efforts to showcase the spectrum of Indian dance forms in all their grandeur has garnered admiration from over **7.5 million people** across the world."
+       "value": "We are storytellers hailing from the land of the oldest oral storytelling tradition — **Bharata (India)**. Our body of work is based on techniques derived from **Natyashastra** — a 5000-year-old classical text on dramaturgy. Over the years, our efforts to showcase the spectrum of Indian dance forms in all their grandeur has garnered admiration from over **7.5 million people** across the world."
       },
       {
        "key": "about/our-history/t6",
@@ -2321,7 +2321,7 @@
        "key": "about/our-history/t7",
        "kind": "text",
        "what": "Text",
-       "value": "*\u2014 Nirupama & Rajendra*"
+       "value": "*— Nirupama & Rajendra*"
       }
      ],
      "lists": []
@@ -2335,7 +2335,7 @@
        "kind": "photo",
        "what": "Photo",
        "value": "assets/web/client/015.jpg",
-       "alt": "Artistic Excellence \u2014 Abhinava production with fans"
+       "alt": "Artistic Excellence — Abhinava production with fans"
       },
       {
        "key": "about/company/t2",
@@ -2366,7 +2366,7 @@
          "key": "about/company/1/1",
          "show": true,
          "cells": {
-          "Text": "Rooted in tradition and creative in presentation, Abhinava\u2019s productions are known for their magical storytelling, breathtaking choreography, original music, and exquisite costumes \u2014 all created in-house."
+          "Text": "Rooted in tradition and creative in presentation, Abhinava’s productions are known for their magical storytelling, breathtaking choreography, original music, and exquisite costumes — all created in-house."
          }
         },
         {
@@ -2427,231 +2427,231 @@
          "key": "about/company-timeline/1/1",
          "show": true,
          "cells": {
-          "Text": "**1994** \u2014 Abhinava inaugurated"
+          "Text": "**1994** — Abhinava inaugurated"
          }
         },
         {
          "key": "about/company-timeline/1/2",
          "show": true,
          "cells": {
-          "Text": "**1995** \u2014 First full-length production: *Parampurush*; organised Abhinava Utsav"
+          "Text": "**1995** — First full-length production: *Parampurush*; organised Abhinava Utsav"
          }
         },
         {
          "key": "about/company-timeline/1/3",
          "show": true,
          "cells": {
-          "Text": "**1996** \u2014 *Spirit of Dance* production; Abhinava Dance School established; organised Abhinava Utsav"
+          "Text": "**1996** — *Spirit of Dance* production; Abhinava Dance School established; organised Abhinava Utsav"
          }
         },
         {
          "key": "about/company-timeline/1/4",
          "show": true,
          "cells": {
-          "Text": "**1997** \u2014 Choreography of the Mahi River Education project for Sampad, UK. Choreography with 100 artists on the Doctor's profession and full-length *Vandemataram*. 50 years of Indian Independence celebrations at Zurich, Switzerland, and organised Abhinava Utsav in Bangalore"
+          "Text": "**1997** — Choreography of the Mahi River Education project for Sampad, UK. Choreography with 100 artists on the Doctor's profession and full-length *Vandemataram*. 50 years of Indian Independence celebrations at Zurich, Switzerland, and organised Abhinava Utsav in Bangalore"
          }
         },
         {
          "key": "about/company-timeline/1/5",
          "show": true,
          "cells": {
-          "Text": "**1998** \u2014 Choreography of *Raghava Lahari*, a full-length work in two styles"
+          "Text": "**1998** — Choreography of *Raghava Lahari*, a full-length work in two styles"
          }
         },
         {
          "key": "about/company-timeline/1/6",
          "show": true,
          "cells": {
-          "Text": "**1999** \u2014 Choreography for songs of the revolutionary poets of Karnataka with 1000 singers, directed by C. Ashwath"
+          "Text": "**1999** — Choreography for songs of the revolutionary poets of Karnataka with 1000 singers, directed by C. Ashwath"
          }
         },
         {
          "key": "about/company-timeline/1/7",
          "show": true,
          "cells": {
-          "Text": "**2000** \u2014 Organised World Dance Day, bringing together hundreds of artists and 3000 art lovers"
+          "Text": "**2000** — Organised World Dance Day, bringing together hundreds of artists and 3000 art lovers"
          }
         },
         {
          "key": "about/company-timeline/1/8",
          "show": true,
          "cells": {
-          "Text": "**2001** \u2014 USA Tour"
+          "Text": "**2001** — USA Tour"
          }
         },
         {
          "key": "about/company-timeline/1/9",
          "show": true,
          "cells": {
-          "Text": "**2002** \u2014 ICCR Tour: Reunion Islands, Zambia & Tanzania"
+          "Text": "**2002** — ICCR Tour: Reunion Islands, Zambia & Tanzania"
          }
         },
         {
          "key": "about/company-timeline/1/10",
          "show": true,
          "cells": {
-          "Text": "**2003** \u2014 Art & Science project on the \u201cStory of Carbon\u201d for Chitralekha Dance Company, UK. Tour USA"
+          "Text": "**2003** — Art & Science project on the “Story of Carbon” for Chitralekha Dance Company, UK. Tour USA"
          }
         },
         {
          "key": "about/company-timeline/1/11",
          "show": true,
          "cells": {
-          "Text": "**2004** \u2014 Tour Europe"
+          "Text": "**2004** — Tour Europe"
          }
         },
         {
          "key": "about/company-timeline/1/12",
          "show": true,
          "cells": {
-          "Text": "**2005** \u2014 Tour Europe and a 16-performance tour of the USA"
+          "Text": "**2005** — Tour Europe and a 16-performance tour of the USA"
          }
         },
         {
          "key": "about/company-timeline/1/13",
          "show": true,
          "cells": {
-          "Text": "**2006** \u2014 Tour UK and performance in the cross-cultural work *Ocean of Light* with American Indian and contemporary dancers, supported by Battery Dance Company, NY"
+          "Text": "**2006** — Tour UK and performance in the cross-cultural work *Ocean of Light* with American Indian and contemporary dancers, supported by Battery Dance Company, NY"
          }
         },
         {
          "key": "about/company-timeline/1/14",
          "show": true,
          "cells": {
-          "Text": "**2007** \u2014 Tour Europe. Contemporary work based on the art of storytelling in the Indian and Irish traditions, with Irish dancers and theatre artists in the UK. Created the *Gausamrakshana* production on cow protection"
+          "Text": "**2007** — Tour Europe. Contemporary work based on the art of storytelling in the Indian and Irish traditions, with Irish dancers and theatre artists in the UK. Created the *Gausamrakshana* production on cow protection"
          }
         },
         {
          "key": "about/company-timeline/1/15",
          "show": true,
          "cells": {
-          "Text": "**2008** \u2014 Musical *Rama Katha Vismaya* created and premiered in Bangalore; tour of the US and Canada"
+          "Text": "**2008** — Musical *Rama Katha Vismaya* created and premiered in Bangalore; tour of the US and Canada"
          }
         },
         {
          "key": "about/company-timeline/1/16",
          "show": true,
          "cells": {
-          "Text": "**2009** \u2014 Created the *Kathakitathom* production for a national tour of the UK"
+          "Text": "**2009** — Created the *Kathakitathom* production for a national tour of the UK"
          }
         },
         {
          "key": "about/company-timeline/1/17",
          "show": true,
          "cells": {
-          "Text": "**2010** \u2014 Invited by MILAPFEST to lead the Indian Forum at the Big Hope Congress, UK \u2014 750 international students from 55 countries"
+          "Text": "**2010** — Invited by MILAPFEST to lead the Indian Forum at the Big Hope Congress, UK — 750 international students from 55 countries"
          }
         },
         {
          "key": "about/company-timeline/1/18",
          "show": true,
          "cells": {
-          "Text": "**2011** \u2014 Received the Karnataka Kalashree State Award"
+          "Text": "**2011** — Received the Karnataka Kalashree State Award"
          }
         },
         {
          "key": "about/company-timeline/1/19",
          "show": true,
          "cells": {
-          "Text": "**2012** \u2014 Tour USA"
+          "Text": "**2012** — Tour USA"
          }
         },
         {
          "key": "about/company-timeline/1/20",
          "show": true,
          "cells": {
-          "Text": "**2013** \u2014 Tour Hong Kong"
+          "Text": "**2013** — Tour Hong Kong"
          }
         },
         {
          "key": "about/company-timeline/1/21",
          "show": true,
          "cells": {
-          "Text": "**2014** \u2014 Invited by the International Arts Festival, Sebring, Florida, USA; China tour \u2014 Shanghai"
+          "Text": "**2014** — Invited by the International Arts Festival, Sebring, Florida, USA; China tour — Shanghai"
          }
         },
         {
          "key": "about/company-timeline/1/22",
          "show": true,
          "cells": {
-          "Text": "**2015** \u2014 Created the *Padmashali* production and celebrated *Abhijna* \u2014 20 years of Abhinava; over 10,000 people at the Indoor Stadium"
+          "Text": "**2015** — Created the *Padmashali* production and celebrated *Abhijna* — 20 years of Abhinava; over 10,000 people at the Indoor Stadium"
          }
         },
         {
          "key": "about/company-timeline/1/23",
          "show": true,
          "cells": {
-          "Text": "**2016** \u2014 Received the prestigious Nrithya Choodamani Award from Sri Krishna Gana Sabha, Chennai"
+          "Text": "**2016** — Received the prestigious Nrithya Choodamani Award from Sri Krishna Gana Sabha, Chennai"
          }
         },
         {
          "key": "about/company-timeline/1/24",
          "show": true,
          "cells": {
-          "Text": "**2017** \u2014 Commissioned choreography *Samhati* for Singapore. Australia \u2013 New Zealand performance tour; tour of Hong Kong"
+          "Text": "**2017** — Commissioned choreography *Samhati* for Singapore. Australia – New Zealand performance tour; tour of Hong Kong"
          }
         },
         {
          "key": "about/company-timeline/1/25",
          "show": true,
          "cells": {
-          "Text": "**2018** \u2014 *Madanothsava* / *Dhaara* \u2014 flood relief & spring festival revival"
+          "Text": "**2018** — *Madanothsava* / *Dhaara* — flood relief & spring festival revival"
          }
         },
         {
          "key": "about/company-timeline/1/26",
          "show": true,
          "cells": {
-          "Text": "**2019** \u2014 *Krishnaa \u2014 Fire to Frost*"
+          "Text": "**2019** — *Krishnaa — Fire to Frost*"
          }
         },
         {
          "key": "about/company-timeline/1/27",
          "show": true,
          "cells": {
-          "Text": "**2020** \u2014 *Parva* \u2014 25 years of Abhinava & Madanothsava at Ramanjaneya Gudda, Bangalore"
+          "Text": "**2020** — *Parva* — 25 years of Abhinava & Madanothsava at Ramanjaneya Gudda, Bangalore"
          }
         },
         {
          "key": "about/company-timeline/1/28",
          "show": true,
          "cells": {
-          "Text": "**2021** \u2014 Deshi Marga Adavu Research launched"
+          "Text": "**2021** — Deshi Marga Adavu Research launched"
          }
         },
         {
          "key": "about/company-timeline/1/29",
          "show": true,
          "cells": {
-          "Text": "**2022** \u2014 Creation of the *Vijayanagara Vyjayanta* production"
+          "Text": "**2022** — Creation of the *Vijayanagara Vyjayanta* production"
          }
         },
         {
          "key": "about/company-timeline/1/30",
          "show": true,
          "cells": {
-          "Text": "**2023** \u2014 *Madanothsava* & US Tour"
+          "Text": "**2023** — *Madanothsava* & US Tour"
          }
         },
         {
          "key": "about/company-timeline/1/31",
          "show": true,
          "cells": {
-          "Text": "**2024** \u2014 SNA Award + US Tour & curated *Abhijata* \u2014 42nd Natya Kala Conference, Chennai"
+          "Text": "**2024** — SNA Award + US Tour & curated *Abhijata* — 42nd Natya Kala Conference, Chennai"
          }
         },
         {
          "key": "about/company-timeline/1/32",
          "show": true,
          "cells": {
-          "Text": "**2025** \u2014 Collaborated with Bickram Ghosh on musical compositions for Kathak. Curated *Navonmesha* \u2014 43rd Natya Kala Conference. Video documentation of a 7th-century Sanskrit satire, *Bhagavadajjukam*, supported by Murty Foundation. Natya Kala Shikhamani Award from the Indian Fine Arts Society, Chennai"
+          "Text": "**2025** — Collaborated with Bickram Ghosh on musical compositions for Kathak. Curated *Navonmesha* — 43rd Natya Kala Conference. Video documentation of a 7th-century Sanskrit satire, *Bhagavadajjukam*, supported by Murty Foundation. Natya Kala Shikhamani Award from the Indian Fine Arts Society, Chennai"
          }
         },
         {
          "key": "about/company-timeline/1/33",
          "show": true,
          "cells": {
-          "Text": "**2026** \u2014 *Rasaradhanam*: presented exquisite choreography works of Shataavadhaani Dr. R Ganesh. Presented Vidwat Goshti"
+          "Text": "**2026** — *Rasaradhanam*: presented exquisite choreography works of Shataavadhaani Dr. R Ganesh. Presented Vidwat Goshti"
          }
         }
        ]
@@ -2678,7 +2678,7 @@
        "key": "about/faq/t3",
        "kind": "text",
        "what": "Text",
-       "value": "For first-time visitors \u2014 common questions about Abhinava Dance Company and Abhinava Dance School:"
+       "value": "For first-time visitors — common questions about Abhinava Dance Company and Abhinava Dance School:"
       }
      ],
      "lists": [
@@ -2727,7 +2727,7 @@
          "show": true,
          "cells": {
           "Title": "Can I watch performances without prior knowledge of classical dance?",
-          "Text": "Yes. Abhinava performances are designed to reach audiences with or without context to traditional dance \u2014 poetic storytelling, dynamic movement, and rich music create an immersive experience for every viewer."
+          "Text": "Yes. Abhinava performances are designed to reach audiences with or without context to traditional dance — poetic storytelling, dynamic movement, and rich music create an immersive experience for every viewer."
          }
         },
         {
@@ -2735,7 +2735,7 @@
          "show": true,
          "cells": {
           "Title": "What is Deshi Marga Adavu?",
-          "Text": "Abhinava's Research Department has introduced **Deshi Marga Adavu (DMA)** \u2014 a new vocabulary of 108 artistically crafted movements created by Smt. Nirupama Rajendra. DMA bridges the Deshi Adavus of Bharatanatyam with the Marga elements from the Natyashastra. Know more at [Research (DMA)](research.html)."
+          "Text": "Abhinava's Research Department has introduced **Deshi Marga Adavu (DMA)** — a new vocabulary of 108 artistically crafted movements created by Smt. Nirupama Rajendra. DMA bridges the Deshi Adavus of Bharatanatyam with the Marga elements from the Natyashastra. Know more at [Research (DMA)](research.html)."
          }
         }
        ]
@@ -2751,7 +2751,7 @@
        "kind": "photo",
        "what": "Photo",
        "value": "assets/web/client/016-artistic-directors-vision-2.jpg",
-       "alt": "Nirupama and Rajendra \u2014 Artistic Directors' vision"
+       "alt": "Nirupama and Rajendra — Artistic Directors' vision"
       },
       {
        "key": "about/founding/t2",
@@ -2782,21 +2782,21 @@
          "key": "about/founding/1/1",
          "show": true,
          "cells": {
-          "Text": "To create a living tradition that honours the past while fearlessly embracing the future \u2014 through performance, education, research, and community celebration."
+          "Text": "To create a living tradition that honours the past while fearlessly embracing the future — through performance, education, research, and community celebration."
          }
         },
         {
          "key": "about/founding/1/2",
          "show": true,
          "cells": {
-          "Text": "As founders of **Abhinava Dance Company** \u2014 one of India's most popular and cutting-edge production houses recognised worldwide \u2014 Nirupama & Rajendra have been instrumental in introducing innovation, creativity, enthusiasm and imagination to the realm of Classical Art."
+          "Text": "As founders of **Abhinava Dance Company** — one of India's most popular and cutting-edge production houses recognised worldwide — Nirupama & Rajendra have been instrumental in introducing innovation, creativity, enthusiasm and imagination to the realm of Classical Art."
          }
         },
         {
          "key": "about/founding/1/3",
          "show": true,
          "cells": {
-          "Text": "They stand today as Artistic Directors with a vision of adapting traditional themes to classical media that will reach out to an audience that may or may not have context to traditional dance \u2014 with techniques from 5000-year-old scriptures to 21st century technological innovations."
+          "Text": "They stand today as Artistic Directors with a vision of adapting traditional themes to classical media that will reach out to an audience that may or may not have context to traditional dance — with techniques from 5000-year-old scriptures to 21st century technological innovations."
          }
         }
        ]
@@ -2812,7 +2812,7 @@
        "kind": "photo",
        "what": "Photo",
        "value": "assets/web/client/about-us-nirupama-rajendra-edit.jpg",
-       "alt": "Nirupama and Rajendra \u2014 founders of Abhinava Dance Company"
+       "alt": "Nirupama and Rajendra — founders of Abhinava Dance Company"
       },
       {
        "key": "about/meet-founders/t2",
@@ -2850,7 +2850,7 @@
          "key": "about/meet-founders/1/2",
          "show": true,
          "cells": {
-          "Text": "They are not only dancers, but also choreographers, teachers and storytellers. Their performances are based on Indian classical dance perfected over the years from learning in music, dance, literature and culture \u2014 some dating back to 5000-year-old scriptures."
+          "Text": "They are not only dancers, but also choreographers, teachers and storytellers. Their performances are based on Indian classical dance perfected over the years from learning in music, dance, literature and culture — some dating back to 5000-year-old scriptures."
          }
         },
         {
@@ -2891,7 +2891,7 @@
        "key": "about/interviews/t3",
        "kind": "text",
        "what": "Text",
-       "value": "Also: [Bombat Bhojana \u2014 watch on Tata Play](https://www.tataplaybinge.com/watch/tv-shows/bombat-bhojana-s1-e271-nirupama-rajendra-the-show/3039642)."
+       "value": "Also: [Bombat Bhojana — watch on Tata Play](https://www.tataplaybinge.com/watch/tv-shows/bombat-bhojana-s1-e271-nirupama-rajendra-the-show/3039642)."
       }
      ],
      "lists": [
@@ -2922,8 +2922,8 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=n3q1jDVp7j8",
           "Video picture": "https://img.youtube.com/vi/n3q1jDVp7j8/hqdefault.jpg",
-          "Video picture description": "Play video: Gold Class with Mayur \u2014 podcast",
-          "Caption": "Gold Class with Mayur \u2014 podcast"
+          "Video picture description": "Play video: Gold Class with Mayur — podcast",
+          "Caption": "Gold Class with Mayur — podcast"
          }
         },
         {
@@ -2932,8 +2932,8 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=vAuU5EL7khE",
           "Video picture": "https://img.youtube.com/vi/vAuU5EL7khE/hqdefault.jpg",
-          "Video picture description": "Play video: Prana Stories \u2014 Part 1",
-          "Caption": "Prana Stories \u2014 Part 1"
+          "Video picture description": "Play video: Prana Stories — Part 1",
+          "Caption": "Prana Stories — Part 1"
          }
         },
         {
@@ -2942,8 +2942,8 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=Q3F_ZHXSsos",
           "Video picture": "https://img.youtube.com/vi/Q3F_ZHXSsos/hqdefault.jpg",
-          "Video picture description": "Play video: Prana Stories \u2014 Part 2",
-          "Caption": "Prana Stories \u2014 Part 2"
+          "Video picture description": "Play video: Prana Stories — Part 2",
+          "Caption": "Prana Stories — Part 2"
          }
         },
         {
@@ -2982,8 +2982,8 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=shv3NFqjPAo",
           "Video picture": "https://img.youtube.com/vi/shv3NFqjPAo/hqdefault.jpg",
-          "Video picture description": "Play video: Prajavani \u2014 2",
-          "Caption": "Prajavani \u2014 2"
+          "Video picture description": "Play video: Prajavani — 2",
+          "Caption": "Prajavani — 2"
          }
         },
         {
@@ -3032,8 +3032,8 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=WUX5lSYGSjE",
           "Video picture": "https://img.youtube.com/vi/WUX5lSYGSjE/hqdefault.jpg",
-          "Video picture description": "Play video: Jayaprakash Nagathihalli \u2014 Chandana",
-          "Caption": "Jayaprakash Nagathihalli \u2014 Chandana"
+          "Video picture description": "Play video: Jayaprakash Nagathihalli — Chandana",
+          "Caption": "Jayaprakash Nagathihalli — Chandana"
          }
         },
         {
@@ -3042,8 +3042,8 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=Au6BYOfgjfA",
           "Video picture": "https://img.youtube.com/vi/Au6BYOfgjfA/hqdefault.jpg",
-          "Video picture description": "Play video: Sangati Sampreeti \u2014 Chandana",
-          "Caption": "Sangati Sampreeti \u2014 Chandana"
+          "Video picture description": "Play video: Sangati Sampreeti — Chandana",
+          "Caption": "Sangati Sampreeti — Chandana"
          }
         },
         {
@@ -3052,8 +3052,8 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=RzHfnW6omXQ",
           "Video picture": "https://img.youtube.com/vi/RzHfnW6omXQ/hqdefault.jpg",
-          "Video picture description": "Play video: The \u201caha\u201d of dance \u2014 TEDx talk",
-          "Caption": "The \u201caha\u201d of dance \u2014 TEDx talk"
+          "Video picture description": "Play video: The “aha” of dance — TEDx talk",
+          "Caption": "The “aha” of dance — TEDx talk"
          }
         },
         {
@@ -3062,8 +3062,8 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=w7vaxINCK0M",
           "Video picture": "https://img.youtube.com/vi/w7vaxINCK0M/hqdefault.jpg",
-          "Video picture description": "Play video: Dance your way to freedom \u2014 TEDx talk",
-          "Caption": "Dance your way to freedom \u2014 TEDx talk"
+          "Video picture description": "Play video: Dance your way to freedom — TEDx talk",
+          "Caption": "Dance your way to freedom — TEDx talk"
          }
         }
        ]
@@ -3240,7 +3240,7 @@
        "key": "performances/performances/t4",
        "kind": "text",
        "what": "Line under the title",
-       "value": "Magical storytelling, breathtaking choreography, original music, and exquisite costumes\n\u2014 all created in-house."
+       "value": "Magical storytelling, breathtaking choreography, original music, and exquisite costumes\n— all created in-house."
       }
      ],
      "lists": []
@@ -3308,7 +3308,7 @@
        "key": "performances/upcoming-shows/t10",
        "kind": "text",
        "what": "Heading",
-       "value": "Ras\u0101r\u0101dhanam"
+       "value": "Rasārādhanam"
       },
       {
        "key": "performances/upcoming-shows/t11",
@@ -3327,7 +3327,7 @@
        "kind": "photo",
        "what": "Video picture",
        "value": "assets/web/client/rasaaraadhanam-thumbnail.jpg",
-       "alt": "Play video: Ras\u0101r\u0101dhanam \u2014 Bharathanrithyam by Nirupama Rajendra"
+       "alt": "Play video: Rasārādhanam — Bharathanrithyam by Nirupama Rajendra"
       }
      ],
      "lists": [
@@ -3352,7 +3352,7 @@
          "show": true,
          "cells": {
           "Title": "Community Events",
-          "Text": "**Madanothsava 2027** \u2014 day-long art and community festival. Date and venue to be confirmed soon."
+          "Text": "**Madanothsava 2027** — day-long art and community festival. Date and venue to be confirmed soon."
          }
         }
        ]
@@ -3386,7 +3386,7 @@
        "key": "performances/upcoming-list/t4",
        "kind": "text",
        "what": "Details",
-       "value": "6 Nov 2026 \u00b7 Meenakshi Rangamancha, Bengaluru"
+       "value": "6 Nov 2026 · Meenakshi Rangamancha, Bengaluru"
       },
       {
        "key": "performances/upcoming-list/t5",
@@ -3405,7 +3405,7 @@
       {
        "key": "performances/upcoming-list/1",
        "what": "List",
-       "note": "One event per row. Start with the date in bold, e.g. **8 Jan 2027** \u2014 what, where. The site puts them in date order and hides past dates by itself.",
+       "note": "One event per row. Start with the date in bold, e.g. **8 Jan 2027** — what, where. The site puts them in date order and hides past dates by itself.",
        "columns": [
         {
          "what": "Item",
@@ -3418,77 +3418,77 @@
          "key": "performances/upcoming-list/1/1",
          "show": true,
          "cells": {
-          "Item": "**4 Nov 2026** \u2014 *Soorya Festival*: exquisite duets of Nirupama\u2013Rajendra, Ganesham Black Box, Trivandrum"
+          "Item": "**4 Nov 2026** — *Soorya Festival*: exquisite duets of Nirupama–Rajendra, Ganesham Black Box, Trivandrum"
          }
         },
         {
          "key": "performances/upcoming-list/1/2",
          "show": true,
          "cells": {
-          "Item": "**6 Nov 2026** \u2014 *Chakradhaar*: an evening of Kathak, rooted in tradition and innovative in presentation, by senior artists of ADC Rohini Prabhath, Maanvi Ramprasad and Apoorva Rao, Meenakshi Rangamancha, Bengaluru \u00b7 [Tickets](https://in.bookmyshow.com/events/chakradhar/et9vsr0cb2)"
+          "Item": "**6 Nov 2026** — *Chakradhaar*: an evening of Kathak, rooted in tradition and innovative in presentation, by senior artists of ADC Rohini Prabhath, Maanvi Ramprasad and Apoorva Rao, Meenakshi Rangamancha, Bengaluru · [Tickets](https://in.bookmyshow.com/events/chakradhar/et9vsr0cb2)"
          }
         },
         {
          "key": "performances/upcoming-list/1/3",
          "show": true,
          "cells": {
-          "Item": "**14 Nov 2026** \u2014 Private show in Ilakal: Abhinava's cherished choreography works for a private event"
+          "Item": "**14 Nov 2026** — Private show in Ilakal: Abhinava's cherished choreography works for a private event"
          }
         },
         {
          "key": "performances/upcoming-list/1/4",
          "show": true,
          "cells": {
-          "Item": "**5 Dec 2026** \u2014 Bharatanatyam Rangapravesha of Kum. Ranjini Iyer: solo debut, Kala Dwaraka, Koramangala, Bangalore"
+          "Item": "**5 Dec 2026** — Bharatanatyam Rangapravesha of Kum. Ranjini Iyer: solo debut, Kala Dwaraka, Koramangala, Bangalore"
          }
         },
         {
          "key": "performances/upcoming-list/1/5",
          "show": true,
          "cells": {
-          "Item": "**19 Dec 2026** \u2014 *Bhagavadgeeta Darshana*: hosted by His Holiness Shri Shri Swarnavalli Swamiji, Hosapete"
+          "Item": "**19 Dec 2026** — *Bhagavadgeeta Darshana*: hosted by His Holiness Shri Shri Swarnavalli Swamiji, Hosapete"
          }
         },
         {
          "key": "performances/upcoming-list/1/6",
          "show": true,
          "cells": {
-          "Item": "**30 Dec 2026** \u2014 Bharatanrityam solo by Smt. Nirupama Rajendra, Krishna Gana Sabha, Chennai"
+          "Item": "**30 Dec 2026** — Bharatanrityam solo by Smt. Nirupama Rajendra, Krishna Gana Sabha, Chennai"
          }
         },
         {
          "key": "performances/upcoming-list/1/7",
          "show": true,
          "cells": {
-          "Item": "**8 Jan 2027** \u2014 Kathak Rang Manch Pravesh of Kum. Anumathi B: solo debut, Meenakshi Rangamancha, Bangalore"
+          "Item": "**8 Jan 2027** — Kathak Rang Manch Pravesh of Kum. Anumathi B: solo debut, Meenakshi Rangamancha, Bangalore"
          }
         },
         {
          "key": "performances/upcoming-list/1/8",
          "show": true,
          "cells": {
-          "Item": "**17 Jan 2027** \u2014 Kathak Rang Manch Pravesh of Kum. Vachana M Dev: solo debut, Meenakshi Rangamancha, Bangalore"
+          "Item": "**17 Jan 2027** — Kathak Rang Manch Pravesh of Kum. Vachana M Dev: solo debut, Meenakshi Rangamancha, Bangalore"
          }
         },
         {
          "key": "performances/upcoming-list/1/9",
          "show": true,
          "cells": {
-          "Item": "**7 Feb 2027** \u2014 Kathak Rang Manch Pravesh of Smt. Sushmita Karan: solo debut, Meenakshi Rangamancha, Bangalore"
+          "Item": "**7 Feb 2027** — Kathak Rang Manch Pravesh of Smt. Sushmita Karan: solo debut, Meenakshi Rangamancha, Bangalore"
          }
         },
         {
          "key": "performances/upcoming-list/1/10",
          "show": true,
          "cells": {
-          "Item": "**19 Feb 2027** \u2014 *Sthapathyam*: production on architecture, U B City, Bangalore"
+          "Item": "**19 Feb 2027** — *Sthapathyam*: production on architecture, U B City, Bangalore"
          }
         },
         {
          "key": "performances/upcoming-list/1/11",
          "show": true,
          "cells": {
-          "Item": "**28 Feb 2027** \u2014 *Nritya Katha 2027*: Kathak duet presentation for Udupa Foundation, J S S Auditorium, Bangalore"
+          "Item": "**28 Feb 2027** — *Nritya Katha 2027*: Kathak duet presentation for Udupa Foundation, J S S Auditorium, Bangalore"
          }
         }
        ]
@@ -3515,7 +3515,7 @@
        "key": "performances/productions/t3",
        "kind": "text",
        "what": "Text",
-       "value": "The active repertoire of Abhinava Dance Company \u2014 from full-length epics to intimate solos, each created in our in-house production studio."
+       "value": "The active repertoire of Abhinava Dance Company — from full-length epics to intimate solos, each created in our in-house production studio."
       }
      ],
      "lists": []
@@ -3552,7 +3552,7 @@
        "key": "performances/what-makes-adc-unique/t5",
        "kind": "text",
        "what": "Text",
-       "value": "Before the curtain rises \u2014 rehearsals, costumes, music and the many hands that bring an Abhinava production to the stage."
+       "value": "Before the curtain rises — rehearsals, costumes, music and the many hands that bring an Abhinava production to the stage."
       },
       {
        "key": "performances/what-makes-adc-unique/t6",
@@ -3590,7 +3590,7 @@
          "show": true,
          "cells": {
           "Small heading": "In-House",
-          "Text": "Complete production house \u2014 original concepts, lyrics, music scores, and bespoke costumes & props created under one roof."
+          "Text": "Complete production house — original concepts, lyrics, music scores, and bespoke costumes & props created under one roof."
          }
         },
         {
@@ -3598,7 +3598,7 @@
          "show": true,
          "cells": {
           "Small heading": "Tradition + Innovation",
-          "Text": "Rooted in Natyashastra with experimental edge \u2014 Sangeet Natak Akademi Award category: Creativity & Experimental Dance."
+          "Text": "Rooted in Natyashastra with experimental edge — Sangeet Natak Akademi Award category: Creativity & Experimental Dance."
          }
         },
         {
@@ -3663,8 +3663,8 @@
          "show": true,
          "cells": {
           "Text": "**Cultural Festivals**",
-          "List (one per line)": "Rasaaraadhanam \u2014 Bangalore\n*Krishnaa \u2014 Fire to Frost*, Samskruthi \u2014 Houston\nKalakendra \u2014 Portland, USA\nKhajuraho \u2014 Khajuraho, Madhya Pradesh\nMusic Academy \u2014 Chennai\nKrishna Gana Sabha \u2014 Chennai\nCentral Sanskrit University \u2014 Delhi\nKathak Mahotsav \u2014 Delhi\nLucknow Kathak Utsav \u2014 Lucknow, Uttar Pradesh\nKonark \u2014 Odisha\nSoorya \u2014 Kerala\nSICA \u2014 Hyderabad\nNishagandhi \u2014 Kerala\nMahabharat Utsav \u2014 Bhopal\nHampi Utsav \u2014 Hampi",
-          "Text 2": "& more\u2026"
+          "List (one per line)": "Rasaaraadhanam — Bangalore\n*Krishnaa — Fire to Frost*, Samskruthi — Houston\nKalakendra — Portland, USA\nKhajuraho — Khajuraho, Madhya Pradesh\nMusic Academy — Chennai\nKrishna Gana Sabha — Chennai\nCentral Sanskrit University — Delhi\nKathak Mahotsav — Delhi\nLucknow Kathak Utsav — Lucknow, Uttar Pradesh\nKonark — Odisha\nSoorya — Kerala\nSICA — Hyderabad\nNishagandhi — Kerala\nMahabharat Utsav — Bhopal\nHampi Utsav — Hampi",
+          "Text 2": "& more…"
          }
         },
         {
@@ -3673,7 +3673,7 @@
          "cells": {
           "Text": "**Corporate Shows**",
           "List (one per line)": "Infosys Foundation\nGMR Group\nRatan Tata\nGodrej\nBosch\nHAL\nIFQM\nHoneywell\nWorld Journalists Meet\nDoctors Conference\nISRO",
-          "Text 2": "& more\u2026"
+          "Text 2": "& more…"
          }
         }
        ]
@@ -3850,7 +3850,7 @@
          "key": "school/programs-offered/1/2",
          "show": true,
          "cells": {
-          "Text": "The programme emphasises stage presence \u2014 dressing appropriately and carrying oneself with grace \u2014 alongside practical exposure to costumes, accessories, music, sound and lighting. Learners intern in productions, assist and lead rehearsals, and present work through both intimate in-house showcases and professional stage performances."
+          "Text": "The programme emphasises stage presence — dressing appropriately and carrying oneself with grace — alongside practical exposure to costumes, accessories, music, sound and lighting. Learners intern in productions, assist and lead rehearsals, and present work through both intimate in-house showcases and professional stage performances."
          }
         }
        ]
@@ -3884,7 +3884,7 @@
        "key": "school/bharatanrityam/t4",
        "kind": "text",
        "what": "Text",
-       "value": "Hailing from the ancient temples of South India, Bharatanrityam encompasses the ancient codified techniques of movement and storytelling that are described in the centuries-old Natya Shastra. The revival of this knowledge is credited to legendary Guru and scholar Padma Vibhushan Dr. Padma Subrahmanyam. Students at Abhinava Centre receive comprehensive education in Bharatanatyam, developing fine skill in the technical and storytelling elements of the Classical South Indian form. Learning at the Abhinava Arts Centre is further enriched by Bharatanrityam instruction. Abhinava Dance Company receives international acclaim for the unique presentation of Bharatanrityam \u2014 a 5000 year old movement vocabulary that continues to win hearts in today's age."
+       "value": "Hailing from the ancient temples of South India, Bharatanrityam encompasses the ancient codified techniques of movement and storytelling that are described in the centuries-old Natya Shastra. The revival of this knowledge is credited to legendary Guru and scholar Padma Vibhushan Dr. Padma Subrahmanyam. Students at Abhinava Centre receive comprehensive education in Bharatanatyam, developing fine skill in the technical and storytelling elements of the Classical South Indian form. Learning at the Abhinava Arts Centre is further enriched by Bharatanrityam instruction. Abhinava Dance Company receives international acclaim for the unique presentation of Bharatanrityam — a 5000 year old movement vocabulary that continues to win hearts in today's age."
       }
      ],
      "lists": []
@@ -4000,7 +4000,7 @@
          "key": "school/dma/1/2",
          "show": true,
          "cells": {
-          "Text": "[Learn more about DMA research \u2192](research.html)"
+          "Text": "[Learn more about DMA research →](research.html)"
          }
         }
        ]
@@ -4027,7 +4027,7 @@
        "key": "school/faculty/t3",
        "kind": "text",
        "what": "Text",
-       "value": "Abhinava's teaching faculty brings decades of performance, choreography, and pedagogy experience \u2014 guided by the Artistic Directors and supported by rehearsal conductors who train the next generation daily."
+       "value": "Abhinava's teaching faculty brings decades of performance, choreography, and pedagogy experience — guided by the Artistic Directors and supported by rehearsal conductors who train the next generation daily."
       }
      ],
      "lists": [
@@ -4223,21 +4223,21 @@
          "key": "school/get-started/1/2",
          "show": true,
          "cells": {
-          "Text": "**Studio A & Studio B** \u2014 Two world-class dance studios at our Basavanagudi campus, plus the Rajajinagar space for expanded training."
+          "Text": "**Studio A & Studio B** — Two world-class dance studios at our Basavanagudi campus, plus the Rajajinagar space for expanded training."
          }
         },
         {
          "key": "school/get-started/1/3",
          "show": true,
          "cells": {
-          "Text": "Facilities include rehearsal halls, costume room, and music production studio \u2014 everything a serious student needs under one roof."
+          "Text": "Facilities include rehearsal halls, costume room, and music production studio — everything a serious student needs under one roof."
          }
         },
         {
          "key": "school/get-started/1/4",
          "show": true,
          "cells": {
-          "Text": "**School Enquiries:**\n[Learning@abhinavadancecompany.com](mailto:Learning@abhinavadancecompany.com) \u00b7 [+91 99023 55722](tel:+919902355722)"
+          "Text": "**School Enquiries:**\n[Learning@abhinavadancecompany.com](mailto:Learning@abhinavadancecompany.com) · [+91 99023 55722](tel:+919902355722)"
          }
         }
        ]
@@ -4282,7 +4282,7 @@
        "key": "school/apply/t6",
        "kind": "text",
        "what": "Text",
-       "value": "**Student Showcase:** Latest *Dance Karma 2025* \u2014 annual student performance celebrating progress and artistry."
+       "value": "**Student Showcase:** Latest *Dance Karma 2025* — annual student performance celebrating progress and artistry."
       },
       {
        "key": "school/apply/t7",
@@ -4449,8 +4449,8 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=ZVWAVlfeGwI",
           "Video picture": "assets/web/client/dance-karma-morning-session-thumbnail-2.jpg",
-          "Video picture description": "Play video: Dance Karma 2025 \u2014 morning session",
-          "Caption": "Dance Karma 2025 \u2014 morning session"
+          "Video picture description": "Play video: Dance Karma 2025 — morning session",
+          "Caption": "Dance Karma 2025 — morning session"
          }
         },
         {
@@ -4459,8 +4459,8 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=K9Q86BAlvDY",
           "Video picture": "assets/web/client/dance-karma-evening-session-thumbnail.jpg",
-          "Video picture description": "Play video: Dance Karma 2025 \u2014 evening session",
-          "Caption": "Dance Karma 2025 \u2014 evening session"
+          "Video picture description": "Play video: Dance Karma 2025 — evening session",
+          "Caption": "Dance Karma 2025 — evening session"
          }
         },
         {
@@ -4536,14 +4536,14 @@
          "key": "school/beyond-the-classroom/1/1",
          "show": true,
          "cells": {
-          "Text": "Students participate in annual showcases including **Dance Karma** (student showcase), **Rangapravesha** (debut solo), **Vijayadashami** (guru-shishya celebration), and **Milan** (new students\u2019 induction programme)."
+          "Text": "Students participate in annual showcases including **Dance Karma** (student showcase), **Rangapravesha** (debut solo), **Vijayadashami** (guru-shishya celebration), and **Milan** (new students’ induction programme)."
          }
         },
         {
          "key": "school/beyond-the-classroom/1/2",
          "show": true,
          "cells": {
-          "Text": "Scholarships available through the T.V. Dwarakanath Scholarship Program and Guru Smt. Sundari Santhanam Scholarship Program \u2014 supported by Central Sangeet Natak Akademi, Karnataka Sangeetha Nrithya Academy, Swara Laya, and R.N. Murthy Endowment."
+          "Text": "Scholarships available through the T.V. Dwarakanath Scholarship Program and Guru Smt. Sundari Santhanam Scholarship Program — supported by Central Sangeet Natak Akademi, Karnataka Sangeetha Nrithya Academy, Swara Laya, and R.N. Murthy Endowment."
          }
         }
        ]
@@ -4576,7 +4576,7 @@
        "key": "school/vijayadashami/t4",
        "kind": "text",
        "what": "Text",
-       "value": "Annual celebration honouring the guru-shishya bond \u2014 students offer gratitude and begin a new year of learning."
+       "value": "Annual celebration honouring the guru-shishya bond — students offer gratitude and begin a new year of learning."
       }
      ],
      "lists": []
@@ -4607,7 +4607,7 @@
        "key": "school/milan/t4",
        "kind": "text",
        "what": "Text",
-       "value": "New Students\u2019 Induction Programme."
+       "value": "New Students’ Induction Programme."
       }
      ],
      "lists": []
@@ -4699,7 +4699,7 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=phaVSACATy8",
           "Video picture": "assets/web/client/radha-thumbnail.jpg",
-          "Video picture description": "Play video: Radha \u2014 what Abhinava means to me",
+          "Video picture description": "Play video: Radha — what Abhinava means to me",
           "Caption": "Radha"
          }
         },
@@ -4709,7 +4709,7 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=zIxFYjCpayA",
           "Video picture": "assets/web/client/bhidesis-thumbnail.jpg",
-          "Video picture description": "Play video: Dharitri and Hamsini \u2014 what Abhinava means to us",
+          "Video picture description": "Play video: Dharitri and Hamsini — what Abhinava means to us",
           "Caption": "Dharitri and Hamsini"
          }
         },
@@ -4719,7 +4719,7 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=vwp9K3xWZb4",
           "Video picture": "assets/web/client/sharvari-thumbnail.jpg",
-          "Video picture description": "Play video: Sharvari \u2014 what Abhinava means to me",
+          "Video picture description": "Play video: Sharvari — what Abhinava means to me",
           "Caption": "Sharvari"
          }
         },
@@ -4729,7 +4729,7 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=vzwryA_fsFo",
           "Video picture": "assets/web/client/coleena-thumbnail.jpg",
-          "Video picture description": "Play video: Colleena Shakti \u2014 what Abhinava means to me",
+          "Video picture description": "Play video: Colleena Shakti — what Abhinava means to me",
           "Caption": "Colleena Shakti"
          }
         }
@@ -4769,7 +4769,7 @@
        "key": "activities/activities/t4",
        "kind": "text",
        "what": "Line under the title",
-       "value": "Festivals \u00b7 Workshops \u00b7 Community \u00b7 Healing through art"
+       "value": "Festivals · Workshops · Community · Healing through art"
       }
      ],
      "lists": []
@@ -4827,14 +4827,14 @@
          "key": "activities/class-to-classics/1/2",
          "show": true,
          "cells": {
-          "Text": "Class to Classics is a unique educational and cultural initiative by Abhinava Dance Company, envisioned to enrich young minds through the timeless wisdom, values, and narratives of Indian epics. The initiative seeks to bridge the gap between classroom learning and India\u2019s rich cultural heritage by bringing stories from our great epics, such as the Ramayana and the Mahabharata, to life through engaging storytelling, classical dance, music, and theatrical presentations."
+          "Text": "Class to Classics is a unique educational and cultural initiative by Abhinava Dance Company, envisioned to enrich young minds through the timeless wisdom, values, and narratives of Indian epics. The initiative seeks to bridge the gap between classroom learning and India’s rich cultural heritage by bringing stories from our great epics, such as the Ramayana and the Mahabharata, to life through engaging storytelling, classical dance, music, and theatrical presentations."
          }
         },
         {
          "key": "activities/class-to-classics/1/3",
          "show": true,
          "cells": {
-          "Text": "To book Class to Classics for your institution, contact: [info@abhinavadancecompany.com](mailto:info@abhinavadancecompany.com) \u00b7 [93432 16765](tel:+919343216765)"
+          "Text": "To book Class to Classics for your institution, contact: [info@abhinavadancecompany.com](mailto:info@abhinavadancecompany.com) · [93432 16765](tel:+919343216765)"
          }
         }
        ]
@@ -4856,7 +4856,7 @@
        "kind": "photo",
        "what": "Video picture",
        "value": "assets/web/client/saraswati-horizontal.jpg",
-       "alt": "Play the \u201cCulture Alive\u201d video"
+       "alt": "Play the “Culture Alive” video"
       },
       {
        "key": "activities/dance-classes/t3",
@@ -4893,7 +4893,7 @@
          "key": "activities/dance-classes/1/1",
          "show": true,
          "cells": {
-          "Text": "Abhinava Dance Company\u2019s studio is brimming with classes, studio events, rehearsals for productions."
+          "Text": "Abhinava Dance Company’s studio is brimming with classes, studio events, rehearsals for productions."
          }
         },
         {
@@ -4927,7 +4927,7 @@
        "key": "activities/workshops/t3",
        "kind": "text",
        "what": "Text",
-       "value": "Abhinava periodically hosts workshops with legendary gurus and international scholars \u2014 under the masterclasses and cultural exchange."
+       "value": "Abhinava periodically hosts workshops with legendary gurus and international scholars — under the masterclasses and cultural exchange."
       }
      ],
      "lists": [
@@ -4974,7 +4974,7 @@
           "Title": "Padma Vibhushan Pandit Birju Maharaj",
           "Video link": "https://www.youtube.com/watch?v=mdXNlfs0IDc",
           "Video picture": "assets/web/client/workshop-maharajji.jpg",
-          "Video picture description": "Play video: Pandit Birju Maharaj \u2014 Kathak workshop at ADC",
+          "Video picture description": "Play video: Pandit Birju Maharaj — Kathak workshop at ADC",
           "Caption": "Kathak workshop",
           "Photos (one per line)": "",
           "Text": ""
@@ -4987,7 +4987,7 @@
           "Title": "Dr Maya Rao",
           "Video link": "https://www.youtube.com/watch?v=vDaAQPQLHx0",
           "Video picture": "assets/web/client/workshop-maya-rao.jpg",
-          "Video picture description": "Play video: Dr Maya Rao \u2014 Abhinaya workshop at ADC",
+          "Video picture description": "Play video: Dr Maya Rao — Abhinaya workshop at ADC",
           "Caption": "Abhinaya workshop",
           "Photos (one per line)": "",
           "Text": ""
@@ -5000,7 +5000,7 @@
           "Title": "Padma Vibhushan Smt. Kumudini Lakhia",
           "Video link": "https://www.youtube.com/watch?v=wXCxUq4XVQk",
           "Video picture": "assets/web/images/workshop-kumudini-lakhia.jpg",
-          "Video picture description": "Play video: Smt. Kumudini Lakhia \u2014 meet and greet at ADC",
+          "Video picture description": "Play video: Smt. Kumudini Lakhia — meet and greet at ADC",
           "Caption": "Meet and Greet",
           "Photos (one per line)": "",
           "Text": ""
@@ -5039,7 +5039,7 @@
           "Title": "Guru Smt. Nirupama Rajendra",
           "Video link": "https://www.youtube.com/watch?v=V1lN-qMpZCc",
           "Video picture": "assets/web/client/workshop-nirupama-dma.jpg",
-          "Video picture description": "Play video: DMA students \u2014 Bharatanrityam workshop",
+          "Video picture description": "Play video: DMA students — Bharatanrityam workshop",
           "Caption": "DMA Workshop",
           "Photos (one per line)": "",
           "Text": ""
@@ -5052,7 +5052,7 @@
           "Title": "Temple University, Philadelphia, USA",
           "Video link": "https://www.youtube.com/watch?v=6owsQZNTpnA",
           "Video picture": "https://img.youtube.com/vi/6owsQZNTpnA/hqdefault.jpg",
-          "Video picture description": "Play video: Temple University, Philadelphia \u2014 Indian cultural experience",
+          "Video picture description": "Play video: Temple University, Philadelphia — Indian cultural experience",
           "Caption": "Indian Cultural Experience",
           "Photos (one per line)": "",
           "Text": "A cultural experience was given to management students from Philadelphia."
@@ -5107,8 +5107,8 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=RzHfnW6omXQ&t=240s",
           "Video picture": "https://img.youtube.com/vi/RzHfnW6omXQ/hqdefault.jpg",
-          "Video picture description": "Play video: TEDx \u2014 Connecting Cultures",
-          "Caption": "TEDx \u2014 Connecting Cultures"
+          "Video picture description": "Play video: TEDx — Connecting Cultures",
+          "Caption": "TEDx — Connecting Cultures"
          }
         },
         {
@@ -5117,8 +5117,8 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=w7vaxINCK0M&t=189s",
           "Video picture": "https://img.youtube.com/vi/w7vaxINCK0M/hqdefault.jpg",
-          "Video picture description": "Play video: TEDx \u2014 PES Talk",
-          "Caption": "TEDx \u2014 PES Talk"
+          "Video picture description": "Play video: TEDx — PES Talk",
+          "Caption": "TEDx — PES Talk"
          }
         },
         {
@@ -5137,8 +5137,8 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=QEM7ILJG93o",
           "Video picture": "assets/web/client/parva-thumbnail-1.jpg",
-          "Video picture description": "Play video: Parva \u2014 25 years of ADC",
-          "Caption": "Parva \u2014 25 years of ADC"
+          "Video picture description": "Play video: Parva — 25 years of ADC",
+          "Caption": "Parva — 25 years of ADC"
          }
         },
         {
@@ -5147,8 +5147,8 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=imvLXrZVMN0",
           "Video picture": "assets/web/client/abhijna-video-cover.jpg",
-          "Video picture description": "Play video: Abhijnaa \u2014 20 years of ADC",
-          "Caption": "Abhijnaa \u2014 20 years of ADC"
+          "Video picture description": "Play video: Abhijnaa — 20 years of ADC",
+          "Caption": "Abhijnaa — 20 years of ADC"
          }
         }
        ]
@@ -5157,7 +5157,7 @@
     },
     {
      "key": "activities/community-programs",
-     "label": "Madanothsava \u2014 Celebration of Spring",
+     "label": "Madanothsava — Celebration of Spring",
      "slots": [
       {
        "key": "activities/community-programs/t1",
@@ -5176,7 +5176,7 @@
        "key": "activities/community-programs/t3",
        "kind": "text",
        "what": "Heading",
-       "value": "Madanothsava \u2014 Celebration of Spring"
+       "value": "Madanothsava — Celebration of Spring"
       }
      ],
      "lists": [
@@ -5202,7 +5202,7 @@
          "key": "activities/community-programs/1/2",
          "show": true,
          "cells": {
-          "Text": "Brought into action by Abhinava Dance Company on **February 22nd, 2020** at Ramanjaneya Gudda, Bangalore \u2014 a brain-child of **Shatavadhaani Dr R Ganesh**."
+          "Text": "Brought into action by Abhinava Dance Company on **February 22nd, 2020** at Ramanjaneya Gudda, Bangalore — a brain-child of **Shatavadhaani Dr R Ganesh**."
          }
         },
         {
@@ -5216,7 +5216,7 @@
          "key": "activities/community-programs/1/4",
          "show": true,
          "cells": {
-          "Text": "Abhinava featured its new home productions: **Madananjali** and **Pramadvane**, inspired by the spring welcoming Madana. Apart from stunning costumes, props and extraordinary music composed by Sri **Praveen D Rao**, these featured new movements called **\"Charchari\"** \u2014 an innovation in itself."
+          "Text": "Abhinava featured its new home productions: **Madananjali** and **Pramadvane**, inspired by the spring welcoming Madana. Apart from stunning costumes, props and extraordinary music composed by Sri **Praveen D Rao**, these featured new movements called **\"Charchari\"** — an innovation in itself."
          }
         }
        ]
@@ -5268,7 +5268,7 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=jXp7NJSDcXE",
           "Video picture": "assets/web/client/madanothsava-1-thumbnail.jpg",
-          "Video picture description": "Play video: Madanothsava 2023 \u2014 Pt. Venkatesh Kumar singing on the Madanothsava stage",
+          "Video picture description": "Play video: Madanothsava 2023 — Pt. Venkatesh Kumar singing on the Madanothsava stage",
           "Caption": "Madanothsava 2023"
          }
         },
@@ -5336,7 +5336,7 @@
          "cells": {
           "Small heading": "Ancient Game",
           "Title": "Sahakaarabhanjikothsava",
-          "Text": "Unique dance game around mango trees & fruit plucking \u2014 a joyous community ritual recreated at Madanothsava.",
+          "Text": "Unique dance game around mango trees & fruit plucking — a joyous community ritual recreated at Madanothsava.",
           "Video link": "https://www.youtube.com/watch?v=-x4d_5udvHk",
           "Video picture": "https://img.youtube.com/vi/-x4d_5udvHk/hqdefault.jpg",
           "Video picture description": "Play video: Sahakaarabhanjikothsava",
@@ -5349,7 +5349,7 @@
          "cells": {
           "Small heading": "Community Dance",
           "Title": "Char Chari Nrithya",
-          "Text": "Ancient community-building clap dance recreated \u2014 **2000\u20133000 people** learnt it at Madanothsava.",
+          "Text": "Ancient community-building clap dance recreated — **2000–3000 people** learnt it at Madanothsava.",
           "Video link": "https://www.youtube.com/watch?v=w6dqstjg8I8",
           "Video picture": "https://img.youtube.com/vi/w6dqstjg8I8/hqdefault.jpg",
           "Video picture description": "Play video: Char Chari Nrithya",
@@ -5386,7 +5386,7 @@
        "key": "activities/humanity-through-art/t4",
        "kind": "text",
        "what": "Text",
-       "value": "Abhinava's outreach brings thousands together \u2014 reviving ancient festivals, building community through dance, and using art as a force for healing and unity."
+       "value": "Abhinava's outreach brings thousands together — reviving ancient festivals, building community through dance, and using art as a force for healing and unity."
       }
      ],
      "lists": [
@@ -5412,14 +5412,14 @@
          "key": "activities/humanity-through-art/1/2",
          "show": true,
          "cells": {
-          "Item": "*Kaladwaraka Festival* (2020\u20132021) \u2014 supported 100+ artists with Infosys Foundation."
+          "Item": "*Kaladwaraka Festival* (2020–2021) — supported 100+ artists with Infosys Foundation."
          }
         },
         {
          "key": "activities/humanity-through-art/1/3",
          "show": true,
          "cells": {
-          "Item": "*Samvedana* \u2014 right after COVID, hundreds of dancers chanted mantras for healing."
+          "Item": "*Samvedana* — right after COVID, hundreds of dancers chanted mantras for healing."
          }
         },
         {
@@ -5528,7 +5528,7 @@
        "key": "store/store/t4",
        "kind": "text",
        "what": "Line under the title",
-       "value": "Costumes \u00b7 Media \u00b7 Learning"
+       "value": "Costumes · Media · Learning"
       }
      ],
      "lists": []
@@ -5541,7 +5541,7 @@
        "key": "store/part-2/t1",
        "kind": "text",
        "what": "Text",
-       "value": "Take home a piece of Abhinava \u2014 bespoke dance costumes, music recordings, Kathak and Bharatanrityam choreography videos, and the complete Deshi Marga Adavu learning library."
+       "value": "Take home a piece of Abhinava — bespoke dance costumes, music recordings, Kathak and Bharatanrityam choreography videos, and the complete Deshi Marga Adavu learning library."
       }
      ],
      "lists": []
@@ -5560,7 +5560,7 @@
        "key": "store/dance-apparel/t2",
        "kind": "text",
        "what": "Small heading",
-       "value": "To Buy \u00b7 To Rent"
+       "value": "To Buy · To Rent"
       },
       {
        "key": "store/dance-apparel/t3",
@@ -5591,14 +5591,14 @@
          "key": "store/dance-apparel/1/1",
          "show": true,
          "cells": {
-          "Item": "**Dance costumes** \u2014 Bharatanatyam and Kathak ensembles"
+          "Item": "**Dance costumes** — Bharatanatyam and Kathak ensembles"
          }
         },
         {
          "key": "store/dance-apparel/1/2",
          "show": true,
          "cells": {
-          "Item": "**Accessories** \u2014 jewellery, props, and ghungroo"
+          "Item": "**Accessories** — jewellery, props, and ghungroo"
          }
         }
        ]
@@ -5667,7 +5667,7 @@
        "kind": "photo",
        "what": "Video picture",
        "value": "https://img.youtube.com/vi/BFohKn3EKe0/maxresdefault.jpg",
-       "alt": "Play video: Bhagavadajjukam \u2014 a 7th century Sanskrit satire"
+       "alt": "Play video: Bhagavadajjukam — a 7th century Sanskrit satire"
       },
       {
        "key": "store/videos/t3",
@@ -5698,7 +5698,7 @@
          "key": "store/videos/1/1",
          "show": true,
          "cells": {
-          "Text": "**Free to watch: *Bhagavadajjukam* \u2014 a 7th century Sanskrit satire.**"
+          "Text": "**Free to watch: *Bhagavadajjukam* — a 7th century Sanskrit satire.**"
          }
         },
         {
@@ -5719,7 +5719,7 @@
          "key": "store/videos/1/4",
          "show": true,
          "cells": {
-          "Text": "**Pay to watch:** Krishna, RKV, Vijayanagara Vyjayanthi, Tad-Bharatam, Deshi Marga Adavu \u2014 [check the streaming schedule](performances.html#upcoming-shows)."
+          "Text": "**Pay to watch:** Krishna, RKV, Vijayanagara Vyjayanthi, Tad-Bharatam, Deshi Marga Adavu — [check the streaming schedule](performances.html#upcoming-shows)."
          }
         }
        ]
@@ -5735,7 +5735,7 @@
        "kind": "photo",
        "what": "Photo",
        "value": "assets/web/client/046.jpg",
-       "alt": "Nirupama Rajendra \u2014 Deshi Marga Adavu"
+       "alt": "Nirupama Rajendra — Deshi Marga Adavu"
       },
       {
        "key": "store/dma-learning/t2",
@@ -5772,14 +5772,14 @@
          "key": "store/dma-learning/1/1",
          "show": true,
          "cells": {
-          "Text": "High-definition Deshi Marga Adavu tutorial videos \u2014 a new vocabulary of 108 artistically crafted movements created by **Smt. Nirupama Rajendra**."
+          "Text": "High-definition Deshi Marga Adavu tutorial videos — a new vocabulary of 108 artistically crafted movements created by **Smt. Nirupama Rajendra**."
          }
         },
         {
          "key": "store/dma-learning/1/2",
          "show": true,
          "cells": {
-          "Text": "DMA bridges *Deshi Adavus* of Bharatanatyam with *Margi Karanas* from the Natyashastra. Access is on subscription. [DMA research \u2192](research.html)"
+          "Text": "DMA bridges *Deshi Adavus* of Bharatanatyam with *Margi Karanas* from the Natyashastra. Access is on subscription. [DMA research →](research.html)"
          }
         },
         {
@@ -5825,7 +5825,7 @@
        "key": "support/support-us/t4",
        "kind": "text",
        "what": "Line under the title",
-       "value": "Patrons \u00b7 Partners \u00b7 Scholarships \u00b7 80G benefits"
+       "value": "Patrons · Partners · Scholarships · 80G benefits"
       }
      ],
      "lists": []
@@ -5863,7 +5863,7 @@
        "key": "support/ways-to-donate/t3",
        "kind": "text",
        "what": "Text",
-       "value": "**To donate:** [info@abhinavadancecompany.com](mailto:info@abhinavadancecompany.com) \u00b7 [+91\u00a093432\u00a016765](tel:+919343216765)"
+       "value": "**To donate:** [info@abhinavadancecompany.com](mailto:info@abhinavadancecompany.com) · [+91 93432 16765](tel:+919343216765)"
       }
      ],
      "lists": [
@@ -5889,7 +5889,7 @@
          "key": "support/ways-to-donate/1/2",
          "show": true,
          "cells": {
-          "Text": "Abhinava Arts Centre is eligible for **80G tax exemption** \u2014 donations receive tax benefits. GST registered."
+          "Text": "Abhinava Arts Centre is eligible for **80G tax exemption** — donations receive tax benefits. GST registered."
          }
         }
        ]
@@ -6126,7 +6126,7 @@
          "cells": {
           "Small heading": "Broadcast",
           "Title": "Doordarshan Kendra",
-          "Text": "National broadcast coverage of ADC productions on Doordarshan \u2014 bringing Abhinava's repertoire to households across India."
+          "Text": "National broadcast coverage of ADC productions on Doordarshan — bringing Abhinava's repertoire to households across India."
          }
         },
         {
@@ -6135,7 +6135,7 @@
          "cells": {
           "Small heading": "Philanthropy",
           "Title": "80G Tax Exemption",
-          "Text": "Abhinava Arts Centre is eligible for **80G tax exemption** \u2014 eligible donations receive tax benefits for supporters of the arts."
+          "Text": "Abhinava Arts Centre is eligible for **80G tax exemption** — eligible donations receive tax benefits for supporters of the arts."
          }
         },
         {
@@ -6144,7 +6144,7 @@
          "cells": {
           "Small heading": "Registration",
           "Title": "GST Registration",
-          "Text": "GST registered institution \u2014 compliant for institutional partnerships, corporate sponsorship, and merchandise."
+          "Text": "GST registered institution — compliant for institutional partnerships, corporate sponsorship, and merchandise."
          }
         }
        ]
@@ -6196,7 +6196,7 @@
          "show": true,
          "cells": {
           "Small heading": "Government",
-          "Text": "Directorate \u2014 Department of Kannada & Culture and Karnataka Tourism"
+          "Text": "Directorate — Department of Kannada & Culture and Karnataka Tourism"
          }
         },
         {
@@ -6204,7 +6204,7 @@
          "show": true,
          "cells": {
           "Small heading": "Academies",
-          "Text": "Central Sangeet Natak Akademi \u00b7 Karnataka Sangeetha Nrithya Academy \u00b7 Indian Council for Cultural Relations (ICCR) \u00b7 Indian Council for Philosophical Research (ICPR) \u00b7 Central Sanskrit University"
+          "Text": "Central Sangeet Natak Akademi · Karnataka Sangeetha Nrithya Academy · Indian Council for Cultural Relations (ICCR) · Indian Council for Philosophical Research (ICPR) · Central Sanskrit University"
          }
         },
         {
@@ -6212,7 +6212,7 @@
          "show": true,
          "cells": {
           "Small heading": "Broadcast",
-          "Text": "Doordarshan Kendra \u2014 national coverage of ADC productions"
+          "Text": "Doordarshan Kendra — national coverage of ADC productions"
          }
         },
         {
@@ -6220,7 +6220,7 @@
          "show": true,
          "cells": {
           "Small heading": "Corporate",
-          "Text": "Chairman, GMR Group \u00b7 Murthy Glass Works \u00b7 Mastek \u00b7 Sangeetha Mobiles"
+          "Text": "Chairman, GMR Group · Murthy Glass Works · Mastek · Sangeetha Mobiles"
          }
         },
         {
@@ -6228,7 +6228,7 @@
          "show": true,
          "cells": {
           "Small heading": "Past Partners",
-          "Text": "Infosys Foundation \u00b7 Murty Foundation"
+          "Text": "Infosys Foundation · Murty Foundation"
          }
         },
         {
@@ -6236,7 +6236,7 @@
          "show": true,
          "cells": {
           "Small heading": "Endowments",
-          "Text": "R.N. Murthy Endowment \u00b7 Swara Laya \u00b7 individual patrons"
+          "Text": "R.N. Murthy Endowment · Swara Laya · individual patrons"
          }
         }
        ]
@@ -6310,7 +6310,7 @@
          "key": "support/corporate-sponsorship/1/4",
          "show": true,
          "cells": {
-          "Text": "Contact: [info@abhinavadancecompany.com](mailto:info@abhinavadancecompany.com) \u00b7 [+91\u00a093432\u00a016765](tel:+919343216765)"
+          "Text": "Contact: [info@abhinavadancecompany.com](mailto:info@abhinavadancecompany.com) · [+91 93432 16765](tel:+919343216765)"
          }
         }
        ]
@@ -6434,7 +6434,7 @@
        "kind": "photo",
        "what": "Photo",
        "value": "assets/web/client/about-us-nirupama-rajendra-2-edit.jpg",
-       "alt": "Nirupama and Rajendra \u2014 Artistic Directors"
+       "alt": "Nirupama and Rajendra — Artistic Directors"
       },
       {
        "key": "contact/contact-form/t2",
@@ -6534,21 +6534,21 @@
          "key": "contact/our-studios/1/1",
          "show": true,
          "cells": {
-          "Text": "Detailed descriptions of the spaces where magic happens \u2014 rehearsal halls, costume room, music studio, and student lounge."
+          "Text": "Detailed descriptions of the spaces where magic happens — rehearsal halls, costume room, music studio, and student lounge."
          }
         },
         {
          "key": "contact/our-studios/1/2",
          "show": true,
          "cells": {
-          "Text": "**Studio A & B (main campus)** \u2014 two world-class dance studios in the cultural hub of Basavanagudi, South Bangalore. Full amenities for Bharatanatyam, Kathak, and Natyashastra training for ages 5\u201360."
+          "Text": "**Studio A & B (main campus)** — two world-class dance studios in the cultural hub of Basavanagudi, South Bangalore. Full amenities for Bharatanatyam, Kathak, and Natyashastra training for ages 5–60."
          }
         },
         {
          "key": "contact/our-studios/1/3",
          "show": true,
          "cells": {
-          "Text": "**Rajajinagar Space** \u2014 additional rehearsal and programme space."
+          "Text": "**Rajajinagar Space** — additional rehearsal and programme space."
          }
         }
        ]
@@ -6587,7 +6587,7 @@
        "key": "research/research/t4",
        "kind": "text",
        "what": "Line under the title",
-       "value": "108 movements \u00b7 New vocabulary \u00b7 Access on subscription"
+       "value": "108 movements · New vocabulary · Access on subscription"
       }
      ],
      "lists": []
@@ -6625,7 +6625,7 @@
          "key": "research/dma-overview/1/1",
          "show": true,
          "cells": {
-          "Text": "Abhinava's Research Department has introduced **Deshi Marga Adavu (DMA)** \u2014 a new vocabulary of 108 artistically crafted movements created by **Smt. Nirupama Rajendra**."
+          "Text": "Abhinava's Research Department has introduced **Deshi Marga Adavu (DMA)** — a new vocabulary of 108 artistically crafted movements created by **Smt. Nirupama Rajendra**."
          }
         },
         {
@@ -6639,7 +6639,7 @@
          "key": "research/dma-overview/1/3",
          "show": true,
          "cells": {
-          "Text": "**Deshi Marga Adavus** are a new set of artistically designed movement vocabularies developed by Smt. Nirupama Rajendra \u2014 named in Sanskrit by **Shatavadhani Dr. R. Ganesh** based on their aesthetic and functional essence. Dr. Ganesh also guided the development process."
+          "Text": "**Deshi Marga Adavus** are a new set of artistically designed movement vocabularies developed by Smt. Nirupama Rajendra — named in Sanskrit by **Shatavadhani Dr. R. Ganesh** based on their aesthetic and functional essence. Dr. Ganesh also guided the development process."
          }
         }
        ]
@@ -6665,7 +6665,7 @@
          "show": true,
          "cells": {
           "Small heading": "Nritta",
-          "Text": "Pure dance \u2014 rhythmic footwork and body geometry enriched by 108 new adavus"
+          "Text": "Pure dance — rhythmic footwork and body geometry enriched by 108 new adavus"
          }
         },
         {
@@ -6673,7 +6673,7 @@
          "show": true,
          "cells": {
           "Small heading": "Abhinaya",
-          "Text": "Expression and storytelling \u2014 deeper interpretive vocabulary for classical narrative"
+          "Text": "Expression and storytelling — deeper interpretive vocabulary for classical narrative"
          }
         },
         {
@@ -6697,7 +6697,7 @@
        "kind": "photo",
        "what": "Photo",
        "value": "assets/web/client/010c.jpg",
-       "alt": "Deshi Marga Adavu \u2014 research at Hampi"
+       "alt": "Deshi Marga Adavu — research at Hampi"
       },
       {
        "key": "research/dma-process/t2",
@@ -6728,7 +6728,7 @@
          "key": "research/dma-process/1/1",
          "show": true,
          "cells": {
-          "Text": "The movements draw on Nirupama Rajendra's training in music, dance, literature, and culture \u2014 from 5000-year-old scriptures to 21st-century innovations, within the lineage of **Dr. Padma Subrahmanyam's** Karana reconstruction."
+          "Text": "The movements draw on Nirupama Rajendra's training in music, dance, literature, and culture — from 5000-year-old scriptures to 21st-century innovations, within the lineage of **Dr. Padma Subrahmanyam's** Karana reconstruction."
          }
         },
         {
@@ -6742,7 +6742,7 @@
          "key": "research/dma-process/1/3",
          "show": true,
          "cells": {
-          "Text": "**Reference articles:** [The Hindu](https://www.thehindu.com/entertainment/dance/nirupama-rajendra-unveils-her-new-dance-project/article34330507.ece) \u00b7 [Narthaki](https://narthaki.com/info/rev21/rev2585.html) \u00b7 [Narthaki preview](https://narthaki.com/info/prv21/prv1422.html)"
+          "Text": "**Reference articles:** [The Hindu](https://www.thehindu.com/entertainment/dance/nirupama-rajendra-unveils-her-new-dance-project/article34330507.ece) · [Narthaki](https://narthaki.com/info/rev21/rev2585.html) · [Narthaki preview](https://narthaki.com/info/prv21/prv1422.html)"
          }
         }
        ]
@@ -6769,7 +6769,7 @@
        "key": "research/dma-videos/t3",
        "kind": "text",
        "what": "Text",
-       "value": "Promotional films and the blessing of Guru Dr. Padma Subrahmanyam \u2014 documenting the birth of a new movement vocabulary."
+       "value": "Promotional films and the blessing of Guru Dr. Padma Subrahmanyam — documenting the birth of a new movement vocabulary."
       }
      ],
      "lists": []
@@ -6828,7 +6828,7 @@
          "key": "research/dma-contact/1/3",
          "show": true,
          "cells": {
-          "Text": "DMA is also part of Abhinava Dance School training programs alongside Bharatanatyam, Kathak, and Natyashastra Karanas. [View school programmes \u2192](school.html)"
+          "Text": "DMA is also part of Abhinava Dance School training programs alongside Bharatanatyam, Kathak, and Natyashastra Karanas. [View school programmes →](school.html)"
          }
         }
        ]
@@ -6975,11 +6975,11 @@
           "Photo description": "Padmavibhushan Dr. Padma Subrahmanyam",
           "Video link": "https://www.youtube.com/watch?v=O5ICDRZ_E2w",
           "Video picture": "https://img.youtube.com/vi/O5ICDRZ_E2w/hqdefault.jpg",
-          "Video picture description": "Play video: Dr. Padma Subrahmanyam on Krishnaa \u2014 Fire to Frost",
+          "Video picture description": "Play video: Dr. Padma Subrahmanyam on Krishnaa — Fire to Frost",
           "Name": "Padmavibhushan Dr. Padma Subrahmanyam",
-          "Small heading": "3 July 2019 \u00b7 premiere of *Krishnaa \u2014 Fire to Frost*, Dayanand Sagar Auditorium",
-          "Quote": "\u201cTo bring the Mahabharata in dance is a Herculean task, which Nirupama and Rajendra have achieved. The concept was communicated beautifully and the choreography was unparalleled. I saw the true Bharata's Natya with all four abhinayas presented in an extraordinary manner.\u201d",
-          "Quote 2": "\u201cYou should take this production to every nook and corner of the earth because you are reinforcing the greatness of culture and heritage values.\u201d",
+          "Small heading": "3 July 2019 · premiere of *Krishnaa — Fire to Frost*, Dayanand Sagar Auditorium",
+          "Quote": "“To bring the Mahabharata in dance is a Herculean task, which Nirupama and Rajendra have achieved. The concept was communicated beautifully and the choreography was unparalleled. I saw the true Bharata's Natya with all four abhinayas presented in an extraordinary manner.”",
+          "Quote 2": "“You should take this production to every nook and corner of the earth because you are reinforcing the greatness of culture and heritage values.”",
           "About": "*Internationally reputed dancer and scholar, President of Nrithyodaya, Chennai. Recipient of the Padma Vibhushan, the Sangeet Natak Akademi's Akademi Ratna and the Fukuoka Asian Culture Prize.*"
          }
         },
@@ -6991,10 +6991,10 @@
           "Photo description": "Dr. Sudha Murty",
           "Video link": "https://www.youtube.com/watch?v=0dbYVDx17RA",
           "Video picture": "https://img.youtube.com/vi/0dbYVDx17RA/hqdefault.jpg",
-          "Video picture description": "Play video: Dr. Sudha Murty on Krishnaa \u2014 Fire to Frost",
+          "Video picture description": "Play video: Dr. Sudha Murty on Krishnaa — Fire to Frost",
           "Name": "Dr. Sudha Murty",
-          "Small heading": "5 July 2019 \u00b7 special presentation of *Krishnaa \u2014 Fire to Frost*, Dayanand Sagar Auditorium",
-          "Quote": "\u201cIn general, women face a lot of challenges in their life but when we see the great difficulties faced by epic characters like Draupadi, it inspires us to deal with our troubles better. The saga of Draupadi was brought to life by Abhinava Dance Company in a grand manner even better than what I had imagined. The music, dance, costume, lighting, and the performance of the artistes touched my heart.\u201d",
+          "Small heading": "5 July 2019 · special presentation of *Krishnaa — Fire to Frost*, Dayanand Sagar Auditorium",
+          "Quote": "“In general, women face a lot of challenges in their life but when we see the great difficulties faced by epic characters like Draupadi, it inspires us to deal with our troubles better. The saga of Draupadi was brought to life by Abhinava Dance Company in a grand manner even better than what I had imagined. The music, dance, costume, lighting, and the performance of the artistes touched my heart.”",
           "Quote 2": "",
           "About": "*Educator, author, philanthropist and former chairperson of the Infosys Foundation; nominated Member of Parliament in 2024.*"
          }
@@ -7009,9 +7009,9 @@
           "Video picture": "",
           "Video picture description": "",
           "Name": "Dr. Veena Bannanje",
-          "Small heading": "11 December 2021 \u00b7 *Krishnaa \u2014 Fire to Frost*, organized by Bannanje Pratishthaana, Dayanand Sagar Auditorium, Bangalore",
-          "Quote": "\u201cI, Veena Bannanje, the founder of the Bannanje Prathishtana, have organized Abhinava Dance Company's production twice, once in Bangalore and once in my village, Kalhalli. Witnessing this big scale production presented by the wonderful team was truly remarkable. Each artist brought profound and impactful artistry to the forefront, taking on multiple roles and characters from the epic.\u201d",
-          "Quote 2": "\u201cInnovative and remarkable, the technique employed to transport the Mahabharata era onto the modern stage is nothing short of mesmerizing. With each scene, the performance delves deep into the human experience, mirroring Draupadi's poignant life that tug at the heartstrings. It's an odyssey, a passage from earthly trials to celestial realms. Abhinava Dance Company's production Krishnaa \u2014 Fire to Frost is an experience that must be savored at least once in a lifetime. Nirupama Rajendra's portrayal of Draupadi's unwavering devotion, resilience, and elegance are brought to life with such vividness that it leaves an indelible mark on the soul. Their choreography, a symphony of movement and emotion, weaves seamlessly with the interplay of light and sound, creating a tapestry of enchantment that captivates the senses. To miss the production Krishnaa is to deny oneself an encounter with the sublime.\u201d",
+          "Small heading": "11 December 2021 · *Krishnaa — Fire to Frost*, organized by Bannanje Pratishthaana, Dayanand Sagar Auditorium, Bangalore",
+          "Quote": "“I, Veena Bannanje, the founder of the Bannanje Prathishtana, have organized Abhinava Dance Company's production twice, once in Bangalore and once in my village, Kalhalli. Witnessing this big scale production presented by the wonderful team was truly remarkable. Each artist brought profound and impactful artistry to the forefront, taking on multiple roles and characters from the epic.”",
+          "Quote 2": "“Innovative and remarkable, the technique employed to transport the Mahabharata era onto the modern stage is nothing short of mesmerizing. With each scene, the performance delves deep into the human experience, mirroring Draupadi's poignant life that tug at the heartstrings. It's an odyssey, a passage from earthly trials to celestial realms. Abhinava Dance Company's production Krishnaa — Fire to Frost is an experience that must be savored at least once in a lifetime. Nirupama Rajendra's portrayal of Draupadi's unwavering devotion, resilience, and elegance are brought to life with such vividness that it leaves an indelible mark on the soul. Their choreography, a symphony of movement and emotion, weaves seamlessly with the interplay of light and sound, creating a tapestry of enchantment that captivates the senses. To miss the production Krishnaa is to deny oneself an encounter with the sublime.”",
           "About": "*Scholar, philosopher and orator with an enormous body of work in Kannada literature; recipient of the Kannada Sahitya Academy award.*"
          }
         },
@@ -7025,9 +7025,9 @@
           "Video picture": "",
           "Video picture description": "",
           "Name": "Shri Arjun Bharadwaj",
-          "Small heading": "11 December 2021 \u00b7 Dayanand Sagar Auditorium",
-          "Quote": "\u201cIt has been a great pleasure and privilege to have been associated with the Abhinava Dance Company for the last decade. I have been fortunate to have witnessed four times the staging of one of their most fabulous productions named Krishnaa \u2014 From Fire to Frost. The theme derives its inspiration from the grandest epic of India, the Mahabharata, and sketches the emotional landscape of Draupadi, the heroine of the epic. The choreographers, Smt. Nirupama Rajendra and Sri. T D Rajendra, have spatiotemporally recreated the episodes of the epic with such nuances that every movement is filled with suggestions and metaphors. The internationally renowned dancer duo are known for their exquisite choreographies which are rooted in traditional Indian theatre, but have a global appeal \u2014 their choreographies are a rare blend of the ancient and the modern, classical and the contemporary, material and the spiritual. The production Krishnaa aesthetically blends the grammar of many dance and drama forms of India. Watching the production not only entertains but also educates the audience on universal human values.\u201d",
-          "Quote 2": "\u201cI have written a detailed review of the first staging of the production in July 2019, published in a reputed journal, [Narthaki.com](https://narthaki.com/info/rev19/rev2388.html). Thereafter, I have watched the presentation three more times and I have always sought to watch it again and again. I am glad that the production has been invited for performances in the USA. My best wishes to the team.\u201d",
+          "Small heading": "11 December 2021 · Dayanand Sagar Auditorium",
+          "Quote": "“It has been a great pleasure and privilege to have been associated with the Abhinava Dance Company for the last decade. I have been fortunate to have witnessed four times the staging of one of their most fabulous productions named Krishnaa — From Fire to Frost. The theme derives its inspiration from the grandest epic of India, the Mahabharata, and sketches the emotional landscape of Draupadi, the heroine of the epic. The choreographers, Smt. Nirupama Rajendra and Sri. T D Rajendra, have spatiotemporally recreated the episodes of the epic with such nuances that every movement is filled with suggestions and metaphors. The internationally renowned dancer duo are known for their exquisite choreographies which are rooted in traditional Indian theatre, but have a global appeal — their choreographies are a rare blend of the ancient and the modern, classical and the contemporary, material and the spiritual. The production Krishnaa aesthetically blends the grammar of many dance and drama forms of India. Watching the production not only entertains but also educates the audience on universal human values.”",
+          "Quote 2": "“I have written a detailed review of the first staging of the production in July 2019, published in a reputed journal, [Narthaki.com](https://narthaki.com/info/rev19/rev2388.html). Thereafter, I have watched the presentation three more times and I have always sought to watch it again and again. I am glad that the production has been invited for performances in the USA. My best wishes to the team.”",
           "About": "*Author, researcher and translator with deep interest in classical literature, arts and philosophy; contributing editor of Prekshaa.*"
          }
         },
@@ -7041,9 +7041,9 @@
           "Video picture": "",
           "Video picture description": "",
           "Name": "Prof. Srinivasa Varakhedi",
-          "Small heading": "27 July 2023 \u00b7 organizer of the Yajnaseni conference, Kamani Auditorium, New Delhi",
-          "Quote": "\u201cThe uniqueness of Abhinava production creates an objective experience and leaves a long lasting impression in all viewers. It\u2019s an enthralling and appealing play with multilayered effects to each and everyone. It touches one\u2019s heart and reveals the inner Bhavan into many characters. Indian value system and cultures are reflected in these plays such a way the whole world will be transformed into a joyful theatre.\u201d",
-          "Quote 2": "\u201cI wish the team Abhinava all the best for their performance during US Trip 2024.\u201d",
+          "Small heading": "27 July 2023 · organizer of the Yajnaseni conference, Kamani Auditorium, New Delhi",
+          "Quote": "“The uniqueness of Abhinava production creates an objective experience and leaves a long lasting impression in all viewers. It’s an enthralling and appealing play with multilayered effects to each and everyone. It touches one’s heart and reveals the inner Bhavan into many characters. Indian value system and cultures are reflected in these plays such a way the whole world will be transformed into a joyful theatre.”",
+          "Quote 2": "“I wish the team Abhinava all the best for their performance during US Trip 2024.”",
           "About": "*Sanskrit scholar, academic and education administrator; Vice Chancellor of Central Sanskrit University, New Delhi.*"
          }
         }
@@ -7114,7 +7114,7 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=la7C2BQlbHY",
           "Video picture": "assets/web/client/ar-rahman-video-cover-2.jpg",
-          "Video picture description": "Play video: A. R. Rahman \u2014 a response",
+          "Video picture description": "Play video: A. R. Rahman — a response",
           "Caption": "A. R. Rahman"
          }
         },
@@ -7124,8 +7124,8 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=ofFFtQ9r9jU",
           "Video picture": "https://img.youtube.com/vi/ofFFtQ9r9jU/hqdefault.jpg",
-          "Video picture description": "Play video: Cyndy Garren \u2014 a director's response",
-          "Caption": "Cyndy Garren \u2014 Director"
+          "Video picture description": "Play video: Cyndy Garren — a director's response",
+          "Caption": "Cyndy Garren — Director"
          }
         },
         {
@@ -7134,7 +7134,7 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=IiZ3dlRurnk",
           "Video picture": "https://img.youtube.com/vi/IiZ3dlRurnk/hqdefault.jpg",
-          "Video picture description": "Play video: Saroj Khan \u2014 a response",
+          "Video picture description": "Play video: Saroj Khan — a response",
           "Caption": "Saroj Khan"
          }
         },
@@ -7144,7 +7144,7 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=nvh7fhiCd2U",
           "Video picture": "assets/web/client/tejasvi-surya-cover-2.jpg",
-          "Video picture description": "Play video: Tejasvi Surya \u2014 a response",
+          "Video picture description": "Play video: Tejasvi Surya — a response",
           "Caption": "Tejasvi Surya"
          }
         },
@@ -7154,7 +7154,7 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=aT0A4xAW9d8",
           "Video picture": "assets/web/client/vijay-prakash-thumbnail.jpg",
-          "Video picture description": "Play video: Vijay Prakash \u2014 a response",
+          "Video picture description": "Play video: Vijay Prakash — a response",
           "Caption": "Vijay Prakash"
          }
         },
@@ -7164,7 +7164,7 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=1xLrdXkcgyo",
           "Video picture": "https://img.youtube.com/vi/1xLrdXkcgyo/hqdefault.jpg",
-          "Video picture description": "Play video: School students \u2014 a response",
+          "Video picture description": "Play video: School students — a response",
           "Caption": "School students"
          }
         },
@@ -7174,7 +7174,7 @@
          "cells": {
           "Video link": "https://www.youtube.com/watch?v=uV77kNO8klU",
           "Video picture": "https://img.youtube.com/vi/uV77kNO8klU/hqdefault.jpg",
-          "Video picture description": "Play video: School students \u2014 a response (2)",
+          "Video picture description": "Play video: School students — a response (2)",
           "Caption": "School students II"
          }
         }
@@ -7214,7 +7214,7 @@
        "key": "credentials/credentials/t4",
        "kind": "text",
        "what": "Line under the title",
-       "value": "Excellence in performing arts \u00b7 National & international"
+       "value": "Excellence in performing arts · National & international"
       }
      ],
      "lists": []
@@ -7227,7 +7227,7 @@
        "key": "credentials/part-2/t1",
        "kind": "text",
        "what": "Text",
-       "value": "Abhinava Dance Company and its founders have received recognition from the highest institutions in India and abroad \u2014 spanning performance, education, broadcast, and philanthropy."
+       "value": "Abhinava Dance Company and its founders have received recognition from the highest institutions in India and abroad — spanning performance, education, broadcast, and philanthropy."
       }
      ],
      "lists": []
@@ -7286,10 +7286,10 @@
          "key": "credentials/awards-and-recognition/1/1",
          "show": true,
          "cells": {
-          "Small heading": "National \u00b7 2023",
+          "Small heading": "National · 2023",
           "Title": "Sangeet Natak Akademi Award",
           "Text": "We are supremely proud of our directors **Smt. Nirupama Rajendra** and **T.D. Rajendra** who were conferred with the Sangeet Natak Akademi Award 2023 from the Central Sangeet Natak Akademi, New Delhi.",
-          "Text 2": "Our honourable President of India, **Smt. Droupadi Murmu**, conferred the award in a special ceremony on **6th March** at Vigyan Bhawan, New Delhi. India's highest honour in the performing arts \u2014 recognizing sustained work of the highest professional order through performances, teaching and scholarship."
+          "Text 2": "Our honourable President of India, **Smt. Droupadi Murmu**, conferred the award in a special ceremony on **6th March** at Vigyan Bhawan, New Delhi. India's highest honour in the performing arts — recognizing sustained work of the highest professional order through performances, teaching and scholarship."
          }
         },
         {
@@ -7298,7 +7298,7 @@
          "cells": {
           "Small heading": "State",
           "Title": "Karnataka Kalashree",
-          "Text": "State recognition for excellence in performing arts \u2014 honouring Nirupama & Rajendra's contribution to Karnataka's classical dance heritage.",
+          "Text": "State recognition for excellence in performing arts — honouring Nirupama & Rajendra's contribution to Karnataka's classical dance heritage.",
           "Text 2": ""
          }
         },
@@ -7308,7 +7308,7 @@
          "cells": {
           "Small heading": "International Tour",
           "Title": "Oklahoma Governor Commendation",
-          "Text": "Recognition during US touring performances \u2014 acknowledging Abhinava Dance Company's role in sharing Indian classical art with American audiences.",
+          "Text": "Recognition during US touring performances — acknowledging Abhinava Dance Company's role in sharing Indian classical art with American audiences.",
           "Text 2": ""
          }
         }
@@ -7353,8 +7353,8 @@
          "show": true,
          "cells": {
           "Photo": "assets/web/client/award-attendance.jpg",
-          "Photo description": "U.S. Krishna Rao \u2013 Chandrabhagadevi Couple Award being conferred",
-          "Title": "U.S. Krishna Rao \u2013 Chandrabhagadevi Couple Award"
+          "Photo description": "U.S. Krishna Rao – Chandrabhagadevi Couple Award being conferred",
+          "Title": "U.S. Krishna Rao – Chandrabhagadevi Couple Award"
          }
         },
         {
@@ -7401,7 +7401,7 @@
          "key": "credentials/awards-and-recognition/3/1",
          "show": true,
          "cells": {
-          "Item": "Governor\u2019s Commendation for outstanding contribution to Indian Dance \u2014 Oklahoma, 2008"
+          "Item": "Governor’s Commendation for outstanding contribution to Indian Dance — Oklahoma, 2008"
          }
         },
         {
@@ -7422,7 +7422,7 @@
          "key": "credentials/awards-and-recognition/3/4",
          "show": true,
          "cells": {
-          "Item": "U.S. Krishna Rao \u2013 Chandrabhagadevi Couple Award by Attendance"
+          "Item": "U.S. Krishna Rao – Chandrabhagadevi Couple Award by Attendance"
          }
         },
         {
@@ -7478,7 +7478,7 @@
          "key": "credentials/awards-and-recognition/3/12",
          "show": true,
          "cells": {
-          "Item": "Natya Kala Ratna \u2014 Smt. Indira Gariyali award"
+          "Item": "Natya Kala Ratna — Smt. Indira Gariyali award"
          }
         },
         {
@@ -7537,7 +7537,7 @@
          "show": true,
          "cells": {
           "Small heading": "National",
-          "Text": "Central Sangeet Natak Akademi \u2014 Sangeet Natak Akademi Award"
+          "Text": "Central Sangeet Natak Akademi — Sangeet Natak Akademi Award"
          }
         },
         {
@@ -7545,7 +7545,7 @@
          "show": true,
          "cells": {
           "Small heading": "International",
-          "Text": "Indian Council for Cultural Relations (ICCR) \u2014 Outstanding Category"
+          "Text": "Indian Council for Cultural Relations (ICCR) — Outstanding Category"
          }
         },
         {
@@ -7553,7 +7553,7 @@
          "show": true,
          "cells": {
           "Small heading": "Broadcast",
-          "Text": "Doordarshan Kendra \u2014 national coverage of ADC productions \u00b7 A Top Artist"
+          "Text": "Doordarshan Kendra — national coverage of ADC productions · A Top Artist"
          }
         },
         {
@@ -7561,7 +7561,7 @@
          "show": true,
          "cells": {
           "Small heading": "State",
-          "Text": "Karnataka Kalashree \u2014 state recognition for performing arts excellence"
+          "Text": "Karnataka Kalashree — state recognition for performing arts excellence"
          }
         },
         {
@@ -7608,7 +7608,7 @@
        "key": "gallery/gallery/t4",
        "kind": "text",
        "what": "Line under the title",
-       "value": "Performances \u00b7 Productions \u00b7 School \u00b7 Research"
+       "value": "Performances · Productions · School · Research"
       }
      ],
      "lists": []
@@ -7633,28 +7633,28 @@
         "type": "image",
         "src": "assets/web/client/gallery/gallery-4.jpg",
         "shape": "tall",
-        "caption": "Rama Katha Vismaya \u2014 Rama, Sita and Lakshmana"
+        "caption": "Rama Katha Vismaya — Rama, Sita and Lakshmana"
        },
        {
         "show": true,
         "type": "image",
         "src": "assets/web/client/gallery/gallery-2.jpg",
         "shape": "wide",
-        "caption": "Rama Katha Vismaya \u2014 the forest"
+        "caption": "Rama Katha Vismaya — the forest"
        },
        {
         "show": true,
         "type": "image",
         "src": "assets/web/client/gallery/gallery-bts.jpg",
         "shape": "tall",
-        "caption": "Behind the scenes \u2014 getting ready"
+        "caption": "Behind the scenes — getting ready"
        },
        {
         "show": true,
         "type": "image",
         "src": "assets/web/client/gallery/gallery-3.jpg",
         "shape": "wide",
-        "caption": "Rama Katha Vismaya \u2014 the birds"
+        "caption": "Rama Katha Vismaya — the birds"
        },
        {
         "show": true,
@@ -7668,7 +7668,7 @@
         "type": "image",
         "src": "assets/web/client/gallery/gallery-bts-2.jpg",
         "shape": "wide",
-        "caption": "Behind the scenes \u2014 the jewellery"
+        "caption": "Behind the scenes — the jewellery"
        },
        {
         "show": true,
