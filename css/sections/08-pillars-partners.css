@@ -60,6 +60,11 @@
     color: var(--navy);
   }
 
+  .alt-film__lead em {
+    font-style: normal;
+    color: var(--gold-deep);
+  }
+
   .alt-film__text {
     max-width: 62ch;
     margin: 0 auto var(--space-lg);
