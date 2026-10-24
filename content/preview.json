@@ -1252,13 +1252,13 @@
        "key": "index/content-style-performance/t3",
        "kind": "text",
        "what": "Text",
-       "value": "Main sentence about the film \u2014 to come from the client."
+       "value": "Where the *Karanas* Come Home"
       },
       {
        "key": "index/content-style-performance/t4",
        "kind": "text",
        "what": "Text",
-       "value": "A longer sentence in body text introducing the video \u2014 to come from the client."
+       "value": "In a South Indian temple, Natyashastra movements find their original home. Watch how Natyashastra karanas are offered as both technique and prayer \u2014 precise, luminous, and deeply still."
       },
       {
        "key": "index/content-style-performance/t5",
@@ -8436,5 +8436,5 @@
    ]
   }
  },
- "by": "learn@jagli.com (home film)"
+ "by": "learn@jagli.com (home film text)"
 }
