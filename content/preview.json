@@ -1247,6 +1247,31 @@
        "kind": "text",
        "what": "Heading",
        "value": "Content \u00b7 Style \u00b7 Performance"
+      },
+      {
+       "key": "index/content-style-performance/t3",
+       "kind": "text",
+       "what": "Text",
+       "value": "Main sentence about the film \u2014 to come from the client."
+      },
+      {
+       "key": "index/content-style-performance/t4",
+       "kind": "text",
+       "what": "Text",
+       "value": "A longer sentence in body text introducing the video \u2014 to come from the client."
+      },
+      {
+       "key": "index/content-style-performance/t5",
+       "kind": "video",
+       "what": "Video link",
+       "value": "https://www.youtube.com/watch?v=X4nPZB4uVTA"
+      },
+      {
+       "key": "index/content-style-performance/t6",
+       "kind": "photo",
+       "what": "Video picture",
+       "value": "assets/web/client/lasya-ranjini-thumbnail-edit.jpg",
+       "alt": "Play video: Lasya Ranjini"
       }
      ],
      "lists": [
@@ -8411,5 +8436,5 @@
    ]
   }
  },
- "by": "learn@jagli.com (press photos)"
+ "by": "learn@jagli.com (production photos)"
 }
