@@ -10,34 +10,34 @@ const INSTAGRAM_FEEDS = {
     "url": "https://www.instagram.com/nirupama_rajendra/",
     "posts": [
       {
-        "image": "assets/web/instagram/main/1.jpg?t=1792645627005",
+        "image": "assets/web/instagram/main/1.jpg?t=1792817644579",
+        "url": "https://www.instagram.com/reel/De1ANyZy_6-/",
+        "caption": "Children blossom into beautiful artists at Abhinava."
+      },
+      {
+        "image": "assets/web/instagram/main/2.jpg?t=1792817646076",
         "url": "https://www.instagram.com/p/Dewx8bCSby3/",
         "caption": "This Vijayadashami, we celebrate new beginnings with a new digital home!"
       },
       {
-        "image": "assets/web/instagram/main/2.jpg?t=1792645629035",
+        "image": "assets/web/instagram/main/3.jpg?t=1792817646268",
         "url": "https://www.instagram.com/reel/DeuG4lTyB1y/",
         "caption": "Heart officially melted ! Watch the video …."
       },
       {
-        "image": "assets/web/instagram/main/3.jpg?t=1792645629637",
+        "image": "assets/web/instagram/main/4.jpg?t=1792817646779",
         "url": "https://www.instagram.com/reel/DelbA18yxU6/",
         "caption": "Our Saraswathi Puja @abhinavadanceschool with all the new entrants. May Goddess Saraswathi"
       },
       {
-        "image": "assets/web/instagram/main/4.jpg?t=1792645630566",
+        "image": "assets/web/instagram/main/5.jpg?t=1792817647754",
         "url": "https://www.instagram.com/p/DegmIEAyDn2/",
         "caption": "Rohini Prabhath, Apoorva Rao and Maanvi Ramprasad bring over two decades of dedicated Kath"
       },
       {
-        "image": "assets/web/instagram/main/5.jpg?t=1792645631771",
+        "image": "assets/web/instagram/main/6.jpg?t=1792817648692",
         "url": "https://www.instagram.com/p/DeYUY0wkqZz/",
         "caption": "Blessed was our Navarathri with dance celebrations where 500 dancers of our institution @a"
-      },
-      {
-        "image": "assets/web/instagram/main/6.jpg?t=1792645632104",
-        "url": "https://www.instagram.com/reel/DeVbA0Hy85c/",
-        "caption": "Navarathra is going to be soaking in the joy of offering our art to the divine. Starting i"
       }
     ]
   },

@@ -90,7 +90,8 @@
 
     function update() {
       const n = boxes.filter((b) => b.checked).length;
-      count.textContent = ` — ${n} of ${MAX} chosen (${items.length} to choose from)`;
+      const logos = items.filter((it) => /logo/i.test(it.name)).length, photos = items.length - logos;
+      count.textContent = ` — ${n} of ${MAX} chosen (${photos} photos${logos ? " and the logo" : ""})`;
       boxes.forEach((b) => { b.disabled = !b.checked && n >= MAX; b.closest(".photo-picker__item").classList.toggle("is-off", b.disabled); });
       go.disabled = n === 0;
       go.textContent = n ? `Download ${n} as a zip` : "Download";
