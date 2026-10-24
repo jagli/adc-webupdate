@@ -5,7 +5,10 @@ window.ADC_PRODUCTIONS = [
   {
     "slug": "rama-katha-vismaya",
     "name": "Rama Katha Vismaya",
-    "poster": "assets/web/client/production-rkv.jpg"
+    "poster": "assets/web/client/production-rkv.jpg",
+    "photos": [
+      "assets/web/images/productions/rama-katha-vismaya/01-rama-katha-vismaya-4x3.jpg"
+    ]
   },
   {
     "slug": "krishnaa-fire-to-frost",
@@ -20,22 +23,34 @@ window.ADC_PRODUCTIONS = [
   {
     "slug": "rasalila",
     "name": "Rasalila",
-    "poster": "assets/web/client/production-rasalila.jpg"
+    "poster": "assets/web/client/production-rasalila.jpg",
+    "photos": [
+      "assets/web/images/productions/rasalila/01-rasalila-4x3.jpg"
+    ]
   },
   {
     "slug": "sambhrama",
     "name": "Sambhrama",
-    "poster": "assets/web/client/production-sambrama.jpg"
+    "poster": "assets/web/client/production-sambrama.jpg",
+    "photos": [
+      "assets/web/images/productions/sambhrama/01-sambhrama-4x3.jpg"
+    ]
   },
   {
     "slug": "jugalbandi",
     "name": "Jugalbandi",
-    "poster": "assets/web/client/production-jugalbandhi-2.jpg"
+    "poster": "assets/web/client/production-jugalbandhi-2.jpg",
+    "photos": [
+      "assets/web/images/productions/jugalbandi/01-jugalbandi-4x3.jpg"
+    ]
   },
   {
     "slug": "laya-lasya",
     "name": "Laya Lasya",
-    "poster": "assets/web/client/production-laya-lasya.jpg"
+    "poster": "assets/web/client/production-laya-lasya.jpg",
+    "photos": [
+      "assets/web/images/productions/laya-lasya/01-laya-lasya-4x3.jpg"
+    ]
   },
   {
     "slug": "shakunthala",
@@ -72,47 +87,74 @@ window.ADC_PRODUCTIONS = [
   {
     "slug": "abhang",
     "name": "Abhang",
-    "poster": "assets/web/client/production-abhang.jpg"
+    "poster": "assets/web/client/production-abhang.jpg",
+    "photos": [
+      "assets/web/images/productions/abhang/01-abhang-4x3.jpg"
+    ]
   },
   {
     "slug": "nature-abhisaar",
     "name": "Nature Abhisaar",
-    "poster": "assets/web/client/production-nature-abhisaar.jpg"
+    "poster": "assets/web/client/production-nature-abhisaar.jpg",
+    "photos": [
+      "assets/web/images/productions/nature-abhisaar/01-nature-abhisaar-4x3.jpg"
+    ]
   },
   {
     "slug": "lasya-ranjini",
     "name": "Lasya Ranjini",
-    "poster": "assets/web/client/production-lasya-ranjini.jpg"
+    "poster": "assets/web/client/production-lasya-ranjini.jpg",
+    "photos": [
+      "assets/web/images/productions/lasya-ranjini/01-lasya-ranjini-4x3.jpg"
+    ]
   },
   {
     "slug": "katha-kirthan",
     "name": "Katha Kirthan",
-    "poster": "assets/web/client/production-kathakiran.jpg"
+    "poster": "assets/web/client/production-kathakiran.jpg",
+    "photos": [
+      "assets/web/images/productions/katha-kirthan/01-katha-kirthan-4x3.jpg"
+    ]
   },
   {
     "slug": "vimaanayana",
     "name": "Vimaanayana",
-    "poster": "assets/web/client/production-vimaanayana.jpg"
+    "poster": "assets/web/client/production-vimaanayana.jpg",
+    "photos": [
+      "assets/web/images/productions/vimaanayana/01-vimaanayana-4x3.jpg"
+    ]
   },
   {
     "slug": "angahara",
     "name": "Angahara",
-    "poster": "assets/web/client/production-angahara-2.jpg"
+    "poster": "assets/web/client/production-angahara-2.jpg",
+    "photos": [
+      "assets/web/images/productions/angahara/01-angahara-4x3.jpg"
+    ]
   },
   {
     "slug": "sringara-rama",
     "name": "Sringara Rama",
-    "poster": "assets/web/client/production-shringara-rama.jpg"
+    "poster": "assets/web/client/production-shringara-rama.jpg",
+    "photos": [
+      "assets/web/images/productions/sringara-rama/01-sringara-rama-4x3.jpg"
+    ]
   },
   {
     "slug": "sankirthan",
     "name": "Sankirthan",
-    "poster": "assets/web/client/production-sankeerthan.jpg"
+    "poster": "assets/web/client/production-sankeerthan.jpg",
+    "photos": [
+      "assets/web/images/productions/sankirthan/01-sankirthan-4x3.jpg"
+    ]
   },
   {
     "slug": "athma-soundarya",
     "name": "Athma Soundarya",
-    "poster": "assets/web/client/production-beauty-beyond-the-body.jpg"
+    "poster": "assets/web/client/production-beauty-beyond-the-body.jpg",
+    "photos": [
+      "assets/web/images/productions/athma-soundarya/01-athma-soundarya-4x3.jpg"
+    ]
   },
   {
     "slug": "krishna-karnamrutham",
@@ -132,7 +174,10 @@ window.ADC_PRODUCTIONS = [
   {
     "slug": "no-strings-attached",
     "name": "No Strings Attached",
-    "poster": "assets/web/client/production-no-strings-attached-2.jpg"
+    "poster": "assets/web/client/production-no-strings-attached-2.jpg",
+    "photos": [
+      "assets/web/images/productions/no-strings-attached/01-no-strings-attached-4x3.jpg"
+    ]
   },
   {
     "slug": "bhanika",
@@ -142,27 +187,42 @@ window.ADC_PRODUCTIONS = [
   {
     "slug": "kadam-kadam",
     "name": "Kadam Kadam",
-    "poster": "assets/web/client/production-kadam-kadam.jpg"
+    "poster": "assets/web/client/production-kadam-kadam.jpg",
+    "photos": [
+      "assets/web/images/productions/kadam-kadam/01-kadam-kadam-4x3.jpg"
+    ]
   },
   {
     "slug": "tadha",
     "name": "Tadha",
-    "poster": "assets/web/client/production-ta-dha.jpg"
+    "poster": "assets/web/client/production-ta-dha.jpg",
+    "photos": [
+      "assets/web/images/productions/tadha/01-tadha-4x3.jpg"
+    ]
   },
   {
     "slug": "kathakitathom",
     "name": "Kathakitathom",
-    "poster": "assets/web/client/production-kathakitathom.jpg"
+    "poster": "assets/web/client/production-kathakitathom.jpg",
+    "photos": [
+      "assets/web/images/productions/kathakitathom/01-kathakitathom-4x3.jpg"
+    ]
   },
   {
     "slug": "varshaabhisarika",
     "name": "Varshaabhisarika",
-    "poster": "assets/web/client/production-varshabhisarika.jpg"
+    "poster": "assets/web/client/production-varshabhisarika.jpg",
+    "photos": [
+      "assets/web/images/productions/varshaabhisarika/01-varshaabhisarika-4x3.jpg"
+    ]
   },
   {
     "slug": "samaagama",
     "name": "Samaagama",
-    "poster": "assets/web/client/production-samaagama.jpg"
+    "poster": "assets/web/client/production-samaagama.jpg",
+    "photos": [
+      "assets/web/images/productions/samaagama/01-samaagama-4x3.jpg"
+    ]
   },
   {
     "slug": "silver-to-silicon",
@@ -172,7 +232,10 @@ window.ADC_PRODUCTIONS = [
   {
     "slug": "vijayanagara-vyjayantha",
     "name": "Vijayanagara Vyjayantha",
-    "poster": "assets/web/client/production-vijayanagara-vyjayantha.jpg"
+    "poster": "assets/web/client/production-vijayanagara-vyjayantha.jpg",
+    "photos": [
+      "assets/web/images/productions/vijayanagara-vyjayantha/01-vijayanagara-vyjayantha-4x3.jpg"
+    ]
   },
   {
     "slug": "angikam",
@@ -187,16 +250,25 @@ window.ADC_PRODUCTIONS = [
   {
     "slug": "hari-hara",
     "name": "Hari Hara",
-    "poster": "assets/web/client/production-hari-hara.jpg"
+    "poster": "assets/web/client/production-hari-hara.jpg",
+    "photos": [
+      "assets/web/images/productions/hari-hara/01-hari-hara-4x3.jpg"
+    ]
   },
   {
     "slug": "leela",
     "name": "Leela",
-    "poster": "assets/web/client/production-leela.jpg"
+    "poster": "assets/web/client/production-leela.jpg",
+    "photos": [
+      "assets/web/images/productions/leela/01-leela-4x3.jpg"
+    ]
   },
   {
     "slug": "bhajan",
     "name": "Bhajan",
-    "poster": "assets/web/client/production-bhajan.jpg"
+    "poster": "assets/web/client/production-bhajan.jpg",
+    "photos": [
+      "assets/web/images/productions/bhajan/01-bhajan-4x3.jpg"
+    ]
   }
 ];

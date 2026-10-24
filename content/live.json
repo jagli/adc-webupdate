@@ -1247,6 +1247,31 @@
        "kind": "text",
        "what": "Heading",
        "value": "Content · Style · Performance"
+      },
+      {
+       "key": "index/content-style-performance/t3",
+       "kind": "text",
+       "what": "Text",
+       "value": "Main sentence about the film — to come from the client."
+      },
+      {
+       "key": "index/content-style-performance/t4",
+       "kind": "text",
+       "what": "Text",
+       "value": "A longer sentence in body text introducing the video — to come from the client."
+      },
+      {
+       "key": "index/content-style-performance/t5",
+       "kind": "video",
+       "what": "Video link",
+       "value": "https://www.youtube.com/watch?v=X4nPZB4uVTA"
+      },
+      {
+       "key": "index/content-style-performance/t6",
+       "kind": "photo",
+       "what": "Video picture",
+       "value": "assets/web/client/lasya-ranjini-thumbnail-edit.jpg",
+       "alt": "Play video: Lasya Ranjini"
       }
      ],
      "lists": [

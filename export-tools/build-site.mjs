@@ -17,7 +17,7 @@ import { site, pageFile } from "./site.config.mjs";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 const OUT = path.join(ROOT, "dist");
-const ASSET_VERSION = "285";
+const ASSET_VERSION = "286";
 const LIVE = !process.argv.includes("--test");
 
 /** What is published comes from site.config.mjs: the same lists every other tool reads. */

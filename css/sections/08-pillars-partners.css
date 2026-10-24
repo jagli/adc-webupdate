@@ -44,6 +44,45 @@
     color: var(--navy);
   }
 
+  /* The film under the pillars (Home → Core Elements): a lead line, a body line, then the
+     video in the same ivory-and-gold frame as the cards. Added October 2026; pillars unchanged. */
+  .alt-film {
+    margin-top: var(--space-2xl);
+    text-align: center;
+  }
+
+  .alt-film__lead {
+    max-width: 40ch;
+    margin: 0 auto var(--space-sm);
+    font-family: var(--font-display);
+    font-size: var(--text-subtitle);
+    line-height: 1.25;
+    color: var(--navy);
+  }
+
+  .alt-film__text {
+    max-width: 62ch;
+    margin: 0 auto var(--space-lg);
+    font-size: var(--text-small);
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  /* the film's cover shows at full brightness (no dark wash, unlike other video tiles) */
+  .alt-film__media .s-video::after,
+  .alt-film__media .s-video:hover::after,
+  .alt-film__media .s-video:focus-visible::after {
+    background: transparent;
+  }
+
+  .alt-film__media {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border: var(--band-rule);
+    border-top: 3px solid var(--gold);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+  }
+
   /* ==========================================================================
      16. Partners (alt-partner-card)
      APPROVED by the client (July 2026). Burgundy band, tone-on-tone cards. Do not restyle.
