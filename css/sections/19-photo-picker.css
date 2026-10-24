@@ -1,0 +1,145 @@
+@layer sections {
+  /* ==========================================================================
+     Press photos picker (About → Press Kit → Photos & Logo)
+     The tile is a button that opens a window of previews; up to five can be ticked and
+     downloaded together as one zip.
+     ========================================================================== */
+
+  button.s-download {
+    width: 100%;
+    padding: 0;
+    font: inherit;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .photo-picker {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md);
+    background: rgba(10, 16, 28, 0.8);
+  }
+
+  .photo-picker[hidden] {
+    display: none;
+  }
+
+  .photo-picker__panel {
+    display: flex;
+    flex-direction: column;
+    width: min(960px, 100%);
+    max-height: 100%;
+    background: var(--ivory);
+    border: 1px solid var(--gold-bright);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  }
+
+  .photo-picker__head,
+  .photo-picker__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  .photo-picker__head b {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--gold-deep);
+  }
+
+  .photo-picker__count {
+    font-size: var(--text-small);
+    color: var(--ink-soft);
+  }
+
+  .photo-picker__close {
+    min-width: 44px;
+    min-height: 44px;
+    font: inherit;
+    color: var(--ink);
+    background: none;
+    border: 1px solid var(--gold-bright);
+    cursor: pointer;
+  }
+
+  .photo-picker__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--space-sm);
+    margin: 0;
+    padding: 0 var(--space-lg);
+    overflow: auto;
+    list-style: none;
+  }
+
+  .photo-picker__item {
+    position: relative;
+    display: block;
+    cursor: pointer;
+  }
+
+  .photo-picker__item img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 2px solid transparent;
+  }
+
+  .photo-picker__item input {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 20px;
+    height: 20px;
+    accent-color: var(--gold-deep);
+  }
+
+  .photo-picker__item input:checked ~ img,
+  .photo-picker__item:has(input:checked) img {
+    border-color: var(--gold-deep);
+  }
+
+  .photo-picker__item span {
+    display: block;
+    padding: 0.2em 0 0.4em;
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    overflow-wrap: anywhere;
+  }
+
+  .photo-picker__item.is-off {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .photo-picker__note {
+    font-size: var(--text-small);
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 560px) {
+    .photo-picker__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      padding: 0 var(--space-md);
+    }
+
+    .photo-picker__head,
+    .photo-picker__foot {
+      padding: var(--space-sm) var(--space-md);
+    }
+
+    .photo-picker__foot {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+}

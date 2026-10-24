@@ -471,7 +471,7 @@
             <p class="s-card__links"><a href="gallery.html">View gallery</a><a href="credentials.html">Credentials &amp; recognition</a></p>
           </article>
         </div>
-        <div class="s-downloads" aria-label="Press downloads">
+        <div class="s-downloads s-downloads--pair" aria-label="Press downloads">
           <a class="s-download" href="assets/web/press/abhinava-press-kit.pdf" download>
             <span class="s-download__cover"><img src="assets/web/press/covers/press-kit.jpg" alt="First page of the Abhinava Dance Company press kit" width="720" height="900" loading="lazy"><span class="s-download__badge">PDF</span></span>
             <span class="s-download__body">
@@ -480,23 +480,106 @@
               <span class="s-download__action">Download <span class="s-download__meta">68 KB</span></span>
             </span>
           </a>
-          <a class="s-download" href="assets/web/press/abhinava-press-reviews.pdf" download>
-            <span class="s-download__cover"><img src="assets/web/press/covers/press-reviews.jpg" alt="A newspaper review of Abhinava Dance Company" width="720" height="900" loading="lazy"><span class="s-download__badge">PDF</span></span>
-            <span class="s-download__body">
-              <span class="s-download__title">Press Reviews</span>
-              <span class="s-download__note">Selected reviews and features from the press</span>
-              <span class="s-download__action">Download <span class="s-download__meta">4 MB</span></span>
-            </span>
-          </a>
-          <a class="s-download" href="assets/web/press/abhinava-press-photos.zip" download>
-            <span class="s-download__cover"><img src="assets/web/press/covers/press-photos.jpg" alt="Four of the press photos of Abhinava Dance Company" width="720" height="900" loading="lazy"><span class="s-download__badge">ZIP</span></span>
+          <button type="button" class="s-download" data-photo-picker='[{"name":"2a1a2722","thumb":"assets/web/thumbs/press/photos/2a1a2722.jpg","files":["assets/web/press/photos/2a1a2722.jpg"]},{"name":"2a1a3169","thumb":"assets/web/thumbs/press/photos/2a1a3169.jpg","files":["assets/web/press/photos/2a1a3169.jpg"]},{"name":"abhang","thumb":"assets/web/thumbs/press/photos/abhang.jpg","files":["assets/web/press/photos/abhang.jpg"]},{"name":"abhisaar-1","thumb":"assets/web/thumbs/press/photos/abhisaar-1.jpg","files":["assets/web/press/photos/abhisaar-1.jpg"]},{"name":"abhisaar-3","thumb":"assets/web/thumbs/press/photos/abhisaar-3.jpg","files":["assets/web/press/photos/abhisaar-3.jpg"]},{"name":"bhanika2","thumb":"assets/web/thumbs/press/photos/bhanika2.jpg","files":["assets/web/press/photos/bhanika2.jpg"]},{"name":"dma2","thumb":"assets/web/thumbs/press/photos/dma2.jpg","files":["assets/web/press/photos/dma2.jpg"]},{"name":"dma9","thumb":"assets/web/thumbs/press/photos/dma9.jpg","files":["assets/web/press/photos/dma9.jpg"]},{"name":"nr-khajuraho","thumb":"assets/web/thumbs/press/photos/nr-khajuraho.jpg","files":["assets/web/press/photos/nr-khajuraho.jpg"]},{"name":"nr","thumb":"assets/web/thumbs/press/photos/nr.jpg","files":["assets/web/press/photos/nr.jpg"]},{"name":"nr1-101","thumb":"assets/web/thumbs/press/photos/nr1-101.jpg","files":["assets/web/press/photos/nr1-101.jpg"]},{"name":"nsa2","thumb":"assets/web/thumbs/press/photos/nsa2.jpg","files":["assets/web/press/photos/nsa2.jpg"]},{"name":"om-namo","thumb":"assets/web/thumbs/press/photos/om-namo.jpg","files":["assets/web/press/photos/om-namo.jpg"]},{"name":"orange-dress","thumb":"assets/web/thumbs/press/photos/orange-dress.jpg","files":["assets/web/press/photos/orange-dress.jpg"]},{"name":"raas1","thumb":"assets/web/thumbs/press/photos/raas1.jpg","files":["assets/web/press/photos/raas1.jpg"]},{"name":"samagama3","thumb":"assets/web/thumbs/press/photos/samagama3.jpg","files":["assets/web/press/photos/samagama3.jpg"]},{"name":"sampradaya-1","thumb":"assets/web/thumbs/press/photos/sampradaya-1.jpg","files":["assets/web/press/photos/sampradaya-1.jpg"]},{"name":"tadha-2","thumb":"assets/web/thumbs/press/photos/tadha-2.jpg","files":["assets/web/press/photos/tadha-2.jpg"]},{"name":"tadha-closeup","thumb":"assets/web/thumbs/press/photos/tadha-closeup.jpg","files":["assets/web/press/photos/tadha-closeup.jpg"]},{"name":"yugal-duet1","thumb":"assets/web/thumbs/press/photos/yugal-duet1.jpg","files":["assets/web/press/photos/yugal-duet1.jpg"]},{"name":"ADC logo (PNG + SVG)","thumb":"assets/web/thumbs/press/photos/abhinava-logo.jpg","files":["assets/web/press/photos/abhinava-logo.png","assets/web/press/photos/abhinava-logo.svg"]}]'>
+            <span class="s-download__cover"><img src="assets/web/press/covers/press-photos.jpg" alt="Four of the press photos of Abhinava Dance Company" width="720" height="900" loading="lazy"><span class="s-download__badge">PHOTOS</span></span>
             <span class="s-download__body">
               <span class="s-download__title">Photos &amp; Logo</span>
-              <span class="s-download__note">20 high-resolution photos and the ADC logo</span>
-              <span class="s-download__action">Download <span class="s-download__meta">10 MB</span></span>
+              <span class="s-download__note">20 high-resolution photos and the ADC logo — choose up to 5</span>
+              <span class="s-download__action">Choose &amp; download</span>
             </span>
-          </a>
+          </button>
         </div>
+      </div>
+    </section>
+
+    <!-- Press Reviews -->
+    <section class="s-split-text s-section--contained" id="press-reviews">
+      <div class="layout">
+        <span class="s-section__eyebrow">In the Press</span>
+        <h2 class="s-section__title">Press Reviews</h2>
+        <ul class="press-wall" data-press-wall>
+          <li class="press-card" data-pages="assets/web/press/reviews/narthaki-2026-09-28-1.jpg,assets/web/press/reviews/narthaki-2026-09-28-2.jpg,assets/web/press/reviews/narthaki-2026-09-28-3.jpg,assets/web/press/reviews/narthaki-2026-09-28-4.jpg,assets/web/press/reviews/narthaki-2026-09-28-5.jpg,assets/web/press/reviews/narthaki-2026-09-28-6.jpg,assets/web/press/reviews/narthaki-2026-09-28-7.jpg">
+            <button type="button" class="press-card__open" aria-label="Read: Rasaaradhanam — an exemplary tribute to the rasas">
+              <span class="press-card__mount"><img src="assets/web/press/reviews/covers/narthaki-2026-09-28.jpg" alt="Narthaki, 28 Sep 2026" width="600" height="750" loading="lazy"><span class="press-card__pages">7 pages</span></span>
+              <span class="press-card__paper">Narthaki</span>
+              <span class="press-card__title">Rasaaradhanam — an exemplary tribute to the rasas</span>
+              <span class="press-card__date">28 Sep 2026</span>
+            </button>
+          </li>
+          <li class="press-card" data-pages="assets/web/press/reviews/nie-city-2024-12-01-1.jpg,assets/web/press/reviews/nie-city-2024-12-01-2.jpg">
+            <button type="button" class="press-card__open" aria-label="Read: Where dynamism and innovation took the stage">
+              <span class="press-card__mount"><img src="assets/web/press/reviews/covers/nie-city-2024-12-01.jpg" alt="The New Indian Express · City Edition, 1 Dec 2024" width="600" height="750" loading="lazy"><span class="press-card__pages">2 pages</span></span>
+              <span class="press-card__paper">The New Indian Express · City Edition</span>
+              <span class="press-card__title">Where dynamism and innovation took the stage</span>
+              <span class="press-card__date">1 Dec 2024</span>
+            </button>
+          </li>
+          <li class="press-card" data-pages="assets/web/press/reviews/nie-event-2024-12-01-1.jpg">
+            <button type="button" class="press-card__open" aria-label="Read: Know your Devi — Nirupama Rajendra">
+              <span class="press-card__mount"><img src="assets/web/press/reviews/covers/nie-event-2024-12-01.jpg" alt="The New Indian Express · Event Xpress, 1 Dec 2024" width="600" height="750" loading="lazy"></span>
+              <span class="press-card__paper">The New Indian Express · Event Xpress</span>
+              <span class="press-card__title">Know your Devi — Nirupama Rajendra</span>
+              <span class="press-card__date">1 Dec 2024</span>
+            </button>
+          </li>
+          <li class="press-card" data-pages="assets/web/press/reviews/dh-2023-03-03-1.jpg">
+            <button type="button" class="press-card__open" aria-label="Read: Festival to celebrate spring this Sunday">
+              <span class="press-card__mount"><img src="assets/web/press/reviews/covers/dh-2023-03-03.jpg" alt="Deccan Herald, 3 Mar 2023" width="600" height="750" loading="lazy"></span>
+              <span class="press-card__paper">Deccan Herald</span>
+              <span class="press-card__title">Festival to celebrate spring this Sunday</span>
+              <span class="press-card__date">3 Mar 2023</span>
+            </button>
+          </li>
+          <li class="press-card" data-pages="assets/web/press/reviews/nie-indulge-2023-03-03-1.jpg">
+            <button type="button" class="press-card__open" aria-label="Read: Spring fling — Madanothsava is back">
+              <span class="press-card__mount"><img src="assets/web/press/reviews/covers/nie-indulge-2023-03-03.jpg" alt="The New Indian Express · Indulge, 3 Mar 2023" width="600" height="750" loading="lazy"></span>
+              <span class="press-card__paper">The New Indian Express · Indulge</span>
+              <span class="press-card__title">Spring fling — Madanothsava is back</span>
+              <span class="press-card__date">3 Mar 2023</span>
+            </button>
+          </li>
+          <li class="press-card" data-pages="assets/web/press/reviews/dh-2023-02-12-1.jpg">
+            <button type="button" class="press-card__open" aria-label="Read: Kathak stars">
+              <span class="press-card__mount"><img src="assets/web/press/reviews/covers/dh-2023-02-12.jpg" alt="Deccan Herald · Sunday Herald, 12 Feb 2023" width="600" height="750" loading="lazy"></span>
+              <span class="press-card__paper">Deccan Herald · Sunday Herald</span>
+              <span class="press-card__title">Kathak stars</span>
+              <span class="press-card__date">12 Feb 2023</span>
+            </button>
+          </li>
+          <li class="press-card" data-pages="assets/web/press/reviews/hitavada-2023-01-29-1.jpg,assets/web/press/reviews/hitavada-2023-01-29-2.jpg,assets/web/press/reviews/hitavada-2023-01-29-3.jpg">
+            <button type="button" class="press-card__open" aria-label="Read: Adding new dimensions to creativity">
+              <span class="press-card__mount"><img src="assets/web/press/reviews/covers/hitavada-2023-01-29.jpg" alt="The Hitavada · Nagpur City Line, 29 Jan 2023" width="600" height="750" loading="lazy"><span class="press-card__pages">3 pages</span></span>
+              <span class="press-card__paper">The Hitavada · Nagpur City Line</span>
+              <span class="press-card__title">Adding new dimensions to creativity</span>
+              <span class="press-card__date">29 Jan 2023</span>
+            </button>
+          </li>
+          <li class="press-card" data-pages="assets/web/press/reviews/nie-2020-02-17-1.jpg">
+            <button type="button" class="press-card__open" aria-label="Read: Rama Katha Vismaya — the Ramayana as a musical">
+              <span class="press-card__mount"><img src="assets/web/press/reviews/covers/nie-2020-02-17.jpg" alt="The New Indian Express, 17 Feb 2020" width="600" height="750" loading="lazy"></span>
+              <span class="press-card__paper">The New Indian Express</span>
+              <span class="press-card__title">Rama Katha Vismaya — the Ramayana as a musical</span>
+              <span class="press-card__date">17 Feb 2020</span>
+            </button>
+          </li>
+          <li class="press-card" data-pages="assets/web/press/reviews/nie-2020-02-08-1.jpg">
+            <button type="button" class="press-card__open" aria-label="Read: Spring in the city — Parva">
+              <span class="press-card__mount"><img src="assets/web/press/reviews/covers/nie-2020-02-08.jpg" alt="The New Indian Express · Bengaluru Express, 8 Feb 2020" width="600" height="750" loading="lazy"></span>
+              <span class="press-card__paper">The New Indian Express · Bengaluru Express</span>
+              <span class="press-card__title">Spring in the city — Parva</span>
+              <span class="press-card__date">8 Feb 2020</span>
+            </button>
+          </li>
+          <li class="press-card" data-pages="assets/web/press/reviews/nie-2018-10-23-1.jpg">
+            <button type="button" class="press-card__open" aria-label="Read: City plays host to a confluence of dance and music">
+              <span class="press-card__mount"><img src="assets/web/press/reviews/covers/nie-2018-10-23.jpg" alt="The New Indian Express, 23 Oct 2018" width="600" height="750" loading="lazy"></span>
+              <span class="press-card__paper">The New Indian Express</span>
+              <span class="press-card__title">City plays host to a confluence of dance and music</span>
+              <span class="press-card__date">23 Oct 2018</span>
+            </button>
+          </li>
+        </ul>
+        <p class="press-wall__more"><button type="button" class="btn btn--outline" aria-expanded="false">See all 10 reviews</button></p>
       </div>
     </section>
 
@@ -519,5 +602,7 @@
   <script src="js/chrome.js?v=285"></script>
   <script src="js/interactions.js?v=285"></script>
   <script src="js/main.js?v=285"></script>
+  <script src="js/press.js?v=285"></script>
+  <script src="js/photo-picker.js?v=285"></script>
 </body>
 </html>

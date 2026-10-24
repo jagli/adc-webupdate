@@ -8,6 +8,7 @@
 import { parse, select, outer, inner, walk } from "./html.mjs";
 import { extract, galleryRow } from "./model.mjs";
 import { escapeHtml, escapeAttr, normalise, decode } from "./light.mjs";
+import { bare } from "./model.mjs";
 import { PAGE_NAMES, PAGES, GLOBAL_FIELDS } from "./site.mjs";
 
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
@@ -23,7 +24,7 @@ function blockChanges(b0, b1) {
   for (const s of b1.slots) {
     const o = s0.get(s.key);
     if (!o) continue;
-    if (normalise(o.value) !== normalise(s.value)) out.push(s.kind === "photo" ? `${s.what} replaced` : s.kind === "photos" ? "Photos changed" : s.kind === "video" ? `${s.what} changed` : `${s.what} changed: “${short(s.value)}”`);
+    if (normalise(bare(o.value)) !== normalise(bare(s.value))) out.push(s.kind === "photo" ? `${s.what} replaced` : s.kind === "photos" ? "Photos changed" : s.kind === "video" ? `${s.what} changed` : `${s.what} changed: “${short(s.value)}”`);
     else if ((o.alt ?? "") !== (s.alt ?? "")) out.push(`${s.what} description changed`);
     else if ((o.href ?? "") !== (s.href ?? "")) out.push(`${s.what} link changed`);
   }

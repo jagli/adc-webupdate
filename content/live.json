@@ -3085,6 +3085,68 @@
        "kind": "text",
        "what": "Heading",
        "value": "Overview & Media"
+      },
+      {
+       "key": "about/press-kit/t3",
+       "kind": "photo",
+       "what": "Photo",
+       "value": "assets/web/press/covers/press-kit.jpg",
+       "alt": "First page of the Abhinava Dance Company press kit"
+      },
+      {
+       "key": "about/press-kit/t4",
+       "kind": "text",
+       "what": "Text",
+       "value": "PDF"
+      },
+      {
+       "key": "about/press-kit/t5",
+       "kind": "text",
+       "what": "Title",
+       "value": "Press Kit"
+      },
+      {
+       "key": "about/press-kit/t6",
+       "kind": "text",
+       "what": "Note",
+       "value": "Company overview, directors, productions and recognition"
+      },
+      {
+       "key": "about/press-kit/t7",
+       "kind": "text",
+       "what": "Details",
+       "value": "68 KB"
+      },
+      {
+       "key": "about/press-kit/t8",
+       "kind": "photo",
+       "what": "Photo",
+       "value": "assets/web/press/covers/press-photos.jpg",
+       "alt": "Four of the press photos of Abhinava Dance Company"
+      },
+      {
+       "key": "about/press-kit/t9",
+       "kind": "text",
+       "what": "Text",
+       "value": "PHOTOS"
+      },
+      {
+       "key": "about/press-kit/t10",
+       "kind": "text",
+       "what": "Title",
+       "value": "Photos & Logo"
+      },
+      {
+       "key": "about/press-kit/t11",
+       "kind": "text",
+       "what": "Note",
+       "value": "20 high-resolution photos and the ADC logo — choose up to 5"
+      },
+      {
+       "key": "about/press-kit/t12",
+       "kind": "text",
+       "what": "Text",
+       "value": "Choose & download"
       }
      ],
      "lists": [
@@ -3128,10 +3190,36 @@
          }
         }
        ]
+      }
+     ]
+    },
+    {
+     "key": "about/press-reviews",
+     "label": "Press Reviews",
+     "slots": [
+      {
+       "key": "about/press-reviews/t1",
+       "kind": "text",
+       "what": "Small heading",
+       "value": "In the Press"
       },
       {
-       "key": "about/press-kit/2",
-       "what": "Downloads",
+       "key": "about/press-reviews/t2",
+       "kind": "text",
+       "what": "Heading",
+       "value": "Press Reviews"
+      },
+      {
+       "key": "about/press-reviews/t3",
+       "kind": "text",
+       "what": "Text",
+       "value": "See all 10 reviews"
+      }
+     ],
+     "lists": [
+      {
+       "key": "about/press-reviews/1",
+       "what": "List",
        "columns": [
         {
          "what": "Photo",
@@ -3144,64 +3232,133 @@
          "link": false
         },
         {
+         "what": "Text 2",
+         "kind": "text",
+         "link": false
+        },
+        {
          "what": "Title",
          "kind": "text",
          "link": false
         },
         {
-         "what": "Note",
+         "what": "Text 3",
          "kind": "text",
-         "link": false
-        },
-        {
-         "what": "Details",
-         "kind": "text",
-         "link": false
-        },
-        {
-         "what": "Link or file",
-         "kind": "href",
          "link": false
         }
        ],
        "rows": [
         {
-         "key": "about/press-kit/2/1",
+         "key": "about/press-reviews/1/1",
          "show": true,
          "cells": {
-          "Photo": "assets/web/press/covers/press-kit.jpg",
-          "Photo description": "First page of the Abhinava Dance Company press kit",
-          "Text": "PDF",
-          "Title": "Press Kit",
-          "Note": "Company overview, directors, productions and recognition",
-          "Details": "68 KB",
-          "Link or file": "assets/web/press/abhinava-press-kit.pdf"
+          "Photo": "assets/web/press/reviews/covers/narthaki-2026-09-28.jpg",
+          "Photo description": "Narthaki, 28 Sep 2026",
+          "Text": "7 pages",
+          "Text 2": "Narthaki",
+          "Title": "Rasaaradhanam — an exemplary tribute to the rasas",
+          "Text 3": "28 Sep 2026"
          }
         },
         {
-         "key": "about/press-kit/2/2",
+         "key": "about/press-reviews/1/2",
          "show": true,
          "cells": {
-          "Photo": "assets/web/press/covers/press-reviews.jpg",
-          "Photo description": "A newspaper review of Abhinava Dance Company",
-          "Text": "PDF",
-          "Title": "Press Reviews",
-          "Note": "Selected reviews and features from the press",
-          "Details": "4 MB",
-          "Link or file": "assets/web/press/abhinava-press-reviews.pdf"
+          "Photo": "assets/web/press/reviews/covers/nie-city-2024-12-01.jpg",
+          "Photo description": "The New Indian Express · City Edition, 1 Dec 2024",
+          "Text": "2 pages",
+          "Text 2": "The New Indian Express · City Edition",
+          "Title": "Where dynamism and innovation took the stage",
+          "Text 3": "1 Dec 2024"
          }
         },
         {
-         "key": "about/press-kit/2/3",
+         "key": "about/press-reviews/1/3",
          "show": true,
          "cells": {
-          "Photo": "assets/web/press/covers/press-photos.jpg",
-          "Photo description": "Four of the press photos of Abhinava Dance Company",
-          "Text": "ZIP",
-          "Title": "Photos & Logo",
-          "Note": "20 high-resolution photos and the ADC logo",
-          "Details": "10 MB",
-          "Link or file": "assets/web/press/abhinava-press-photos.zip"
+          "Photo": "assets/web/press/reviews/covers/nie-event-2024-12-01.jpg",
+          "Photo description": "The New Indian Express · Event Xpress, 1 Dec 2024",
+          "Text": "The New Indian Express · Event Xpress",
+          "Title": "Know your Devi — Nirupama Rajendra",
+          "Text 2": "1 Dec 2024"
+         }
+        },
+        {
+         "key": "about/press-reviews/1/4",
+         "show": true,
+         "cells": {
+          "Photo": "assets/web/press/reviews/covers/dh-2023-03-03.jpg",
+          "Photo description": "Deccan Herald, 3 Mar 2023",
+          "Text": "Deccan Herald",
+          "Title": "Festival to celebrate spring this Sunday",
+          "Text 2": "3 Mar 2023"
+         }
+        },
+        {
+         "key": "about/press-reviews/1/5",
+         "show": true,
+         "cells": {
+          "Photo": "assets/web/press/reviews/covers/nie-indulge-2023-03-03.jpg",
+          "Photo description": "The New Indian Express · Indulge, 3 Mar 2023",
+          "Text": "The New Indian Express · Indulge",
+          "Title": "Spring fling — Madanothsava is back",
+          "Text 2": "3 Mar 2023"
+         }
+        },
+        {
+         "key": "about/press-reviews/1/6",
+         "show": true,
+         "cells": {
+          "Photo": "assets/web/press/reviews/covers/dh-2023-02-12.jpg",
+          "Photo description": "Deccan Herald · Sunday Herald, 12 Feb 2023",
+          "Text": "Deccan Herald · Sunday Herald",
+          "Title": "Kathak stars",
+          "Text 2": "12 Feb 2023"
+         }
+        },
+        {
+         "key": "about/press-reviews/1/7",
+         "show": true,
+         "cells": {
+          "Photo": "assets/web/press/reviews/covers/hitavada-2023-01-29.jpg",
+          "Photo description": "The Hitavada · Nagpur City Line, 29 Jan 2023",
+          "Text": "3 pages",
+          "Text 2": "The Hitavada · Nagpur City Line",
+          "Title": "Adding new dimensions to creativity",
+          "Text 3": "29 Jan 2023"
+         }
+        },
+        {
+         "key": "about/press-reviews/1/8",
+         "show": true,
+         "cells": {
+          "Photo": "assets/web/press/reviews/covers/nie-2020-02-17.jpg",
+          "Photo description": "The New Indian Express, 17 Feb 2020",
+          "Text": "The New Indian Express",
+          "Title": "Rama Katha Vismaya — the Ramayana as a musical",
+          "Text 2": "17 Feb 2020"
+         }
+        },
+        {
+         "key": "about/press-reviews/1/9",
+         "show": true,
+         "cells": {
+          "Photo": "assets/web/press/reviews/covers/nie-2020-02-08.jpg",
+          "Photo description": "The New Indian Express · Bengaluru Express, 8 Feb 2020",
+          "Text": "The New Indian Express · Bengaluru Express",
+          "Title": "Spring in the city — Parva",
+          "Text 2": "8 Feb 2020"
+         }
+        },
+        {
+         "key": "about/press-reviews/1/10",
+         "show": true,
+         "cells": {
+          "Photo": "assets/web/press/reviews/covers/nie-2018-10-23.jpg",
+          "Photo description": "The New Indian Express, 23 Oct 2018",
+          "Text": "The New Indian Express",
+          "Title": "City plays host to a confluence of dance and music",
+          "Text 2": "23 Oct 2018"
          }
         }
        ]

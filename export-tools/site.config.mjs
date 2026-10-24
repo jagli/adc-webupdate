@@ -41,7 +41,7 @@ export const site = {
   scripts: [
     "icons", "adc-images", "progressive-images", "chrome",
     "interactions", "main", "gallery", "instagram-data", "instagram",
-    "productions-data", "productions",
+    "productions-data", "productions", "press", "photo-picker",
   ],
 
   /** Scripts used only by the dev pages. */

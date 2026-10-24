@@ -69,7 +69,7 @@ const isTrack = (el) => classes(el).includes("s-mini__track");
 const PHOTOS_WHAT = "Photos (one per line)";
 /** A carousel's slides as lines: a photo's address, or a YouTube link for a video slide. */
 function trackValue(el) {
-  return el.children.map((c) => (c.tag === "img" ? c.attrs.src || "" : decode(c.attrs.href || ""))).filter(Boolean).join("\n");
+  return el.children.map((c) => (c.tag === "img" ? bare(c.attrs.src) : decode(c.attrs.href || ""))).filter(Boolean).join("\n");
 }
 
 const isVideo = (el) => el.tag === "a" && ("data-video" in el.attrs || classes(el).includes("s-video"));
@@ -96,7 +96,7 @@ function itemFields(src, item, skipSet) {
       return;
     }
     if (el.tag === "img") {
-      fields.push({ kind: "photo", what: isVideo(el.parent) ? "Video picture" : "Photo", el, value: el.attrs.src || "", alt: decode(el.attrs.alt || "") });
+      fields.push({ kind: "photo", what: isVideo(el.parent) ? "Video picture" : "Photo", el, value: bare(el.attrs.src), alt: decode(el.attrs.alt || "") });
       return;
     }
     if (isVideo(el)) fields.push({ kind: "video", what: "Video link", el, value: decode(el.attrs.href || "") });
@@ -177,7 +177,7 @@ export function extract(page, src) {
       }
       if (el.tag === "img") {
         const what = isVideo(el.parent) ? "Video picture" : classes(el.parent).includes("v-hero__media") ? "Top photo" : "Photo";
-        block.slots.push({ key: `${key}/t${++si}`, kind: "photo", what, el, value: el.attrs.src || "", alt: decode(el.attrs.alt || "") });
+        block.slots.push({ key: `${key}/t${++si}`, kind: "photo", what, el, value: bare(el.attrs.src), alt: decode(el.attrs.alt || "") });
         return;
       }
       if (isVideo(el)) block.slots.push({ key: `${key}/t${++si}`, kind: "video", what: "Video link", el, value: decode(el.attrs.href || "") });
@@ -237,6 +237,9 @@ export function toData(model) {
 
 /* ── writing back ───────────────────────────────────────────────────────── */
 
+/** A picture's address without the site's cache number ("…jpg?v=285"): the page keeps its own. */
+export const bare = (u) => String(u || "").replace(/\?v=\d+$/, "");
+
 function setAttr(openTag, name, value) {
   const re = new RegExp(`(\\s${name}\\s*=\\s*)("[^"]*"|'[^']*'|[^\\s>]+)`, "i");
   const v = `"${escapeAttr(value)}"`;
@@ -266,10 +269,10 @@ function fieldEdits(src, f, cell, base = 0) {
       const imgTpl = slides.find((c) => c.tag === "img");
       const vidTpl = slides.find((c) => c.tag === "a");
       const sep = slides.length > 1 ? src.slice(slides[0].end, slides[1].start) : "\n";
-      const byValue = new Map(slides.map((c) => [c.tag === "img" ? c.attrs.src : decode(c.attrs.href || ""), c]));
+      const byValue = new Map(slides.map((c) => [c.tag === "img" ? bare(c.attrs.src) : decode(c.attrs.href || ""), c]));
       const lines = normalise(cell.value).split("\n").map((x) => x.trim()).filter(Boolean);
       const out = lines.map((line) => {
-        const same = byValue.get(line);
+        const same = byValue.get(bare(line));
         if (same) return src.slice(same.start, same.end);
         const yt = (line.match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/) || [])[1];
         if (yt) {
@@ -303,7 +306,7 @@ function fieldEdits(src, f, cell, base = 0) {
   } else if (f.kind === "photo") {
     let open = src.slice(el.start, el.openEnd);
     const before = open;
-    if (cell.value && cell.value !== el.attrs.src) open = setAttr(open, "src", cell.value);
+    if (cell.value && bare(cell.value) !== bare(el.attrs.src)) open = setAttr(open, "src", cell.value);
     if (cell.alt !== undefined && cell.alt !== decode(el.attrs.alt || "")) open = setAttr(open, "alt", cell.alt);
     if (open !== before) edits.push([el.start - base, el.openEnd - base, open]);
   } else if (f.kind === "video") {
