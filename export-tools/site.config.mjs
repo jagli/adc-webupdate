@@ -20,7 +20,7 @@ export const site = {
 
   /** Files at the top of the site for search engines, published as they are (the live address only;
    *  the test site gets a robots.txt that keeps it out of search results, and no sitemap). */
-  searchFiles: ["robots.txt", "sitemap.xml"],
+  searchFiles: ["robots.txt", "sitemap.xml", "_redirects"],
 
   /** Pages for development only: checked by the tools, never published. */
   devPages: ["foundry"],

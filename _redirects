@@ -1,0 +1,75 @@
+# Old addresses from the previous websites that search engines still list → the page that replaces them.
+# 301 = moved for good. A rule never hides a page that exists (e.g. /gallery, /school, /support).
+
+# People (team, faculty, dancers, collaborators)
+/who-we-are              /about                 301
+/dancers                 /about#meet-the-team   301
+/faculty/*               /about#meet-the-team   301
+/our-team/*              /about#meet-the-team   301
+/collaborators/*         /about#meet-the-team   301
+/adithi-ashok-0          /about#meet-the-team   301
+/ajay-vijayendra         /about#meet-the-team   301
+/anand-behere            /about#meet-the-team   301
+/apoorva-b-rao           /about#meet-the-team   301
+/arjun-bharadwaj         /about#meet-the-team   301
+/arjun-bharadwaj-0       /about#meet-the-team   301
+/ashwin-j-prabhath-0     /about#meet-the-team   301
+/bhavana-parashar        /about#meet-the-team   301
+/dr-shoba-s-meera        /about#meet-the-team   301
+/harinishri-bt           /about#meet-the-team   301
+/indu-ramdas-0           /about#meet-the-team   301
+/maanvi-ramprasad        /about#meet-the-team   301
+/medhavini-varakhedi     /about#meet-the-team   301
+/meghana-varadaraju-0    /about#meet-the-team   301
+/pooja-arya              /about#meet-the-team   301
+/praveen-d-rao           /about#meet-the-team   301
+/pravin-ghodkindi        /about#meet-the-team   301
+/ranju-ramachandran-0    /about#meet-the-team   301
+/rohini-jayaram          /about#meet-the-team   301
+/rohini-s-prabhath       /about#meet-the-team   301
+/rohini-s-prabhath-0     /about#meet-the-team   301
+/santhosh-n              /about#meet-the-team   301
+/shreya-vatsa-0          /about#meet-the-team   301
+/smruthi-vishwanath      /about#meet-the-team   301
+/smruthi-vishwanath-1    /about#meet-the-team   301
+/sohini-karanth-0        /about#meet-the-team   301
+/tdsrinivas              /about#meet-the-team   301
+/sites/default/files/Nirupama-Rajendra-Directors-Bio.pdf  /about  301
+
+# Productions, shows and events
+/performance             /performances          301
+/performance/*           /performances          301
+/stage-production/*      /performances          301
+/stage-productions       /performances          301
+/upcoming-performances/* /performances          301
+/node/*                  /performances          301
+/abhimanyu               /performances          301
+/shakuntala              /performances          301
+/ta-dha                  /performances          301
+/krishnaa-fire-frost     /performances          301
+/padmashaali             /performances          301
+/under-the-culture-tree  /performances          301
+/special-events          /performances          301
+/corporate               /performances          301
+/innovation              /performances          301
+
+# School
+/school/*                /school                301
+/special-activities      /school                301
+/rangapravesha           /school                301
+/student-responses       /testimonials          301
+/show-response           /testimonials          301
+
+# Gallery, press, shop
+/gallery/*               /gallery               301
+/media                   /gallery               301
+/print-media             /credentials           301
+/online-media            /credentials           301
+/goodies                 /store                 301
+
+# Old website machinery (log-in, search, index.php)
+/index.php/*             /                      301
+/user                    /                      301
+/user/*                  /                      301
+/search/*                /                      301
+/filter/*                /                      301
