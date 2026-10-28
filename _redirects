@@ -54,14 +54,14 @@
 /innovation              /performances          301
 
 # School
-/school/*                /school                301
+/school/*                /school                301!
 /special-activities      /school                301
 /rangapravesha           /school                301
 /student-responses       /testimonials          301
 /show-response           /testimonials          301
 
 # Gallery, press, shop
-/gallery/*               /gallery               301
+/gallery/*               /gallery               301!
 /media                   /gallery               301
 /print-media             /credentials           301
 /online-media            /credentials           301
