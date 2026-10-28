@@ -3304,8 +3304,9 @@
           "Photo": "assets/web/press/reviews/covers/nie-event-2024-12-01.jpg",
           "Photo description": "The New Indian Express · Event Xpress, 1 Dec 2024",
           "Text": "The New Indian Express · Event Xpress",
+          "Text 2": "1 Dec 2024",
           "Title": "Know your Devi — Nirupama Rajendra",
-          "Text 2": "1 Dec 2024"
+          "Text 3": ""
          }
         },
         {
@@ -3315,8 +3316,9 @@
           "Photo": "assets/web/press/reviews/covers/dh-2023-03-03.jpg",
           "Photo description": "Deccan Herald, 3 Mar 2023",
           "Text": "Deccan Herald",
+          "Text 2": "3 Mar 2023",
           "Title": "Festival to celebrate spring this Sunday",
-          "Text 2": "3 Mar 2023"
+          "Text 3": ""
          }
         },
         {
@@ -3326,8 +3328,9 @@
           "Photo": "assets/web/press/reviews/covers/nie-indulge-2023-03-03.jpg",
           "Photo description": "The New Indian Express · Indulge, 3 Mar 2023",
           "Text": "The New Indian Express · Indulge",
+          "Text 2": "3 Mar 2023",
           "Title": "Spring fling — Madanothsava is back",
-          "Text 2": "3 Mar 2023"
+          "Text 3": ""
          }
         },
         {
@@ -3337,8 +3340,9 @@
           "Photo": "assets/web/press/reviews/covers/dh-2023-02-12.jpg",
           "Photo description": "Deccan Herald · Sunday Herald, 12 Feb 2023",
           "Text": "Deccan Herald · Sunday Herald",
+          "Text 2": "12 Feb 2023",
           "Title": "Kathak stars",
-          "Text 2": "12 Feb 2023"
+          "Text 3": ""
          }
         },
         {
@@ -3360,8 +3364,9 @@
           "Photo": "assets/web/press/reviews/covers/nie-2020-02-17.jpg",
           "Photo description": "The New Indian Express, 17 Feb 2020",
           "Text": "The New Indian Express",
+          "Text 2": "17 Feb 2020",
           "Title": "Rama Katha Vismaya — the Ramayana as a musical",
-          "Text 2": "17 Feb 2020"
+          "Text 3": ""
          }
         },
         {
@@ -3371,8 +3376,9 @@
           "Photo": "assets/web/press/reviews/covers/nie-2020-02-08.jpg",
           "Photo description": "The New Indian Express · Bengaluru Express, 8 Feb 2020",
           "Text": "The New Indian Express · Bengaluru Express",
+          "Text 2": "8 Feb 2020",
           "Title": "Spring in the city — Parva",
-          "Text 2": "8 Feb 2020"
+          "Text 3": ""
          }
         },
         {
@@ -3382,8 +3388,9 @@
           "Photo": "assets/web/press/reviews/covers/nie-2018-10-23.jpg",
           "Photo description": "The New Indian Express, 23 Oct 2018",
           "Text": "The New Indian Express",
+          "Text 2": "23 Oct 2018",
           "Title": "City plays host to a confluence of dance and music",
-          "Text 2": "23 Oct 2018"
+          "Text 3": ""
          }
         }
        ]
@@ -8416,18 +8423,21 @@
         "show": true,
         "type": "video",
         "src": "https://www.youtube.com/embed/N3tJrzU3XLk",
+        "shape": "wide",
         "caption": "DMA Promo I"
        },
        {
         "show": true,
         "type": "video",
         "src": "https://www.youtube.com/embed/FvRC3Q4h1Kw",
+        "shape": "wide",
         "caption": "DMA Promo II"
        },
        {
         "show": true,
         "type": "video",
         "src": "https://www.youtube.com/embed/tbbnvYsB2Jw",
+        "shape": "wide",
         "caption": "Guru Padma Subrahmanyam blessing DMA"
        }
       ]
