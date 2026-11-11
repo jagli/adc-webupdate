@@ -10,34 +10,34 @@ const INSTAGRAM_FEEDS = {
     "url": "https://www.instagram.com/nirupama_rajendra/",
     "posts": [
       {
-        "image": "assets/web/instagram/main/1.jpg?t=1793078604261",
-        "url": "https://www.instagram.com/p/De7czkDkhgq/",
-        "caption": "Even after 5000 yrs, the Divine Ecstasy of Lord Krishna’s Rasalila continues to enchant th"
+        "image": "assets/web/instagram/main/1.jpg?t=1794296225436",
+        "url": "https://www.instagram.com/reel/DfgxwTPSwpu/",
+        "caption": "An episode that gives us goosebumps even now !"
       },
       {
-        "image": "assets/web/instagram/main/2.jpg?t=1793078604498",
-        "url": "https://www.instagram.com/reel/De1ANyZy_6-/",
-        "caption": "Children blossom into beautiful artists at Abhinava."
+        "image": "assets/web/instagram/main/2.jpg?t=1794296225624",
+        "url": "https://www.instagram.com/reel/Dfb2n_2SxuE/",
+        "caption": "Watch our Next Gen Shine Bright …"
       },
       {
-        "image": "assets/web/instagram/main/3.jpg?t=1793078605862",
-        "url": "https://www.instagram.com/p/Dewx8bCSby3/",
-        "caption": "This Vijayadashami, we celebrate new beginnings with a new digital home!"
+        "image": "assets/web/instagram/main/3.jpg?t=1794296227513",
+        "url": "https://www.instagram.com/p/DfbXv2CEjli/",
+        "caption": "Few captures from yesterday’s Chakradhār."
       },
       {
-        "image": "assets/web/instagram/main/4.jpg?t=1793078605929",
-        "url": "https://www.instagram.com/reel/DeuG4lTyB1y/",
-        "caption": "Heart officially melted ! Watch the video …."
+        "image": "assets/web/instagram/main/4.jpg?t=1794296228396",
+        "url": "https://www.instagram.com/p/DfUAyDSkigK/",
+        "caption": "Today we remember with deep humility and gratitude — the day our Parama-Guru, the legendar"
       },
       {
-        "image": "assets/web/instagram/main/5.jpg?t=1793078605963",
-        "url": "https://www.instagram.com/reel/DelbA18yxU6/",
-        "caption": "Our Saraswathi Puja @abhinavadanceschool with all the new entrants. May Goddess Saraswathi"
+        "image": "assets/web/instagram/main/5.jpg?t=1794296228789",
+        "url": "https://www.instagram.com/reel/DfMUJLCy6F9/",
+        "caption": "ಕರ್ನಾಟಕ ರಾಜ್ಯೋತ್ಸವದ ಹಾರ್ದಿಕ ಶುಭಾಶಯಗಳು🙏"
       },
       {
-        "image": "assets/web/instagram/main/6.jpg?t=1793078606674",
-        "url": "https://www.instagram.com/p/DegmIEAyDn2/",
-        "caption": "Rohini Prabhath, Apoorva Rao and Maanvi Ramprasad bring over two decades of dedicated Kath"
+        "image": "assets/web/instagram/main/6.jpg?t=1794296228887",
+        "url": "https://www.instagram.com/reel/DfKotemyVfe/",
+        "caption": "Thank you @hosadiganthadigital  specially dear friend and exemplary artist - Shivu for thi"
       }
     ]
   },
