@@ -90,7 +90,13 @@ export async function resolveMedia(content, stage, { cache, log = () => {} } = {
 
   async function fix(value, where, kind = "photo") {
     const id = driveId(value);
-    if (!id) return value;
+    if (!id) {
+      // not a Drive link: it must be a web address or a photo the site already has
+      const v = String(value || "").trim();
+      if (v && !/^https?:\/\//.test(v) && !fs.existsSync(path.join(stage, v.split(/[?#]/)[0])))
+        problems.push(`${where}: “${v.slice(0, 60)}” is not a photo link — paste the Google Drive link of the photo (shared as “Anyone with the link”)`);
+      return value;
+    }
     if (isDriveFolder(value)) { problems.push(`${where}: a folder link was pasted where one file is expected — open the folder and copy the link of one file`); return value; }
     return (await fetchFile(id, drive[id]?.name, kind, where)) ?? value;
   }
