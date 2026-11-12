@@ -31,23 +31,6 @@
    "Show": "Yes"
   },
   {
-   "Production": "Jagli Demo 2",
-   "Label": "Demo",
-   "Length": "25 minutes",
-   "Artists": "Ensemble of six dancers",
-   "Style": "Bharatanatyam and Kathak",
-   "About": "**Jagli Demo 2** is a demonstration production, made to show how the Abhinava team can update the website from the Google Sheet. It imagines a meeting of two classical traditions: the grounded geometry of *Bharatanatyam* and the spinning grace of *Kathak*, woven into one short piece about conversation, listening and answering.",
-   "Performers": "Abhinava Dance Company",
-   "Director": "Vinod Gowda",
-   "Music": "Demo score",
-   "Lighting": "",
-   "Availability": "",
-   "Poster": "https://drive.google.com/file/d/1A8yvFLf0vSD2JyczkYK4Fq3Z_GrPQZt7/view?usp=sharing",
-   "Media folder": "",
-   "Videos": "https://www.youtube.com/watch?v=cXZedxppzMY",
-   "Show": "Yes"
-  },
-  {
    "Production": "Krishnaa — Fire to Frost",
    "Label": "",
    "Length": "",
@@ -62,6 +45,23 @@
    "Poster": "assets/web/client/017.jpg",
    "Media folder": "",
    "Videos": "",
+   "Show": "Yes"
+  },
+  {
+   "Production": "ADC DEMO - 2",
+   "Label": "test 2",
+   "Length": "60 min",
+   "Artists": "Vinod",
+   "Style": "Design",
+   "About": "Added a new empty production card below “Krishnaa — Fire to Frost”. Type its name and details in the yellow cells.",
+   "Performers": "",
+   "Director": "",
+   "Music": "",
+   "Lighting": "",
+   "Availability": "",
+   "Poster": "https://drive.google.com/file/d/1A8yvFLf0vSD2JyczkYK4Fq3Z_GrPQZt7/view",
+   "Media folder": "",
+   "Videos": "https://youtu.be/tpkiF7WQuWE?si=Ke9gtq4wJOuAdxBK",
    "Show": "Yes"
   },
   {
@@ -8452,6 +8452,6 @@
   }
  },
  "by": "learn@jagli.com",
- "at": "2026-11-12T06:27:31.266Z",
- "hash": "9wNgQq0x8LWHVzt/"
+ "at": "2026-11-12T06:33:35.526Z",
+ "hash": "jqk9UMjOVyEzRjMc"
 }
