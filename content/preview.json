@@ -40,8 +40,8 @@
    "Performers": "Abhinava Dance Company",
    "Director": "Vinod Gowda",
    "Music": "Demo score",
-   "Lighting": "Demo lighting",
-   "Availability": "Currently available",
+   "Lighting": "",
+   "Availability": "",
    "Poster": "https://drive.google.com/file/d/1A8yvFLf0vSD2JyczkYK4Fq3Z_GrPQZt7/view?usp=sharing",
    "Media folder": "",
    "Videos": "https://www.youtube.com/watch?v=cXZedxppzMY",
@@ -8452,6 +8452,6 @@
   }
  },
  "by": "learn@jagli.com",
- "at": "2026-11-12T06:16:24.677Z",
- "hash": "TtEAJOLsy7bgwL4f"
+ "at": "2026-11-12T06:27:31.266Z",
+ "hash": "9wNgQq0x8LWHVzt/"
 }
