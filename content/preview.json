@@ -3548,8 +3548,8 @@
        "key": "performances/upcoming-list/t1",
        "kind": "photo",
        "what": "Photo",
-       "value": "upcoming-shows-list-pic-edit.jpg",
-       "alt": "Three Kathak artists of Abhinava Dance Company"
+       "value": "https://drive.google.com/file/d/1HoSJiJ5AnYVwntQ3rDV8UMz6__y_obFT/view",
+       "alt": "A dancer of Abhinava Dance Company"
       },
       {
        "key": "performances/upcoming-list/t2",
@@ -8445,6 +8445,11 @@
   }
  },
  "drive": {
+  "1HoSJiJ5AnYVwntQ3rDV8UMz6__y_obFT": {
+   "name": "upcoming-shows-list-pic-edit.jpg",
+   "modified": "2026-11-12T06:48:12.235Z",
+   "mimeType": "image/jpeg"
+  },
   "1A8yvFLf0vSD2JyczkYK4Fq3Z_GrPQZt7": {
    "name": "jagli-demo-2-poster.jpg",
    "modified": "2026-11-12T05:23:26.508Z",
@@ -8452,6 +8457,6 @@
   }
  },
  "by": "learn@jagli.com",
- "at": "2026-11-12T06:33:35.526Z",
- "hash": "jqk9UMjOVyEzRjMc"
+ "at": "2026-11-12T06:49:27.149Z",
+ "hash": "JSp4MD8TdAWVPR3m"
 }
