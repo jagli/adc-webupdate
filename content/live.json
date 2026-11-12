@@ -3573,7 +3573,7 @@
        "key": "performances/upcoming-list/t1",
        "kind": "photo",
        "what": "Photo",
-       "value": "assets/web/content/upcoming-shows-list-pic-edit-5459146f.jpg",
+       "value": "Photo",
        "alt": "A dancer of Abhinava Dance Company"
       },
       {
@@ -3586,13 +3586,13 @@
        "key": "performances/upcoming-list/t3",
        "kind": "text",
        "what": "Title",
-       "value": "Chakradhaar"
+       "value": "SMRM 2026"
       },
       {
        "key": "performances/upcoming-list/t4",
        "kind": "text",
        "what": "Details",
-       "value": "6 Nov 2026 · Meenakshi Rangamancha, Bengaluru"
+       "value": "20 Nov 2026"
       },
       {
        "key": "performances/upcoming-list/t5",
@@ -3629,9 +3629,9 @@
         },
         {
          "key": "new-39",
-         "show": false,
+         "show": true,
          "cells": {
-          "Item": "**12 Nov 2026** — *JAGLI DEMO*: 11:30 am · Hotel New Mylari, Kuvempunagara. Featuring a Group Discussion and a Solo by Vinod Gowda"
+          "Item": "**20 Nov 2026** — *SMRM 2026*: Annual Conference of the Society for Mitochondrial Research & Medicine (SMRM 2026) - Mitochondrial Continuum: Bridging Biology and Medicine\" at NIMHANS Bangalore"
          }
         },
         {
