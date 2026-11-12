@@ -3548,7 +3548,7 @@
        "key": "performances/upcoming-list/t1",
        "kind": "photo",
        "what": "Photo",
-       "value": "assets/web/client/upcoming-shows-list-pic-edit.jpg",
+       "value": "upcoming-shows-list-pic-edit.jpg",
        "alt": "Three Kathak artists of Abhinava Dance Company"
       },
       {
@@ -8452,6 +8452,6 @@
   }
  },
  "by": "learn@jagli.com",
- "at": "2026-11-12T06:03:38.084Z",
- "hash": "mpTIFVsIssMuOTeo"
+ "at": "2026-11-12T06:16:24.677Z",
+ "hash": "TtEAJOLsy7bgwL4f"
 }
