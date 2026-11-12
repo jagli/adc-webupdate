@@ -3548,7 +3548,7 @@
        "key": "performances/upcoming-list/t1",
        "kind": "photo",
        "what": "Photo",
-       "value": "Photo",
+       "value": "https://drive.google.com/file/d/1sMNNCVZHfD1RUMVlleSqrwFR3kwr1no2/view",
        "alt": "A dancer of Abhinava Dance Company"
       },
       {
@@ -8445,6 +8445,11 @@
   }
  },
  "drive": {
+  "1sMNNCVZHfD1RUMVlleSqrwFR3kwr1no2": {
+   "name": "upcoming-shows-list-pic-edit.jpg",
+   "modified": "2026-11-12T07:06:04.713Z",
+   "mimeType": "image/jpeg"
+  },
   "1A8yvFLf0vSD2JyczkYK4Fq3Z_GrPQZt7": {
    "name": "jagli-demo-2-poster.jpg",
    "modified": "2026-11-12T05:23:26.508Z",
@@ -8452,6 +8457,6 @@
   }
  },
  "by": "learn@jagli.com",
- "at": "2026-11-12T07:07:36.626Z",
- "hash": "GCixOoO7HPBkHhJC"
+ "at": "2026-11-12T10:00:51.365Z",
+ "hash": "dlNXHXZdt07N+0V3"
 }
