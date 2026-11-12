@@ -3561,13 +3561,13 @@
        "key": "performances/upcoming-list/t3",
        "kind": "text",
        "what": "Title",
-       "value": "Chakradhaar"
+       "value": "SMRM 2026"
       },
       {
        "key": "performances/upcoming-list/t4",
        "kind": "text",
        "what": "Details",
-       "value": "6 Nov 2026 · Meenakshi Rangamancha, Bengaluru"
+       "value": "20 Nov 2026"
       },
       {
        "key": "performances/upcoming-list/t5",
@@ -3603,9 +3603,9 @@
         },
         {
          "key": "new-39",
-         "show": false,
+         "show": true,
          "cells": {
-          "Item": "**12 Nov 2026** — *JAGLI DEMO*: 11:30 am · Hotel New Mylari, Kuvempunagara. Featuring a Group Discussion and a Solo by Vinod Gowda"
+          "Item": "**20 Nov 2026** — *SMRM 2026*: Annual Conference of the Society for Mitochondrial Research & Medicine (SMRM 2026) - Mitochondrial Continuum: Bridging Biology and Medicine\" at NIMHANS Bangalore"
          }
         },
         {
@@ -8452,6 +8452,6 @@
   }
  },
  "by": "learn@jagli.com",
- "at": "2026-11-12T06:56:21.038Z",
- "hash": "Tr0lpjCwJLGhsJkR"
+ "at": "2026-11-12T07:07:36.626Z",
+ "hash": "GCixOoO7HPBkHhJC"
 }
