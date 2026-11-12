@@ -3603,7 +3603,7 @@
         },
         {
          "key": "new-39",
-         "show": true,
+         "show": false,
          "cells": {
           "Item": "**12 Nov 2026** — *JAGLI DEMO*: 11:30 am · Hotel New Mylari, Kuvempunagara. Featuring a Group Discussion and a Solo by Vinod Gowda"
          }
@@ -8452,6 +8452,6 @@
   }
  },
  "by": "learn@jagli.com",
- "at": "2026-11-12T05:27:06.439Z",
- "hash": "Q5GUBV8FJNer8BXE"
+ "at": "2026-11-12T06:00:49.891Z",
+ "hash": "mpTIFVsIssMuOTeo"
 }
