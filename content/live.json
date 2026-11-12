@@ -3573,7 +3573,7 @@
        "key": "performances/upcoming-list/t1",
        "kind": "photo",
        "what": "Photo",
-       "value": "assets/web/client/upcoming-shows-list-pic-edit.jpg",
+       "value": "upcoming-shows-list-pic-edit.jpg",
        "alt": "Three Kathak artists of Abhinava Dance Company"
       },
       {
@@ -3629,7 +3629,7 @@
         },
         {
          "key": "new-39",
-         "show": true,
+         "show": false,
          "cells": {
           "Item": "**12 Nov 2026** — *JAGLI DEMO*: 11:30 am · Hotel New Mylari, Kuvempunagara. Featuring a Group Discussion and a Solo by Vinod Gowda"
          }
