@@ -31,6 +31,23 @@
    "Show": "Yes"
   },
   {
+   "Production": "Jagli Demo 2",
+   "Label": "Demo",
+   "Length": "25 minutes",
+   "Artists": "Ensemble of six dancers",
+   "Style": "Bharatanatyam and Kathak",
+   "About": "**Jagli Demo 2** is a demonstration production, made to show how the Abhinava team can update the website from the Google Sheet. It imagines a meeting of two classical traditions: the grounded geometry of *Bharatanatyam* and the spinning grace of *Kathak*, woven into one short piece about conversation, listening and answering.",
+   "Performers": "Abhinava Dance Company",
+   "Director": "Vinod Gowda",
+   "Music": "Demo score",
+   "Lighting": "Demo lighting",
+   "Availability": "Currently available",
+   "Poster": "assets/web/content/jagli-demo-2-poster-f62faac1.jpg",
+   "Media folder": "",
+   "Videos": "https://www.youtube.com/watch?v=cXZedxppzMY",
+   "Show": "Yes"
+  },
+  {
    "Production": "Krishnaa — Fire to Frost",
    "Label": "",
    "Length": "",
@@ -3608,6 +3625,13 @@
          "show": true,
          "cells": {
           "Item": "**4 Nov 2026** — *Soorya Festival*: exquisite duets of Nirupama–Rajendra, Ganesham Black Box, Trivandrum"
+         }
+        },
+        {
+         "key": "new-39",
+         "show": true,
+         "cells": {
+          "Item": "**12 Nov 2026** — *JAGLI DEMO*: 11:30 am · Hotel New Mylari, Kuvempunagara. Featuring a Group Discussion and a Solo by Vinod Gowda"
          }
         },
         {
