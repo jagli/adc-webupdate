@@ -106,6 +106,34 @@ function initMiniCarousels() {
   });
 }
 
+/* Past shows (Performances): arrows under the row of cards; the row itself scrolls sideways without them */
+function initPastShows() {
+  const chevron = (d) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
+  document.querySelectorAll("[data-past-shows]").forEach((root) => {
+    const track = root.querySelector(".s-past__track");
+    if (!track || root.dataset.pastBound === "1") return;
+    root.dataset.pastBound = "1";
+    const nav = document.createElement("div");
+    nav.className = "s-past__nav";
+    nav.innerHTML = `<button type="button" class="s-past__arrow" aria-label="Earlier shows">${chevron("M15 6l-6 6 6 6")}</button><button type="button" class="s-past__arrow" aria-label="Later shows">${chevron("M9 6l6 6-6 6")}</button>`;
+    track.after(nav);
+    const [prev, next] = nav.querySelectorAll("button");
+    const step = () => (track.firstElementChild?.getBoundingClientRect().width || track.clientWidth) + parseFloat(getComputedStyle(track).columnGap || 0);
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      nav.hidden = max <= 2;
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft >= max - 2;
+    };
+    prev.addEventListener("click", () => track.scrollBy({ left: -step(), behavior: "smooth" }));
+    next.addEventListener("click", () => track.scrollBy({ left: step(), behavior: "smooth" }));
+    track.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    root.querySelector("details")?.addEventListener("toggle", update);
+    update();
+  });
+}
+
 function initSubnav() {
   const subnav = document.querySelector(".v-chapter__nav");
   if (!subnav || subnav.dataset.subnavBound === "1") return;

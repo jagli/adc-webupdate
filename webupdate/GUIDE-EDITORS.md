@@ -1,50 +1,73 @@
 # Updating abhinava.dance — guide for editors and the moderator
 
-You change the website in one Google Sheet, **ADC Website**. Nothing goes live until the moderator approves it.
+You change the website in one Google Sheet, **ADC Website**. Nothing goes live until the moderator presses Publish.
+
+**The very first time:** Google asks for permission and may say "Google hasn't verified this app". That is expected. Click **Advanced ▸ Go to ADC Website ▸ Allow**. It asks only once.
+
+Open the panel first: menu **Website ▸ Open the Website panel**. It opens on the right. Everything below happens in that panel or in the page tabs.
 
 ## Editors
 
 ### 1. Change words
 - Open the tab of the page: Home, About, Performances…
-- Each **dark band** is one part of the page, top to bottom.
+- Each **coloured band** is one part of the page, top to bottom.
 - Type only in the **yellow cells**.
 - **Bold:** `**like this**` · **Italic:** `*like this*` · **Link:** `[words](https://address)`
 - **New line inside a cell:** Ctrl + Enter (Mac: ⌘ + Enter)
+- **Click the cell before you type.** If you last clicked the panel, typing goes into the panel instead.
 
 ### 2. Change a photo
 1. Put the photo in Google Drive.
 2. Right-click it ▸ **Share** ▸ General access: **Anyone with the link** ▸ **Copy link**.
 3. Paste the link into the photo cell. The picture appears next to it.
 
-**Several photos (carousels):** one link per line in the "Photos" cell. Or paste one **Drive folder** link instead: all its photos are used, in file-name order (01, 02, 03…).
+**Many photos at once (a carousel or the gallery):** paste a Drive **folder** link in the "Drive folder" row. Its photos are used in file-name order (01, 02, 03…).
 
 **Videos:** paste the YouTube link.
 
 ### 3. Lists (cards, events, people, videos…)
-- **One row = one item.**
-- **Hide:** untick **Show**. Nothing is deleted; tick it again to bring it back.
-- **Move:** drag the row by its number on the far left.
-- **Add:** type in an empty row at the bottom of the list.
-- **Upcoming shows:** start each event with the date in bold, e.g. `**8 Jan 2027** — what, where`. The website sorts them by date and hides past dates by itself.
+**One row = one item.** Click the row, then use the **Selected row** box in the panel:
 
-### 4. See it, then send it
-1. Menu **Website ▸ ① Update preview**.
-2. After about 2 minutes, the **Website panel** on the right shows:
-   - **See only what changed:** your changes in place on the page, with a Before / After switch and a Phone view.
-   - **Open the full preview:** the whole website with your changes.
-3. If something is wrong, the panel says which tab and row. Fix it and press Update preview again.
-4. When it looks right: **Website ▸ ② Submit for review**. Add a note if you like. The moderator gets an email.
+- **▲ Move up / ▼ Move down:** change the order.
+- **＋ Add below:** a new empty row under the one you clicked. It starts **hidden**: fill it in, then tick **Show**.
+- **Hide / Show:** takes an item off the website, or brings it back. Nothing is ever deleted.
+
+**Never clear a row to remove it.** Press Hide instead. If a row is cleared, the panel stops and tells you.
+
+**Events:** one row per show: Date (click the cell for a calendar) · Event · Details · Ticket link. Past dates hide themselves.
+
+**Featured event** (Performances tab ▸ Upcoming Shows):
+1. In **Featured event**, pick the event from the list. The list shows the events below from today on, in date order. The date line fills itself in.
+2. Paste the poster's Google Drive link in **Photo**.
+3. Press **Send my changes**. The moderator publishes it.
+
+When the featured event's date has passed, it stays on the website until someone picks a new one.
+
+### 4. Send your changes
+1. When you are done, press **Send my changes** in the panel. You can add a note for the moderator.
+2. In about 2 minutes a preview is ready and the moderator gets an email. Nothing is live yet.
+3. If something is wrong, the panel says which tab and row, in plain words. Fix it and press **Send my changes** again.
+
+**Panel stuck or not answering?** Close it and open it again (Website ▸ Open the Website panel). Do this too if it has been open for hours.
+
+**Made a mistake?** Edit ▸ Undo (Ctrl + Z / ⌘ + Z). Older mistakes: File ▸ Version history shows every earlier version of the Sheet.
 
 ## Moderator
 
-1. Open the email, or **Website ▸ ③ Review**.
-2. Click **See only what changed**: only the changed parts, with the parts around them faded. Changed words and photos are outlined. Use **Before (live now)** to compare, and **Phone** to check the phone view.
-3. In the Website panel:
-   - **Approve & publish:** abhinava.dance updates in a few minutes.
-   - **Send back with this note:** the editor gets your note by email.
+1. Open the email, or the Website panel.
+2. Press **See what changed ↗**. It shows only the changed parts, outlined, with a **Before / After** switch and a **Phone** view. "Open the whole preview website" shows every page.
+3. Then, in the panel:
+   - **Publish:** press it, then press it **again within 6 seconds** to confirm. abhinava.dance updates in a few minutes.
+   - **Send back:** write what to change in the box, then press Send back. The editor gets your note by email.
 
-If anyone changes the Sheet after the preview, Approve is blocked until a new preview is made. You always approve exactly what goes live.
+If anyone changes the Sheet after the changes were sent, Publish is blocked until the editor presses **Send my changes** again. You always publish exactly what you checked.
+
+## Owner
+
+- **Users:** add or remove editors and moderators in the panel ▸ **Users**. They get access to the Sheet straight away; removing them takes it away.
+- **Activity:** the panel ▸ **Activity**, or the **Log** tab: who sent, published or sent back, and when.
+- **Undo the last publish:** puts the previous version of abhinava.dance back.
 
 ## Do not change
 
-The dark bands, the beige header rows and the tab names. If you change one by mistake: **Edit ▸ Undo**.
+The coloured bands, the grey header rows, column A and the tab names. If you change one by mistake: **Edit ▸ Undo**, or ask the owner.

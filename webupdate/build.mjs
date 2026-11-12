@@ -23,6 +23,7 @@ import { PAGES, PAGE_NAMES, writeGlobal, toCsv, PRODUCTION_COLUMNS, readSite, me
 import { resolveMedia } from "./engine/media.mjs";
 import { validate } from "./engine/validate.mjs";
 import { reviewPage } from "./engine/review.mjs";
+import { writePastShows } from "./engine/past.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const arg = (name, def) => { const i = process.argv.indexOf(`--${name}`); return i === -1 ? def : process.argv[i + 1]; };
@@ -72,6 +73,8 @@ for (const p of PAGES) {
   if (!data) continue;
   const out = apply(p, src, data, { today });
   problems.push(...out.problems.map((m) => `${PAGE_NAMES[p]} › ${m}`));
+  // Past Shows: the Upcoming Shows rows whose date has passed (Global ▸ Show Past Shows switches it)
+  if (p === "performances") out.src = writePastShows(out.src, content, { today, on: content.global?.showPastShows !== false });
   fs.writeFileSync(file, out.src);
 }
 // 3b. footer details

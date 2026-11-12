@@ -21,7 +21,8 @@ var PAGES = [
 var GLOBAL_FIELDS = [
   ["Company name", "name"], ["Tagline", "tagline"], ["Email", "email"], ["Phone", "phone"],
   ["School email", "schoolEmail"], ["School phone", "schoolPhone"], ["Instagram link", "instagram"],
-  ["YouTube link", "youtube"], ["School Instagram link", "schoolInstagram"], ["Show School Instagram", "showSchoolInstagram"]
+  ["YouTube link", "youtube"], ["School Instagram link", "schoolInstagram"], ["Show School Instagram", "showSchoolInstagram"],
+  ["Show Past Shows (Performances page)", "showPastShows"]
 ];
 var PRODUCTION_COLUMNS = ["Production", "Label", "Length", "Artists", "Style", "About", "Performers", "Director", "Music", "Lighting", "Availability", "Poster", "Media folder", "Videos", "Show"];
 var SITE = "https://abhinava.dance/";
@@ -29,6 +30,9 @@ var COLORS = {
   band: "#0a2a45", bandText: "#ffffff", note: "#5b6170", edit: "#fffbea", head: "#f1e6cf", listNote: "#faf5ea",
   title: "#6a0f3b", problem: "#fde2e1", key: "#eeeeee", item: "#fffdf2", itemRow: "#fbfaf6"
 };
+/** Global rows that are a tick box (Yes/No). */
+var GLOBAL_SWITCHES = ["showSchoolInstagram", "showPastShows"];
+
 var ROLE = { owner: "Super admin", moderator: "Moderator", editor: "Editor" };
 
 /* ── menu ──────────────────────────────────────────────────────────────── */
@@ -47,6 +51,21 @@ function onOpen() {
       .addItem("Set up the Sheet (first time / new layout)", "setupSheet")
       .addItem("Check settings", "checkSettings"))
     .addToUi();
+  try { refreshFeatured_(); } catch (e) {}
+  try { addMissingSwitches_(); } catch (e) {}
+}
+
+/** A Global tab made before a switch existed gets its row (ticked = on), under the last row. */
+function addMissingSwitches_() {
+  var s = SpreadsheetApp.getActive().getSheetByName("Global");
+  if (!s) return;
+  var v = s.getDataRange().getValues(), have = {}, last = 0;
+  for (var i = 0; i < v.length; i++) { var k = parseKey_(v[i][0]); if (k.type === "global") { have[k.rest] = true; last = i + 1; } }
+  if (!last || have.showPastShows) return;
+  s.insertRowAfter(last);
+  s.getRange(last + 1, 1, 1, 2).setValues([["global|showPastShows", "Show Past Shows (Performances page)"]]);
+  s.getRange(last + 1, 2).setFontColor(COLORS.note);
+  s.getRange(last + 1, 3).setBackground(COLORS.edit).setNumberFormat("General").insertCheckboxes().setValue(true);
 }
 
 function openPanel() {
@@ -116,8 +135,18 @@ function checkSettings() {
     var r = gh_("GET", "/repos/" + setting_("GITHUB_REPO"));
     ok.push("GitHub answers: " + (r.code === 200 ? "yes" : "no (" + r.code + ")"));
   }
+  ok.push("Automatic checks: " + (autoCheckOn_() ? "on" : "could not be switched on"));
   ok.push("You are: " + me_() + " — " + (roleOf_(me_()) || "not in the Users tab"));
   SpreadsheetApp.getUi().alert(ok.join("\n"));
+}
+
+/** Owner only: the 5-minute check that emails the moderator and finishes publishes. */
+function autoCheckOn_() {
+  if (!can_("own")) return ScriptApp.getProjectTriggers().some(function (t) { return t.getHandlerFunction() === "autoCheck"; });
+  var have = ScriptApp.getProjectTriggers().filter(function (t) { return t.getHandlerFunction() === "autoCheck"; });
+  have.slice(1).forEach(function (t) { ScriptApp.deleteTrigger(t); });
+  if (!have.length) ScriptApp.newTrigger("autoCheck").timeBased().everyMinutes(5).create();
+  return true;
 }
 
 /* ── GitHub ────────────────────────────────────────────────────────────── */
@@ -177,7 +206,23 @@ function log_(action, detail) {
 /* ── reading the Sheet into content ────────────────────────────────────── */
 
 function readPageTab_(sheet, page) {
-  return readPageRows_(sheet.getDataRange().getValues(), page);
+  return readPageRows_(cellValues_(sheet.getDataRange()), page);
+}
+
+/**
+ * Cell values, with links put back. A Drive link pasted into a cell becomes a file "chip"
+ * (or a link with other words showing), and the plain value is then only the file name.
+ * Where a whole cell is one link, the link address is used instead.
+ */
+function cellValues_(range) {
+  var v = range.getValues(), rt = range.getRichTextValues();
+  for (var r = 0; r < v.length; r++) for (var c = 0; c < v[r].length; c++) {
+    var t = rt[r][c];
+    if (!t || typeof v[r][c] !== "string" || !v[r][c]) continue;
+    var url = t.getLinkUrl();
+    if (url && /^https?:/.test(url) && v[r][c].indexOf(url) < 0) v[r][c] = url;
+  }
+  return v;
 }
 
 function readContent_() {
@@ -185,17 +230,17 @@ function readContent_() {
   var content = { version: 1, global: {}, productions: [], pages: {} };
   var g = ss.getSheetByName("Global");
   if (g) {
-    var gv = g.getDataRange().getValues();
+    var gv = cellValues_(g.getDataRange());
     for (var i = 0; i < gv.length; i++) {
       var k = parseKey_(gv[i][0]);
       if (k.type !== "global") continue;
-      content.global[k.rest] = k.rest === "showSchoolInstagram" ? gv[i][2] === true || /^yes$/i.test(gv[i][2]) : String(gv[i][2]);
+      content.global[k.rest] = GLOBAL_SWITCHES.indexOf(k.rest) >= 0 ? gv[i][2] === true || /^yes$/i.test(gv[i][2]) : String(gv[i][2]);
     }
   }
   content.problems = [];
   var p = ss.getSheetByName("Productions");
   if (p) {
-    var pr = readProductions_(p.getDataRange().getValues());
+    var pr = readProductions_(cellValues_(p.getDataRange()));
     content.productions = pr.productions.map(function (x) { var row = {}; PRODUCTION_COLUMNS.forEach(function (c) { row[c] = x[c] || ""; }); return row; });
     pr.problems.forEach(function (m) { content.problems.push("Tab Productions, " + m); });
   }
@@ -337,8 +382,26 @@ function notifyModerators_(st) {
 
 /** Status for the sidebar: reads the robot's status file. */
 function getStatus() {
+  var out = advance_();
+  out.me = me_(); out.role = roleOf_(me_());
+  return out;
+}
+
+/**
+ * Moves a send or a publish forward (preview ready → moderator emailed; publish finished).
+ * Runs from the panel and also every 5 minutes on its own (autoCheck), so the moderator is
+ * emailed even if the editor closed the Sheet. The lock makes sure only one run does it, so
+ * the email never goes out twice.
+ */
+function autoCheck() { try { refreshFeatured_(); } catch (e) {} advance_(); }
+function advance_() {
+  var lock = LockService.getScriptLock();
+  if (!lock.tryLock(10000)) return { state: state_(), previewUrl: pagesUrl_(), reviewUrl: pagesUrl_() + "review/" };
+  try { return advanceLocked_(); } finally { lock.releaseLock(); }
+}
+function advanceLocked_() {
   var st = state_();
-  var out = { me: me_(), role: roleOf_(me_()), state: st, previewUrl: pagesUrl_(), reviewUrl: pagesUrl_() + "review/" };
+  var out = { state: st, previewUrl: pagesUrl_(), reviewUrl: pagesUrl_() + "review/" };
   if (st.status === "building" || st.status === "waiting" || st.status === "ready" || st.status === "publishing") {
     var raw = rawFile_("status/preview.json", "status");
     if (raw) {
@@ -351,6 +414,10 @@ function getStatus() {
         }
         if (!s.ok && st.status === "building") { st.status = "problems"; st.problems = s.problems || ["The build stopped — see GitHub"]; setState_(st); log_("Preview problems", st.problems.join(" | ")); }
       }
+    }
+    // the robot never answered: say so instead of waiting for ever
+    if (st.status === "building" && Date.now() - Date.parse(st.when || 0) > 15 * 60000) {
+      st.status = "problems"; st.problems = ["The preview did not finish. Press Send my changes again. If it happens twice, tell the owner."]; delete st.autoSubmit; setState_(st); log_("Preview did not finish", "");
     }
     var pub = rawFile_("status/publish.json", "status");
     if (pub) {
@@ -370,6 +437,9 @@ function getStatus() {
         }
       }
     }
+  }
+  if (st.status === "publishing" && Date.now() - Date.parse(st.approvedAt || 0) > 20 * 60000 && !(out.publish && out.publish.sha === st.sha)) {
+      st.status = "waiting"; st.publishError = "Publishing did not finish, so the live site did not change. You can press Publish again."; setState_(st); log_("Publish did not finish", "no answer from the robot");
   }
   out.state = st;
   out.contentChanged = st.hash && (st.status === "ready" || st.status === "waiting") ? changedSince_(st) : false;
@@ -392,8 +462,51 @@ function changedSince_(st) {
 }
 function usersChanged_() { var p = PropertiesService.getScriptProperties(); p.setProperty("USERS_V", String(Number(p.getProperty("USERS_V") || 0) + 1)); }
 function noteEdit_() { PropertiesService.getScriptProperties().setProperty("EDITED_AT", String(Date.now())); }
-/** Simple trigger: any typing in the Sheet. */
-function onEdit() { noteEdit_(); }
+/** Simple trigger: any typing in the Sheet. A change on the Performances tab refreshes the Featured list. */
+function onEdit(e) {
+  noteEdit_();
+  try { if (e && e.range && e.range.getSheet().getName() === "Performances") refreshFeatured_(e.range.getSheet()); } catch (err) {}
+}
+
+/**
+ * The Featured event dropdown (Performances ▸ Upcoming Shows): the shown events from today on, in
+ * date order. Picking one fills the date line. A featured event whose date has passed is kept as
+ * it is (no list item matches it any more, which Google allows) until someone picks a new one.
+ */
+function refreshFeatured_(s) {
+  s = s || SpreadsheetApp.getActive().getSheetByName("Performances");
+  if (!s) return;
+  var v = s.getDataRange().getValues(), pick = -1, dateRow = -1;
+  for (var i = 0; i < v.length; i++) {
+    var a = String(v[i][0]);
+    if (a.indexOf("slot|" + FEATURED_TITLE + "|") === 0) pick = i;
+    if (a.indexOf("slot|" + FEATURED_DATE + "|") === 0) dateRow = i;
+  }
+  if (pick < 0) return;
+  var now = new Date(Utilities.formatDate(new Date(), "Asia/Kolkata", "yyyy/MM/dd"));
+  var choices = featuredChoices_(v, now);
+  var cell = s.getRange(pick + 1, 3), cur = cellText_(v[pick][2]).trim();
+  // an older plain title: turn it into "date — name"
+  if (cur && !FEATURED_RE.test(cur)) {
+    var match = choices.filter(function (c) { return c.split(" — ").slice(1).join(" — ") === cur; })[0];
+    var d = dateRow >= 0 ? /^(\d{1,2} [A-Z][a-z]{2} \d{4})/.exec(cellText_(v[dateRow][2])) : null;
+    var label = match || (d ? d[1] + " — " + cur : "");
+    if (label) { cell.setValue(label); cur = label; }
+  }
+  if (String(v[pick][1]) !== "Featured event (pick from the list)") s.getRange(pick + 1, 2).setValue("Featured event (pick from the list)");
+  var rule = choices.length
+    ? SpreadsheetApp.newDataValidation().requireValueInList(choices, true).setAllowInvalid(true)
+        .setHelpText("Pick the event to feature. The list shows the events below from today on, in date order. Add or tick an event below and it appears here.").build()
+    : null;
+  if (rule) cell.setDataValidation(rule); else cell.clearDataValidations();
+  if (dateRow >= 0) {
+    var m = FEATURED_RE.exec(cur);
+    var dc = s.getRange(dateRow + 1, 3);
+    if (m && cellText_(v[dateRow][2]).trim().indexOf(m[1]) !== 0) dc.setValue(m[1]);
+    if (String(v[dateRow][1]) !== "Date line (filled in when you pick)") s.getRange(dateRow + 1, 2).setValue("Date line (filled in when you pick)");
+    dc.setBackground(COLORS.key);
+  }
+}
 
 /** A fingerprint of what editors wrote (words, photos, lists, contact details, productions). */
 function hash_(c) {
@@ -471,6 +584,7 @@ function saveUser(email, role, name) {
   try { SpreadsheetApp.getActive().addEditor(email); } catch (e) {}
   log_(u ? "User changed" : "User added", email + " → " + role);
   usersChanged_();
+  try { autoCheckOn_(); } catch (e) {}
   return { ok: true, message: (u ? "Updated " : "Added ") + email + " as " + role + ". They can now open this Sheet." };
 }
 

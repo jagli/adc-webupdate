@@ -3606,3 +3606,207 @@
     }
   }
 }
+
+@layer sections {
+  /* ==========================================================================
+     Past shows (s-past)
+     Under Upcoming Shows (Performances): the shows whose date has passed, newest first,
+     as a row of dark cards that slide sideways. Closed by default: only the heading
+     "Past Shows" shows, with a chevron; a click opens it (a plain <details>, no script
+     needed). The arrows are added by js/interactions.js initPastShows(); without scripts
+     the row still scrolls sideways. The website robot fills the cards from the Sheet's
+     Upcoming Shows rows, and leaves the section out when it is switched off there.
+     ========================================================================== */
+
+  .s-past {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+  }
+
+  .s-past[hidden] {
+    display: none;
+  }
+
+  .s-past__box {
+    border-top: 1px solid var(--gold-dim);
+    border-bottom: 1px solid var(--gold-dim);
+  }
+
+  .s-past__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding: var(--space-lg) 0;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .s-past__head::-webkit-details-marker {
+    display: none;
+  }
+
+  .s-past__head:focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 4px;
+  }
+
+  .s-past__head .s-section__title {
+    margin: 0;
+  }
+
+  .s-past__count {
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    color: var(--text-muted);
+    margin-left: var(--space-sm);
+    white-space: nowrap;
+  }
+
+  .s-past__chevron {
+    flex: 0 0 auto;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    color: var(--gold-deep);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+
+  .s-past__chevron svg {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .s-past__head:hover .s-past__chevron {
+    background: rgba(201, 162, 39, 0.12);
+  }
+
+  .s-past__box[open] .s-past__chevron {
+    transform: rotate(180deg);
+  }
+
+  .s-past__body {
+    position: relative;
+    padding-bottom: var(--space-xl);
+  }
+
+  .s-past__track {
+    display: flex;
+    gap: var(--space-md);
+    margin: 0;
+    padding: var(--space-2xs) 0 var(--space-sm);
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold-dim) transparent;
+  }
+
+  .s-past__card {
+    flex: 0 0 min(82%, 20rem);
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    min-height: 12rem;
+    padding: var(--space-lg);
+    color: var(--ivory);
+    background: linear-gradient(160deg, rgb(58, 30, 42) 0%, rgb(34, 20, 27) 100%);
+    border: 1px solid rgba(201, 162, 39, 0.45);
+    box-shadow: var(--shadow-tile);
+  }
+
+  .s-past__date {
+    font-family: var(--font-sans);
+    font-size: var(--text-label);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+  }
+
+  .s-past__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ivory);
+  }
+
+  .s-past__text {
+    margin: 0;
+    font-size: var(--text-small);
+    line-height: 1.5;
+    color: var(--text-on-dark-soft);
+  }
+
+  /* A short gold rule above the words, like the Featured plate */
+  .s-past__title::after {
+    content: "";
+    display: block;
+    width: 2.5rem;
+    height: 1px;
+    margin-top: 0.6rem;
+    background: var(--gold-bright);
+  }
+
+  .s-past__nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-xs);
+    margin-top: var(--space-sm);
+  }
+
+  .s-past__nav[hidden] {
+    display: none;
+  }
+
+  .s-past__arrow {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    color: var(--gold-deep);
+    background: transparent;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .s-past__arrow svg {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .s-past__arrow:hover:not(:disabled) {
+    background: rgba(201, 162, 39, 0.12);
+  }
+
+  .s-past__arrow:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  .s-past__arrow:focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 2px;
+  }
+
+  @media (min-width: 768px) {
+    .s-past__card {
+      flex-basis: calc((100% - 2 * var(--space-md)) / 3);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .s-past__chevron {
+      transition: none;
+    }
+  }
+}

@@ -16,6 +16,7 @@ function setupSheet() {
   startTab_(ss);
   globalTab_(ss, content.global || {});
   PAGES.forEach(function (pg) { if (content.pages[pg[0]]) pageTab_(ss, pg, content.pages[pg[0]]); });
+  try { refreshFeatured_(); } catch (e) {}
   productionsTab_(ss, content.productions || []);
   usersSheet_();
   log_("Sheet set up", "All tabs written from the live site");
@@ -66,6 +67,7 @@ function startTab_(ss) {
     ["Every card, event, person, photo or line of a list has its own row. Click the row, then use the “Selected row” box in the Website panel:  ▲ Move up · ▼ Move down · ＋ Add below · Hide / Show.", ""],
     ["To remove something, press Hide (or untick “Show”). Nothing is ever deleted, so you can always Show it again.  Never clear a row to remove it — the preview will stop and tell you.", "tip"],
     ["Events: one row per show. Date (click the cell for a calendar) · Event · Details · Ticket link. Past dates hide themselves.", "tip"],
+    ["Featured (Performances ▸ Upcoming Shows): 1. pick the event from the “Featured event” list  2. paste the poster's Drive link in Photo  3. Send my changes. The list shows only events from today on, in date order. A past featured event stays until you pick a new one.", "tip"],
     ["Made a mistake?  Edit ▸ Undo (Ctrl+Z / ⌘+Z).  Older mistakes: File ▸ Version history shows every earlier version of this Sheet.", "tip"],
     ["", ""],
     ["4.  Send it", "step"],
@@ -95,14 +97,15 @@ function globalTab_(ss, g) {
   var s = freshSheet_(ss, "Global");
   s.getRange(1, 2).setValue("Global — contact details and links (shown in the footer of every page)").setFontSize(16).setFontWeight("bold").setFontColor(COLORS.title);
   s.getRange(2, 2).setValue("Type in the yellow cells only.").setFontColor(COLORS.note);
-  var rows = GLOBAL_FIELDS.map(function (f) { return ["global|" + f[1], f[0], f[1] === "showSchoolInstagram" ? !!g[f[1]] : (g[f[1]] || "")]; });
+  var rows = GLOBAL_FIELDS.map(function (f) { return ["global|" + f[1], f[0], GLOBAL_SWITCHES.indexOf(f[1]) >= 0 ? (f[1] === "showPastShows" ? g[f[1]] !== false : !!g[f[1]]) : (g[f[1]] || "")]; });
   var start = 4;
   s.getRange(start, 3, rows.length, 1).setNumberFormat("@");
   s.getRange(start, 1, rows.length, 3).setValues(rows);
   s.getRange(start, 3, rows.length, 1).setBackground(COLORS.edit).setWrap(true);
   s.getRange(start, 2, rows.length, 1).setFontColor(COLORS.note);
-  var cb = start + GLOBAL_FIELDS.length - 1;
-  s.getRange(cb, 3).setNumberFormat("General").insertCheckboxes().setValue(!!g.showSchoolInstagram);
+  rows.forEach(function (r, i) {
+    if (GLOBAL_SWITCHES.indexOf(r[0].slice(7)) >= 0) s.getRange(start + i, 3).setNumberFormat("General").insertCheckboxes().setValue(r[2] === true);
+  });
   s.setColumnWidth(1, 20); s.setColumnWidth(2, 240); s.setColumnWidth(3, 520);
   s.hideColumns(1);
   s.getRange(1, 1, s.getMaxRows(), 1).protect().setDescription("Keys").setWarningOnly(true);

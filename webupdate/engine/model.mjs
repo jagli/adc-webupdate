@@ -13,7 +13,7 @@ import { parse, walk, select, inner, classes, splice } from "./html.mjs";
 import { toLight, toHtml, normalise, INLINE, escapeAttr, decode } from "./light.mjs";
 
 /** Parts of a page that are not edited here (made by the site itself, or edited in their own tab). */
-const SKIP = "nav, .v-chapter__nav, .alt-next, .instagram-section, .s-prod-grid, script, style, svg, [data-production], .v-hero__shade, [aria-hidden=true]";
+const SKIP = "[data-past-shows], nav, .v-chapter__nav, .alt-next, .instagram-section, .s-prod-grid, script, style, svg, [data-production], .v-hero__shade, [aria-hidden=true]";
 
 /** Containers that are always lists, even with a single item, so editors can add more. */
 const KNOWN_LISTS = ".s-cards, .client-portrait-grid, .s-video-grid, .s-video-wall, .s-timeline, .v-stats, .alt-pillars, .alt-partners__grid, .s-voices, .s-downloads, .s-quotes, .alt-hscroll, ul, ol";
@@ -340,7 +340,7 @@ function cellsFor(fields, cells) {
   }));
 }
 
-function eventDate(light) {
+export function eventDate(light) {
   const m = /\*\*([^*]+)\*\*/.exec(light) || [null, light];
   if (!/\b(19|20)\d\d\b/.test(m[1])) return null; // a date without a year would be read as long past
   const d = Date.parse(m[1].replace(/(\d+)(st|nd|rd|th)/, "$1"));

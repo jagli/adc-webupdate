@@ -33,6 +33,8 @@ const SITE = {
   /* School Instagram: shown in the footer once showSchoolInstagram is true */
   schoolInstagram: "https://www.instagram.com/abhinavadanceschool/",
   showSchoolInstagram: false,
+  /* Past Shows on the Performances page (the website robot reads this switch from the Sheet) */
+  showPastShows: true,
 };
 
 /* Main nav — exact sitemap order (8 items) */

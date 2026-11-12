@@ -19,6 +19,7 @@ function initLayout() {
   if (typeof initSubnav === "function") initSubnav();
   if (typeof initCarousels === "function") initCarousels();
   if (typeof initMiniCarousels === "function") initMiniCarousels();
+  if (typeof initPastShows === "function") initPastShows();
   if (typeof initVideos === "function") initVideos();
   if (typeof initProductions === "function") initProductions();
   if (typeof initAutoMotion === "function") initAutoMotion();

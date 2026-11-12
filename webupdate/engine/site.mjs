@@ -20,6 +20,7 @@ export const GLOBAL_FIELDS = [
   ["Company name", "name"], ["Tagline", "tagline"], ["Email", "email"], ["Phone", "phone"],
   ["School email", "schoolEmail"], ["School phone", "schoolPhone"], ["Instagram link", "instagram"],
   ["YouTube link", "youtube"], ["School Instagram link", "schoolInstagram"], ["Show School Instagram (Yes/No)", "showSchoolInstagram"],
+  ["Show Past Shows (Yes/No)", "showPastShows"],
 ];
 
 export const PRODUCTION_COLUMNS = ["Production", "Label", "Length", "Artists", "Style", "About", "Performers", "Director", "Music", "Lighting", "Availability", "Poster", "Media folder", "Videos", "Show"];

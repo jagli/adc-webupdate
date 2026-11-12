@@ -183,7 +183,55 @@ function readPageRows_(v, page) {
       delete l.names;
     });
   });
+  featuredFromPick_(data);
   return data;
+}
+
+/* ── Featured event (Performances ▸ Upcoming Shows): picked from the events list ──
+ * The Title cell is a dropdown of the shown events from today on, in date order, written
+ * "20 Nov 2026 — SMRM 2026". The website gets the event name as the title and its date as the
+ * line under it. A featured event whose date has passed stays as it is until someone picks another. */
+
+var FEATURED_TITLE = "performances/upcoming-list/t3";
+var FEATURED_DATE = "performances/upcoming-list/t4";
+var FEATURED_RE = /^(\d{1,2} [A-Z][a-z]{2} \d{4}) — (.+)$/;
+
+function featuredLabel_(date, name) { return eventDate_(date) + " — " + String(name).trim(); }
+
+/** The events from today on (shown rows only), in date order, as dropdown labels. */
+function featuredChoices_(v, today) {
+  var out = [], inEvents = false;
+  for (var r = 0; r < v.length; r++) {
+    var k = parseKey_(v[r][0]);
+    if (k.type === "events") { inEvents = true; continue; }
+    if (!inEvents) continue;
+    if (k.type !== "ev" && k.type !== "") { inEvents = false; continue; }
+    var row = v[r], name = String(row[3] || "").trim();
+    // no Event name: use the start of Details ("Private show in Ilakal: …" → "Private show in Ilakal")
+    if (!name) name = String(row[4] || "").replace(/\*|\[|\]\([^)]*\)/g, "").split(/[:,—\n]/)[0].trim().slice(0, 60);
+    if (row[1] === false || !name) continue;
+    var d = row[2] instanceof Date ? row[2] : new Date(Date.parse(String(row[2]).replace(/(\d+)(st|nd|rd|th)/, "$1")));
+    if (isNaN(d.getTime())) continue;
+    var day = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    if (day < today) continue;
+    out.push({ day: day.getTime(), label: featuredLabel_(day, name) });
+  }
+  out.sort(function (a, b) { return a.day - b.day; });
+  var seen = {};
+  return out.map(function (x) { return x.label; }).filter(function (l) { return seen[l] ? false : (seen[l] = true); });
+}
+
+/** A picked "date — name" becomes the title (name) and the line under it (date). */
+function featuredFromPick_(data) {
+  data.blocks.forEach(function (b) {
+    var t = null, d = null;
+    b.slots.forEach(function (s) { if (s.key === FEATURED_TITLE) t = s; if (s.key === FEATURED_DATE) d = s; });
+    if (!t) return;
+    var m = FEATURED_RE.exec(String(t.value).trim());
+    if (!m) return;
+    t.value = m[2];
+    if (d && String(d.value).trim().indexOf(m[1]) !== 0) d.value = m[1];
+  });
 }
 
 /* ── laying a page tab out from content ── */
@@ -203,6 +251,16 @@ function layoutPage_(pg, data) {
         push(["", "▸ Photos — one row per photo. Paste a Drive link to add one; untick Show to hide one."], { type: "listnote" });
         push(["photoset|" + sl.key + "|" + sl.what, "Show", "Photo (Drive link)", "", "Picture"], { type: "listhead", cols: 1 });
         splitLines_(sl.value).forEach(function (line) { push(["pho|1", true, line, "", ""], { type: "pho", photoCol: 3, previewCol: 5 }); });
+        return;
+      }
+      if (sl.key === FEATURED_TITLE) {
+        var fd = b.slots.filter(function (x) { return x.key === FEATURED_DATE; })[0];
+        var dm = fd && /^(\d{1,2} [A-Z][a-z]{2} \d{4})/.exec(String(fd.value));
+        push(["slot|" + sl.key + "|" + sl.kind, "Featured event (pick from the list)", dm ? dm[1] + " — " + sl.value : sl.value, "", ""], { type: "slot", kind: sl.kind, featured: "pick" });
+        return;
+      }
+      if (sl.key === FEATURED_DATE) {
+        push(["slot|" + sl.key + "|" + sl.kind, "Date line (filled in when you pick)", sl.value, "", ""], { type: "slot", kind: sl.kind, featured: "date" });
         return;
       }
       var extra = sl.kind === "photo" ? (sl.alt || "") : sl.href !== undefined ? sl.href : "";
