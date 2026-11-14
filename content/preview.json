@@ -10,7 +10,8 @@
   "instagram": "https://www.instagram.com/nirupama_rajendra/",
   "youtube": "https://www.youtube.com/abhinavadancecompany",
   "schoolInstagram": "https://www.instagram.com/abhinavadanceschool/",
-  "showSchoolInstagram": false
+  "showSchoolInstagram": false,
+  "showPastShows": true
  },
  "productions": [
   {
@@ -33,18 +34,18 @@
   {
    "Production": "Krishnaa — Fire to Frost",
    "Label": "",
-   "Length": "",
+   "Length": "90 min",
    "Artists": "",
    "Style": "",
-   "About": "",
+   "About": "This production is on a pulsating personality from Mahabharatha - DRAUPADI !\nBorn out of fire, Draupadi’s life was filled with many emotions and experiences which shaped her into a very unique personality and her journey finally found peace in the cold Himalayas. Throughout her life, Draupadi was entrenched in high values and conducted herself with both elegance and power.Krishnaa - Fire to Frost, depicts highlights of Draupadi'slife through the perspective of Krishna who features as Sutradhara of not only the dance production but also as a major character in Draupadi’s life.",
    "Performers": "",
-   "Director": "",
-   "Music": "",
+   "Director": "Smt. Nirupama Rajendra & Sri T. D. Rajendra",
+   "Music": "Praveen D Rao",
    "Lighting": "",
    "Availability": "",
    "Poster": "assets/web/client/017.jpg",
    "Media folder": "",
-   "Videos": "",
+   "Videos": "https://youtu.be/U4MdyEtvynI",
    "Show": "Yes"
   },
   {
@@ -3560,13 +3561,13 @@
       {
        "key": "performances/upcoming-list/t3",
        "kind": "text",
-       "what": "Title",
+       "what": "Featured event (pick from the list)",
        "value": "SMRM 2026"
       },
       {
        "key": "performances/upcoming-list/t4",
        "kind": "text",
-       "what": "Details",
+       "what": "Date line (filled in when you pick)",
        "value": "20 Nov 2026"
       },
       {
@@ -8456,7 +8457,7 @@
    "mimeType": "image/jpeg"
   }
  },
- "by": "learn@jagli.com",
- "at": "2026-11-12T10:00:51.365Z",
- "hash": "dlNXHXZdt07N+0V3"
+ "by": "shriramnarayan12@gmail.com",
+ "at": "2026-11-14T04:33:18.556Z",
+ "hash": "r134beftaI137zrl"
 }
