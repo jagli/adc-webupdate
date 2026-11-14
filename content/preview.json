@@ -4693,7 +4693,7 @@
        "key": "school/beyond-the-classroom/t1",
        "kind": "photos",
        "what": "Photos (one per line)",
-       "value": "assets/web/client/rangapravesha-01.jpg\nassets/web/client/rangapravesha-02.jpg\nassets/web/client/rangapravesha-medha-1.jpg\nassets/web/client/rangapravesha-08.jpg\nassets/web/client/rangapravesha-sanchita.jpg\nassets/web/client/rangapravesha-04.jpg\nassets/web/client/rangapravesha-07-edit.jpg\nassets/web/client/rangapravesha-09.jpg\nassets/web/client/rangapravesh-shreya.jpg\nassets/web/client/rangapravesha-10-edit.jpg\nhttps://drive.google.com/file/d/10jXIJX1VLzo2hsEYGEABPOb6prklfcvR/view?usp=drive_link"
+       "value": "assets/web/client/rangapravesha-01.jpg\nassets/web/client/rangapravesha-02.jpg\nassets/web/client/rangapravesha-medha-1.jpg\nassets/web/client/rangapravesha-08.jpg\nassets/web/client/rangapravesha-sanchita.jpg\nassets/web/client/rangapravesha-04.jpg\nassets/web/client/rangapravesha-07-edit.jpg\nassets/web/client/rangapravesha-09.jpg\nassets/web/client/rangapravesh-shreya.jpg\nassets/web/client/rangapravesha-10-edit.jpg\nhttps://drive.google.com/file/d/1m9CO4ln8kp6cR600AqV8sS91nXiX_Jq5/view?usp=drive_link\nhttps://drive.google.com/file/d/13OTGvfmul66mbEAqAh5TexWSzhfh5CZJ/view?usp=drive_link"
       },
       {
        "key": "school/beyond-the-classroom/t2",
@@ -8451,9 +8451,14 @@
    "modified": "2026-11-12T07:06:04.713Z",
    "mimeType": "image/jpeg"
   },
-  "10jXIJX1VLzo2hsEYGEABPOb6prklfcvR": {
-   "name": "Big2.jpg",
-   "modified": "2024-09-27T04:19:04.000Z",
+  "1m9CO4ln8kp6cR600AqV8sS91nXiX_Jq5": {
+   "name": "_DSC7383.jpg.jpeg",
+   "modified": "2026-11-14T14:09:25.137Z",
+   "mimeType": "image/jpeg"
+  },
+  "13OTGvfmul66mbEAqAh5TexWSzhfh5CZJ": {
+   "name": "IMG_6072.JPG.jpeg",
+   "modified": "2026-11-14T14:09:28.085Z",
    "mimeType": "image/jpeg"
   },
   "1A8yvFLf0vSD2JyczkYK4Fq3Z_GrPQZt7": {
@@ -8462,7 +8467,7 @@
    "mimeType": "image/jpeg"
   }
  },
- "by": "info@abhinavadancecompany.com",
- "at": "2026-11-14T05:49:05.892Z",
- "hash": "A5mgtagwlYnna1QY"
+ "by": "shriramnarayan12@gmail.com",
+ "at": "2026-11-14T14:15:08.311Z",
+ "hash": "tmv8XZ225JxUcV+Z"
 }
