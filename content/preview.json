@@ -4693,7 +4693,7 @@
        "key": "school/beyond-the-classroom/t1",
        "kind": "photos",
        "what": "Photos (one per line)",
-       "value": "assets/web/client/rangapravesha-01.jpg\nassets/web/client/rangapravesha-02.jpg\nassets/web/client/rangapravesha-medha-1.jpg\nassets/web/client/rangapravesha-08.jpg\nassets/web/client/rangapravesha-sanchita.jpg\nassets/web/client/rangapravesha-04.jpg\nassets/web/client/rangapravesha-07-edit.jpg\nassets/web/client/rangapravesha-09.jpg\nassets/web/client/rangapravesh-shreya.jpg\nassets/web/client/rangapravesha-10-edit.jpg"
+       "value": "assets/web/client/rangapravesha-01.jpg\nassets/web/client/rangapravesha-02.jpg\nassets/web/client/rangapravesha-medha-1.jpg\nassets/web/client/rangapravesha-08.jpg\nassets/web/client/rangapravesha-sanchita.jpg\nassets/web/client/rangapravesha-04.jpg\nassets/web/client/rangapravesha-07-edit.jpg\nassets/web/client/rangapravesha-09.jpg\nassets/web/client/rangapravesh-shreya.jpg\nassets/web/client/rangapravesha-10-edit.jpg\nhttps://drive.google.com/file/d/10jXIJX1VLzo2hsEYGEABPOb6prklfcvR/view?usp=drive_link"
       },
       {
        "key": "school/beyond-the-classroom/t2",
@@ -8451,13 +8451,18 @@
    "modified": "2026-11-12T07:06:04.713Z",
    "mimeType": "image/jpeg"
   },
+  "10jXIJX1VLzo2hsEYGEABPOb6prklfcvR": {
+   "name": "Big2.jpg",
+   "modified": "2024-09-27T04:19:04.000Z",
+   "mimeType": "image/jpeg"
+  },
   "1A8yvFLf0vSD2JyczkYK4Fq3Z_GrPQZt7": {
    "name": "jagli-demo-2-poster.jpg",
    "modified": "2026-11-12T05:23:26.508Z",
    "mimeType": "image/jpeg"
   }
  },
- "by": "info@abhinavadancecompany.com",
- "at": "2026-11-14T05:39:33.780Z",
- "hash": "DtljS5yrLueAAQFs"
+ "by": "shriramnarayan12@gmail.com",
+ "at": "2026-11-14T05:47:02.709Z",
+ "hash": "A5mgtagwlYnna1QY"
 }
