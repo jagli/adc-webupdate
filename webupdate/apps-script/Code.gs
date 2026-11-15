@@ -725,7 +725,8 @@ function captionFromName_(name) {
 /**
  * Panel button “Check for new photos”: every JPG/PNG in the carousel's folder that is not in the
  * carousel yet becomes a new photo row at the end (shown, picture beside it, description from the
- * file name). Shares each new photo “Anyone with the link” so the website robot can download it.
+ * file name). The folder is shared “Anyone with the link”, so the robot can download what is in it;
+ * the script itself only reads Drive.
  * Nothing is removed: a photo deleted from the folder stays until someone unticks Show.
  */
 function checkNewPhotos(expect) {
@@ -761,7 +762,7 @@ function checkNewPhotos(expect) {
     fresh.forEach(function (file, i) {
       var row = at + 1 + i;
       sheet.getRange(at, 1, 1, lastCol).copyTo(sheet.getRange(row, 1, 1, lastCol));
-      try { file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW); } catch (e) { unshared.push(file.getName()); }
+      try { var acc = file.getSharingAccess(); if (acc !== DriveApp.Access.ANYONE_WITH_LINK && acc !== DriveApp.Access.ANYONE) unshared.push(file.getName()); } catch (e) {}
       var cap = captionFromName_(file.getName());
       if (!cap) blank++;
       sheet.getRange(row, 1, 1, 4).setValues([["pho|", true, "https://drive.google.com/file/d/" + file.getId() + "/view", cap]]);
@@ -773,7 +774,7 @@ function checkNewPhotos(expect) {
       (blank ? "Type a Description for " + (blank === fresh.length ? "each" : blank + " of them") + " (what the photo shows). " : "Check each Description. ") +
       "Use ▲ ▼ to change the order, then press Send my changes.";
     if (skipped.length) msg += " Not used: " + skipped.join(", ") + ".";
-    if (unshared.length) msg += " Could not share " + unshared.join(", ") + ": in Drive, right-click ▸ Share ▸ General access: “Anyone with the link”.";
+    if (unshared.length) msg += " Not shared yet: " + unshared.join(", ") + ". Send will stop until they are: ask the owner to share the “Website photos” folder as “Anyone with the link”.";
     log_("Photos added", sheet.getName() + ": " + fresh.length + " from folder “" + f.getName() + "”");
     return { ok: !unshared.length, message: msg };
   } finally { lock.releaseLock(); }

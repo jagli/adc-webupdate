@@ -15,7 +15,7 @@ function setupSheet() {
   var ss = SpreadsheetApp.getActive();
   startTab_(ss);
   globalTab_(ss, content.global || {});
-  photoFolders_(ss, content);
+  var noFolder = photoFolders_(ss, content);
   PAGES.forEach(function (pg) { if (content.pages[pg[0]]) pageTab_(ss, pg, content.pages[pg[0]]); });
   try { refreshFeatured_(); } catch (e) {}
   productionsTab_(ss, content.productions || []);
@@ -26,7 +26,8 @@ function setupSheet() {
   order.forEach(function (name, i) { var s = ss.getSheetByName(name); if (s) { ss.setActiveSheet(s); ss.moveActiveSheet(i + 1); } });
   var def = ss.getSheetByName("Sheet1"); if (def && ss.getSheets().length > 1) ss.deleteSheet(def);
   ss.setActiveSheet(ss.getSheetByName("Start here"));
-  ui.alert("Done. Every tab is ready. Add editors and the moderator in Website ▸ Owner ▸ Users.");
+  ui.alert("Done. Every tab is ready. Add editors and the moderator in Website ▸ Owner ▸ Users." +
+    (noFolder.length ? "\n\nCarousels without a photo folder (create these folders in Drive, next to this Sheet, then run Set up again): " + noFolder.join(", ") : ""));
 }
 
 function freshSheet_(ss, name) {
@@ -115,40 +116,37 @@ function globalTab_(ss, g) {
 /* ── a Drive folder per carousel, for new photos ── */
 
 /**
- * Every carousel gets its own folder in “Website photos” (next to this Sheet), named after its tab
- * and section. Which folder belongs to which carousel is kept in the script's settings, so a
- * renamed folder or section keeps its folder. Puts each folder's link on its carousel (slot.folder).
+ * Every carousel's photo folder: “Website photos” (next to this Sheet) ▸ “<Tab> – <Section>”.
+ * The script only reads Drive, so it never creates folders: the owner makes them once (and shares
+ * “Website photos” as “Anyone with the link can view”, which every photo inside inherits).
+ * A folder found once is remembered by id in the script's settings, so renaming it later is fine.
+ * Puts each folder's link on its carousel (slot.folder); returns the names of folders not found.
  */
 function photoFolders_(ss, content) {
   var props = PropertiesService.getScriptProperties();
   var map = {}; try { map = JSON.parse(props.getProperty("PHOTO_FOLDERS") || "{}"); } catch (e) {}
-  var parent = DriveApp.getFileById(ss.getId()).getParents().next();
-  var root = null;
-  function rootFolder() {
-    if (root) return root;
-    var it = parent.getFoldersByName("Website photos");
-    root = it.hasNext() ? it.next() : parent.createFolder("Website photos");
-    return root;
-  }
+  var missing = [], root = null;
+  try {
+    var it = DriveApp.getFileById(ss.getId()).getParents().next().getFoldersByName("Website photos");
+    if (it.hasNext()) root = it.next();
+  } catch (e) {}
   PAGES.forEach(function (pg) {
     var page = content.pages[pg[0]];
     if (!page) return;
     page.blocks.forEach(function (b) {
       b.slots.forEach(function (sl) {
         if (sl.kind !== "photos") return;
-        var f = null;
+        var name = pg[1] + " – " + b.label, f = null;
         if (map[sl.key]) { try { f = DriveApp.getFolderById(map[sl.key]); if (f.isTrashed()) f = null; } catch (e) { f = null; } }
-        if (!f) {
-          var name = pg[1] + " – " + b.label;
-          var same = rootFolder().getFoldersByName(name);
-          f = same.hasNext() ? same.next() : rootFolder().createFolder(name);
-          map[sl.key] = f.getId();
-        }
+        if (!f && root) { var same = root.getFoldersByName(name); if (same.hasNext()) f = same.next(); }
+        if (!f) { missing.push(name); return; }
+        map[sl.key] = f.getId();
         sl.folder = f.getUrl();
       });
     });
   });
   props.setProperty("PHOTO_FOLDERS", JSON.stringify(map));
+  return root ? missing : ["Website photos (and inside it: " + missing.join(", ") + ")"];
 }
 
 /* ── one page tab ── */

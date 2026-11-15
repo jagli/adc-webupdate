@@ -63,7 +63,7 @@ const pad = (rows) => { const w = width(rows); return rows.map((r) => { const x 
 let active = null;
 const driveFolders = {};
 const shared = [];
-const fakeFile = (id, name, mimeType) => ({ getId: () => id, getName: () => name, getMimeType: () => mimeType, isTrashed: () => false, setSharing: () => shared.push(id) });
+const fakeFile = (id, name, mimeType) => ({ getId: () => id, getName: () => name, getMimeType: () => mimeType, isTrashed: () => false, getSharingAccess: () => (shared.push(id), "A") });
 const fakeFolder = (name, files) => ({ getName: () => name, getFiles: () => { let i = 0; return { hasNext: () => i < files.length, next: () => files[i++] }; } });
 const cacheStore = {};
 const g = {
@@ -233,7 +233,7 @@ perfSheet.values[ev - 1] = keepEv;
   ok(/DSC_7383|HEIC/.test(res1.message) && /IMG_1234\.HEIC \(iPhone HEIC/.test(res1.message) && /clip\.mp4 \(a video/.test(res1.message), "it says which files were not used, and why");
   ok(added[0][2].includes("FILE00000000000000000000002") && added[1][2].includes("FILE00000000000000000000001"), "new photos come in file-name order, at the end of the carousel");
   ok(added[1][3] === "" && added[0][3] === "Dance Karma junior group" && added[0][1] === true, "description from the file name; a camera name is left for the editor");
-  ok(shared.length === 2, "each new photo is shared so the robot can download it");
+  ok(shared.length === 2, "each new photo's link sharing is checked (inherited from the folder)");
   const last = Number(ra) + 1;
   ok(/IMAGE\(/.test(school.formulas[`${last},5`] || ""), "each new row shows its picture");
   const res2 = g.checkNewPhotos({ sheet: "School" });
