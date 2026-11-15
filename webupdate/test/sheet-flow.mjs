@@ -238,6 +238,15 @@ perfSheet.values[ev - 1] = keepEv;
   ok(/IMAGE\(/.test(school.formulas[`${last},5`] || ""), "each new row shows its picture");
   const res2 = g.checkNewPhotos({ sheet: "School" });
   ok(res2.ok && photos().length === n0 + 2 && /No new photos/.test(res2.message), "pressing Check again adds nothing twice");
+  // after a publish the rows hold the website's copies; Check must still not add them again
+  const savedRows = added.map((r) => r[2]);
+  added[0][2] = "assets/web/content/dance-karma-junior-group-1a2b3c4d.jpg"; added[1][2] = "assets/web/content/dsc-7383-5e6f7a8b.jpg";
+  const res3 = g.checkNewPhotos({ sheet: "School" });
+  ok(res3.ok && /No new photos/.test(res3.message), "after a publish, Check does not add the same photos again");
+  added[0][2] = savedRows[0]; added[1][2] = savedRows[1];
+  // a list's note row right under a carousel does not show the carousel buttons
+  const below = Number(ra) + 2;
+  if (String(school.values[below - 1][0]) === "") { active = { sheet: school, range: school.getRange(below, 3) }; ok(!g.getSelectedRow().photos, "a row under the carousel does not show the photo buttons"); }
   const back = g.readPageRows_(school.values, "school");
   const slot = back.blocks.flatMap((b) => b.slots).find((x) => x.key === "school/beyond-the-classroom/t1");
   const lines = slot.value.split("\n");

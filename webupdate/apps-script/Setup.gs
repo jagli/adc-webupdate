@@ -63,7 +63,7 @@ function startTab_(ss) {
     ["", ""],
     ["2.  Change a photo", "step"],
     ["Put the photo in Google Drive ▸ right-click ▸ Share ▸ General access: “Anyone with the link” ▸ Copy link. Paste the link into the photo cell. The picture appears next to it.", ""],
-    ["Videos: paste the YouTube link.   Many photos at once (a carousel or the gallery): paste a Drive folder link in the “Drive folder” row; photos appear in file-name order (01, 02, …).", "tip"],
+    ["Carousels (several photos): click a photo row ▸ in the Website panel press 📁 Open photo folder, drop the photos in, then press ↻ Check for new photos. Type a Description for each.   Videos: paste the YouTube link.   Gallery: paste a Drive folder link in its “Drive folder” row.", "tip"],
     ["", ""],
     ["3.  Lists — one item = one row", "step"],
     ["Every card, event, person, photo or line of a list has its own row. Click the row, then use the “Selected row” box in the Website panel:  ▲ Move up · ▼ Move down · ＋ Add below · Hide / Show.", ""],

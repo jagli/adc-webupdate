@@ -742,7 +742,9 @@ function checkNewPhotos(expect) {
   var lock = LockService.getDocumentLock();
   if (!lock.tryLock(20000)) return { ok: false, message: "Someone else is changing the Sheet. Try again in a minute." };
   try {
-    var have = {};
+    // photos this carousel already took from its folder (after a publish their rows hold the website's copy, not the Drive link)
+    var props = PropertiesService.getScriptProperties(), seenKey = "PHOTOS_TAKEN:" + folder.id;
+    var have = {}; try { JSON.parse(props.getProperty(seenKey) || "[]").forEach(function (id) { have[id] = 1; }); } catch (e) {}
     if (ps.last >= ps.first) sheet.getRange(ps.first, 3, ps.last - ps.first + 1, 1).getValues().forEach(function (r) { var id = driveId_(String(r[0])); if (id) have[id] = 1; });
     var f;
     try { f = DriveApp.getFolderById(folder.id); } catch (e) { return { ok: false, message: "The photo folder cannot be opened. Ask the owner to run Website ▸ Owner ▸ Set up the Sheet." }; }
@@ -769,6 +771,7 @@ function checkNewPhotos(expect) {
       sheet.getRange(row, 5).setFormula(previewFormula_("C" + row));
     });
     noteEdit_();
+    props.setProperty(seenKey, JSON.stringify(Object.keys(have).concat(fresh.map(function (x) { return x.getId(); }))));
     sheet.setActiveRange(sheet.getRange(at + 1, 4));
     var msg = "Added " + fresh.length + " new photo" + (fresh.length > 1 ? "s" : "") + " at the end of the carousel (rows " + (at + 1) + (fresh.length > 1 ? "–" + (at + fresh.length) : "") + "). " +
       (blank ? "Type a Description for " + (blank === fresh.length ? "each" : blank + " of them") + " (what the photo shows). " : "Check each Description. ") +
@@ -794,6 +797,7 @@ function getSelectedRow() {
       var ps = photosetAt_(marks, range.getRow());
       var pf = ps && photoFolderOf_(sheet, ps);
       if (pf) photos = { url: pf.url, sheet: sheet.getName() };
+      if (ps && mark === "" && range.getRow() > ps.last) { ps = null; photos = null; }
       if (ps && mark !== "pho") return { ok: false, photos: photos, message: "Carousel photos. Put new photos in the photo folder, then press ↻ Check for new photos." };
     }
   }

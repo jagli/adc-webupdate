@@ -16,7 +16,8 @@ Open the panel first: menu **Website ▸ Open the Website panel**. It opens on t
 - **New line inside a cell:** Ctrl + Enter (Mac: ⌘ + Enter)
 - **Click the cell before you type.** If you last clicked the panel, typing goes into the panel instead.
 
-### 2. Change a photo
+### 2. Photos
+**One photo** (a photo cell, not a carousel):
 1. Put the photo in Google Drive.
 2. Right-click it ▸ **Share** ▸ General access: **Anyone with the link** ▸ **Copy link**.
 3. Paste the link into the photo cell. The picture appears next to it.
