@@ -11,6 +11,7 @@
  * Column A (hidden) holds a marker on every structural row:
  *   block|key              a section band          slot|key|kind[|link]   one text / photo / video
  *   photoset|slotKey|what  a carousel's header     pho|1 / pho|           one carousel photo (1 = existed)
+ *   phofolder|slotKey      a carousel's Drive folder for new photos (the panel's “Check for new photos”)
  *   listnote|key           the line naming a list  list|key|columns       a list's header row
  *   row|rowKey             one card / list row     sub|field|1 / sub|field  one item of a card's list
  *   events|key|columns     the events header       ev|rowKey              one event
@@ -103,6 +104,7 @@ function readPageRows_(v, page) {
       if (p[2] === "link") slot.href = String(row[3]);
       block.slots.push(slot); continue;
     }
+    if (k.type === "phofolder") continue;
     if (k.type === "photoset") {
       endGroups();
       var ps = k.rest.split("|");
@@ -248,7 +250,8 @@ function layoutPage_(pg, data) {
     if (plain.length) push(["", "What", "Words / photo / video", "Photo description or link address", "Picture"], { type: "slothead" });
     b.slots.forEach(function (sl) {
       if (sl.kind === "photos") {
-        push(["", "▸ Photos — one row per photo. Paste a Drive link to add one; untick Show to hide one. Description: what the photo shows (read aloud to blind visitors and by Google)."], { type: "listnote" });
+        push(["", "▸ Photos — one row per photo. To add photos: put them in the photo folder below, click any photo row, then press ↻ Check for new photos in the Website panel. Untick Show to take one off; ▲ ▼ to change the order. Description: what the photo shows (read aloud to blind visitors and by Google)."], { type: "listnote" });
+        if (sl.folder) push(["phofolder|" + sl.key, "Photo folder", sl.folder, "Drop new photos here (JPG or PNG), then press ↻ Check for new photos in the Website panel.", ""], { type: "phofolder" });
         push(["photoset|" + sl.key + "|" + sl.what, "Show", "Photo (Drive link)", "Description", "Picture"], { type: "listhead", cols: 2 });
         splitLines_(sl.value).forEach(function (line, i) { push(["pho|1", true, line, (sl.alts || [])[i] || "", ""], { type: "pho", photoCol: 3, previewCol: 5 }); });
         return;

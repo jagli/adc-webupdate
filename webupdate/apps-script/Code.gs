@@ -688,15 +688,118 @@ function folderRowInfo_() {
   return base;
 }
 
+/* ── carousels: a Drive folder for new photos, and “Check for new photos” ── */
+
+/**
+ * The carousel around a row (its header, folder row and photo rows), or null.
+ * Works from the folder row, the header or any photo row. Rows are 1-based.
+ */
+function photosetAt_(marks, row) {
+  var t = function (i) { return parseKey_(marks[i - 1]).type; };
+  var i = row;
+  if (t(i) === "phofolder") { while (i <= marks.length && t(i) !== "photoset" && t(i) !== "block") i++; }
+  else { while (i >= 1 && (t(i) === "pho" || t(i) === "")) i--; }
+  if (i < 1 || i > marks.length || t(i) !== "photoset") return null;
+  var head = i, last = head;
+  while (last + 1 <= marks.length && t(last + 1) === "pho") last++;
+  var folderRow = null;
+  for (var j = head - 1; j >= Math.max(1, head - 3); j--) if (t(j) === "phofolder") folderRow = j;
+  return { head: head, first: head + 1, last: last, folderRow: folderRow, key: parseKey_(marks[head - 1]).rest.split("|")[0] };
+}
+
+function photoFolderOf_(sheet, ps) {
+  if (!ps || !ps.folderRow) return null;
+  var link = String(sheet.getRange(ps.folderRow, 3).getValue()).trim();
+  var id = driveId_(link);
+  return id ? { id: id, url: link } : null;
+}
+
+var CAMERA_NAME = /^(img|dsc|dscn|dscf|pxl|mvimg|photo|image|whatsapp image)[\s_-]*[\d\s_.-]*(\(\d+\))?$/i;
+/** A description from a file name: "03 Dance Karma junior.jpg" → "Dance Karma junior"; a camera name → "". */
+function captionFromName_(name) {
+  var n = String(name).replace(/\.[a-z0-9]+$/i, "").trim();
+  if (CAMERA_NAME.test(n)) return "";
+  return n.replace(/^\d+[\s._-]*/, "").replace(/[_-]+/g, " ").replace(/\s+/g, " ").trim();
+}
+
+/**
+ * Panel button “Check for new photos”: every JPG/PNG in the carousel's folder that is not in the
+ * carousel yet becomes a new photo row at the end (shown, picture beside it, description from the
+ * file name). Shares each new photo “Anyone with the link” so the website robot can download it.
+ * Nothing is removed: a photo deleted from the folder stays until someone unticks Show.
+ */
+function checkNewPhotos(expect) {
+  if (!can_("edit")) return { ok: false, message: "Your account is not on the Users list." };
+  var sheet = SpreadsheetApp.getActiveSheet(), range = SpreadsheetApp.getActiveRange();
+  if (!range) return { ok: false, message: "Click a photo row of the carousel first." };
+  if (expect && (expect.sheet !== sheet.getName())) return { ok: false, message: "The selected row changed. Click the carousel again and press the button." };
+  var marks = sheet.getRange(1, 1, sheet.getLastRow(), 1).getValues().map(function (r) { return r[0]; });
+  var ps = photosetAt_(marks, range.getRow());
+  if (!ps) return { ok: false, message: "Click a photo row of a carousel first." };
+  var folder = photoFolderOf_(sheet, ps);
+  if (!folder) return { ok: false, message: "This carousel has no photo folder yet. Ask the owner to run Website ▸ Owner ▸ Set up the Sheet." };
+  var lock = LockService.getDocumentLock();
+  if (!lock.tryLock(20000)) return { ok: false, message: "Someone else is changing the Sheet. Try again in a minute." };
+  try {
+    var have = {};
+    if (ps.last >= ps.first) sheet.getRange(ps.first, 3, ps.last - ps.first + 1, 1).getValues().forEach(function (r) { var id = driveId_(String(r[0])); if (id) have[id] = 1; });
+    var f;
+    try { f = DriveApp.getFolderById(folder.id); } catch (e) { return { ok: false, message: "The photo folder cannot be opened. Ask the owner to run Website ▸ Owner ▸ Set up the Sheet." }; }
+    var it = f.getFiles(), fresh = [], skipped = [];
+    while (it.hasNext()) {
+      var x = it.next();
+      if (x.isTrashed() || have[x.getId()]) continue;
+      if (/^image\/(jpeg|png|webp)$/.test(x.getMimeType())) fresh.push(x);
+      else skipped.push(x.getName() + (/heic|heif/i.test(x.getMimeType() + x.getName()) ? " (iPhone HEIC: save it as JPG)" : /^video\//.test(x.getMimeType()) ? " (a video: put it on YouTube)" : " (not a JPG or PNG photo)"));
+    }
+    fresh.sort(function (a, b) { return a.getName().localeCompare(b.getName(), undefined, { numeric: true }); });
+    if (!fresh.length) {
+      return { ok: true, message: "No new photos in the folder “" + f.getName() + "”." + (skipped.length ? " Not used: " + skipped.join(", ") + "." : " Put new photos in it, then press the button again.") };
+    }
+    var lastCol = sheet.getLastColumn(), at = ps.last, unshared = [], blank = 0;
+    sheet.insertRowsAfter(at, fresh.length);
+    fresh.forEach(function (file, i) {
+      var row = at + 1 + i;
+      sheet.getRange(at, 1, 1, lastCol).copyTo(sheet.getRange(row, 1, 1, lastCol));
+      try { file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW); } catch (e) { unshared.push(file.getName()); }
+      var cap = captionFromName_(file.getName());
+      if (!cap) blank++;
+      sheet.getRange(row, 1, 1, 4).setValues([["pho|", true, "https://drive.google.com/file/d/" + file.getId() + "/view", cap]]);
+      sheet.getRange(row, 5).setFormula(previewFormula_("C" + row));
+    });
+    noteEdit_();
+    sheet.setActiveRange(sheet.getRange(at + 1, 4));
+    var msg = "Added " + fresh.length + " new photo" + (fresh.length > 1 ? "s" : "") + " at the end of the carousel (rows " + (at + 1) + (fresh.length > 1 ? "–" + (at + fresh.length) : "") + "). " +
+      (blank ? "Type a Description for " + (blank === fresh.length ? "each" : blank + " of them") + " (what the photo shows). " : "Check each Description. ") +
+      "Use ▲ ▼ to change the order, then press Send my changes.";
+    if (skipped.length) msg += " Not used: " + skipped.join(", ") + ".";
+    if (unshared.length) msg += " Could not share " + unshared.join(", ") + ": in Drive, right-click ▸ Share ▸ General access: “Anyone with the link”.";
+    log_("Photos added", sheet.getName() + ": " + fresh.length + " from folder “" + f.getName() + "”");
+    return { ok: !unshared.length, message: msg };
+  } finally { lock.releaseLock(); }
+}
+
 /** What the panel shows about the clicked row. */
 function getSelectedRow() {
   if (!can_("edit")) return { ok: false, message: "Your account is not on the Users list." };
   var fr = folderRowInfo_();
   if (fr) return fr;
+  var sheet = SpreadsheetApp.getActiveSheet(), range = SpreadsheetApp.getActiveRange();
+  var photos = null;
+  if (range && PAGES.some(function (p) { return p[1] === sheet.getName(); })) {
+    var mark = parseKey_(sheet.getRange(range.getRow(), 1).getValue()).type;
+    if (mark === "pho" || mark === "phofolder" || mark === "photoset" || mark === "") {
+      var marks = sheet.getRange(1, 1, sheet.getLastRow(), 1).getValues().map(function (r) { return r[0]; });
+      var ps = photosetAt_(marks, range.getRow());
+      var pf = ps && photoFolderOf_(sheet, ps);
+      if (pf) photos = { url: pf.url, sheet: sheet.getName() };
+      if (ps && mark !== "pho") return { ok: false, photos: photos, message: "Carousel photos. Put new photos in the photo folder, then press ↻ Check for new photos." };
+    }
+  }
   var t = rowTarget_();
   if (t.error) return { ok: false, message: t.error };
   var kind = { row: "item", sub: "list item", pho: "photo", ev: "event", grow: "gallery item", prod: "production" }[t.unit.kind];
-  return { ok: true, label: describeRow_(t), kind: kind, canUp: !!t.unit.prev, canDown: !!t.unit.next, shown: t.sheet.getRange(t.r + 1, 2).getValue() !== false, sheet: t.sheet.getName(), row: t.r + 1 };
+  return { ok: true, label: describeRow_(t), kind: kind, canUp: !!t.unit.prev, canDown: !!t.unit.next, shown: t.sheet.getRange(t.r + 1, 2).getValue() !== false, sheet: t.sheet.getName(), row: t.r + 1, photos: photos };
 }
 
 function rowTool(action, expect) {

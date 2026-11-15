@@ -21,9 +21,18 @@ Open the panel first: menu **Website ▸ Open the Website panel**. It opens on t
 2. Right-click it ▸ **Share** ▸ General access: **Anyone with the link** ▸ **Copy link**.
 3. Paste the link into the photo cell. The picture appears next to it.
 
-**Carousels** (for example School ▸ Beyond the Classroom): one row per photo, with the picture beside it. The website's own photos are not in a Drive folder; they are listed here.
-- **Add a photo:** click a photo row, press **＋ Add below**, paste the photo's Drive link, and type a **Description**: what the photo shows, e.g. "Dance Karma 2026 — junior group". It is read aloud to blind visitors and by Google. Left empty, the photo's file name is used.
-- **Change the order:** ▲ Move up / ▼ Move down. **Take one off:** untick Show. **Swap one:** paste a new Drive link over the old one.
+**Carousels** (for example School ▸ Beyond the Classroom): one row per photo, with the picture beside it. Each carousel has its own **photo folder** in Google Drive (shared drive adc X jagli ▸ Website photos), linked in the "Photo folder" row at its top.
+
+- **Add photos:**
+  1. Click any photo row of the carousel. The panel shows **📁 Open photo folder** and **↻ Check for new photos**.
+  2. Press **📁 Open photo folder** and drop the new photos in (JPG or PNG, any size). No sharing or links needed.
+  3. Back in the Sheet, press **↻ Check for new photos**. The new photos are added at the end, each with its picture.
+  4. Type a **Description** for each: what the photo shows, e.g. "Dance Karma 2026 — junior group". It is read aloud to blind visitors and by Google. A file name like "02 Dance Karma junior.jpg" fills it in for you.
+- **Change the order:** ▲ Move up / ▼ Move down. **Take one off:** untick Show. Deleting a photo from the folder does not take it off the website.
+- **Swap one:** paste a new Drive link over the old one.
+- iPhone HEIC photos: save them as JPG first. Videos go on YouTube.
+
+Then press **Send my changes**. The moderator sees "Photos changed" and publishes.
 
 **The Gallery:** paste a Drive **folder** link in its "Drive folder" row to add all its photos at once, in file-name order (01, 02, 03…).
 

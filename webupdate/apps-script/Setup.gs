@@ -15,6 +15,7 @@ function setupSheet() {
   var ss = SpreadsheetApp.getActive();
   startTab_(ss);
   globalTab_(ss, content.global || {});
+  photoFolders_(ss, content);
   PAGES.forEach(function (pg) { if (content.pages[pg[0]]) pageTab_(ss, pg, content.pages[pg[0]]); });
   try { refreshFeatured_(); } catch (e) {}
   productionsTab_(ss, content.productions || []);
@@ -111,6 +112,45 @@ function globalTab_(ss, g) {
   s.getRange(1, 1, s.getMaxRows(), 1).protect().setDescription("Keys").setWarningOnly(true);
 }
 
+/* ── a Drive folder per carousel, for new photos ── */
+
+/**
+ * Every carousel gets its own folder in “Website photos” (next to this Sheet), named after its tab
+ * and section. Which folder belongs to which carousel is kept in the script's settings, so a
+ * renamed folder or section keeps its folder. Puts each folder's link on its carousel (slot.folder).
+ */
+function photoFolders_(ss, content) {
+  var props = PropertiesService.getScriptProperties();
+  var map = {}; try { map = JSON.parse(props.getProperty("PHOTO_FOLDERS") || "{}"); } catch (e) {}
+  var parent = DriveApp.getFileById(ss.getId()).getParents().next();
+  var root = null;
+  function rootFolder() {
+    if (root) return root;
+    var it = parent.getFoldersByName("Website photos");
+    root = it.hasNext() ? it.next() : parent.createFolder("Website photos");
+    return root;
+  }
+  PAGES.forEach(function (pg) {
+    var page = content.pages[pg[0]];
+    if (!page) return;
+    page.blocks.forEach(function (b) {
+      b.slots.forEach(function (sl) {
+        if (sl.kind !== "photos") return;
+        var f = null;
+        if (map[sl.key]) { try { f = DriveApp.getFolderById(map[sl.key]); if (f.isTrashed()) f = null; } catch (e) { f = null; } }
+        if (!f) {
+          var name = pg[1] + " – " + b.label;
+          var same = rootFolder().getFoldersByName(name);
+          f = same.hasNext() ? same.next() : rootFolder().createFolder(name);
+          map[sl.key] = f.getId();
+        }
+        sl.folder = f.getUrl();
+      });
+    });
+  });
+  props.setProperty("PHOTO_FOLDERS", JSON.stringify(map));
+}
+
 /* ── one page tab ── */
 function pageTab_(ss, pg, data) {
   var s = freshSheet_(ss, pg[1]);
@@ -137,6 +177,7 @@ function pageTab_(ss, pg, data) {
       else if (f.type === "pho") { if (c === 2 || c === 3) b = COLORS.edit; }
       else if (f.type === "ev") { if (c >= 2 && c <= 5) b = COLORS.edit; }
       else if (f.type === "grow") { if (c >= 2 && c <= 5) b = COLORS.edit; }
+      else if (f.type === "phofolder") { b = COLORS.listNote; if (c === 1 || c === 3) color = COLORS.note; }
       else if (f.type === "folder") { if (c === 1) color = COLORS.note; if (c === 2) b = COLORS.edit; if (c === 3) color = COLORS.note; }
       else if (f.type === "title") { color = COLORS.title; w = "bold"; }
       else if (f.type === "hint") { color = COLORS.note; }

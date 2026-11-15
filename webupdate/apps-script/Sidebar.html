@@ -76,6 +76,14 @@
         <button id="btn-add" class="alt" disabled>＋ Add below</button>
         <button id="btn-toggle" class="alt" disabled>Hide</button>
       </div>
+      <div id="photo-tools" hidden>
+        <div class="state" style="margin-top:10px">Carousel photos</div>
+        <div class="grid2">
+          <a class="link" id="photo-folder" target="_blank" style="text-align:center">📁 Open photo folder</a>
+          <button id="btn-new-photos">↻ Check for new photos</button>
+        </div>
+        <div class="muted">Put new photos in the folder (JPG or PNG), then press Check. They are added at the end, ready to describe and send.</div>
+      </div>
     </div>
 
     <div class="card" id="editor-actions">
@@ -180,6 +188,9 @@
     $("btn-up").disabled = !(ok && r.canUp); $("btn-down").disabled = !(ok && r.canDown);
     $("btn-add").disabled = !ok; $("btn-toggle").disabled = !ok;
     $("btn-toggle").textContent = ok && !r.shown ? "Show" : "Hide";
+    var ph = r && r.photos;
+    $("photo-tools").hidden = !ph;
+    if (ph) { $("photo-folder").href = ph.url; $("photo-folder").dataset.sheet = ph.sheet; }
   }
   function rowAction(name, btn) { call("rowTool", [name, shownRow], btn).then(function (r) { if (r) say(r.message, !r.ok); lastRow = ""; watchRow(); }); }
   /* follow the clicked row: ask every 2 seconds while this panel is open and visible */
@@ -198,6 +209,10 @@
   $("btn-down").onclick = function () { rowAction("down", this); };
   $("btn-add").onclick = function () { rowAction("add", this); };
   $("btn-toggle").onclick = function () { rowAction("toggle", this); };
+  $("btn-new-photos").onclick = function () {
+    say("");
+    call("checkNewPhotos", [{ sheet: $("photo-folder").dataset.sheet || "" }], this, "Looking in the folder…").then(function (r) { if (r) say(r.message, !r.ok); lastRow = ""; watchRow(); });
+  };
 
   $("btn-send").onclick = function () { say(""); call("sendChanges", [$("note").value], this, "Sending…").then(function (r) { if (r) { say(r.message, !r.ok); if (r.ok) $("note").value = ""; } refresh(); }); };
   /* ask twice inside the panel instead of a browser pop-up (pop-ups can hide behind windows) */

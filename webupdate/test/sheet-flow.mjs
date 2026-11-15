@@ -41,6 +41,7 @@ function sheetFrom(values) {
         setValue: (v) => { s.values[row - 1][col - 1] = v; return rg; },
         getFormulas: () => [Array.from({ length: nc }, (_, j) => s.formulas[`${row},${col + j}`] || "")],
         getCell: (i, j) => s.getRange(row + i - 1, col + j - 1),
+        setFormula: (f) => { s.formulas[`${row},${col}`] = f; return rg; },
         clearContent: () => { s.values[row - 1][col - 1] = ""; return rg; },
         copyTo: (t) => { for (let j = 0; j < nc; j++) { t.getCell(1, j + 1).setValue(s.values[row - 1][col - 1 + j]); const f = s.formulas[`${row},${col + j}`]; if (f) s.formulas[`${t.row},${t.col + j}`] = f; } },
         setFontWeight: () => ({ setBackground: () => {} }), setBackground: () => {},
@@ -60,6 +61,10 @@ const width = (rows) => rows.reduce((m, r) => Math.max(m, r.length), 5);
 const pad = (rows) => { const w = width(rows); return rows.map((r) => { const x = r.slice(); while (x.length < w) x.push(""); return x; }); };
 
 let active = null;
+const driveFolders = {};
+const shared = [];
+const fakeFile = (id, name, mimeType) => ({ getId: () => id, getName: () => name, getMimeType: () => mimeType, isTrashed: () => false, setSharing: () => shared.push(id) });
+const fakeFolder = (name, files) => ({ getName: () => name, getFiles: () => { let i = 0; return { hasNext: () => i < files.length, next: () => files[i++] }; } });
 const cacheStore = {};
 const g = {
   SpreadsheetApp: {
@@ -75,7 +80,7 @@ const g = {
     getUi: () => ({ alert() {} }),
   },
   Session: { getActiveUser: () => ({ getEmail: () => user }), getEffectiveUser: () => user },
-  LockService: { getScriptLock: () => ({ tryLock: () => true, releaseLock() {} }) },
+  LockService: { getScriptLock: () => ({ tryLock: () => true, releaseLock() {} }), getDocumentLock: () => ({ tryLock: () => true, releaseLock() {} }) },
   CacheService: { getScriptCache: () => ({ get: (k) => cacheStore[k] ?? null, put: (k, v) => (cacheStore[k] = v) }) },
   PropertiesService: { getScriptProperties: () => ({ getProperty: (k) => props[k] ?? null, setProperty: (k, v) => (props[k] = v) }) },
   UrlFetchApp: {
@@ -90,7 +95,7 @@ const g = {
       return respond(200, {});
     },
   },
-  DriveApp: { Access: { ANYONE_WITH_LINK: "A", ANYONE: "B" }, getFileById: () => { throw new Error("no"); }, getFolderById: () => { throw new Error("no"); } },
+  DriveApp: { Access: { ANYONE_WITH_LINK: "A", ANYONE: "B" }, Permission: { VIEW: "V" }, getFileById: () => { throw new Error("no"); }, getFolderById: (id) => { if (driveFolders[id]) return driveFolders[id]; throw new Error("no"); } },
   MailApp: { sendEmail: (to, subj) => mails.push([to, subj]) },
   HtmlService: {},
   Utilities: {
@@ -103,12 +108,17 @@ const g = {
   console, JSON, Date, Math, String, Object, Array, Buffer,
 };
 vm.createContext(g);
-for (const f of ["Layout.gs", "Code.gs"]) vm.runInContext(fs.readFileSync(path.join(HERE, "../apps-script", f), "utf8"), g, { filename: f });
+for (const f of ["Layout.gs", "Code.gs", "Setup.gs"]) vm.runInContext(fs.readFileSync(path.join(HERE, "../apps-script", f), "utf8"), g, { filename: f });
 
 /* ── lay the Sheet out the way Setup does ── */
 sheets.Global = sheetFrom(pad([["", "Global"], ["", "hint"], [""], ...GLOBAL_FIELDS.map(([l, k]) => [`global|${k}`, l, site.global[k] ?? ""])]));
 sheets.Productions = sheetFrom(pad(g.layoutProductions_(site.productions).rows));
-for (const p of PAGES) sheets[PAGE_NAMES[p]] = sheetFrom(pad(g.layoutPage_([p, PAGE_NAMES[p]], site.pages[p]).rows));
+const FOLDER = "https://drive.google.com/drive/folders/FOLDER0000000000000000beyond";
+for (const p of PAGES) {
+  const data = JSON.parse(JSON.stringify(site.pages[p]));
+  for (const b of data.blocks) for (const sl of b.slots) if (sl.kind === "photos") sl.folder = sl.key === "school/beyond-the-classroom/t1" ? FOLDER : "https://drive.google.com/drive/folders/OTHER000000000000000000" + sl.key.length;
+  sheets[PAGE_NAMES[p]] = sheetFrom(pad(g.layoutPage_([p, PAGE_NAMES[p]], data).rows));
+}
 sheets.Users = sheetFrom([["Email (Google account)", "Role", "Name"], ["owner@example.com", "Super admin", "Owner"], ["ed@example.com", "Editor", "Ed"], ["mod@example.com", "Moderator", "Mo"]]);
 
 /* ── the flow ── */
@@ -195,6 +205,46 @@ for (let c = 2; c < keepEv.length; c++) perfSheet.values[ev - 1][c] = "";
 const res = g.updatePreview();
 ok(res.ok === false && res.problems.some((m) => /Performances tab, row .* untick Show instead/.test(m)), "Update preview stops on a cleared event: " + (res.problems || [])[0]);
 perfSheet.values[ev - 1] = keepEv;
+
+// carousel: Check for new photos adds what is new in the carousel's folder, once
+{
+  const school = sheets.School;
+  school.name = "School";
+  const at = (fn) => school.values.findIndex(fn) + 1;
+  const photos = () => school.values.filter((r) => /^pho\|/.test(String(r[0])));
+  const firstPho = at((r) => String(r[0]) === "pho|1" && /rangapravesha-01/.test(r[2]));
+  const n0 = photos().length;
+  driveFolders.FOLDER0000000000000000beyond = fakeFolder("School – Beyond the Classroom", [
+    fakeFile("FILE00000000000000000000002", "02 Dance Karma junior group.jpg", "image/jpeg"),
+    fakeFile("FILE00000000000000000000001", "DSC_7383.JPG", "image/jpeg"),
+    fakeFile("FILE00000000000000000000003", "IMG_1234.HEIC", "image/heic"),
+    fakeFile("FILE00000000000000000000004", "clip.mp4", "video/mp4"),
+  ]);
+  active = { sheet: school, range: school.getRange(firstPho, 3) };
+  const sel = g.getSelectedRow();
+  ok(sel.ok && sel.photos && sel.photos.url === FOLDER, "clicking a carousel photo shows the carousel's photo folder in the panel");
+  const folderRow = at((r) => String(r[0]).startsWith("phofolder|school/beyond"));
+  active = { sheet: school, range: school.getRange(folderRow, 3) };
+  ok(g.getSelectedRow().photos?.url === FOLDER, "clicking the Photo folder row shows the buttons too");
+  const res1 = g.checkNewPhotos({ sheet: "School" });
+  const [, ra] = /rows (\d+)/.exec(res1.message) || [];
+  const added = [school.values[ra - 1], school.values[ra]];
+  ok(res1.ok && photos().length === n0 + 2, "Check for new photos adds the two JPGs: " + res1.message);
+  ok(/DSC_7383|HEIC/.test(res1.message) && /IMG_1234\.HEIC \(iPhone HEIC/.test(res1.message) && /clip\.mp4 \(a video/.test(res1.message), "it says which files were not used, and why");
+  ok(added[0][2].includes("FILE00000000000000000000002") && added[1][2].includes("FILE00000000000000000000001"), "new photos come in file-name order, at the end of the carousel");
+  ok(added[1][3] === "" && added[0][3] === "Dance Karma junior group" && added[0][1] === true, "description from the file name; a camera name is left for the editor");
+  ok(shared.length === 2, "each new photo is shared so the robot can download it");
+  const last = Number(ra) + 1;
+  ok(/IMAGE\(/.test(school.formulas[`${last},5`] || ""), "each new row shows its picture");
+  const res2 = g.checkNewPhotos({ sheet: "School" });
+  ok(res2.ok && photos().length === n0 + 2 && /No new photos/.test(res2.message), "pressing Check again adds nothing twice");
+  const back = g.readPageRows_(school.values, "school");
+  const slot = back.blocks.flatMap((b) => b.slots).find((x) => x.key === "school/beyond-the-classroom/t1");
+  const lines = slot.value.split("\n");
+  const before = site.pages.school.blocks.flatMap((b) => b.slots).find((x) => x.key === "school/beyond-the-classroom/t1").value.split("\n").length;
+  ok(lines.length === before + 2 && slot.alts.length === lines.length && slot.alts[lines.length - 2] === "Dance Karma junior group", "the new photos and descriptions are read and sent like any other");
+  ok(!back.problems.length, "the folder row is not mistaken for a photo");
+}
 
 // a newer publish (made outside this preview) clears a stale "ready"
 props.STATE = JSON.stringify({ status: "ready", when: "2026-01-01T00:00:00Z", sha: "old1234", hash: "h" });
