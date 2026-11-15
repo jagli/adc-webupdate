@@ -24,7 +24,7 @@ let lastPreview = null;
 function sheetFrom(values) {
   const s = {
     values,
-    getDataRange: () => ({ getValues: () => s.values.map((r) => r.slice()) }),
+    getDataRange: () => ({ getValues: () => s.values.map((r) => r.slice()), getRichTextValues: () => s.values.map((r) => r.map(() => null)) }),
     getLastRow: () => s.values.length,
     appendRow: (r) => s.values.push(r),
     formulas: {},

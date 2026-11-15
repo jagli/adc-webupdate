@@ -106,13 +106,13 @@ function readPageRows_(v, page) {
     if (k.type === "photoset") {
       endGroups();
       var ps = k.rest.split("|");
-      photoset = { key: ps[0], kind: "photos", what: ps.slice(1).join("|") || "Photos (one per line)", value: "", items: [] };
+      photoset = { key: ps[0], kind: "photos", what: ps.slice(1).join("|") || "Photos (one per line)", value: "", items: [], alts: [] };
       block.slots.push(photoset); continue;
     }
     if ((k.type === "pho" || k.type === "") && photoset) {
       var pv = String(row[2] === undefined ? "" : row[2]).trim();
       if (!pv) { if (k.rest) warnEmpty(r, "a photo"); continue; }
-      if (row[1] !== false) photoset.items.push(pv);
+      if (row[1] !== false) { photoset.items.push(pv); photoset.alts.push(String(row[3] === undefined ? "" : row[3]).trim()); }
       continue;
     }
     if (k.type === "listnote") { endGroups(); listName = String(row[1]).replace(/^▸\s*/, "").split(" — ")[0]; continue; }
@@ -248,9 +248,9 @@ function layoutPage_(pg, data) {
     if (plain.length) push(["", "What", "Words / photo / video", "Photo description or link address", "Picture"], { type: "slothead" });
     b.slots.forEach(function (sl) {
       if (sl.kind === "photos") {
-        push(["", "▸ Photos — one row per photo. Paste a Drive link to add one; untick Show to hide one."], { type: "listnote" });
-        push(["photoset|" + sl.key + "|" + sl.what, "Show", "Photo (Drive link)", "", "Picture"], { type: "listhead", cols: 1 });
-        splitLines_(sl.value).forEach(function (line) { push(["pho|1", true, line, "", ""], { type: "pho", photoCol: 3, previewCol: 5 }); });
+        push(["", "▸ Photos — one row per photo. Paste a Drive link to add one; untick Show to hide one. Description: what the photo shows (read aloud to blind visitors and by Google)."], { type: "listnote" });
+        push(["photoset|" + sl.key + "|" + sl.what, "Show", "Photo (Drive link)", "Description", "Picture"], { type: "listhead", cols: 2 });
+        splitLines_(sl.value).forEach(function (line, i) { push(["pho|1", true, line, (sl.alts || [])[i] || "", ""], { type: "pho", photoCol: 3, previewCol: 5 }); });
         return;
       }
       if (sl.key === FEATURED_TITLE) {

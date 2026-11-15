@@ -26,6 +26,7 @@ function blockChanges(b0, b1) {
     if (!o) continue;
     if (normalise(bare(o.value)) !== normalise(bare(s.value))) out.push(s.kind === "photo" ? `${s.what} replaced` : s.kind === "photos" ? "Photos changed" : s.kind === "video" ? `${s.what} changed` : `${s.what} changed: “${short(s.value)}”`);
     else if ((o.alt ?? "") !== (s.alt ?? "")) out.push(`${s.what} description changed`);
+    else if (s.kind === "photos" && (s.alts || []).some((x, i) => x && x !== (o.alts || [])[i])) out.push("Photo descriptions changed");
     else if ((o.href ?? "") !== (s.href ?? "")) out.push(`${s.what} link changed`);
   }
   const l0 = new Map((b0?.lists || []).map((l) => [l.key, l]));

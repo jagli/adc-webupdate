@@ -21,7 +21,13 @@ Open the panel first: menu **Website ▸ Open the Website panel**. It opens on t
 2. Right-click it ▸ **Share** ▸ General access: **Anyone with the link** ▸ **Copy link**.
 3. Paste the link into the photo cell. The picture appears next to it.
 
-**Many photos at once (a carousel or the gallery):** paste a Drive **folder** link in the "Drive folder" row. Its photos are used in file-name order (01, 02, 03…).
+**Carousels** (for example School ▸ Beyond the Classroom): one row per photo, with the picture beside it. The website's own photos are not in a Drive folder; they are listed here.
+- **Add a photo:** click a photo row, press **＋ Add below**, paste the photo's Drive link, and type a **Description**: what the photo shows, e.g. "Dance Karma 2026 — junior group". It is read aloud to blind visitors and by Google. Left empty, the photo's file name is used.
+- **Change the order:** ▲ Move up / ▼ Move down. **Take one off:** untick Show. **Swap one:** paste a new Drive link over the old one.
+
+**The Gallery:** paste a Drive **folder** link in its "Drive folder" row to add all its photos at once, in file-name order (01, 02, 03…).
+
+The website resizes and turns every photo upright itself; any size of JPG or PNG is fine.
 
 **Videos:** paste the YouTube link.
 
@@ -29,7 +35,7 @@ Open the panel first: menu **Website ▸ Open the Website panel**. It opens on t
 **One row = one item.** Click the row, then use the **Selected row** box in the panel:
 
 - **▲ Move up / ▼ Move down:** change the order.
-- **＋ Add below:** a new empty row under the one you clicked. It starts **hidden**: fill it in, then tick **Show**.
+- **＋ Add below:** a new empty row under the one you clicked, with Show ticked. Fill it in.
 - **Hide / Show:** takes an item off the website, or brings it back. Nothing is ever deleted.
 
 **Never clear a row to remove it.** Press Hide instead. If a row is cleared, the panel stops and tells you.
@@ -37,11 +43,14 @@ Open the panel first: menu **Website ▸ Open the Website panel**. It opens on t
 **Events:** one row per show: Date (click the cell for a calendar) · Event · Details · Ticket link. Past dates hide themselves.
 
 **Featured event** (Performances tab ▸ Upcoming Shows):
+
 1. In **Featured event**, pick the event from the list. The list shows the events below from today on, in date order. The date line fills itself in.
 2. Paste the poster's Google Drive link in **Photo**.
 3. Press **Send my changes**. The moderator publishes it.
 
 When the featured event's date has passed, it stays on the website until someone picks a new one.
+
+**Past Shows** (Performances page, under Upcoming Shows): events whose date has passed move there by themselves, newest first, on the next publish. Switch it on or off with the **Show Past Shows** tick in the **Global** tab.
 
 ### 4. Send your changes
 1. When you are done, press **Send my changes** in the panel. You can add a note for the moderator.

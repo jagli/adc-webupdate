@@ -71,6 +71,12 @@ const PHOTOS_WHAT = "Photos (one per line)";
 function trackValue(el) {
   return el.children.map((c) => (c.tag === "img" ? bare(c.attrs.src) : decode(c.attrs.href || ""))).filter(Boolean).join("\n");
 }
+/** Each carousel photo's description (alt), in the same order as trackValue; "" for a video slide. */
+function trackAlts(el) {
+  return el.children.filter((c) => (c.tag === "img" ? bare(c.attrs.src) : decode(c.attrs.href || ""))).map((c) => (c.tag === "img" ? decode(c.attrs.alt || "") : ""));
+}
+/** A description made from a photo's file name: "dance-karma-02.jpg" → "dance karma 02". */
+const altFromName = (line) => line.split(/[?#]/)[0].split("/").pop().replace(/\.[a-z0-9]+$/i, "").replace(/-[0-9a-f]{8}$/, "").replace(/-(jpe?g|png|webp|heic)$/i, "").replace(/^\d+[\s._-]*/, "").replace(/[-_]+/g, " ").trim();
 
 const isVideo = (el) => el.tag === "a" && ("data-video" in el.attrs || classes(el).includes("s-video"));
 
@@ -157,7 +163,7 @@ export function extract(page, src) {
         return;
       }
       if (isTrack(el)) {
-        block.slots.push({ key: `${key}/t${++si}`, kind: "photos", what: PHOTOS_WHAT, el, value: trackValue(el) });
+        block.slots.push({ key: `${key}/t${++si}`, kind: "photos", what: PHOTOS_WHAT, el, value: trackValue(el), alts: trackAlts(el) });
         return;
       }
       if (el !== top && listContainer(src, el, knownSet)) {
@@ -222,7 +228,7 @@ export function toData(model) {
     blocks: model.blocks.map((b) => ({
       key: b.key,
       label: b.label,
-      slots: b.slots.map((s) => ({ key: s.key, kind: s.kind, what: s.what, value: s.value, ...(s.alt !== undefined && { alt: s.alt }), ...(s.href !== undefined && { href: s.href }) })),
+      slots: b.slots.map((s) => ({ key: s.key, kind: s.kind, what: s.what, value: s.value, ...(s.alt !== undefined && { alt: s.alt }), ...(s.alts !== undefined && { alts: s.alts }), ...(s.href !== undefined && { href: s.href }) })),
       lists: b.lists.map((l) => ({
         key: l.key,
         what: l.what,
@@ -264,16 +270,20 @@ function fieldEdits(src, f, cell, base = 0) {
   } else if (f.kind === "photos") {
     const now = trackValue(el);
     if (!normalise(cell.value)) return edits; // an emptied carousel keeps its photos (the checks report it)
-    if (normalise(cell.value) !== normalise(now)) {
+    const lines0 = normalise(cell.value).split("\n").map((x) => x.trim()).filter(Boolean);
+    // a description typed in the Sheet wins; an empty one keeps the photo's own (or, for a new photo, its file name)
+    const typed = (i) => String((cell.alts || [])[i] ?? "").trim();
+    const altsChanged = lines0.some((line, i) => { const j = now.split("\n").indexOf(bare(line)); return typed(i) && j >= 0 && typed(i) !== (f.alts || [])[j]; });
+    if (normalise(cell.value) !== normalise(now) || altsChanged) {
       const slides = el.children;
       const imgTpl = slides.find((c) => c.tag === "img");
       const vidTpl = slides.find((c) => c.tag === "a");
       const sep = slides.length > 1 ? src.slice(slides[0].end, slides[1].start) : "\n";
       const byValue = new Map(slides.map((c) => [c.tag === "img" ? bare(c.attrs.src) : decode(c.attrs.href || ""), c]));
       const lines = normalise(cell.value).split("\n").map((x) => x.trim()).filter(Boolean);
-      const out = lines.map((line) => {
+      const out = lines.map((line, i) => {
         const same = byValue.get(bare(line));
-        if (same) return src.slice(same.start, same.end);
+        if (same) { const html = src.slice(same.start, same.end); return same.tag === "img" && typed(i) ? setAttr(html, "alt", typed(i)) : html; }
         const yt = (line.match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/) || [])[1];
         if (yt) {
           if (vidTpl) {
@@ -284,8 +294,7 @@ function fieldEdits(src, f, cell, base = 0) {
           return `<a class="s-mini__slide s-pop__video" href="${escapeAttr(line)}" target="_blank" rel="noopener" data-video data-video-title="Video"><img src="https://img.youtube.com/vi/${yt}/hqdefault.jpg" alt="Play video" loading="lazy"><span class="s-video__play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></a>`;
         }
         const tpl = imgTpl ? src.slice(imgTpl.start, imgTpl.end) : '<img class="s-mini__slide" src="" alt="" loading="lazy">';
-        const alt = line.split("/").pop().replace(/\.[a-z0-9]+$/i, "").replace(/^\d+[\s._-]*/, "").replace(/[-_]+/g, " ");
-        return setAttr(setAttr(tpl, "src", line), "alt", imgTpl ? decode(imgTpl.attrs.alt || alt) : alt);
+        return setAttr(setAttr(tpl, "src", line), "alt", typed(i) || altFromName(line));
       });
       edits.push([slides[0].start - base, slides[slides.length - 1].end - base, out.join(sep)]);
     }
@@ -363,7 +372,7 @@ export function apply(page, src, data, { today = Date.now() } = {}) {
     for (const s of block.slots) {
       const v = slotData.get(s.key);
       if (!v) continue;
-      edits.push(...fieldEdits(src, s, { value: v.value, alt: v.alt, href: v.href }));
+      edits.push(...fieldEdits(src, s, { value: v.value, alt: v.alt, alts: v.alts, href: v.href }));
     }
     const listData = new Map(d.lists.map((l) => [l.key, l]));
     for (const l of block.lists) {

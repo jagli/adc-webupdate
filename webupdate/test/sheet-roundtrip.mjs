@@ -110,6 +110,18 @@ const liveEv = live.blocks.find((b) => b.key === "performances/upcoming-list").l
   const slot = back.blocks.flatMap((b) => b.slots).find((x) => x.key === origSlot.key);
   ok(slot.value.split("\n").length === origSlot.value.split("\n").length - 1, "carousel: one photo hidden");
 }
+{
+  // a carousel photo's description: shown in the Sheet, read back in step with its photo
+  const s2 = "school";
+  const v = toValues(ctx.layoutPage_([s2, "School"], site.pages[s2]));
+  const rows = v.map((r, i) => i).filter((i) => String(v[i][0]) === "pho|1");
+  const origSlot = site.pages[s2].blocks.flatMap((b) => b.slots).find((x) => x.kind === "photos");
+  ok(v[rows[0]][3] === origSlot.alts[0] && v[rows[0]][3] !== "", "carousel: each photo row shows its description");
+  v[rows[0]][1] = false;
+  v[rows[1]][3] = "A new description";
+  const slot = ctx.readPageRows_(v, s2).blocks.flatMap((b) => b.slots).find((x) => x.key === origSlot.key);
+  ok(slot.alts.length === slot.value.split("\n").length && slot.alts[0] === "A new description", "carousel: descriptions stay with their photos when one is hidden");
+}
 // 5. the panel's Move up / Move down: what moves together
 {
   const v = fresh();

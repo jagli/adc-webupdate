@@ -31,6 +31,22 @@ const gt = block("get-tickets").slots.find((s) => s.kind === "photo");
 gt.value = "assets/web/content/test-photo.jpg"; gt.alt = "A test photo";
 block("what-makes-adc-unique").slots.find((s) => s.kind === "video").value = "https://youtu.be/la7C2BQlbHY";
 
+{
+  // carousel: a new photo gets its own description (typed, or from its file name), never another photo's
+  const ss = fs.readFileSync(path.join(ROOT, "school.html"), "utf8");
+  const sd = toData(extract("school", ss));
+  const c = sd.blocks.find((b) => b.key === "school/beyond-the-classroom").slots.find((x) => x.kind === "photos");
+  const lines = c.value.split("\n");
+  c.value = ["assets/web/content/dance-karma-2026-ab12cd34.jpg", "assets/web/content/milan-03-ab12cd35.jpg", ...lines.slice(1)].join("\n");
+  c.alts = ["", "New students at Milan", "Changed description", ...c.alts.slice(2)];
+  const so = apply("school", ss, sd).src;
+  ok(so.includes('src="assets/web/content/dance-karma-2026-ab12cd34.jpg" alt="dance karma 2026"'), "carousel: new photo without a description is described by its file name");
+  ok(so.includes('alt="New students at Milan"'), "carousel: new photo uses the description typed in the Sheet");
+  ok(so.includes('src="' + lines[1] + '" alt="Changed description"'), "carousel: an existing photo's description can be changed");
+  ok(!so.includes('src="' + lines[0] + '"'), "carousel: a removed photo is gone");
+  ok(apply("school", ss, toData(extract("school", ss))).src === ss, "carousel: no change in the Sheet, no change to the page");
+}
+
 const out = apply(p, src, data, { today: Date.parse("2026-10-23") });
 if (OUT) fs.writeFileSync(OUT, out.src);
 const again = toData(extract(p, out.src));

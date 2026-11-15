@@ -111,14 +111,22 @@ export async function resolveMedia(content, stage, { cache, log = () => {} } = {
   }
 
   /** A photos cell: one photo/video per line; a Drive folder link becomes all its photos. */
-  async function fixLines(value, where) {
-    const out = [];
-    for (const line of String(value || "").split(/\r?\n/).map((x) => x.trim()).filter(Boolean)) {
+  async function fixLines(value, where, alts) {
+    const out = [], outAlts = [];
+    for (const [i, line] of String(value || "").split(/\r?\n/).map((x) => x.trim()).filter(Boolean).entries()) {
+      const alt = alts?.[i] ?? "";
       if (isDriveFolder(line)) {
-        for (const f of folderFiles(line, where)) { const rel = await fetchFile(f.id, f.name, "photo", `${where} › ${f.name}`); if (rel) out.push(rel); }
-      } else if (youtubeId(line)) out.push(line);
-      else out.push(await fix(line, where));
+        for (const f of folderFiles(line, where)) { const rel = await fetchFile(f.id, f.name, "photo", `${where} › ${f.name}`); if (rel) { out.push(rel); outAlts.push(captionFromName(f.name)); } }
+      } else if (youtubeId(line)) { out.push(line); outAlts.push(alt); }
+      else {
+        const rel = await fix(line, where);
+        out.push(rel);
+        // a new Drive photo with no description is described by its Drive file name, not the web copy's
+        const id = driveId(line);
+        outAlts.push(alt || (id && drive[id]?.name ? captionFromName(drive[id].name) : ""));
+      }
     }
+    if (alts) return { value: out.join("\n"), alts: outAlts };
     return out.join("\n");
   }
 
@@ -127,7 +135,7 @@ export async function resolveMedia(content, stage, { cache, log = () => {} } = {
       const at = (x) => `${content.pageNames?.[page] || page} › ${b.label}${x ? ` › ${x}` : ""}`;
       for (const s of b.slots) {
         if (s.kind === "photo") s.value = await fix(s.value, at(s.what));
-        if (s.kind === "photos") s.value = await fixLines(s.value, at(s.what));
+        if (s.kind === "photos") { const r = await fixLines(s.value, at(s.what), s.alts || []); s.value = r.value; s.alts = r.alts; }
         if (s.kind === "video" && s.value && !youtubeId(s.value)) problems.push(`${at(s.what)}: "${s.value}" is not a YouTube link`);
         if (s.href) s.href = await fix(s.href, at(`${s.what} link`), "file");
       }

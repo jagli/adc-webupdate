@@ -134,7 +134,7 @@ function pageTab_(ss, pg, data) {
       else if (f.type === "slot") { if (c === 1) color = COLORS.note; if (c === 2 || (c === 3 && (f.kind === "photo" || f.link))) b = COLORS.edit; }
       else if (f.type === "row") { if (c >= 2 && c < 2 + f.cols) b = (f.multiCols || []).indexOf(c + 1) >= 0 ? COLORS.key : COLORS.edit; }
       else if (f.type === "sub") { if (c === f.itemCol - 1) b = COLORS.item; else if (c >= 1) b = COLORS.itemRow; }
-      else if (f.type === "pho") { if (c === 2) b = COLORS.edit; }
+      else if (f.type === "pho") { if (c === 2 || c === 3) b = COLORS.edit; }
       else if (f.type === "ev") { if (c >= 2 && c <= 5) b = COLORS.edit; }
       else if (f.type === "grow") { if (c >= 2 && c <= 5) b = COLORS.edit; }
       else if (f.type === "folder") { if (c === 1) color = COLORS.note; if (c === 2) b = COLORS.edit; if (c === 3) color = COLORS.note; }

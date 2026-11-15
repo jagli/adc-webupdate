@@ -87,6 +87,12 @@ export function readSite(root) {
 }
 
 /** Keep the editors' values wherever the key still exists; take the new layout everywhere else. */
+/** Descriptions for `value`'s photos, taken from the page's own photos by address (a photo not on the page gets ""). */
+function altsByPhoto(value, pageValue, pageAlts) {
+  const by = new Map(String(pageValue || "").split("\n").map((v, i) => [v.trim(), pageAlts[i] ?? ""]));
+  return String(value || "").split("\n").map((x) => x.trim()).filter(Boolean).map((v) => by.get(v) ?? "");
+}
+
 export function mergeContent(old, fresh, report = []) {
   const out = JSON.parse(JSON.stringify(fresh));
   out.global = { ...fresh.global, ...old.global };
@@ -98,7 +104,7 @@ export function mergeContent(old, fresh, report = []) {
       if (!ob) { report.push(`new section: ${b.key}`); continue; }
       oldBlocks.delete(b.key);
       const os = new Map(ob.slots.map((s) => [s.key, s]));
-      b.slots = b.slots.map((s) => (os.has(s.key) && os.get(s.key).kind === s.kind ? { ...s, value: os.get(s.key).value, ...(s.alt !== undefined && { alt: os.get(s.key).alt ?? s.alt }), ...(s.href !== undefined && { href: os.get(s.key).href ?? s.href }) } : (report.push(`new text/photo: ${s.key}`), s)));
+      b.slots = b.slots.map((s) => (os.has(s.key) && os.get(s.key).kind === s.kind ? { ...s, value: os.get(s.key).value, ...(s.alt !== undefined && { alt: os.get(s.key).alt ?? s.alt }), ...(s.alts !== undefined && { alts: os.get(s.key).alts ?? altsByPhoto(os.get(s.key).value, s.value, s.alts) }), ...(s.href !== undefined && { href: os.get(s.key).href ?? s.href }) } : (report.push(`new text/photo: ${s.key}`), s)));
       const ol = new Map(ob.lists.map((l) => [l.key, l]));
       b.lists = b.lists.map((l) => {
         const o = ol.get(l.key);
