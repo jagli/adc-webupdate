@@ -4737,7 +4737,7 @@
        "key": "school/beyond-the-classroom/t1",
        "kind": "photos",
        "what": "Photos (one per line)",
-       "value": "assets/web/client/rangapravesha-01.jpg\nassets/web/client/rangapravesha-02.jpg\nassets/web/client/rangapravesha-medha-1.jpg\nassets/web/client/rangapravesha-08.jpg\nassets/web/client/rangapravesha-sanchita.jpg\nassets/web/client/rangapravesha-04.jpg\nassets/web/client/rangapravesha-07-edit.jpg\nassets/web/client/rangapravesha-09.jpg\nassets/web/client/rangapravesh-shreya.jpg\nassets/web/client/rangapravesha-10-edit.jpg\nhttps://drive.google.com/file/d/1IPW98WKqiQkLvKTW0nGeVJr4zEUneK5U/view\nhttps://drive.google.com/file/d/1qlmH5m4riDS5FWmcb22AeM6zJvZP0Cha/view",
+       "value": "assets/web/client/rangapravesha-01.jpg\nassets/web/client/rangapravesha-02.jpg\nassets/web/client/rangapravesha-medha-1.jpg\nassets/web/client/rangapravesha-08.jpg\nassets/web/client/rangapravesha-sanchita.jpg\nassets/web/client/rangapravesha-04.jpg\nassets/web/client/rangapravesha-07-edit.jpg\nassets/web/client/rangapravesha-09.jpg\nassets/web/client/rangapravesh-shreya.jpg\nassets/web/client/rangapravesha-10-edit.jpg\nassets/web/content/dsc7383-jpg-62bf7aeb.jpg\nassets/web/content/img-6072-jpg-6e0ac5f8.jpg",
        "alts": [
         "Rangapravesha — Apoorva’s debut solo on stage",
         "Rangapravesha — Radha’s debut solo on stage",
@@ -8548,19 +8548,8 @@
    ]
   }
  },
- "drive": {
-  "1IPW98WKqiQkLvKTW0nGeVJr4zEUneK5U": {
-   "name": "_DSC7383.jpg.jpeg",
-   "modified": "2026-11-16T09:26:25.995Z",
-   "mimeType": "image/jpeg"
-  },
-  "1qlmH5m4riDS5FWmcb22AeM6zJvZP0Cha": {
-   "name": "IMG_6072.JPG.jpeg",
-   "modified": "2026-11-16T09:26:33.869Z",
-   "mimeType": "image/jpeg"
-  }
- },
- "by": "info@abhinavadancecompany.com",
- "at": "2026-11-16T09:38:30.096Z",
- "hash": "FPOcWQpynIZhCxut"
+ "drive": {},
+ "by": "shriramnarayan12@gmail.com",
+ "at": "2026-11-16T09:49:04.588Z",
+ "hash": "0K/6yms1hum/Pa48"
 }
