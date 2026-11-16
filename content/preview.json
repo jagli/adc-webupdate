@@ -60,7 +60,7 @@
    "Music": "",
    "Lighting": "",
    "Availability": "",
-   "Poster": "https://drive.google.com/file/d/1A8yvFLf0vSD2JyczkYK4Fq3Z_GrPQZt7/view",
+   "Poster": "assets/web/content/jagli-demo-2-poster-f62faac1.jpg",
    "Media folder": "",
    "Videos": "https://youtu.be/tpkiF7WQuWE?si=Ke9gtq4wJOuAdxBK",
    "Show": "No"
@@ -1265,6 +1265,31 @@
        "kind": "text",
        "what": "Heading",
        "value": "Content · Style · Performance"
+      },
+      {
+       "key": "index/content-style-performance/t3",
+       "kind": "text",
+       "what": "Text",
+       "value": "Where the *Karanas* Come Home"
+      },
+      {
+       "key": "index/content-style-performance/t4",
+       "kind": "text",
+       "what": "Text",
+       "value": "In a South Indian temple, Natyashastra movements find their original home. Watch how Natyashastra karanas are offered as both technique and prayer — precise, luminous, and deeply still."
+      },
+      {
+       "key": "index/content-style-performance/t5",
+       "kind": "video",
+       "what": "Video link",
+       "value": "https://www.youtube.com/watch?v=X4nPZB4uVTA"
+      },
+      {
+       "key": "index/content-style-performance/t6",
+       "kind": "photo",
+       "what": "Video picture",
+       "value": "assets/web/client/lasya-ranjini-thumbnail-edit.jpg",
+       "alt": "Play video: Lasya Ranjini"
       }
      ],
      "lists": [
@@ -1726,7 +1751,13 @@
        "key": "about/our-mission/t1",
        "kind": "photos",
        "what": "Photos (one per line)",
-       "value": "assets/web/client/four-pillars-4.jpg\nassets/web/client/four-pillars-3.jpg\nassets/web/client/four-pillars-5.jpg\nassets/web/client/four-pillars-1.jpg"
+       "value": "assets/web/client/four-pillars-4.jpg\nassets/web/client/four-pillars-3.jpg\nassets/web/client/four-pillars-5.jpg\nassets/web/client/four-pillars-1.jpg",
+       "alts": [
+        "Four Pillars of Abhinava — Abhinava Dance Company — production on stage",
+        "Four Pillars of Abhinava — Research at a heritage site",
+        "Four Pillars of Abhinava — Abhinava Dance School — a class in the studio",
+        "Four Pillars of Abhinava — Community — Madanothsava procession"
+       ]
       },
       {
        "key": "about/our-mission/t2",
@@ -3549,7 +3580,7 @@
        "key": "performances/upcoming-list/t1",
        "kind": "photo",
        "what": "Photo",
-       "value": "https://drive.google.com/file/d/1sMNNCVZHfD1RUMVlleSqrwFR3kwr1no2/view",
+       "value": "assets/web/content/upcoming-shows-list-pic-edit-8871f9ef.jpg",
        "alt": "A dancer of Abhinava Dance Company"
       },
       {
@@ -3809,7 +3840,16 @@
        "key": "performances/past-performances/t1",
        "kind": "photos",
        "what": "Photos (one per line)",
-       "value": "assets/web/client/noteworthy-1.jpg\nassets/web/client/noteworthy-2.jpg\nassets/web/client/noteworthy-3.jpg\nassets/web/client/noteworthy-4.jpg\nassets/web/client/noteworthy-5.jpg\nassets/web/client/noteworthy-6.jpg\nassets/web/client/noteworthy-7.jpg"
+       "value": "assets/web/client/noteworthy-1.jpg\nassets/web/client/noteworthy-2.jpg\nassets/web/client/noteworthy-3.jpg\nassets/web/client/noteworthy-4.jpg\nassets/web/client/noteworthy-5.jpg\nassets/web/client/noteworthy-6.jpg\nassets/web/client/noteworthy-7.jpg",
+       "alts": [
+        "Noteworthy performance 1",
+        "Noteworthy performance 2",
+        "Noteworthy performance 3",
+        "Noteworthy performance 4",
+        "Noteworthy performance",
+        "Noteworthy performance",
+        "Noteworthy performance"
+       ]
       },
       {
        "key": "performances/past-performances/t2",
@@ -4440,7 +4480,11 @@
        "key": "school/apply/t1",
        "kind": "photos",
        "what": "Photos (one per line)",
-       "value": "assets/web/client/school-apply-now.jpg\nassets/web/client/037b-edit.jpg"
+       "value": "assets/web/client/school-apply-now.jpg\nassets/web/client/037b-edit.jpg",
+       "alts": [
+        "Bharatanatyam students of Abhinava Dance School",
+        "Kathak students of Abhinava Dance School"
+       ]
       },
       {
        "key": "school/apply/t2",
@@ -4693,7 +4737,21 @@
        "key": "school/beyond-the-classroom/t1",
        "kind": "photos",
        "what": "Photos (one per line)",
-       "value": "assets/web/client/rangapravesha-01.jpg\nassets/web/client/rangapravesha-02.jpg\nassets/web/client/rangapravesha-medha-1.jpg\nassets/web/client/rangapravesha-08.jpg\nassets/web/client/rangapravesha-sanchita.jpg\nassets/web/client/rangapravesha-04.jpg\nassets/web/client/rangapravesha-07-edit.jpg\nassets/web/client/rangapravesha-09.jpg\nassets/web/client/rangapravesh-shreya.jpg\nassets/web/client/rangapravesha-10-edit.jpg\nhttps://drive.google.com/file/d/1m9CO4ln8kp6cR600AqV8sS91nXiX_Jq5/view?usp=drive_link\nhttps://drive.google.com/file/d/13OTGvfmul66mbEAqAh5TexWSzhfh5CZJ/view?usp=drive_link"
+       "value": "assets/web/client/rangapravesha-01.jpg\nassets/web/client/rangapravesha-02.jpg\nassets/web/client/rangapravesha-medha-1.jpg\nassets/web/client/rangapravesha-08.jpg\nassets/web/client/rangapravesha-sanchita.jpg\nassets/web/client/rangapravesha-04.jpg\nassets/web/client/rangapravesha-07-edit.jpg\nassets/web/client/rangapravesha-09.jpg\nassets/web/client/rangapravesh-shreya.jpg\nassets/web/client/rangapravesha-10-edit.jpg\nhttps://drive.google.com/file/d/1IPW98WKqiQkLvKTW0nGeVJr4zEUneK5U/view\nhttps://drive.google.com/file/d/1qlmH5m4riDS5FWmcb22AeM6zJvZP0Cha/view",
+       "alts": [
+        "Rangapravesha — Apoorva’s debut solo on stage",
+        "Rangapravesha — Radha’s debut solo on stage",
+        "Rangapravesha — Medha’s debut solo on stage",
+        "Rangapravesha — Pooja’s debut solo on stage",
+        "Rangapravesha — Sanchita’s debut solo on stage",
+        "Rangapravesha — Maanvi’s debut solo on stage",
+        "Rangapravesha — Smruthi’s debut solo on stage",
+        "Rangapravesha — Harshitha L’s debut solo on stage",
+        "Rangapravesha — Shreya’s debut solo on stage",
+        "Rangapravesha — Harshitha V’s debut solo on stage",
+        "Rangapravesha — Kavana Hegde`s debut solo on stage",
+        "Rangapravesha — Meghana V’s debut solo on stage"
+       ]
       },
       {
        "key": "school/beyond-the-classroom/t2",
@@ -4746,7 +4804,22 @@
        "key": "school/vijayadashami/t1",
        "kind": "photos",
        "what": "Photos (one per line)",
-       "value": "assets/web/client/vijayadashami-thumbnail.jpg\nassets/web/client/vijayadashami-01.jpg\nassets/web/client/vijayadashami-02.jpg\nassets/web/client/vijayadashami-03.jpg\nassets/web/client/vijayadashami-04.jpg\nassets/web/client/vijayadashami-05.jpg\nassets/web/client/vijayadashami-07.jpg\nassets/web/client/vijayadashami-08.jpg\nassets/web/client/vijayadashami-09.jpg\nassets/web/client/vijayadashami-10.jpg\nassets/web/client/vijayadashami-11.jpg\nassets/web/client/vijayadashami-12.jpg\nassets/web/client/vijayadashami.jpg"
+       "value": "assets/web/client/vijayadashami-thumbnail.jpg\nassets/web/client/vijayadashami-01.jpg\nassets/web/client/vijayadashami-02.jpg\nassets/web/client/vijayadashami-03.jpg\nassets/web/client/vijayadashami-04.jpg\nassets/web/client/vijayadashami-05.jpg\nassets/web/client/vijayadashami-07.jpg\nassets/web/client/vijayadashami-08.jpg\nassets/web/client/vijayadashami-09.jpg\nassets/web/client/vijayadashami-10.jpg\nassets/web/client/vijayadashami-11.jpg\nassets/web/client/vijayadashami-12.jpg\nassets/web/client/vijayadashami.jpg",
+       "alts": [
+        "Vijayadashami — the altar with ankle bells, flowers and offerings",
+        "Vijayadashami — students of Abhinava Dance School performing",
+        "Vijayadashami — students of Abhinava Dance School performing",
+        "Vijayadashami — students of Abhinava Dance School performing",
+        "Vijayadashami — students of Abhinava Dance School performing",
+        "Vijayadashami — students of Abhinava Dance School performing",
+        "Vijayadashami — students of Abhinava Dance School performing",
+        "Vijayadashami — students of Abhinava Dance School performing",
+        "Vijayadashami — students of Abhinava Dance School performing",
+        "Vijayadashami — students of Abhinava Dance School performing",
+        "Vijayadashami — students of Abhinava Dance School performing",
+        "Vijayadashami — students of Abhinava Dance School performing",
+        "Ankle bells and flowers laid out for Vijayadashami"
+       ]
       },
       {
        "key": "school/vijayadashami/t2",
@@ -4777,7 +4850,15 @@
        "key": "school/milan/t1",
        "kind": "photos",
        "what": "Photos (one per line)",
-       "value": "assets/web/client/milan-01.jpg\nassets/web/client/milan-02.jpg\nassets/web/client/milan-02a.jpg\nassets/web/client/milan-03.jpg\nassets/web/client/milan-04.jpg\nassets/web/client/milan-05.jpg"
+       "value": "assets/web/client/milan-01.jpg\nassets/web/client/milan-02.jpg\nassets/web/client/milan-02a.jpg\nassets/web/client/milan-03.jpg\nassets/web/client/milan-04.jpg\nassets/web/client/milan-05.jpg",
+       "alts": [
+        "Milan — new students’ induction programme",
+        "Milan — new students’ induction programme",
+        "Milan — new students’ induction programme",
+        "Milan — new students’ induction programme",
+        "Milan — new students’ induction programme",
+        "Milan — new students’ induction programme"
+       ]
       },
       {
        "key": "school/milan/t2",
@@ -5742,7 +5823,20 @@
        "key": "store/dance-apparel/t1",
        "kind": "photos",
        "what": "Photos (one per line)",
-       "value": "assets/web/client/store-costume-01-3x4.jpg\nassets/web/client/store-costume-02-3x4.jpg\nassets/web/client/store-costume-03-3x4.jpg\nassets/web/client/store-costume-04-3x4.jpg\nassets/web/client/store-costume-05-3x4.jpg\nassets/web/client/store-costume-06-3x4.jpg\nassets/web/client/store-costume-07-3x4.jpg\nassets/web/client/store-costume-08-3x4.jpg\nassets/web/client/store-costume-09-3x4.jpg\nassets/web/client/store-costume-10-3x4.jpg\nassets/web/client/store-costume-11-3x4.jpg"
+       "value": "assets/web/client/store-costume-01-3x4.jpg\nassets/web/client/store-costume-02-3x4.jpg\nassets/web/client/store-costume-03-3x4.jpg\nassets/web/client/store-costume-04-3x4.jpg\nassets/web/client/store-costume-05-3x4.jpg\nassets/web/client/store-costume-06-3x4.jpg\nassets/web/client/store-costume-07-3x4.jpg\nassets/web/client/store-costume-08-3x4.jpg\nassets/web/client/store-costume-09-3x4.jpg\nassets/web/client/store-costume-10-3x4.jpg\nassets/web/client/store-costume-11-3x4.jpg",
+       "alts": [
+        "Dance costume from the Abhinava studio",
+        "Dance costume from the Abhinava studio",
+        "Dance costume from the Abhinava studio",
+        "Dance costume from the Abhinava studio",
+        "Dance costume from the Abhinava studio",
+        "Dance costume from the Abhinava studio",
+        "Dance costume from the Abhinava studio",
+        "Dance costume from the Abhinava studio",
+        "Dance costume from the Abhinava studio",
+        "Dance costume from the Abhinava studio",
+        "Dance costume from the Abhinava studio"
+       ]
       },
       {
        "key": "store/dance-apparel/t2",
@@ -6142,7 +6236,16 @@
        "key": "support/scholarships/t1",
        "kind": "photos",
        "what": "Photos (one per line)",
-       "value": "assets/web/client/scholar-pradyota-3x4.jpg\nassets/web/client/scholar-dharithri-hamsini-3x4.jpg\nassets/web/client/scholar-sharvari-3x4.jpg\nassets/web/client/scholar-naisha-3x4.jpg\nassets/web/client/scholar-akshitha-chandrappa-3x4.jpg\nassets/web/client/scholar-deepika-chandrappa-3x4.jpg\nassets/web/client/scholar-ardra-3x4.jpg"
+       "value": "assets/web/client/scholar-pradyota-3x4.jpg\nassets/web/client/scholar-dharithri-hamsini-3x4.jpg\nassets/web/client/scholar-sharvari-3x4.jpg\nassets/web/client/scholar-naisha-3x4.jpg\nassets/web/client/scholar-akshitha-chandrappa-3x4.jpg\nassets/web/client/scholar-deepika-chandrappa-3x4.jpg\nassets/web/client/scholar-ardra-3x4.jpg",
+       "alts": [
+        "Pradyota, scholarship holder",
+        "Dharithri and Hamsini, scholarship holders",
+        "Sharvari, scholarship holder",
+        "Naisha, scholarship holder",
+        "Akshitha Chandrappa, scholarship holder",
+        "Deepika Chandrappa, scholarship holder",
+        "Ardra, scholarship holder"
+       ]
       },
       {
        "key": "support/scholarships/t2",
@@ -8446,28 +8549,18 @@
   }
  },
  "drive": {
-  "1sMNNCVZHfD1RUMVlleSqrwFR3kwr1no2": {
-   "name": "upcoming-shows-list-pic-edit.jpg",
-   "modified": "2026-11-12T07:06:04.713Z",
-   "mimeType": "image/jpeg"
-  },
-  "1m9CO4ln8kp6cR600AqV8sS91nXiX_Jq5": {
+  "1IPW98WKqiQkLvKTW0nGeVJr4zEUneK5U": {
    "name": "_DSC7383.jpg.jpeg",
-   "modified": "2026-11-14T14:09:25.137Z",
+   "modified": "2026-11-16T09:26:25.995Z",
    "mimeType": "image/jpeg"
   },
-  "13OTGvfmul66mbEAqAh5TexWSzhfh5CZJ": {
+  "1qlmH5m4riDS5FWmcb22AeM6zJvZP0Cha": {
    "name": "IMG_6072.JPG.jpeg",
-   "modified": "2026-11-14T14:09:28.085Z",
-   "mimeType": "image/jpeg"
-  },
-  "1A8yvFLf0vSD2JyczkYK4Fq3Z_GrPQZt7": {
-   "name": "jagli-demo-2-poster.jpg",
-   "modified": "2026-11-12T05:23:26.508Z",
+   "modified": "2026-11-16T09:26:33.869Z",
    "mimeType": "image/jpeg"
   }
  },
- "by": "info@abhinavadancecompany.com",
- "at": "2026-11-14T14:16:30.478Z",
- "hash": "tmv8XZ225JxUcV+Z"
+ "by": "shriramnarayan12@gmail.com",
+ "at": "2026-11-16T09:32:25.480Z",
+ "hash": "OLLnYZdhl/5+lyBe"
 }
