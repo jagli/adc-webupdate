@@ -368,7 +368,7 @@
    "Availability": "",
    "Poster": "assets/web/client/production-no-strings-attached-2.jpg",
    "Media folder": "",
-   "Videos": "",
+   "Videos": "https://youtu.be/44Sd-XS1ipI",
    "Show": "Yes"
   },
   {
@@ -385,7 +385,7 @@
    "Availability": "",
    "Poster": "assets/web/client/production-bhanika.jpg",
    "Media folder": "",
-   "Videos": "",
+   "Videos": "https://youtu.be/EOK9klOmt5g",
    "Show": "Yes"
   },
   {
@@ -572,7 +572,7 @@
    "Availability": "",
    "Poster": "assets/web/client/production-leela.jpg",
    "Media folder": "",
-   "Videos": "",
+   "Videos": "https://youtu.be/-Cc7b_q2HZo",
    "Show": "Yes"
   },
   {
@@ -867,6 +867,23 @@
   {
    "Production": "Mangaldhwani",
    "Label": "",
+   "Length": "",
+   "Artists": "",
+   "Style": "",
+   "About": "",
+   "Performers": "",
+   "Director": "",
+   "Music": "",
+   "Lighting": "",
+   "Availability": "",
+   "Poster": "",
+   "Media folder": "",
+   "Videos": "",
+   "Show": "No"
+  },
+  {
+   "Production": "Vedamantra",
+   "Label": "Vedamantra",
    "Length": "",
    "Artists": "",
    "Style": "",
