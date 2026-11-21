@@ -89,11 +89,11 @@ body.locked .hero-num, body.locked .facts, body.locked .top, body.locked main, b
 body:not(.locked) .lock, body:not(.locked) .seal { display: none; }
 
 /* locked: one centred card on the full burgundy screen */
-body.locked { background: var(--burgundy-deep); }
-body.locked .band { min-height: 100vh; min-height: 100dvh; display: grid; place-items: center; }
+body.locked { background: #082c4a; }
+body.locked .band { min-height: 100vh; min-height: 100dvh; display: grid; place-items: center; background: radial-gradient(120% 120% at 80% 0%, #15507f 0%, #0a406a 45%, #072a47 100%); }
 body.locked .band .wrap { width: 100%; padding-block: 48px; justify-items: center; text-align: center; }
 body.locked .top { justify-content: center; }
-.seal { width: min(100%, 460px); display: grid; justify-items: center; gap: 18px; padding: 44px 36px 34px; border: 1px solid rgba(216,182,129,.45); border-radius: 6px; background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015)); box-shadow: 0 30px 80px rgba(20,0,10,.35), inset 0 0 0 6px rgba(74,6,41,.35), inset 0 0 0 7px rgba(216,182,129,.18); }
+.seal { width: min(100%, 460px); display: grid; justify-items: center; gap: 18px; padding: 44px 36px 34px; border: 1px solid rgba(216,182,129,.45); border-radius: 6px; background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015)); box-shadow: 0 30px 80px rgba(20,0,10,.35), inset 0 0 0 6px rgba(7,42,71,.35), inset 0 0 0 7px rgba(216,182,129,.18); }
 .seal .logo { width: 84px; height: 84px; border-radius: 50%; background: radial-gradient(circle, #fff 0%, #f6efe4 62%, rgba(246,239,228,0) 72%); display: grid; place-items: center; }
 .seal .logo img { width: 62px; height: auto; }
 .seal h1 { margin: 0; font-size: clamp(30px, 6vw, 40px); }
