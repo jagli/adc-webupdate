@@ -1,11 +1,12 @@
-# Daily visitor report (03:00 IST): reads Netlify's analytics up to yesterday, adds each week once it has
-# ended to report/data/ (the history), and republishes the live site so abhinava.dance/report/ shows it.
+# Daily visitor report (23:30 IST): reads Netlify's analytics from launch to today, saves each week and month
+# once it has ended (the history) in report/data/, and republishes the live site so abhinava.dance/report/ shows it.
+# Each publish costs 15 Netlify credits (about 450 a month of the plan's 3,000).
 # Nobody has to press anything. Run it by hand from the Actions tab to refresh at any time.
 name: Visitor report
 
 on:
   schedule:
-    - cron: "30 21 * * *"
+    - cron: "0 18 * * *"
   workflow_dispatch:
     inputs:
       publish:

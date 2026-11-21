@@ -280,50 +280,61 @@ h2 { font-family: var(--font-display); font-weight: 700; font-size: 29px; color:
 
   function fact(n, label) { var d = document.createElement("div"); d.className = "fact"; d.innerHTML = "<b></b><small></small>"; d.querySelector("b").textContent = n; d.querySelector("small").textContent = label; return d; }
 
+  /* ids: "all", "week-YYYY-MM-DD", "month-YYYY-MM" (also the data file names and the address hash) */
+  function listOf(id) { return id.indexOf("week-") === 0 ? index.weeks.map(function (w) { return "week-" + w.id; }) : id.indexOf("month-") === 0 ? (index.months || []).map(function (m) { return "month-" + m.id; }) : []; }
+  function prevOf(id) { var l = listOf(id), i = l.indexOf(id); return i >= 0 ? l[i + 1] : null; }
+  function monthInfo(id) { return (index.months || []).filter(function (m) { return "month-" + m.id === id; })[0]; }
+
   function render(id, data) {
-    var all = id === "all", facts = $("facts"); facts.innerHTML = "";
-    $("title").textContent = all ? "Visitors since launch" : "The week of " + range(data.from, data.to);
+    var all = id === "all", isWeek = id.indexOf("week-") === 0, mo = monthInfo(id), facts = $("facts"); facts.innerHTML = "";
+    var unit = all ? "" : isWeek ? "week" : "month";
+    var monthName = mo ? LONG[parts(mo.from).m] + " " + parts(mo.from).y : "";
+    $("title").textContent = all ? "Visitors since launch" : isWeek ? "The week of " + range(data.from, data.to) : monthName + (mo.current ? " so far" : "");
     $("lede").textContent = all
       ? "Since the new abhinava.dance went live on " + longDate(index.launch) + ", people in India and around the world have come every day to read about the company, its performances and the school."
       : "Who visited abhinava.dance from " + longDate(data.from) + " to " + longDate(data.to) + ", and what they read.";
     $("people").textContent = data.people != null ? fmt(data.people) : fmt(data.daily.reduce(function (s, d) { return s + d.visitors; }, 0));
-    $("people-label").textContent = (all ? "people visited the website, " + range(data.from, data.to) : "people visited the website this week");
-    $("daily-kicker").textContent = all ? "Since launch" : "This week";
+    $("people-label").textContent = all ? "people visited the website, " + range(data.from, data.to) : "people visited the website this " + unit + (mo && mo.current ? ", up to " + short(data.to) : "");
+    $("daily-kicker").textContent = all ? "Since launch" : "This " + unit;
     var st = drawDaily(data);
-    $("daily-intro").textContent = all ? "Every day since launch, with the busiest day marked." : "Each day of the week, with the busiest day marked.";
+    $("daily-intro").textContent = all ? "Every day since launch, with the busiest day marked." : "Each day of the " + unit + ", with the busiest day marked.";
     facts.appendChild(fact("~" + fmt(st.avg), "visitors a day"));
     facts.appendChild(fact(fmt(st.best.visitors), "visitors on " + short(st.best.d)));
     if (all) facts.appendChild(fact(fmt(data.daily.length), "days online"));
     else {
-      var i = index.weeks.findIndex(function (w) { return w.id === id; }), prev = index.weeks[i + 1];
-      var prevData = prev && cache[prev.id];
-      if (prevData && prevData.people && data.people && data.people >= prevData.people) facts.appendChild(fact("+" + Math.round(100 * (data.people / prevData.people - 1)) + "%", "more visitors than the week before"));
+      var prevData = cache[prevOf(id)];
+      var perDay = function (d) { return d.daily.reduce(function (s, x) { return s + x.visitors; }, 0) / d.daily.length; };
+      if (prevData && perDay(data) >= perDay(prevData)) facts.appendChild(fact("+" + Math.round(100 * (perDay(data) / perDay(prevData) - 1)) + "%", "more visitors a day than the " + unit + " before"));
       else facts.appendChild(fact(fmt(data.pagesTop.filter(function (p) { return p[0] !== "Home"; }).reduce(function (s, p) { return s + p[1]; }, 0)), "inner pages read"));
     }
     facts.appendChild(fact(String(data.countryCount || data.countries.length), "countries"));
-    $("served-d").textContent = all ? "Since launch" : "This week";
+    $("served-d").textContent = all ? "Since launch" : "This " + unit;
     $("served-n").textContent = fmt(data.requests);
     $("served-p").textContent = "requests served: every page, photo and video picture the website delivered to visitors' screens" + (data.bandwidth ? ", " + (data.bandwidth / 1e9).toFixed(1) + " GB in all." : ".");
     drawRequests(data); drawCountries(data); drawPages(data); drawSources(data);
-    $("source").textContent = "Source: Netlify Web Analytics for abhinava.dance, " + range(data.from, data.to) + " (India time). Netlify counts visits on its own servers, with no tracking on the website. A visitor is one person counted once in the period, however many pages they read. Countries are measured by pages read; Netlify does not record cities. Requests served come from Netlify's usage records. Updated every day; last updated " + longDate(index.collected.slice(0, 10)) + ".";
+    $("source").textContent = "Source: Netlify Web Analytics for abhinava.dance, " + range(data.from, data.to) + " (India time). Netlify counts visits on its own servers, with no tracking on the website. A visitor is one person counted once in the period, however many pages they read. Countries are measured by pages read; Netlify does not record cities. Requests served come from Netlify's usage records. Updated every night at 11:30 pm India time; last updated " + longDate(index.collected.slice(0, 10)) + ".";
   }
 
+  function fetchOne(id) { return cache[id] ? Promise.resolve(cache[id]) : getJSON("data/" + id + ".json").then(function (d) { cache[id] = d; return d; }); }
   function load(id) {
-    var get = cache[id] ? Promise.resolve(cache[id]) : getJSON("data/" + (id === "all" ? "all" : "week-" + id) + ".json").then(function (d) { cache[id] = d; return d; });
-    var i = index.weeks.findIndex(function (w) { return w.id === id; }), prev = index.weeks[i + 1];
-    var getPrev = id !== "all" && prev && !cache[prev.id] ? getJSON("data/week-" + prev.id + ".json").then(function (d) { cache[prev.id] = d; }).catch(function () {}) : Promise.resolve();
-    return Promise.all([get, getPrev]).then(function (r) { render(id, r[0]); });
+    var prev = prevOf(id);
+    return Promise.all([fetchOne(id), prev ? fetchOne(prev).catch(function () {}) : null]).then(function (r) { render(id, r[0]); });
   }
 
   getJSON("data/index.json").then(function (ix) {
     index = ix;
     var sel = $("period"); sel.innerHTML = "";
-    var o = document.createElement("option"); o.value = "all"; o.textContent = "All time, since " + short(ix.launch) + " " + parts(ix.launch).y; sel.appendChild(o);
-    var g = document.createElement("optgroup"); g.label = "Week by week"; sel.appendChild(g);
-    ix.weeks.forEach(function (w, i) { var o = document.createElement("option"); o.value = w.id; o.textContent = (i === 0 ? "Latest week: " : "") + range(w.from < ix.launch ? ix.launch : w.from, w.to); g.appendChild(o); });
-    var start = (location.hash || "").replace("#week-", "");
-    sel.value = ix.weeks.some(function (w) { return w.id === start; }) ? start : "all";
-    sel.addEventListener("change", function () { history.replaceState(null, "", sel.value === "all" ? location.pathname : "#week-" + sel.value); load(sel.value); });
+    var add = function (parent, value, text) { var o = document.createElement("option"); o.value = value; o.textContent = text; parent.appendChild(o); };
+    add(sel, "all", "Since launch: " + short(ix.launch) + " " + parts(ix.launch).y + " to today");
+    if ((ix.months || []).length) {
+      var gm = document.createElement("optgroup"); gm.label = "Month by month"; sel.appendChild(gm);
+      ix.months.forEach(function (m) { add(gm, "month-" + m.id, LONG[parts(m.from).m] + " " + parts(m.from).y + (m.current ? " (so far)" : "")); });
+    }
+    var gw = document.createElement("optgroup"); gw.label = "Week by week"; sel.appendChild(gw);
+    ix.weeks.forEach(function (w, i) { add(gw, "week-" + w.id, (i === 0 ? "Latest week: " : "") + range(w.from < ix.launch ? ix.launch : w.from, w.to)); });
+    var start = (location.hash || "").slice(1);
+    sel.value = [].some.call(sel.options, function (o) { return o.value === start; }) ? start : "all";
+    sel.addEventListener("change", function () { history.replaceState(null, "", sel.value === "all" ? location.pathname : "#" + sel.value); load(sel.value); });
     return load(sel.value);
   }).catch(function () {
     document.querySelector(".hero-num").hidden = true;

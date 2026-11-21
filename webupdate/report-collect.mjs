@@ -6,11 +6,13 @@
  *
  * Writes
  *   report/data/index.json        the weeks on offer, newest first, and when the data was collected
- *   report/data/all.json          everything since launch (21 October 2026) up to yesterday
+ *   report/data/all.json          everything since launch (21 October 2026) up to today
+ *   report/data/month-YYYY-MM.json   one calendar month (the current month so far is rewritten each run)
  *   report/data/week-YYYY-MM-DD.json   one Monday-to-Sunday week (India time), named after its Monday
  *
  * A week already saved is never rewritten, so the history stays even if Netlify stops keeping old data.
- * Run every day by the GitHub workflow (report.yml): all time goes up to yesterday; a week is added once it has ended.
+ * Run every day at 23:30 IST by the GitHub workflow (report.yml): all time and this month go up to today;
+ * a week or month is saved once it has ended and is never rewritten.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -60,7 +62,7 @@ function merge(rows, nameOf, limit) {
 
 let account = null;
 async function period(fromYmd, toYmd) {
-  const from = istMidnight(fromYmd), to = istMidnight(toYmd) + DAY - 1;
+  const from = istMidnight(fromYmd), to = Math.min(istMidnight(toYmd) + DAY - 1, Date.now());
   const base = `${ANALYTICS}/${site}`;
   const [pv, uv, uvRange, bw, countries, pages, sources] = await Promise.all([
     get(base + "/pageviews" + q(from, to, "&resolution=day")),
@@ -118,12 +120,26 @@ for (const [mon, sun] of weeks) {
   write(file, w);
   console.log("saved " + file);
 }
-const yesterday = ymd(istMidnight(todayYmd) - DAY);
-const all = await period(LAUNCH, yesterday);
+// calendar months from launch: past months saved once, the current month rewritten up to today
+const months = [];
+for (let y = 2026, m = 10; `${y}-${String(m).padStart(2, "0")}` <= todayYmd.slice(0, 7); m === 12 ? (y++, m = 1) : m++) {
+  const id = `${y}-${String(m).padStart(2, "0")}`, first = `${id}-01`, last = ymd(Date.UTC(m === 12 ? y + 1 : y, m === 12 ? 0 : m, 1) - DAY - IST + IST);
+  const current = todayYmd.slice(0, 7) === id;
+  months.push({ id, from: first < LAUNCH ? LAUNCH : first, to: current ? todayYmd : last, current });
+}
+for (const mo of months) {
+  const file = `month-${mo.id}.json`;
+  if (!mo.current && fs.existsSync(path.join(OUT, file))) continue;
+  const d = await period(mo.from, mo.to);
+  if (!d.daily.some((x) => x.visitors)) { console.error(`Netlify returned no visitors for ${mo.id}; nothing saved.`); process.exit(1); }
+  write(file, d);
+}
+const all = await period(LAUNCH, todayYmd);
 if (!all.people && !all.daily.some((d) => d.visitors)) { console.error("Netlify returned no visitor numbers; nothing saved. Is Web Analytics switched on for the site?"); process.exit(1); }
 write("all.json", all);
 write("index.json", {
-  collected: new Date(now).toISOString(), launch: LAUNCH, upTo: yesterday,
+  collected: new Date(now).toISOString(), launch: LAUNCH, upTo: todayYmd,
+  months: months.slice().reverse(),
   weeks: weeks.map(([from, to]) => ({ id: from, from, to })).reverse(),
 });
-console.log(`all time ${LAUNCH} to ${yesterday}, ${weeks.length} weeks`);
+console.log(`all time ${LAUNCH} to ${todayYmd}, ${months.length} months, ${weeks.length} weeks`);
