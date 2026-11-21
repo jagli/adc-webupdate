@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /report/
 
 Sitemap: https://abhinava.dance/sitemap.xml

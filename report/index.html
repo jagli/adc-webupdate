@@ -78,6 +78,35 @@ h2 { font-family: var(--font-display); font-weight: 700; font-size: 29px; color:
 
 .source { font-size: 14px; color: var(--ink-soft); border-top: 1px solid var(--gold-soft); margin-top: 46px; padding-block: 20px 48px; max-width: 80ch; }
 .empty { padding-block: 60px; color: var(--ink-soft); }
+.lock { display: grid; gap: 10px; max-width: 420px; }
+.lock label { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-bright); }
+.lock .row { display: flex; gap: 10px; flex-wrap: wrap; }
+.lock input { flex: 1 1 220px; min-width: 0; font: 18px var(--font-body); color: var(--burgundy); background: var(--ivory); border: 1px solid var(--gold-bright); border-radius: 4px; padding: 11px 14px; }
+.lock button { font: 700 17px var(--font-body); color: var(--burgundy-deep); background: var(--gold-bright); border: 0; border-radius: 4px; padding: 11px 20px; cursor: pointer; }
+.lock input:focus-visible, .lock button:focus-visible { outline: 3px solid var(--gold-bright); outline-offset: 2px; }
+.lock .msg { min-height: 1.4em; color: #f3c9c9; font-size: 15px; }
+body.locked .hero-num, body.locked .facts, body.locked .top, body.locked main, body.locked .lede { display: none; }
+body:not(.locked) .lock, body:not(.locked) .seal { display: none; }
+
+/* locked: one centred card on the full burgundy screen */
+body.locked { background: var(--burgundy-deep); }
+body.locked .band { min-height: 100vh; min-height: 100dvh; display: grid; place-items: center; }
+body.locked .band .wrap { width: 100%; padding-block: 48px; justify-items: center; text-align: center; }
+body.locked .top { justify-content: center; }
+.seal { width: min(100%, 460px); display: grid; justify-items: center; gap: 18px; padding: 44px 36px 34px; border: 1px solid rgba(216,182,129,.45); border-radius: 6px; background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015)); box-shadow: 0 30px 80px rgba(20,0,10,.35), inset 0 0 0 6px rgba(74,6,41,.35), inset 0 0 0 7px rgba(216,182,129,.18); }
+.seal .logo { width: 84px; height: 84px; border-radius: 50%; background: radial-gradient(circle, #fff 0%, #f6efe4 62%, rgba(246,239,228,0) 72%); display: grid; place-items: center; }
+.seal .logo img { width: 62px; height: auto; }
+.seal h1 { margin: 0; font-size: clamp(30px, 6vw, 40px); }
+.seal .sub { margin: 0; color: #ecdcc8; font-size: 17px; max-width: 36ch; text-wrap: balance; }
+.rule { display: flex; align-items: center; gap: 12px; width: 70%; color: var(--gold-bright); }
+.rule::before, .rule::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-bright), transparent); }
+.rule i { width: 7px; height: 7px; transform: rotate(45deg); background: var(--gold-bright); }
+.seal .lock { width: 100%; max-width: none; justify-items: stretch; text-align: left; }
+.seal .lock label { text-align: center; }
+.seal .lock .row { flex-direction: column; }
+.seal .lock input { flex: none; text-align: center; letter-spacing: .04em; }
+.seal .lock .msg { text-align: center; }
+.seal .foot { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: rgba(216,182,129,.75); }
 
 @media (max-width: 760px) {
   .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -87,9 +116,22 @@ h2 { font-family: var(--font-display); font-weight: 700; font-size: 29px; color:
 }
 </style>
 </head>
-<body>
+<body class="locked">
 <header class="band">
   <div class="wrap">
+    <div class="seal">
+      <div class="logo"><img src="../assets/adc-logo.svg" alt="Abhinava Dance Company"></div>
+      <div class="eyebrow">abhinava.dance</div>
+      <h1>Visitor report</h1>
+      <div class="rule" aria-hidden="true"><i></i></div>
+      <p class="sub">A private report. Enter the phrase to open it.</p>
+    <form class="lock" id="lock" autocomplete="off">
+        <label for="phrase">Phrase</label>
+        <div class="row"><input id="phrase" type="password" autocomplete="off" spellcheck="false" required><button type="submit" id="unlock">Open report</button></div>
+        <div class="msg" id="lock-msg" role="status"></div>
+      </form>
+      <div class="foot">Abhinava Dance Company</div>
+    </div>
     <div class="top">
       <div>
         <div class="eyebrow"><a href="../">abhinava.dance</a> &middot; Visitor report</div>
@@ -100,7 +142,7 @@ h2 { font-family: var(--font-display); font-weight: 700; font-size: 29px; color:
         <select id="period"><option>All time</option></select>
       </div>
     </div>
-    <p class="lede" id="lede">People in India and around the world come to abhinava.dance every day to read about the company, its performances and the school.</p>
+    <p class="lede" id="lede"></p>
     <div class="hero-num"><b id="people">&nbsp;</b><span id="people-label">people visited the website</span></div>
     <div class="facts" id="facts"></div>
   </div>
@@ -170,7 +212,23 @@ h2 { font-family: var(--font-display); font-weight: 700; font-size: 29px; color:
   function el(name, attrs, parent, text) { var e = document.createElementNS(NS, name); for (var k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; if (parent) parent.appendChild(e); return e; }
   function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
   function niceMax(v) { var p = Math.pow(10, Math.floor(Math.log10(Math.max(v, 1)))); var n = Math.ceil(v / p); var steps = [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10]; for (var i = 0; i < steps.length; i++) if (steps[i] * p >= v) return steps[i] * p; return 10 * p; }
-  function getJSON(u) { return fetch(u, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(u); return r.json(); }); }
+  function getRaw(u) { return fetch(u, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(u); return r.json(); }); }
+  var KEY = null;
+  var b64 = function (s) { return Uint8Array.from(atob(s), function (c) { return c.charCodeAt(0); }); };
+  function getJSON(u) {
+    return getRaw(u).then(function (raw) {
+      if (!raw.ct) throw new Error("not sealed");
+      return crypto.subtle.decrypt({ name: "AES-GCM", iv: b64(raw.iv) }, KEY, b64(raw.ct)).then(function (buf) { return JSON.parse(new TextDecoder().decode(buf)); });
+    });
+  }
+  function deriveKey(phrase) {
+    return getRaw("data/lock.json").then(function (lock) {
+      var norm = String(phrase).trim().replace(/\s+/g, " ").toLowerCase();
+      return crypto.subtle.importKey("raw", new TextEncoder().encode(norm), "PBKDF2", false, ["deriveKey"]).then(function (base) {
+        return crypto.subtle.deriveKey({ name: "PBKDF2", salt: b64(lock.salt), iterations: lock.iter, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, true, ["decrypt"]);
+      });
+    });
+  }
 
   var index = null, cache = {};
 
@@ -321,7 +379,7 @@ h2 { font-family: var(--font-display); font-weight: 700; font-size: 29px; color:
     return Promise.all([fetchOne(id), prev ? fetchOne(prev).catch(function () {}) : null]).then(function (r) { render(id, r[0]); });
   }
 
-  getJSON("data/index.json").then(function (ix) {
+  function start() { return getJSON("data/index.json").then(function (ix) {
     index = ix;
     var sel = $("period"); sel.innerHTML = "";
     var add = function (parent, value, text) { var o = document.createElement("option"); o.value = value; o.textContent = text; parent.appendChild(o); };
@@ -335,13 +393,26 @@ h2 { font-family: var(--font-display); font-weight: 700; font-size: 29px; color:
     var start = (location.hash || "").slice(1);
     sel.value = [].some.call(sel.options, function (o) { return o.value === start; }) ? start : "all";
     sel.addEventListener("change", function () { history.replaceState(null, "", sel.value === "all" ? location.pathname : "#" + sel.value); load(sel.value); });
+    document.body.classList.remove("locked");
     return load(sel.value);
-  }).catch(function () {
-    document.querySelector(".hero-num").hidden = true;
-    document.querySelector(".picker").hidden = true;
-    $("lede").textContent = "The visitor numbers could not be loaded just now. Please try again in a moment.";
-    $("main").innerHTML = "";
+  }); }
+
+  function unlock(key, remember) {
+    KEY = key;
+    return start().then(function () {
+      if (remember) crypto.subtle.exportKey("raw", key).then(function (k) { try { sessionStorage.setItem("adc-report-key", btoa(String.fromCharCode.apply(null, new Uint8Array(k)))); } catch (e) {} });
+    });
+  }
+  $("lock").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var btn = $("unlock"), msg = $("lock-msg");
+    btn.disabled = true; msg.textContent = "Opening…";
+    deriveKey($("phrase").value).then(function (key) { return unlock(key, true); }).then(function () { msg.textContent = ""; }).catch(function () {
+      KEY = null; msg.textContent = "That phrase is not right. Please try again."; $("phrase").select();
+    }).then(function () { btn.disabled = false; });
   });
+  var saved = null; try { saved = sessionStorage.getItem("adc-report-key"); } catch (e) {}
+  if (saved) crypto.subtle.importKey("raw", b64(saved), { name: "AES-GCM" }, true, ["decrypt"]).then(function (k) { return unlock(k, false); }).catch(function () { try { sessionStorage.removeItem("adc-report-key"); } catch (e) {} KEY = null; });
 })();
 </script>
 </body>

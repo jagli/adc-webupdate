@@ -11,17 +11,26 @@
  *   report/data/week-YYYY-MM-DD.json   one Monday-to-Sunday week (India time), named after its Monday
  *
  * A week already saved is never rewritten, so the history stays even if Netlify stops keeping old data.
+ *
+ * Phrase lock: every file is encrypted (AES-GCM, key from REPORT_PHRASE via PBKDF2) so the published files are
+ * unreadable without the phrase; the page asks for it and decrypts in the browser. report/data/lock.json holds
+ * only the salt. The phrase is a GitHub secret, never in a file.
  * Run every Monday at 00:30 IST by the GitHub workflow (report.yml): all time and this month go up to today;
  * a week or month is saved once it has ended and is never rewritten.
  */
 import fs from "node:fs";
 import path from "node:path";
+import crypto from "node:crypto";
 
 const REPO = path.resolve(process.argv[2] || ".");
 const OUT = path.join(REPO, "report/data");
 const token = process.env.NETLIFY_AUTH_TOKEN;
 let site = process.env.NETLIFY_SITE_ID; // a site name works for deploys; analytics needs the site's id, looked up below
 if (!token || !site) { console.error("NETLIFY_AUTH_TOKEN and NETLIFY_SITE_ID are needed."); process.exit(1); }
+const phrase = process.env.REPORT_PHRASE;
+if (!phrase) { console.error("REPORT_PHRASE is needed: the report is never published unlocked."); process.exit(1); }
+/* the same normalising as the page: spaces and capitals do not matter */
+const norm = (p) => String(p).trim().replace(/\s+/g, " ").toLowerCase();
 
 const LAUNCH = "2026-10-21";
 const TZ = "Asia/Kolkata", IST = 5.5 * 3600e3, DAY = 86400e3;
@@ -96,9 +105,25 @@ async function period(fromYmd, toYmd) {
   };
 }
 
-const write = (name, data) => fs.writeFileSync(path.join(OUT, name), JSON.stringify(data) + "\n");
-
 fs.mkdirSync(OUT, { recursive: true });
+const ITER = 250000;
+let lock = null;
+try { lock = JSON.parse(fs.readFileSync(path.join(OUT, "lock.json"), "utf8")); } catch (e) {}
+if (!lock || lock.iter !== ITER || !lock.salt) lock = { v: 1, iter: ITER, salt: crypto.randomBytes(16).toString("base64") };
+const key = crypto.pbkdf2Sync(norm(phrase), Buffer.from(lock.salt, "base64"), ITER, 32, "sha256");
+function seal(obj) {
+  const iv = crypto.randomBytes(12), c = crypto.createCipheriv("aes-256-gcm", key, iv);
+  const ct = Buffer.concat([c.update(JSON.stringify(obj), "utf8"), c.final(), c.getAuthTag()]);
+  return { v: 1, iv: iv.toString("base64"), ct: ct.toString("base64") };
+}
+const write = (name, data) => fs.writeFileSync(path.join(OUT, name), JSON.stringify(seal(data)) + "\n");
+// files saved before the lock (or under an older salt) are sealed now; history is kept as it is
+for (const f of fs.readdirSync(OUT)) {
+  if (!/^(week|month)-.*\.json$/.test(f)) continue;
+  const raw = JSON.parse(fs.readFileSync(path.join(OUT, f), "utf8"));
+  if (!raw.ct) write(f, raw);
+}
+fs.writeFileSync(path.join(OUT, "lock.json"), JSON.stringify({ v: 1, iter: ITER, salt: lock.salt }) + "\n");
 {
   const info = await get(`https://api.netlify.com/api/v1/sites/${site}`);
   site = info.site_id || info.id || site;
