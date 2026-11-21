@@ -127,7 +127,7 @@ body.locked .top { justify-content: center; }
       <p class="sub">A private report. Enter the phrase to open it.</p>
     <form class="lock" id="lock" autocomplete="off">
         <label for="phrase">Phrase</label>
-        <div class="row"><input id="phrase" type="password" autocomplete="off" spellcheck="false" required><button type="submit" id="unlock">Open report</button></div>
+        <div class="row"><input id="phrase" type="password" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" required><button type="submit" id="unlock">Open report</button></div>
         <div class="msg" id="lock-msg" role="status"></div>
       </form>
       <div class="foot">Abhinava Dance Company</div>
@@ -223,7 +223,7 @@ body.locked .top { justify-content: center; }
   }
   function deriveKey(phrase) {
     return getRaw("data/lock.json").then(function (lock) {
-      var norm = String(phrase).trim().replace(/\s+/g, " ").toLowerCase();
+      var norm = String(phrase).normalize("NFKC").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, "");
       return crypto.subtle.importKey("raw", new TextEncoder().encode(norm), "PBKDF2", false, ["deriveKey"]).then(function (base) {
         return crypto.subtle.deriveKey({ name: "PBKDF2", salt: b64(lock.salt), iterations: lock.iter, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, true, ["decrypt"]);
       });
