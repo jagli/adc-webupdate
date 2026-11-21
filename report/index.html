@@ -312,7 +312,7 @@ h2 { font-family: var(--font-display); font-weight: 700; font-size: 29px; color:
     $("served-n").textContent = fmt(data.requests);
     $("served-p").textContent = "requests served: every page, photo and video picture the website delivered to visitors' screens" + (data.bandwidth ? ", " + (data.bandwidth / 1e9).toFixed(1) + " GB in all." : ".");
     drawRequests(data); drawCountries(data); drawPages(data); drawSources(data);
-    $("source").textContent = "Source: Netlify Web Analytics for abhinava.dance, " + range(data.from, data.to) + " (India time). Netlify counts visits on its own servers, with no tracking on the website. A visitor is one person counted once in the period, however many pages they read. Countries are measured by pages read; Netlify does not record cities. Requests served come from Netlify's usage records. Updated every night at 11:30 pm India time; last updated " + longDate(index.collected.slice(0, 10)) + ".";
+    $("source").textContent = "Source: Netlify Web Analytics for abhinava.dance, " + range(data.from, data.to) + " (India time). Netlify counts visits on its own servers, with no tracking on the website. A visitor is one person counted once in the period, however many pages they read. Countries are measured by pages read; Netlify does not record cities. Requests served come from Netlify's usage records. Updated every Monday; last updated " + longDate(index.collected.slice(0, 10)) + ".";
   }
 
   function fetchOne(id) { return cache[id] ? Promise.resolve(cache[id]) : getJSON("data/" + id + ".json").then(function (d) { cache[id] = d; return d; }); }
@@ -325,7 +325,7 @@ h2 { font-family: var(--font-display); font-weight: 700; font-size: 29px; color:
     index = ix;
     var sel = $("period"); sel.innerHTML = "";
     var add = function (parent, value, text) { var o = document.createElement("option"); o.value = value; o.textContent = text; parent.appendChild(o); };
-    add(sel, "all", "Since launch: " + short(ix.launch) + " " + parts(ix.launch).y + " to today");
+    add(sel, "all", "Since launch, " + short(ix.launch) + " " + parts(ix.launch).y);
     if ((ix.months || []).length) {
       var gm = document.createElement("optgroup"); gm.label = "Month by month"; sel.appendChild(gm);
       ix.months.forEach(function (m) { add(gm, "month-" + m.id, LONG[parts(m.from).m] + " " + parts(m.from).y + (m.current ? " (so far)" : "")); });

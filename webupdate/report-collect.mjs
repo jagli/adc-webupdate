@@ -11,7 +11,7 @@
  *   report/data/week-YYYY-MM-DD.json   one Monday-to-Sunday week (India time), named after its Monday
  *
  * A week already saved is never rewritten, so the history stays even if Netlify stops keeping old data.
- * Run every day at 23:30 IST by the GitHub workflow (report.yml): all time and this month go up to today;
+ * Run every Monday at 00:30 IST by the GitHub workflow (report.yml): all time and this month go up to today;
  * a week or month is saved once it has ended and is never rewritten.
  */
 import fs from "node:fs";
