@@ -7,6 +7,11 @@ on:
   schedule:
     - cron: "30 21 * * 0"
   workflow_dispatch:
+    inputs:
+      publish:
+        description: "Publish the site even if the numbers did not change (after a change to the report page)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -34,7 +39,7 @@ jobs:
         id: diff
         run: |
           git add -A report/data
-          if git diff --cached --quiet -- report/data ':!report/data/index.json'; then echo "changed=no" >> "$GITHUB_OUTPUT"; else echo "changed=yes" >> "$GITHUB_OUTPUT"; fi
+          if [ "${{ inputs.publish }}" != "true" ] && git diff --cached --quiet -- report/data ':!report/data/index.json'; then echo "changed=no" >> "$GITHUB_OUTPUT"; else echo "changed=yes" >> "$GITHUB_OUTPUT"; fi
       - if: steps.diff.outputs.changed == 'yes'
         run: npm install --no-save --no-audit --no-fund sharp@0.33.5
       - if: steps.diff.outputs.changed == 'yes'
@@ -53,5 +58,7 @@ jobs:
           [ $code = 1 ] && exit 1
           git checkout -- js/instagram-data.js 2>/dev/null || true
           git add -A report/data
-          git -c user.name="Visitor report" -c user.email="actions@users.noreply.github.com" commit -q -m "Visitor report: week to $(node -p "require('./report/data/index.json').upTo")"
-          git push -q origin main
+          if ! git diff --cached --quiet; then
+            git -c user.name="Visitor report" -c user.email="actions@users.noreply.github.com" commit -q -m "Visitor report: week to $(node -p "require('./report/data/index.json').upTo")"
+            git push -q origin main
+          fi

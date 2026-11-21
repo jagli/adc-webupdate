@@ -169,7 +169,7 @@ h2 { font-family: var(--font-display); font-weight: 700; font-size: 29px; color:
   var range = function (a, b) { var A = parts(a), B = parts(b); return A.m === B.m ? A.d + "–" + B.d + " " + LONG[B.m] + " " + B.y : A.d + " " + MONTHS[A.m] + " – " + B.d + " " + MONTHS[B.m] + " " + B.y; };
   function el(name, attrs, parent, text) { var e = document.createElementNS(NS, name); for (var k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; if (parent) parent.appendChild(e); return e; }
   function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
-  function niceMax(v) { var p = Math.pow(10, Math.floor(Math.log10(Math.max(v, 1)))); var n = Math.ceil(v / p); return (n <= 2 ? 2 : n <= 5 ? 5 : 10) * p; }
+  function niceMax(v) { var p = Math.pow(10, Math.floor(Math.log10(Math.max(v, 1)))); var n = Math.ceil(v / p); var steps = [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10]; for (var i = 0; i < steps.length; i++) if (steps[i] * p >= v) return steps[i] * p; return 10 * p; }
   function getJSON(u) { return fetch(u, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(u); return r.json(); }); }
 
   var index = null, cache = {};
@@ -198,7 +198,7 @@ h2 { font-family: var(--font-display); font-weight: 700; font-size: 29px; color:
     }
     var step = n > 14 ? Math.ceil(n / 8) : 1;
     days.forEach(function (d, i) {
-      if (i % step === 0 || i === n - 1) el("text", { x: x(i), y: H - 10, "text-anchor": "middle" }, svg, n > 14 ? short(d.d) : ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"][(new Date(Date.UTC(parts(d.d).y, parts(d.d).m, parts(d.d).d)).getUTCDay() + 6) % 7] + " " + parts(d.d).d);
+      if ((i % step === 0 && (i === n - 1 || n - 1 - i >= step / 2)) || i === n - 1) el("text", { x: x(i), y: H - 10, "text-anchor": i === n - 1 && n > 14 ? "end" : "middle" }, svg, n > 14 ? short(d.d) : ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"][(new Date(Date.UTC(parts(d.d).y, parts(d.d).m, parts(d.d).d)).getUTCDay() + 6) % 7] + " " + parts(d.d).d);
       if (n <= 14) el("circle", { cx: x(i), cy: y(d.visitors), r: 3.5, fill: C.burgundy }, svg);
     });
     var best = 0; days.forEach(function (d, i) { if (d.visitors > days[best].visitors) best = i; });
@@ -223,7 +223,7 @@ h2 { font-family: var(--font-display); font-weight: 700; font-size: 29px; color:
       el("rect", { x: L + i * bw + Math.min(1.5, bw * .1), y: H - B - h, width: Math.max(1, bw - Math.min(3, bw * .2)), height: h, rx: 1.5, fill: i === best ? C.burgundy : C.gold }, s);
     });
     var marks = n > 14 ? [0, Math.round(n / 3), Math.round(2 * n / 3), n - 1] : data.daily.map(function (d, i) { return i; });
-    marks.forEach(function (i) { el("text", { x: L + (i + 0.5) * bw, y: H - 6, "text-anchor": "middle" }, s, short(data.daily[i].d)); });
+    marks.forEach(function (i, k) { var last = n > 14 && k === marks.length - 1; el("text", { x: last ? W : L + (i + 0.5) * bw, y: H - 6, "text-anchor": last ? "end" : "middle" }, s, short(data.daily[i].d)); });
   }
 
   function drawCountries(data) {
