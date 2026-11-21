@@ -17,7 +17,8 @@ import path from "node:path";
 
 const REPO = path.resolve(process.argv[2] || ".");
 const OUT = path.join(REPO, "report/data");
-const token = process.env.NETLIFY_AUTH_TOKEN, site = process.env.NETLIFY_SITE_ID;
+const token = process.env.NETLIFY_AUTH_TOKEN;
+let site = process.env.NETLIFY_SITE_ID; // a site name works for deploys; analytics needs the site's id, looked up below
 if (!token || !site) { console.error("NETLIFY_AUTH_TOKEN and NETLIFY_SITE_ID are needed."); process.exit(1); }
 
 const LAUNCH = "2026-10-21";
@@ -96,7 +97,11 @@ async function period(fromYmd, toYmd) {
 const write = (name, data) => fs.writeFileSync(path.join(OUT, name), JSON.stringify(data) + "\n");
 
 fs.mkdirSync(OUT, { recursive: true });
-try { account = (await get(`https://api.netlify.com/api/v1/sites/${site}`)).account_id; } catch (e) { console.warn("account: " + e.message); }
+{
+  const info = await get(`https://api.netlify.com/api/v1/sites/${site}`);
+  site = info.site_id || info.id || site;
+  account = info.account_id || null;
+}
 
 // full weeks, Monday to Sunday (India time), from the launch week to the last one that has ended
 const now = Date.now(), todayYmd = ymd(now);
@@ -108,10 +113,14 @@ for (let mon = istMidnight("2026-10-19"); ymd(mon + 6 * DAY) <= lastSunday; mon 
 for (const [mon, sun] of weeks) {
   const file = `week-${mon}.json`;
   if (fs.existsSync(path.join(OUT, file))) continue;
-  write(file, await period(mon, sun));
+  const w = await period(mon, sun);
+  if (!w.daily.some((d) => d.visitors)) { console.error(`Netlify returned no visitors for ${mon}; nothing saved.`); process.exit(1); }
+  write(file, w);
   console.log("saved " + file);
 }
-write("all.json", await period(LAUNCH, lastSunday));
+const all = await period(LAUNCH, lastSunday);
+if (!all.people && !all.daily.some((d) => d.visitors)) { console.error("Netlify returned no visitor numbers; nothing saved. Is Web Analytics switched on for the site?"); process.exit(1); }
+write("all.json", all);
 write("index.json", {
   collected: new Date(now).toISOString(), launch: LAUNCH, upTo: lastSunday,
   weeks: weeks.map(([from, to]) => ({ id: from, from, to })).reverse(),
