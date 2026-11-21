@@ -61,6 +61,6 @@ jobs:
           git checkout -- js/instagram-data.js 2>/dev/null || true
           git add -A report/data
           if ! git diff --cached --quiet; then
-            git -c user.name="Visitor report" -c user.email="actions@users.noreply.github.com" commit -q -m "Visitor report: up to $(node -p "require('./report/data/index.json').upTo")"
+            git -c user.name="Visitor report" -c user.email="actions@users.noreply.github.com" commit -q -m "Visitor report: $(TZ=Asia/Kolkata date +%Y-%m-%d)"
             git push -q origin main
           fi
