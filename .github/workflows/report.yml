@@ -1,0 +1,57 @@
+# Weekly visitor report (Monday 03:00 IST): reads Netlify's analytics for the week that just ended,
+# keeps it in report/data/ (the history), and republishes the live site so abhinava.dance/report/ shows it.
+# Nobody has to press anything. Run it by hand from the Actions tab to refresh at any time.
+name: Visitor report
+
+on:
+  schedule:
+    - cron: "30 21 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: live-site
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Collect the visitor numbers
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: node webupdate/report-collect.mjs .
+      - name: Changed?
+        id: diff
+        run: |
+          git add -A report/data
+          if git diff --cached --quiet -- report/data ':!report/data/index.json'; then echo "changed=no" >> "$GITHUB_OUTPUT"; else echo "changed=yes" >> "$GITHUB_OUTPUT"; fi
+      - if: steps.diff.outputs.changed == 'yes'
+        run: npm install --no-save --no-audit --no-fund sharp@0.33.5
+      - if: steps.diff.outputs.changed == 'yes'
+        name: Build the live site
+        env:
+          INSTAGRAM_FEED_MAIN: ${{ secrets.INSTAGRAM_FEED_MAIN }}
+          INSTAGRAM_FEED_SCHOOL: ${{ secrets.INSTAGRAM_FEED_SCHOOL }}
+        run: node webupdate/build.mjs --content content/live.json --out ../out
+      - if: steps.diff.outputs.changed == 'yes'
+        name: Publish and keep the history
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          set +e; node webupdate/netlify-deploy.mjs ../out/site "Visitor report: $(date -u +%Y-%m-%d)"; code=$?; set -e
+          [ $code = 1 ] && exit 1
+          git checkout -- js/instagram-data.js 2>/dev/null || true
+          git add -A report/data
+          git -c user.name="Visitor report" -c user.email="actions@users.noreply.github.com" commit -q -m "Visitor report: week to $(node -p "require('./report/data/index.json').upTo")"
+          git push -q origin main

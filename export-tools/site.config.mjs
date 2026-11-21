@@ -16,7 +16,7 @@ export const site = {
   ],
 
   /** Folders published as they are, for hidden features reached only by their link (#ram); no page links to them. */
-  hiddenFolders: ["ram"],
+  hiddenFolders: ["ram", "report"],
 
   /** Files at the top of the site for search engines, published as they are (the live address only;
    *  the test site gets a robots.txt that keeps it out of search results, and no sitemap). */

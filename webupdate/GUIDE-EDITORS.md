@@ -1,92 +1,94 @@
-# Updating abhinava.dance — guide for editors and the moderator
+# How to update the abhinava.dance website
 
-You change the website in one Google Sheet, **ADC Website**. Nothing goes live until the moderator presses Publish.
+All changes to the website are made in one Google Sheet called ADC Website. Nothing appears on the website until the moderator publishes it.
 
-**The very first time:** Google asks for permission and may say "Google hasn't verified this app". That is expected. Click **Advanced ▸ Go to ADC Website ▸ Allow**. It asks only once.
+The first time you open the Sheet, Google will ask for permission and may say "Google hasn't verified this app". This is normal. Click Advanced, then Go to ADC Website, then Allow. You only need to do this once.
 
-Open the panel first: menu **Website ▸ Open the Website panel**. It opens on the right. Everything below happens in that panel or in the page tabs.
+Most of the work is done from the Website panel. To open it, go to the Website menu at the top of the Sheet and choose Open the Website panel. It opens on the right side of the screen.
 
-## Editors
+## For editors
 
-### 1. Change words
-- Open the tab of the page: Home, About, Performances…
-- Each **coloured band** is one part of the page, top to bottom.
-- Type only in the **yellow cells**.
-- **Bold:** `**like this**` · **Italic:** `*like this*` · **Link:** `[words](https://address)`
-- **New line inside a cell:** Ctrl + Enter (Mac: ⌘ + Enter)
-- **Click the cell before you type.** If you last clicked the panel, typing goes into the panel instead.
+### Changing text
 
-### 2. Photos
-**One photo** (a photo cell, not a carousel):
-1. Put the photo in Google Drive.
-2. Right-click it ▸ **Share** ▸ General access: **Anyone with the link** ▸ **Copy link**.
-3. Paste the link into the photo cell. The picture appears next to it.
+Each page of the website has its own tab at the bottom of the Sheet (Home, About, Performances and so on). Inside a tab, each coloured band is one section of the page, in the same order as on the website.
 
-**Carousels** (for example School ▸ Beyond the Classroom): one row per photo, with the picture beside it. Each carousel has its own **photo folder** in Google Drive (shared drive adc X jagli ▸ Website photos), linked in the "Photo folder" row at its top.
+Type only in the yellow cells. To make words bold, put two stars on each side, like `**this**`. For italics use one star, like `*this*`. To add a link, write `[the words](https://the-address)`. To start a new line inside a cell, press Ctrl + Enter (on a Mac, Cmd + Enter).
 
-- **Add photos:**
-  1. Click any photo row of the carousel. The panel shows **📁 Open photo folder** and **↻ Check for new photos**.
-  2. Press **📁 Open photo folder** and drop the new photos in (JPG or PNG, any size). No sharing or links needed.
-  3. Back in the Sheet, press **↻ Check for new photos**. The new photos are added at the end, each with its picture.
-  4. Type a **Description** for each: what the photo shows, e.g. "Dance Karma 2026 — junior group". It is read aloud to blind visitors and by Google. A file name like "02 Dance Karma junior.jpg" fills it in for you.
-- **Change the order:** ▲ Move up / ▼ Move down. **Take one off:** untick Show. Deleting a photo from the folder does not take it off the website.
-- **Swap one:** paste a new Drive link over the old one.
-- iPhone HEIC photos: save them as JPG first. Videos go on YouTube.
+Click on the cell before you start typing. If the last thing you clicked was the panel, your typing will go into the panel instead.
 
-Then press **Send my changes**. The moderator sees "Photos changed" and publishes.
+### Changing a single photo
 
-**The Gallery:** paste a Drive **folder** link in its "Drive folder" row to add all its photos at once, in file-name order (01, 02, 03…).
+1. Upload the photo to Google Drive.
+2. Right-click it, choose Share, set General access to "Anyone with the link", and click Copy link.
+3. Paste the link into the photo cell in the Sheet. A small preview of the photo will appear next to it.
 
-The website resizes and turns every photo upright itself; any size of JPG or PNG is fine.
+### Adding photos to a carousel
 
-**Videos:** paste the YouTube link.
+Some sections show several photos that slide across (for example "Beyond the Classroom" on the School page). In the Sheet these have one row per photo. Each of these carousels also has its own folder in Google Drive, inside the shared drive adc X jagli, in the folder Website photos. The folder's link is in the "Photo folder" row just above the photos.
 
-### 3. Lists (cards, events, people, videos…)
-**One row = one item.** Click the row, then use the **Selected row** box in the panel:
+1. Click any photo row in the carousel. The panel will show two buttons: Open photo folder and Check for new photos.
+2. Click Open photo folder and drag your photos into it. JPG or PNG photos of any size are fine. There is no need to share them or copy any links.
+3. Go back to the Sheet and click Check for new photos. The new photos are added at the end of the carousel, each with a preview.
+4. In the Description column, write a short line saying what each photo shows, for example "Dance Karma 2026, junior group". This is read out to visitors who use screen readers and also helps Google. If the photo's file name is meaningful, it is filled in for you; please check it.
 
-- **▲ Move up / ▼ Move down:** change the order.
-- **＋ Add below:** a new empty row under the one you clicked, with Show ticked. Fill it in.
-- **Hide / Show:** takes an item off the website, or brings it back. Nothing is ever deleted.
+To change the order, click a photo row and use Move up or Move down in the panel. To take a photo off the website, untick Show. Removing a photo from the Drive folder does not remove it from the website.
 
-**Never clear a row to remove it.** Press Hide instead. If a row is cleared, the panel stops and tells you.
+Photos taken on an iPhone are sometimes saved in HEIC format. Please save them as JPG first. Videos should be put on YouTube and added as a YouTube link.
 
-**Events:** one row per show: Date (click the cell for a calendar) · Event · Details · Ticket link. Past dates hide themselves.
+The website resizes the photos and turns them the right way up by itself.
 
-**Featured event** (Performances tab ▸ Upcoming Shows):
+### The Gallery page
 
-1. In **Featured event**, pick the event from the list. The list shows the events below from today on, in date order. The date line fills itself in.
-2. Paste the poster's Google Drive link in **Photo**.
-3. Press **Send my changes**. The moderator publishes it.
+To add many photos to the Gallery at once, paste the link of a Google Drive folder into the "Drive folder" row. All the photos in that folder are added, in the order of their file names (01, 02, 03 and so on).
 
-When the featured event's date has passed, it stays on the website until someone picks a new one.
+### Lists: cards, events, people, videos
 
-**Past Shows** (Performances page, under Upcoming Shows): events whose date has passed move there by themselves, newest first, on the next publish. Switch it on or off with the **Show Past Shows** tick in the **Global** tab.
+Each item in a list is one row. Click a row, and then use the buttons in the "Selected row" part of the panel:
 
-### 4. Send your changes
-1. When you are done, press **Send my changes** in the panel. You can add a note for the moderator.
-2. In about 2 minutes a preview is ready and the moderator gets an email. Nothing is live yet.
-3. If something is wrong, the panel says which tab and row, in plain words. Fix it and press **Send my changes** again.
+- Move up and Move down change the order.
+- Add below creates a new empty row under the one you clicked. Fill it in.
+- Hide takes an item off the website without deleting it. Show brings it back.
 
-**Panel stuck or not answering?** Close it and open it again (Website ▸ Open the Website panel). Do this too if it has been open for hours.
+Please do not clear a row to remove an item. Use Hide instead. If a row is cleared, the panel will stop and tell you.
 
-**Made a mistake?** Edit ▸ Undo (Ctrl + Z / ⌘ + Z). Older mistakes: File ▸ Version history shows every earlier version of the Sheet.
+Events have one row per show: Date (click the cell to get a calendar), Event, Details and Ticket link. Events whose date has passed are hidden automatically.
 
-## Moderator
+The featured event at the top of the Performances page is set in the Performances tab, under Upcoming Shows:
 
-1. Open the email, or the Website panel.
-2. Press **See what changed ↗**. It shows only the changed parts, outlined, with a **Before / After** switch and a **Phone** view. "Open the whole preview website" shows every page.
-3. Then, in the panel:
-   - **Publish:** press it, then press it **again within 6 seconds** to confirm. abhinava.dance updates in a few minutes.
-   - **Send back:** write what to change in the box, then press Send back. The editor gets your note by email.
+1. In the Featured event cell, choose the event from the list. The list shows upcoming events in date order. The date fills in by itself.
+2. Paste the Google Drive link of the poster in the Photo cell.
+3. Click Send my changes.
 
-If anyone changes the Sheet after the changes were sent, Publish is blocked until the editor presses **Send my changes** again. You always publish exactly what you checked.
+When the featured event's date has passed, it stays on the website until a new one is chosen.
 
-## Owner
+Events that have already happened move to the Past Shows section on the Performances page at the next publish, newest first. Past Shows can be switched off with the Show Past Shows tick box in the Global tab.
 
-- **Users:** add or remove editors and moderators in the panel ▸ **Users**. They get access to the Sheet straight away; removing them takes it away.
-- **Activity:** the panel ▸ **Activity**, or the **Log** tab: who sent, published or sent back, and when.
-- **Undo the last publish:** puts the previous version of abhinava.dance back.
+### Sending your changes
 
-## Do not change
+1. When you have finished, click Send my changes in the panel. You can add a note for the moderator if you like.
+2. After about two minutes a preview is ready and the moderator receives an email. Nothing is on the website yet.
+3. If there is a problem, the panel tells you which tab and row to look at. Correct it and click Send my changes again.
 
-The coloured bands, the grey header rows, column A and the tab names. If you change one by mistake: **Edit ▸ Undo**, or ask the owner.
+If the panel stops responding, close it and open it again from the Website menu. It is also a good idea to reopen it if it has been open for several hours.
+
+To undo a mistake, use Edit, then Undo (Ctrl + Z, or Cmd + Z on a Mac). For older changes, File, then Version history shows every earlier version of the Sheet.
+
+## For the moderator
+
+1. Open the email you received, or open the Website panel.
+2. Click See what changed. This shows only the parts of the website that have changed, with a Before / After switch and a Phone view. "Open the whole preview website" shows all the pages.
+3. Then, in the panel, either:
+   - click Publish, and click it a second time within 6 seconds to confirm. The website updates within a few minutes; or
+   - write what needs changing in the box and click Send back. The editor receives your note by email.
+
+If the Sheet is changed after the editor has sent it, Publish is blocked until the editor clicks Send my changes again. This makes sure you always publish exactly what you checked.
+
+## For the owner
+
+- Users: add or remove editors and moderators in the panel, under Users. They get access to the Sheet immediately, and lose it when removed.
+- Activity: the panel's Activity section, or the Log tab, shows who sent, published or sent back changes, and when.
+- Undo the last publish: puts the previous version of the website back.
+
+## Please do not change
+
+The coloured bands, the grey heading rows, column A and the names of the tabs. If one is changed by mistake, use Edit, then Undo, or ask the owner.
