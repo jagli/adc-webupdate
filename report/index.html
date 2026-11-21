@@ -305,7 +305,7 @@ h2 { font-family: var(--font-display); font-weight: 700; font-size: 29px; color:
     $("served-n").textContent = fmt(data.requests);
     $("served-p").textContent = "requests served: every page, photo and video picture the website delivered to visitors' screens" + (data.bandwidth ? ", " + (data.bandwidth / 1e9).toFixed(1) + " GB in all." : ".");
     drawRequests(data); drawCountries(data); drawPages(data); drawSources(data);
-    $("source").textContent = "Source: Netlify Web Analytics for abhinava.dance, " + range(data.from, data.to) + " (India time). Netlify counts visits on its own servers, with no tracking on the website. A visitor is one person counted once in the period, however many pages they read. Countries are measured by pages read; Netlify does not record cities. Requests served come from Netlify's usage records. Updated every Monday; last updated " + longDate(index.collected.slice(0, 10)) + ".";
+    $("source").textContent = "Source: Netlify Web Analytics for abhinava.dance, " + range(data.from, data.to) + " (India time). Netlify counts visits on its own servers, with no tracking on the website. A visitor is one person counted once in the period, however many pages they read. Countries are measured by pages read; Netlify does not record cities. Requests served come from Netlify's usage records. Updated every day; last updated " + longDate(index.collected.slice(0, 10)) + ".";
   }
 
   function load(id) {

@@ -6,11 +6,11 @@
  *
  * Writes
  *   report/data/index.json        the weeks on offer, newest first, and when the data was collected
- *   report/data/all.json          everything since launch (21 October 2026) up to the end of the last full week
+ *   report/data/all.json          everything since launch (21 October 2026) up to yesterday
  *   report/data/week-YYYY-MM-DD.json   one Monday-to-Sunday week (India time), named after its Monday
  *
  * A week already saved is never rewritten, so the history stays even if Netlify stops keeping old data.
- * Run by the weekly GitHub workflow (report.yml) early on Monday; any day works: only full weeks are added.
+ * Run every day by the GitHub workflow (report.yml): all time goes up to yesterday; a week is added once it has ended.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -118,11 +118,12 @@ for (const [mon, sun] of weeks) {
   write(file, w);
   console.log("saved " + file);
 }
-const all = await period(LAUNCH, lastSunday);
+const yesterday = ymd(istMidnight(todayYmd) - DAY);
+const all = await period(LAUNCH, yesterday);
 if (!all.people && !all.daily.some((d) => d.visitors)) { console.error("Netlify returned no visitor numbers; nothing saved. Is Web Analytics switched on for the site?"); process.exit(1); }
 write("all.json", all);
 write("index.json", {
-  collected: new Date(now).toISOString(), launch: LAUNCH, upTo: lastSunday,
+  collected: new Date(now).toISOString(), launch: LAUNCH, upTo: yesterday,
   weeks: weeks.map(([from, to]) => ({ id: from, from, to })).reverse(),
 });
-console.log(`all time ${LAUNCH} to ${lastSunday}, ${weeks.length} weeks`);
+console.log(`all time ${LAUNCH} to ${yesterday}, ${weeks.length} weeks`);

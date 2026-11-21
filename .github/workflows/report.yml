@@ -1,11 +1,11 @@
-# Weekly visitor report (Monday 03:00 IST): reads Netlify's analytics for the week that just ended,
-# keeps it in report/data/ (the history), and republishes the live site so abhinava.dance/report/ shows it.
+# Daily visitor report (03:00 IST): reads Netlify's analytics up to yesterday, adds each week once it has
+# ended to report/data/ (the history), and republishes the live site so abhinava.dance/report/ shows it.
 # Nobody has to press anything. Run it by hand from the Actions tab to refresh at any time.
 name: Visitor report
 
 on:
   schedule:
-    - cron: "30 21 * * 0"
+    - cron: "30 21 * * *"
   workflow_dispatch:
     inputs:
       publish:
@@ -59,6 +59,6 @@ jobs:
           git checkout -- js/instagram-data.js 2>/dev/null || true
           git add -A report/data
           if ! git diff --cached --quiet; then
-            git -c user.name="Visitor report" -c user.email="actions@users.noreply.github.com" commit -q -m "Visitor report: week to $(node -p "require('./report/data/index.json').upTo")"
+            git -c user.name="Visitor report" -c user.email="actions@users.noreply.github.com" commit -q -m "Visitor report: up to $(node -p "require('./report/data/index.json').upTo")"
             git push -q origin main
           fi
