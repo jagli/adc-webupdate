@@ -3681,7 +3681,7 @@
         },
         {
          "key": "performances/upcoming-list/1/5",
-         "show": true,
+         "show": false,
          "cells": {
           "Item": "**19 Dec 2026** — *Bhagavadgeeta Darshana*: hosted by His Holiness Shri Shri Swarnavalli Swamiji, Hosapete"
          }
