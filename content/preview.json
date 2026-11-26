@@ -3597,7 +3597,7 @@
        "key": "performances/upcoming-list/t1",
        "kind": "photo",
        "what": "Photo",
-       "value": "assets/web/content/upcoming-shows-list-pic-edit-8871f9ef.jpg",
+       "value": "https://drive.google.com/file/d/1tX1BKjv4MK0rTi3qIlC4fePZuEXuNfk0/view?usp=drive_link",
        "alt": "A dancer of Abhinava Dance Company"
       },
       {
@@ -8579,8 +8579,14 @@
    ]
   }
  },
- "drive": {},
+ "drive": {
+  "1tX1BKjv4MK0rTi3qIlC4fePZuEXuNfk0": {
+   "name": "Chennai_f.jpg",
+   "modified": "2026-11-26T07:32:13.732Z",
+   "mimeType": "image/jpeg"
+  }
+ },
  "by": "info@abhinavadancecompany.com",
- "at": "2026-11-26T07:49:49.148Z",
- "hash": "/Ix99ueP0cojHma7"
+ "at": "2026-11-26T07:57:52.993Z",
+ "hash": "xyyFX1NvauHP/Dei"
 }
