@@ -3680,6 +3680,13 @@
          }
         },
         {
+         "key": "new-43",
+         "show": true,
+         "cells": {
+          "Item": "**9 Dec 2026** — *Sambhrama*: Bengaluru Jaatre at Shalini Grounds, Jayanagar, Bangalore hosted by Govt of Karanataka"
+         }
+        },
+        {
          "key": "performances/upcoming-list/1/5",
          "show": false,
          "cells": {
@@ -3698,6 +3705,13 @@
          "show": true,
          "cells": {
           "Item": "**8 Jan 2027** — Kathak Rang Manch Pravesh of Kum. Anumathi B: solo debut, Meenakshi Rangamancha, Bangalore"
+         }
+        },
+        {
+         "key": "new-48",
+         "show": true,
+         "cells": {
+          "Item": "**15 Jan 2027** — *Bahurang*: SOMA – Festival for the Arts at Shankaraa Foundation, Bangalore, organized by Shankaraa Foundation"
          }
         },
         {
