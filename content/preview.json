@@ -3610,13 +3610,13 @@
        "key": "performances/upcoming-list/t3",
        "kind": "text",
        "what": "Featured event (pick from the list)",
-       "value": "SMRM 2026"
+       "value": "Bharatanrityam solo by Smt. Nirupama Rajendra"
       },
       {
        "key": "performances/upcoming-list/t4",
        "kind": "text",
        "what": "Date line (filled in when you pick)",
-       "value": "20 Nov 2026"
+       "value": "30 Dec 2026"
       },
       {
        "key": "performances/upcoming-list/t5",
@@ -3696,7 +3696,7 @@
          "key": "performances/upcoming-list/1/6",
          "show": true,
          "cells": {
-          "Item": "**30 Dec 2026** — Bharatanrityam solo by Smt. Nirupama Rajendra, Krishna Gana Sabha, Chennai"
+          "Item": "**30 Dec 2026** — Bharatanrityam solo by Smt. Nirupama Rajendra, Krishna Gana Sabha, Chennai · [Tickets](https://tikkl.com/krishnaganasabha/c/d6ccf06f?section=buy-tickets&search=Nirupama+)"
          }
         },
         {
@@ -8581,6 +8581,6 @@
  },
  "drive": {},
  "by": "info@abhinavadancecompany.com",
- "at": "2026-11-26T05:04:39.750Z",
- "hash": "PoMhohcZsoyS0fpx"
+ "at": "2026-11-26T07:49:49.148Z",
+ "hash": "/Ix99ueP0cojHma7"
 }
